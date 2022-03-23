@@ -24,18 +24,41 @@ var r = setInterval ( ()=>{
   if (lefts === 0) {switcherLeft = 5;}
 
 
+brickBouncer(tops,lefts,[215,230]);
+
+
 } , 30);
 
 
-const box = document.getElementById ('box');
+//const box = document.getElementById ('box');
 
 
-box.addEventListener ('mousemove', e => {
+document.addEventListener ('mousemove', e => {
 
-document.getElementById('plate').style.left = e.offsetX + 'px';
 
-pos = e.offsetX;
+if(e.offsetX<450){
+  pos = e.offsetX;
 
-console.log(e.offsetX);
+}else { pos = 450}
+
+document.getElementById('plate').style.left = pos + 'px';
+
+
+
+console.log(pos);
 
 })
+
+
+
+var brickBouncer = function (top,left,bricksArray){
+
+
+  if (top > bricksArray[0]-30 && top < bricksArray[0]+30 &&
+      left > bricksArray[1]-45  && left < bricksArray[1]+ 45)
+      { switcherTop = -5;
+        document.getElementById('brick').style.backgroundColor = 'green';}
+
+
+  console.log(top, left, bricksArray);
+}
