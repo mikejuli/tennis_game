@@ -17,17 +17,17 @@ var r = setInterval ( ()=>{
 
   if(tops > 355 && (pos-40 > lefts || pos +40 < lefts) ) { clearInterval (r);}
 
-  if (tops === 365){ switcherTop = -5;}
-  if (tops === 0) {switcherTop = 5;}
+  if (tops === 365){ switcherTop = -1;}
+  if (tops === 0) {switcherTop = 1;}
 
-  if (lefts === 470){ switcherLeft = -5;}
-  if (lefts === 0) {switcherLeft = 5;}
-
-
-brickBouncer(tops,lefts,[215,230]);
+  if (lefts === 470){ switcherLeft = -1;}
+  if (lefts === 0) {switcherLeft = 1;}
 
 
-} , 30);
+brickBouncer(tops,lefts,[49,100]);
+
+
+} , 5);
 
 
 //const box = document.getElementById ('box');
@@ -53,11 +53,41 @@ console.log(pos);
 
 var brickBouncer = function (top,left,bricksArray){
 
+  console.log('top:',top, '  left:',left);
 
-  if (top > bricksArray[0]-30 && top < bricksArray[0]+30 &&
-      left > bricksArray[1]-45  && left < bricksArray[1]+ 45)
-      { switcherTop = -5;
+  //top side of the brick
+  if ((top == bricksArray[0]-10) &&
+      left >= bricksArray[1]-10 && left <= bricksArray[1]+ 60)
+      { switcherTop = -1;
         document.getElementById('brick').style.backgroundColor = 'green';}
+
+  //bottom side of the brick
+  if ((top == bricksArray[0]+30) &&
+      left >= bricksArray[1]-10 && left <= bricksArray[1]+ 60 )
+      { switcherTop = 1;
+        document.getElementById('brick').style.backgroundColor = 'green';}
+
+
+  //left side of the brick
+  if (top >= bricksArray[0]-10 && top <= bricksArray[0]+30+10 &&
+      (left == bricksArray[1]-10) )
+      { switcherLeft = -1;
+        document.getElementById('brick').style.backgroundColor = 'green';}
+
+
+  //right side of the brick
+  if (top >= bricksArray[0]-10 && top <= bricksArray[0]+30+10 &&
+      (left === bricksArray[1]+60) )
+      { switcherLeft = 1;
+        document.getElementById('brick').style.backgroundColor = 'green';}
+
+
+
+
+        //creating the same conditions for all the rest sides, depending where the ball coming from. 4 conditions.
+
+        //adding the way multiply bricks
+
 
 
   console.log(top, left, bricksArray);
