@@ -28,7 +28,7 @@ var r = setInterval ( ()=>{
   if (lefts === 0) {switcherLeft = 1;}
 
 
-brickBouncer(tops,lefts,[180,200]);
+  brickBouncer(tops,lefts,pattern);
 
 
 } , 5);
@@ -54,20 +54,30 @@ document.getElementById('plate').style.left = pos + 'px';
 })
 
 
-var creatingBrick = function (top,left){
+var creatingBrick = function (arr){
 
+  //arr[0] is a top value ; arr[1] is a left value
 
   var newBrick = document.createElement('div');
   newBrick.setAttribute('id', 'brick');
-  newBrick.setAttribute('style', `top: ${top} ; left:${left}`)
+  newBrick.setAttribute('style', `top: ${arr[0]} ; left:${arr[1]}`)
   var wall = document.getElementById('wall');
   wall.appendChild(newBrick);
 
 }
 
-creatingBrick(180,200);
-creatingBrick(180,280);
-creatingBrick(180,360);
+
+var creatingWall = function(pattern){
+
+  for(let x of pattern){
+
+    creatingBrick(x);
+
+  }
+
+}
+
+creatingWall(pattern);
 
 // document.getElementById('brick').style.top = 140;
 // document.getElementById('brick').style.left = 200;
@@ -79,32 +89,39 @@ var brickBouncer = function (top,left,bricksArray){
 
   //console.log('top:',top, '  left:',left);
 
-
-  //top side of the brick
-  if ((top == bricksArray[0]-10) &&
-      left >= bricksArray[1]-10 && left <= bricksArray[1]+ 60)
-      { switcherTop = -1;
-        document.getElementById('brick').style.backgroundColor = 'green';}
-
-  //bottom side of the brick
-  if ((top == bricksArray[0]+30) &&
-      left >= bricksArray[1]-10 && left <= bricksArray[1]+ 60 )
-      { switcherTop = 1;
-        document.getElementById('brick').style.backgroundColor = 'green';}
+  for( let x of bricksArray){
 
 
-  //left side of the brick
-  if (top >= bricksArray[0]-10 && top <= bricksArray[0]+30+10 &&
-      (left == bricksArray[1]-10) )
-      { switcherLeft = -1;
-        document.getElementById('brick').style.backgroundColor = 'green';}
+    //top side of the brick
+    if ((top == x[0]-10) &&
+        left >= x[1]-10 && left <= x[1]+ 60)
+        { switcherTop = -1;
+
+          document.getElementById('wall').childNodes[x[2]].style.backgroundColor = 'green';}
+
+    //bottom side of the brick
+    if ((top == x[0]+30) &&
+        left >= x[1]-10 && left <= x[1]+ 60 )
+        { switcherTop = 1;
+
+          document.getElementById('wall').childNodes[x[2]].style.backgroundColor = 'green';}
 
 
-  //right side of the brick
-  if (top >= bricksArray[0]-10 && top <= bricksArray[0]+30+10 &&
-      (left === bricksArray[1]+60) )
-      { switcherLeft = 1;
-        document.getElementById('brick').style.backgroundColor = 'green';}
+    //left side of the brick
+    if (top >= x[0]-10 && top <= x[0]+30+10 &&
+        (left == x[1]-10) )
+        { switcherLeft = -1;
+
+          document.getElementById('wall').childNodes[x[2]].style.backgroundColor = 'green';}
+
+    //right side of the brick
+    if (top >= x[0]-10 && top <= x[0]+30 &&
+        (left === x[1]+60) )
+        { switcherLeft = 1;
+
+          document.getElementById('wall').childNodes[x[2]].style.backgroundColor = 'green';}
+  }
+
 
 
 
@@ -115,5 +132,5 @@ var brickBouncer = function (top,left,bricksArray){
 
 
 
- // console.log(top, left, bricksArray);
+ // console.log(top, left, x);
 }
