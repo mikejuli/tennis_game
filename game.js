@@ -20,13 +20,15 @@ var r = setInterval ( ()=>{
   document.getElementById('ball').style.top = tops + 'px';
 
   //some changes
-  // if(tops > 355 && (pos-40 > lefts || pos +40 < lefts) ) { clearInterval (r);}
+   if(tops > 380 && (pos < lefts && pos +50 > lefts) ) { switcherTop = -1;}
 
-  // if (tops === 365){ switcherTop = -1;}
-  // if (tops === 0) {switcherTop = 1;}
 
-  // if (lefts === 470){ switcherLeft = -1;}
-  // if (lefts === 0) {switcherLeft = 1;}
+  if (tops === 400){ clearInterval (r);}
+
+  if (tops === 0) {switcherTop = 1;}
+
+  if (lefts === 470){ switcherLeft = -1;}
+  if (lefts === 0) {switcherLeft = 1;}
 
 
   brickBouncer(tops,lefts,pattern);
@@ -43,7 +45,6 @@ document.addEventListener ('mousemove', e => {
 
 if(e.offsetX<450){
   pos = e.offsetX;
-
 }else { pos = 450}
 
 document.getElementById('plate').style.left = pos + 'px';
@@ -94,8 +95,8 @@ var brickBouncer = function (top,left,bricksArray){
   for( var x=0 ; x< bricksArray.length;x++){
 
 
-    //top side of the brick
-    if ((top == bricksArray[x][0]-10) &&
+    //top side of the brick //-2 moved touch line
+    if ((top == bricksArray[x][0]-10 -2) &&
         left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 60)
         { switcherTop = -1;
 
@@ -116,8 +117,8 @@ var brickBouncer = function (top,left,bricksArray){
 
 
 
-    //bottom side of the brick
-    if ((top == bricksArray[x][0]+30) &&
+    //bottom side of the brick  //+2 moved touch line
+    if ((top == bricksArray[x][0]+30 + 2) &&
         left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 60 )
         { switcherTop = 1;
 
@@ -135,7 +136,7 @@ var brickBouncer = function (top,left,bricksArray){
 
     //left side of the brick
     if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+30+10 &&
-        (left == bricksArray[x][1]-10) )
+        (left == bricksArray[x][1]-10-2) ) //moved touch line a bit left, to prevent the ball through move
         { switcherLeft = -1;
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
@@ -147,9 +148,9 @@ var brickBouncer = function (top,left,bricksArray){
 
          } else
 
-    //right side of the brick
+    //right side of the brick //+2 moved touch line
     if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+30 &&
-        (left === bricksArray[x][1]+60) )
+        (left === bricksArray[x][1]+60+2) )
         { switcherLeft = 1;
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
