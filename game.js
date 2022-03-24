@@ -19,13 +19,14 @@ var r = setInterval ( ()=>{
 
   document.getElementById('ball').style.top = tops + 'px';
 
-  if(tops > 355 && (pos-40 > lefts || pos +40 < lefts) ) { clearInterval (r);}
+  //some changes
+  // if(tops > 355 && (pos-40 > lefts || pos +40 < lefts) ) { clearInterval (r);}
 
-  if (tops === 365){ switcherTop = -1;}
-  if (tops === 0) {switcherTop = 1;}
+  // if (tops === 365){ switcherTop = -1;}
+  // if (tops === 0) {switcherTop = 1;}
 
-  if (lefts === 470){ switcherLeft = -1;}
-  if (lefts === 0) {switcherLeft = 1;}
+  // if (lefts === 470){ switcherLeft = -1;}
+  // if (lefts === 0) {switcherLeft = 1;}
 
 
   brickBouncer(tops,lefts,pattern);
@@ -107,7 +108,7 @@ var brickBouncer = function (top,left,bricksArray){
          bricksArray.splice(x,1)
 
 
-
+          if(bricksArray.length === 0) { alert("You Win!")}
 
 
 
@@ -125,6 +126,10 @@ var brickBouncer = function (top,left,bricksArray){
 
           console.log(bricksArray[x][2]);
          bricksArray.splice(x,1)
+
+
+         if(bricksArray.length === 0) { alert("You Win!")}
+
          } else
 
 
@@ -137,6 +142,9 @@ var brickBouncer = function (top,left,bricksArray){
 
           console.log(bricksArray[x][2]);
          bricksArray.splice(x,1) //indebricksArray[x]of
+
+         if(bricksArray.length === 0) { alert("You Win!")}
+
          } else
 
     //right side of the brick
@@ -148,6 +156,9 @@ var brickBouncer = function (top,left,bricksArray){
 
           console.log(bricksArray[x][2]);
          bricksArray.splice(x,1)
+
+         if(bricksArray.length === 0) { alert("You Win!")}
+
          }
   }
 

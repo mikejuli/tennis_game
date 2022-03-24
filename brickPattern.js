@@ -3,7 +3,7 @@ var pattern =
 
 0,1,1,1,0,
 1,1,1,1,1,
-0,1,1,1,0
+0,1,1,1,0,
 
 
 ]
@@ -12,7 +12,7 @@ var pattern =
 var top = 123;
 var left = 63;
 var count = 0;
-var num =-1;
+var num = -1;
 pattern = pattern.map( (x) => {
 
 
