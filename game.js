@@ -61,6 +61,7 @@ var creatingBrick = function (arr){
   var newBrick = document.createElement('div');
   newBrick.setAttribute('id', 'brick');
   newBrick.setAttribute('style', `top: ${arr[0]} ; left:${arr[1]}`)
+  newBrick.textContent = arr[2];
   var wall = document.getElementById('wall');
   wall.appendChild(newBrick);
 
@@ -89,40 +90,68 @@ var brickBouncer = function (top,left,bricksArray){
 
   //console.log('top:',top, '  left:',left);
 
-  for( let x of bricksArray){
+  for( var x=0 ; x< bricksArray.length;x++){
 
 
     //top side of the brick
-    if ((top == x[0]-10) &&
-        left >= x[1]-10 && left <= x[1]+ 60)
+    if ((top == bricksArray[x][0]-10) &&
+        left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 60)
         { switcherTop = -1;
 
-          document.getElementById('wall').childNodes[x[2]].style.backgroundColor = 'green';}
+          // document.getElementById('wall').childNodes[bricksArray[x][2]].style.backgroundColor = 'green';
+          // var d = document.getElementById('wall').removeChild(document.getElementById('wall').childNodes[bricksArray[x][2]]);
+
+         document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+         console.log(bricksArray[x][2]);
+
+         bricksArray.splice(x,1)
+
+
+
+
+
+
+        } else
+
+
 
     //bottom side of the brick
-    if ((top == x[0]+30) &&
-        left >= x[1]-10 && left <= x[1]+ 60 )
+    if ((top == bricksArray[x][0]+30) &&
+        left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 60 )
         { switcherTop = 1;
 
-          document.getElementById('wall').childNodes[x[2]].style.backgroundColor = 'green';}
+
+          document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
+          console.log(bricksArray[x][2]);
+         bricksArray.splice(x,1)
+         } else
 
 
     //left side of the brick
-    if (top >= x[0]-10 && top <= x[0]+30+10 &&
-        (left == x[1]-10) )
+    if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+30+10 &&
+        (left == bricksArray[x][1]-10) )
         { switcherLeft = -1;
 
-          document.getElementById('wall').childNodes[x[2]].style.backgroundColor = 'green';}
+          document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
+          console.log(bricksArray[x][2]);
+         bricksArray.splice(x,1) //indebricksArray[x]of
+         } else
 
     //right side of the brick
-    if (top >= x[0]-10 && top <= x[0]+30 &&
-        (left === x[1]+60) )
+    if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+30 &&
+        (left === bricksArray[x][1]+60) )
         { switcherLeft = 1;
 
-          document.getElementById('wall').childNodes[x[2]].style.backgroundColor = 'green';}
+          document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
+          console.log(bricksArray[x][2]);
+         bricksArray.splice(x,1)
+         }
   }
 
-
+  //console.log(bricksArray);
 
 
 
