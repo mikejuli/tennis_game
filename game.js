@@ -1,5 +1,9 @@
 console.log('check');
 
+import pattern from '/brickPattern.js';
+
+console.log(pattern);
+
 var tops = 0;
 var lefts = 0;
 var switcherTop = 0;
@@ -24,7 +28,7 @@ var r = setInterval ( ()=>{
   if (lefts === 0) {switcherLeft = 1;}
 
 
-brickBouncer(tops,lefts,[49,100]);
+brickBouncer(tops,lefts,[180,200]);
 
 
 } , 5);
@@ -45,15 +49,36 @@ document.getElementById('plate').style.left = pos + 'px';
 
 
 
-console.log(pos);
+//console.log(pos);
 
 })
+
+
+var creatingBrick = function (top,left){
+
+
+  var newBrick = document.createElement('div');
+  newBrick.setAttribute('id', 'brick');
+  newBrick.setAttribute('style', `top: ${top} ; left:${left}`)
+  var wall = document.getElementById('wall');
+  wall.appendChild(newBrick);
+
+}
+
+creatingBrick(180,200);
+creatingBrick(180,280);
+creatingBrick(180,360);
+
+// document.getElementById('brick').style.top = 140;
+// document.getElementById('brick').style.left = 200;
+
 
 
 
 var brickBouncer = function (top,left,bricksArray){
 
-  console.log('top:',top, '  left:',left);
+  //console.log('top:',top, '  left:',left);
+
 
   //top side of the brick
   if ((top == bricksArray[0]-10) &&
@@ -90,5 +115,5 @@ var brickBouncer = function (top,left,bricksArray){
 
 
 
-  console.log(top, left, bricksArray);
+ // console.log(top, left, bricksArray);
 }
