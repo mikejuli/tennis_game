@@ -6,7 +6,7 @@ console.log(pattern);
 
 var tops = 0;
 var lefts = 0;
-var switcherTop = 0;
+var switcherTop = 1;
 var switcherLeft = 0;
 var pos = 50;
 
@@ -20,14 +20,47 @@ var r = setInterval ( ()=>{
   document.getElementById('ball').style.top = tops + 'px';
 
   //some changes
-   if(tops > 380 && (pos < lefts && pos +50 > lefts) ) { switcherTop = -1;}
+  if(tops === 380 && (pos < lefts && pos +150 > lefts) ) {
 
+
+    // refactoring this section to async function
+    // 1) eventlistener -> removelistener -> switcherTop value
+
+    var func = ( (e)=> {
+
+      console.log(tops,e);
+
+
+      // if(temp<e.offsetX) {switcherTop = -0.5;}
+      // if(temp>e.offsetX) {switcherTop = -3;}
+
+      // function s(){
+        if(tops === 380){switcherTop = -3;}
+        //}
+        document.removeEventListener('mousemove', func)
+
+      //s();
+
+    } )
+
+    switcherTop = -1;
+
+    document.addEventListener('mousemove', func)
+
+  //  setTimeout(()=>{ document.removeEventListener('mousemove', func) },500)
+
+
+
+
+  }
+
+  //  if(tops > 380 && (pos < lefts && pos +50 > lefts) ) { switcherTop = -3;}
 
   if (tops === 400){ clearInterval (r);}
 
-  if (tops === 0) {switcherTop = 1;}
+  if (tops <= 0 ) {switcherTop = 1;}
 
-  if (lefts === 470){ switcherLeft = -1;}
+  if (lefts === 500){ switcherLeft = -1;}
   if (lefts === 0) {switcherLeft = 1;}
 
 
@@ -43,9 +76,9 @@ var r = setInterval ( ()=>{
 document.addEventListener ('mousemove', e => {
 
 
-if(e.offsetX<450){
+if(e.offsetX<350){
   pos = e.offsetX;
-}else { pos = 450}
+}else { pos = 350}
 
 document.getElementById('plate').style.left = pos + 'px';
 
