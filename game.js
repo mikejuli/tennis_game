@@ -22,7 +22,7 @@ var r = setInterval ( ()=>{
   document.getElementById('ball').style.top = tops + 'px';
 
   //some changes
-  if(tops >= 380 && (pos < lefts && pos +100 > lefts) ) {
+  if(tops >= 378 && (pos < lefts && pos +100 > lefts) ) {
 
 
     // refactoring this section to async function
@@ -31,7 +31,7 @@ var r = setInterval ( ()=>{
 
 
   //  var funcEnter = ( (e)=> {
-    if(tops === 380){
+    if(tops === 378){
       firstEnter = pos;}
 
 
@@ -41,16 +41,8 @@ var r = setInterval ( ()=>{
       // if(powerOfTouching>=90){ powerOfTouching = 90;}
 
 
-
-      // console.log(powerOfTouching);
-      // if(temp<e.offsetX) {switcherTop = -0.5;}
-      // if(temp>e.offsetX) {switcherTop = -3;}
-
-      // function s(){
         if(tops === 385){
 
-          // switcherTop = - Math.sqrt(1.5);
-          // switcherLeft = 1/2;
 
           var powerOfTouching = firstEnter - pos;
 
@@ -60,12 +52,40 @@ var r = setInterval ( ()=>{
           Math.Sin = function(w){
             return parseFloat(Math.sin(w).toFixed(5));
         };
-        switcherLeft = Math.Sin(Math.PI * 0.9 ); // 0
-
-        Math.Cos = function(w){
+          Math.Cos = function(w){
           return parseFloat(Math.cos(w).toFixed(5));
         };
-        switcherTop = Math.Cos(Math.PI * 0.9  ); // 0
+
+
+
+        if(powerOfTouching <= -20) {
+
+          switcherLeft = Math.Sin(Math.PI * 0.7 );
+          switcherTop = Math.Cos(Math.PI * 0.7  );
+
+        }  else if(powerOfTouching <= -10) {
+
+          switcherLeft = Math.Sin(Math.PI * 0.85 );
+          switcherTop = Math.Cos(Math.PI * 0.85 );
+
+        } else if (powerOfTouching >= 20){
+
+          switcherLeft = Math.Sin(Math.PI * 1.30 );
+          switcherTop = Math.Cos(Math.PI * 1.30 );
+
+        } else if (powerOfTouching >= 10){
+
+          switcherLeft = Math.Sin(Math.PI * 1.15 );
+          switcherTop = Math.Cos(Math.PI * 1.15 );
+
+        }
+
+
+        else {
+
+          switcherTop = - 1;
+
+        }
 
 
 
@@ -73,7 +93,7 @@ var r = setInterval ( ()=>{
 
 
 
-          // switcherTop = - 2;
+
           // switcherLeft = 0;
 
 
@@ -84,11 +104,7 @@ var r = setInterval ( ()=>{
        //  document.removeEventListener('mousemove', funcEnter)
 
         }
-        //}
 
-      //s();
-
-  //  } )
 
    // switcherTop = -1;
 
