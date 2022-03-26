@@ -1,6 +1,7 @@
 #box {
 
   background-color: rgb(183, 247, 225);
+
   height: 400px;
   width: 500px;
   position: absolute;
@@ -25,7 +26,7 @@
 #plate {
 
 height: 10px;
-width: 150px;
+width: 100px;
 position: absolute;
 top: calc(100% - 10px);
 left: 50%;

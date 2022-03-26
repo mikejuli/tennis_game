@@ -5,10 +5,12 @@ import pattern from '/brickPattern.js';
 console.log(pattern);
 
 var tops = 0;
-var lefts = 0;
+var lefts = 250;
 var switcherTop = 1;
 var switcherLeft = 0;
 var pos = 50;
+
+var firstEnter;
 
 var r = setInterval ( ()=>{
 
@@ -20,41 +22,101 @@ var r = setInterval ( ()=>{
   document.getElementById('ball').style.top = tops + 'px';
 
   //some changes
-  if(tops === 380 && (pos < lefts && pos +150 > lefts) ) {
+  if(tops >= 380 && (pos < lefts && pos +100 > lefts) ) {
 
 
     // refactoring this section to async function
     // 1) eventlistener -> removelistener -> switcherTop value
 
-    var func = ( (e)=> {
-
-      console.log(tops,e);
 
 
+  //  var funcEnter = ( (e)=> {
+    if(tops === 380){
+      firstEnter = pos;}
+
+
+
+      // var powerOfTouching = lefts - pos;
+
+      // if(powerOfTouching>=90){ powerOfTouching = 90;}
+
+
+
+      // console.log(powerOfTouching);
       // if(temp<e.offsetX) {switcherTop = -0.5;}
       // if(temp>e.offsetX) {switcherTop = -3;}
 
       // function s(){
-        if(tops === 380){switcherTop = -3;}
+        if(tops === 385){
+
+          // switcherTop = - Math.sqrt(1.5);
+          // switcherLeft = 1/2;
+
+          var powerOfTouching = firstEnter - pos;
+
+          console.log(powerOfTouching);
+
+
+          Math.Sin = function(w){
+            return parseFloat(Math.sin(w).toFixed(5));
+        };
+        switcherLeft = Math.Sin(Math.PI * 0.9 ); // 0
+
+        Math.Cos = function(w){
+          return parseFloat(Math.cos(w).toFixed(5));
+        };
+        switcherTop = Math.Cos(Math.PI * 0.9  ); // 0
+
+
+
+
+
+
+
+          // switcherTop = - 2;
+          // switcherLeft = 0;
+
+
+
+         // switcherLeft = Math.sqrt(3)/2;
+
+
+       //  document.removeEventListener('mousemove', funcEnter)
+
+        }
         //}
-        document.removeEventListener('mousemove', func)
 
       //s();
 
-    } )
+  //  } )
 
-    switcherTop = -1;
+   // switcherTop = -1;
 
-    document.addEventListener('mousemove', func)
+    //document.addEventListener('mousemove', funcEnter)
+
+
 
   //  setTimeout(()=>{ document.removeEventListener('mousemove', func) },500)
 
 
 
 
-  }
+ }
 
   //  if(tops > 380 && (pos < lefts && pos +50 > lefts) ) { switcherTop = -3;}
+
+
+  //remover after testing
+  // if (tops >= 200) {
+
+  //   switcherTop = - Math.sqrt(2);
+  //   switcherLeft = 0;
+
+
+
+
+  // }
+
 
   if (tops === 400){ clearInterval (r);}
 
