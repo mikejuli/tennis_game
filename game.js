@@ -29,9 +29,9 @@ var r = setInterval ( ()=>{
     // 1) eventlistener -> removelistener -> switcherTop value
 
 
-
-  //  var funcEnter = ( (e)=> {
-    if(tops === 378){
+    //  var funcEnter = ( (e)=> {
+      if(tops >= 378 && tops <= 379){
+        console.log(tops);
       firstEnter = pos;}
 
 
@@ -41,8 +41,8 @@ var r = setInterval ( ()=>{
       // if(powerOfTouching>=90){ powerOfTouching = 90;}
 
 
-        if(tops === 385){
 
+        if(tops >= 385 && tops <= 386){
 
           var powerOfTouching = firstEnter - pos;
 
@@ -90,8 +90,9 @@ var r = setInterval ( ()=>{
 
 
         else {
-
+          console.log('here-1');
           switcherTop = - 1;
+
 
         }
 
@@ -130,17 +131,17 @@ var r = setInterval ( ()=>{
   if (tops === 400){ clearInterval (r);}
 
   if (tops <= 0 ) {
-    tops = 0.01;
+    tops =0;
       switcherTop = -switcherTop;
   }
 
   if (lefts >= 490){
-    lefts = 489.9;
+    lefts = 490;
     switcherLeft = -switcherLeft;
   }
 
   if (lefts <= 0) {
-    lefts = 0.1;
+    lefts =  0;
     switcherLeft = -switcherLeft;
   }
 
@@ -157,9 +158,9 @@ var r = setInterval ( ()=>{
 document.addEventListener ('mousemove', e => {
 
 
-if(e.offsetX<350){
+if(e.offsetX<400){
   pos = e.offsetX;
-}else { pos = 350}
+}else { pos = 400}
 
 document.getElementById('plate').style.left = pos + 'px';
 

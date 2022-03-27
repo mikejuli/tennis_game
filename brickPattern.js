@@ -1,8 +1,8 @@
 var pattern =
 [
 
-
 0
+
 
 
 ]
