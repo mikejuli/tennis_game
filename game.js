@@ -26,7 +26,7 @@ var r = setInterval ( ()=>{
 
 
     // refactoring this section to async function
-    // 1) eventlistener -> removelistener -> switcherTop value
+    // 1) eventlistener ->-> removelistener -> switcherTop value
 
 
     //  var funcEnter = ( (e)=> {
