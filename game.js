@@ -9,7 +9,7 @@ var lefts = 250;
 var switcherTop = 1;
 var switcherLeft = 0;
 var pos = 50;
-
+var coeff = 1;
 var firstEnter;
 
 var r = setInterval ( ()=>{
@@ -60,23 +60,31 @@ var r = setInterval ( ()=>{
 
         if(powerOfTouching <= -20) {
 
-          switcherLeft = Math.Sin(Math.PI * 0.7 );
-          switcherTop = Math.Cos(Math.PI * 0.7  );
+          coeff = 0.7;
+
+          switcherLeft = Math.Sin(Math.PI * coeff );
+          switcherTop = Math.Cos(Math.PI * coeff  );
 
         }  else if(powerOfTouching <= -10) {
 
-          switcherLeft = Math.Sin(Math.PI * 0.85 );
-          switcherTop = Math.Cos(Math.PI * 0.85 );
+          coeff = 0.85;
+
+          switcherLeft = Math.Sin(Math.PI * coeff );
+          switcherTop = Math.Cos(Math.PI * coeff );
 
         } else if (powerOfTouching >= 20){
 
-          switcherLeft = Math.Sin(Math.PI * 1.30 );
-          switcherTop = Math.Cos(Math.PI * 1.30 );
+          coeff = 1.30;
+
+          switcherLeft = Math.Sin(Math.PI * coeff );
+          switcherTop = Math.Cos(Math.PI * coeff );
 
         } else if (powerOfTouching >= 10){
 
-          switcherLeft = Math.Sin(Math.PI * 1.15 );
-          switcherTop = Math.Cos(Math.PI * 1.15 );
+          coeff = 1.15;
+
+          switcherLeft = Math.Sin(Math.PI * coeff );
+          switcherTop = Math.Cos(Math.PI * coeff );
 
         }
 
@@ -87,21 +95,6 @@ var r = setInterval ( ()=>{
 
         }
 
-
-
-
-
-
-
-
-          // switcherLeft = 0;
-
-
-
-         // switcherLeft = Math.sqrt(3)/2;
-
-
-       //  document.removeEventListener('mousemove', funcEnter)
 
         }
 
@@ -136,10 +129,20 @@ var r = setInterval ( ()=>{
 
   if (tops === 400){ clearInterval (r);}
 
-  if (tops <= 0 ) {switcherTop = 1;}
+  if (tops <= 0 ) {
+    tops = 0.01;
+      switcherTop = -switcherTop;
+  }
 
-  if (lefts === 500){ switcherLeft = -1;}
-  if (lefts === 0) {switcherLeft = 1;}
+  if (lefts >= 490){
+    lefts = 489.9;
+    switcherLeft = -switcherLeft;
+  }
+
+  if (lefts <= 0) {
+    lefts = 0.1;
+    switcherLeft = -switcherLeft;
+  }
 
 
   brickBouncer(tops,lefts,pattern);
