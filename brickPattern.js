@@ -1,9 +1,7 @@
 var pattern =
 [
 
-1,1,1,1,1,1,
-1,1,1,1,1,1,
-1,1,1,1,1,1
+1,1,1,1
 
 
 ]
@@ -16,7 +14,7 @@ var num = -1;
 pattern = pattern.map( (x) => {
 
 
-  if(count===6)
+  if(count===10)
 
     {top+= 33; left = 3;count=0;}
 

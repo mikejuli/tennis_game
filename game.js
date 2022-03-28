@@ -4,10 +4,25 @@ import pattern from '/brickPattern.js';
 
 console.log(pattern);
 
+var height = 400;
+var width = 500;
+var plate = 100;
+var speed = 1;
+
 var tops = 400;
 var lefts = 250;
-var switcherTop = -1;
-var switcherLeft = 1;
+var cof = 0.8;
+
+
+Math.Sin = function(w){
+  return parseFloat(Math.sin(w).toFixed(5));
+};
+Math.Cos = function(w){
+return parseFloat(Math.cos(w).toFixed(5));
+};
+
+var switcherTop = Math.Cos(Math.PI * cof)* speed;
+var switcherLeft = Math.Sin(Math.PI * cof)* speed;
 var pos = 50;
 var coeff = 1;
 var firstEnter;
@@ -30,7 +45,7 @@ var ballRunning = function(){
   document.getElementById('ball').style.top = tops + 'px';
 
   //some changes
-  if(tops >= 378 && (pos < lefts && pos +100 > lefts) ) {
+  if(tops >= height-22 && (pos < lefts && pos +plate > lefts) ) {
 
 
     // refactoring this section to async function
@@ -38,7 +53,7 @@ var ballRunning = function(){
 
 
     //  var funcEnter = ( (e)=> {
-      if(tops >= 378 && tops <= 379){
+      if(tops >= height-22 && tops <= height-21){
         console.log(tops);
       firstEnter = pos;}
 
@@ -50,7 +65,7 @@ var ballRunning = function(){
 
 
 
-        if(tops >= 385 && tops <= 386){
+        if(tops >= height-15 && tops <= height-14){
 
           var powerOfTouching = firstEnter - pos;
 
@@ -70,29 +85,29 @@ var ballRunning = function(){
 
           coeff = 0.6;
 
-          switcherLeft = Math.Sin(Math.PI * coeff );
-          switcherTop = Math.Cos(Math.PI * coeff  );
+          switcherLeft = Math.Sin(Math.PI * coeff )* speed;
+          switcherTop = Math.Cos(Math.PI * coeff  )* speed;
 
         }  else if(powerOfTouching <= -15) {
 
           coeff = 0.8;
 
-          switcherLeft = Math.Sin(Math.PI * coeff );
-          switcherTop = Math.Cos(Math.PI * coeff );
+          switcherLeft = Math.Sin(Math.PI * coeff )* speed;
+          switcherTop = Math.Cos(Math.PI * coeff )* speed;
 
         } else if (powerOfTouching >= 30){
 
           coeff = 1.40;
 
-          switcherLeft = Math.Sin(Math.PI * coeff );
-          switcherTop = Math.Cos(Math.PI * coeff );
+          switcherLeft = Math.Sin(Math.PI * coeff )* speed;
+          switcherTop = Math.Cos(Math.PI * coeff )* speed;
 
         } else if (powerOfTouching >= 15){
 
           coeff = 1.20;
 
-          switcherLeft = Math.Sin(Math.PI * coeff );
-          switcherTop = Math.Cos(Math.PI * coeff );
+          switcherLeft = Math.Sin(Math.PI * coeff )* speed;
+          switcherTop = Math.Cos(Math.PI * coeff )* speed;
 
         }
 
@@ -136,15 +151,15 @@ var ballRunning = function(){
   // }
 
 
-  if (tops >= 400){ clearInterval (r);}
+  if (tops >= height){ clearInterval (r);}
 
   if (tops <= 0 ) {
     tops =0;
       switcherTop = -switcherTop;
   }
 
-  if (lefts >= 490){
-    lefts = 490;
+  if (lefts >= width-10){
+    lefts = width-10;
     switcherLeft = -switcherLeft;
   }
 
@@ -166,18 +181,18 @@ var ballRunning = function(){
 document.addEventListener ('mousemove', e => {
 
 
-if(e.offsetX<400){
+if(e.offsetX<width-plate){
   pos = e.offsetX;
-}else { pos = 400}
+}else { pos = width-plate}
 
 document.getElementById('plate').style.left = pos + 'px';
 
 if(!inMove){
-  document.getElementById('ball').style.left = pos +45 + 'px';
-  document.getElementById('ball').style.top = 380;
+  document.getElementById('ball').style.left = pos +(plate/2)-5 + 'px';
+  document.getElementById('ball').style.top = height-20;
 
-  tops = 380;
-  lefts = pos + 45;
+  tops = height-20;
+  lefts = pos + (plate/2)-5;
 
 }
 
@@ -204,9 +219,10 @@ var creatingBrick = function (arr){
   //arr[0] is a top value ; arr[1] is a left value
 
   var newBrick = document.createElement('div');
+  newBrick.health = 3;
   newBrick.setAttribute('id', 'brick');
   newBrick.setAttribute('style', `top: ${arr[0]} ; left:${arr[1]}`)
-  newBrick.textContent = arr[2];
+  newBrick.textContent = newBrick.health;
   var wall = document.getElementById('wall');
   wall.appendChild(newBrick);
 
@@ -244,7 +260,10 @@ var brickBouncer = function (top,left,bricksArray){
         { switcherTop = -switcherTop;
 
 
+
+
          document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
          console.log(bricksArray[x][2]);
 
          bricksArray.splice(x,1)
@@ -263,11 +282,16 @@ var brickBouncer = function (top,left,bricksArray){
         left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 60 )
         { switcherTop = -switcherTop;
 
+          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('style', document.getElementById('wall').childNodes[bricksArray[x][2]].getAttribute('style')+`;background-color: rgb(127, ${ 179 + document.getElementById('wall').childNodes[bricksArray[x][2]].health * 20}, 213)` );
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
-          console.log(bricksArray[x][2]);
-         bricksArray.splice(x,1)
+
+        //   document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
+        //   console.log(bricksArray[x][2]);
+        //  bricksArray.splice(x,1)
 
 
          if(bricksArray.length === 0) { alert("You Win!")}
@@ -316,3 +340,5 @@ var brickBouncer = function (top,left,bricksArray){
 
  // console.log(top, left, x);
 }
+
+
