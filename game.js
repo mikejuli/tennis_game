@@ -4,15 +4,21 @@ import pattern from '/brickPattern.js';
 
 console.log(pattern);
 
-var tops = 0;
+var tops = 400;
 var lefts = 250;
-var switcherTop = 1;
-var switcherLeft = 0;
+var switcherTop = -1;
+var switcherLeft = 1;
 var pos = 50;
 var coeff = 1;
 var firstEnter;
+var inMove = 0;
 
-var r = setInterval ( ()=>{
+
+var ballRunning = function(){
+
+  inMove = 1;
+
+  var r = setInterval ( ()=>{
 
   tops = tops+switcherTop;
   lefts = lefts + switcherLeft;
@@ -60,28 +66,28 @@ var r = setInterval ( ()=>{
 
         if(powerOfTouching <= -20) {
 
-          coeff = 0.7;
+          coeff = 0.6;
 
           switcherLeft = Math.Sin(Math.PI * coeff );
           switcherTop = Math.Cos(Math.PI * coeff  );
 
         }  else if(powerOfTouching <= -10) {
 
-          coeff = 0.85;
+          coeff = 0.8;
 
           switcherLeft = Math.Sin(Math.PI * coeff );
           switcherTop = Math.Cos(Math.PI * coeff );
 
         } else if (powerOfTouching >= 20){
 
-          coeff = 1.30;
+          coeff = 1.40;
 
           switcherLeft = Math.Sin(Math.PI * coeff );
           switcherTop = Math.Cos(Math.PI * coeff );
 
         } else if (powerOfTouching >= 10){
 
-          coeff = 1.15;
+          coeff = 1.20;
 
           switcherLeft = Math.Sin(Math.PI * coeff );
           switcherTop = Math.Cos(Math.PI * coeff );
@@ -128,7 +134,7 @@ var r = setInterval ( ()=>{
   // }
 
 
-  if (tops === 400){ clearInterval (r);}
+  if (tops >= 400){ clearInterval (r);}
 
   if (tops <= 0 ) {
     tops =0;
@@ -151,7 +157,7 @@ var r = setInterval ( ()=>{
 
 } , 5);
 
-
+};
 //const box = document.getElementById ('box');
 
 
@@ -164,9 +170,29 @@ if(e.offsetX<400){
 
 document.getElementById('plate').style.left = pos + 'px';
 
+if(!inMove){
+  document.getElementById('ball').style.left = pos +45 + 'px';
+  document.getElementById('ball').style.top = 380;
+
+  tops = 380;
+  lefts = pos + 45;
+
+}
 
 
 //console.log(pos);
+
+})
+
+
+document.addEventListener('click', function(){
+
+if(inMove === 0){
+
+  ballRunning();
+
+}
+
 
 })
 

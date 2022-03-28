@@ -8,16 +8,16 @@ var pattern =
 ]
 
 
-var top = 123;
-var left = 63;
+var top = 63;
+var left = 3;
 var count = 0;
 var num = -1;
 pattern = pattern.map( (x) => {
 
 
-  if(count===5)
+  if(count===6)
 
-    {top+= 33; left = 63;count=0;}
+    {top+= 33; left = 3;count=0;}
 
     count++;
 
