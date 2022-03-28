@@ -4,18 +4,26 @@ import pattern from '/brickPattern.js';
 
 console.log(pattern);
 
-var tops = 0;
+var tops = 400;
 var lefts = 250;
-var switcherTop = 1;
-var switcherLeft = 0;
+var switcherTop = -1;
+var switcherLeft = 1;
 var pos = 50;
 var coeff = 1;
 var firstEnter;
+var inMove = 0;
 
-var r = setInterval ( ()=>{
+
+var ballRunning = function(){
+
+  inMove = 1;
+
+  var r = setInterval ( ()=>{
 
   tops = tops+switcherTop;
   lefts = lefts + switcherLeft;
+
+    console.log(tops,lefts);
 
   document.getElementById('ball').style.left = lefts + 'px';
 
@@ -58,30 +66,30 @@ var r = setInterval ( ()=>{
 
 
 
-        if(powerOfTouching <= -20) {
+        if(powerOfTouching <= -30) {
 
-          coeff = 0.7;
+          coeff = 0.6;
 
           switcherLeft = Math.Sin(Math.PI * coeff );
           switcherTop = Math.Cos(Math.PI * coeff  );
 
-        }  else if(powerOfTouching <= -10) {
+        }  else if(powerOfTouching <= -15) {
 
-          coeff = 0.85;
-
-          switcherLeft = Math.Sin(Math.PI * coeff );
-          switcherTop = Math.Cos(Math.PI * coeff );
-
-        } else if (powerOfTouching >= 20){
-
-          coeff = 1.30;
+          coeff = 0.8;
 
           switcherLeft = Math.Sin(Math.PI * coeff );
           switcherTop = Math.Cos(Math.PI * coeff );
 
-        } else if (powerOfTouching >= 10){
+        } else if (powerOfTouching >= 30){
 
-          coeff = 1.15;
+          coeff = 1.40;
+
+          switcherLeft = Math.Sin(Math.PI * coeff );
+          switcherTop = Math.Cos(Math.PI * coeff );
+
+        } else if (powerOfTouching >= 15){
+
+          coeff = 1.20;
 
           switcherLeft = Math.Sin(Math.PI * coeff );
           switcherTop = Math.Cos(Math.PI * coeff );
@@ -91,7 +99,7 @@ var r = setInterval ( ()=>{
 
         else {
           console.log('here-1');
-          switcherTop = - 1;
+          switcherTop = - switcherTop;
 
 
         }
@@ -128,7 +136,7 @@ var r = setInterval ( ()=>{
   // }
 
 
-  if (tops === 400){ clearInterval (r);}
+  if (tops >= 400){ clearInterval (r);}
 
   if (tops <= 0 ) {
     tops =0;
@@ -151,7 +159,7 @@ var r = setInterval ( ()=>{
 
 } , 5);
 
-
+};
 //const box = document.getElementById ('box');
 
 
@@ -164,9 +172,29 @@ if(e.offsetX<400){
 
 document.getElementById('plate').style.left = pos + 'px';
 
+if(!inMove){
+  document.getElementById('ball').style.left = pos +45 + 'px';
+  document.getElementById('ball').style.top = 380;
+
+  tops = 380;
+  lefts = pos + 45;
+
+}
 
 
 //console.log(pos);
+
+})
+
+
+document.addEventListener('click', function(){
+
+if(inMove === 0){
+
+  ballRunning();
+
+}
+
 
 })
 
@@ -211,12 +239,10 @@ var brickBouncer = function (top,left,bricksArray){
 
 
     //top side of the brick //-2 moved touch line
-    if ((top == bricksArray[x][0]-10 -2) &&
+    if ((top >= bricksArray[x][0]-10 -2 && top <= bricksArray[x][0]-10 -1) &&
         left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 60)
-        { switcherTop = -1;
+        { switcherTop = -switcherTop;
 
-          // document.getElementById('wall').childNodes[bricksArray[x][2]].style.backgroundColor = 'green';
-          // var d = document.getElementById('wall').removeChild(document.getElementById('wall').childNodes[bricksArray[x][2]]);
 
          document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
          console.log(bricksArray[x][2]);
@@ -233,9 +259,9 @@ var brickBouncer = function (top,left,bricksArray){
 
 
     //bottom side of the brick  //+2 moved touch line
-    if ((top == bricksArray[x][0]+30 + 2) &&
+    if ((top <= bricksArray[x][0]+30 + 2 && top >= bricksArray[x][0]+30 + 1) &&
         left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 60 )
-        { switcherTop = 1;
+        { switcherTop = -switcherTop;
 
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
@@ -250,9 +276,9 @@ var brickBouncer = function (top,left,bricksArray){
 
 
     //left side of the brick
-    if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+30+10 &&
-        (left == bricksArray[x][1]-10-2) ) //moved touch line a bit left, to prevent the ball through move
-        { switcherLeft = -1;
+    if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+30 &&
+        (left >= bricksArray[x][1]-10-2 && left <= bricksArray[x][1]-10-1) ) //moved touch line a bit left, to prevent the ball through move
+        { switcherLeft = -switcherLeft;
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
 
@@ -265,8 +291,8 @@ var brickBouncer = function (top,left,bricksArray){
 
     //right side of the brick //+2 moved touch line
     if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+30 &&
-        (left === bricksArray[x][1]+60+2) )
-        { switcherLeft = 1;
+        (left <= bricksArray[x][1]+60+2 && left >= bricksArray[x][1]+60+1) )
+        { switcherLeft = -switcherLeft;
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
 
