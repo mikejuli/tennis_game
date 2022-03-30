@@ -283,7 +283,7 @@ var brickBouncer = function (top,left,bricksArray){
         { switcherTop = -switcherTop;
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
-           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('style', document.getElementById('wall').childNodes[bricksArray[x][2]].getAttribute('style')+`;background-color: rgb(127, ${ 179 + document.getElementById('wall').childNodes[bricksArray[x][2]].health * 20}, 213)` );
+           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('style', document.getElementById('wall').childNodes[bricksArray[x][2]].getAttribute('style')+`;background: rgb(45, ${ 159 - (3-document.getElementById('wall').childNodes[bricksArray[x][2]].health) * 20}, 253)` );
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
