@@ -4,7 +4,7 @@
   height: 400px;
   width: 500px;
   position: absolute;
-  z-index: -1;
+
 }
 
 
@@ -15,7 +15,7 @@
   position: absolute;
 
 
-  background-color: brown;
+  background-color: rgb(138, 66, 18);
 
   border-radius: 50%;
 
@@ -36,7 +36,8 @@ background-color: darkslateblue;
 
 #brick {
 border-radius: 15%;
-background-color: #2980B9;
+background: rgb(45,159,253);
+background: linear-gradient(0deg, rgba(45,159,253,1) 11%, rgba(17,217,219,1) 82%);
 
 height: 30px;
 width: 60px;
@@ -48,3 +49,14 @@ position: absolute;
 }
 
 
+#item {
+
+  height: 20px;
+  width: 20px;
+  position: absolute;
+
+
+  background-color: rgb(213, 226, 215);
+border-color: lightsalmon;
+  border-radius: 50%;
+}
