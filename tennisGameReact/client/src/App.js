@@ -1,25 +1,61 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+
+class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {button:false};
+    this.handle = this.handle.bind(this);
+  }
+
+
+  handle(){
+
+this.setState({button:true})
+  }
+
+
+  componentDidUpdate(){
+
+    if(this.state.button=== true){
+
+
+    }
+
+  }
+
+
+
+
+render(){
+
+  var popUp;
+
+  if(this.state.button){
+
+    popUp = <header className="App-header">
+    <img src={logo} className="App-logo" alt="logo" />
+  </header>
+
+  } else { popUp = ""}
+
+
+
+
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Helo
-        </a>
-      </header>
+
+    <div>{popUp}</div>
+
+      <button id = 'button' onClick={()=>this.handle()}>{'START'}</button>
+
     </div>
+
   );
+}
 }
 
 export default App;
