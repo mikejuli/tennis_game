@@ -42,7 +42,7 @@ render(){
 
   if(this.state.levelChosen){
 
-   popUp = <div><Field/> <div>{this.state.level}</div></div>
+   popUp = <div><Field level = {this.state.level}/> <div>{this.state.level}</div></div>
 
   } else { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel}/>}
 
