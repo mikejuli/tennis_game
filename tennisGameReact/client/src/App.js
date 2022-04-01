@@ -1,30 +1,37 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import Levels from './components/levels';
+import Field from './components/gameField'
 
 class App extends React.Component{
   constructor(props){
     super(props);
-    this.state = {button:false};
+    this.state = {levelChosen:false, level: 0 };
     this.handle = this.handle.bind(this);
+    this.fitLevel = this.fitLevel.bind(this);
   }
 
 
   handle(){
 
-this.setState({button:true})
+this.setState({levelChosen:true})
   }
 
+  fitLevel(level){
 
-  componentDidUpdate(){
-
-    if(this.state.button=== true){
-
-
-    }
-
+    this.setState({level: level})
   }
+
+  // componentDidUpdate(){
+
+  //   if(this.state.levelChosen === true){
+
+  //     console.log('pressed from App');
+
+  //   }
+
+  // }
 
 
 
@@ -33,13 +40,11 @@ render(){
 
   var popUp;
 
-  if(this.state.button){
+  if(this.state.levelChosen){
 
-    popUp = <header className="App-header">
-    <img src={logo} className="App-logo" alt="logo" />
-  </header>
+   popUp = <div><Field/> <div>{this.state.level}</div></div>
 
-  } else { popUp = ""}
+  } else { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel}/>}
 
 
 
@@ -49,8 +54,6 @@ render(){
     <div className="App">
 
     <div>{popUp}</div>
-
-      <button id = 'button' onClick={()=>this.handle()}>{'START'}</button>
 
     </div>
 
