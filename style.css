@@ -1,5 +1,5 @@
 #box {
-
+  z-index: -1;
   background-color: rgb(183, 247, 225);
   height: 400px;
   width: 500px;

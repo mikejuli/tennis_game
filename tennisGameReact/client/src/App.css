@@ -43,11 +43,12 @@ td {
 
 #box {
 
-  background-color: rgb(183, 247, 225);
+
+  background-color: rgb(157, 212, 193);
   height: 400px;
   width: 500px;
-  position: absolute;
-
+  position: relative;
+  z-index: -1;
 }
 
 
@@ -75,6 +76,7 @@ top: calc(100% - 10px);
 left: 50%;
 
 background-color: darkslateblue;
+
 }
 
 #brick {

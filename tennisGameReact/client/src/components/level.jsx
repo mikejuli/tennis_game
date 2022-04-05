@@ -1,21 +1,41 @@
 import React from 'react';
-
+import $ from 'jquery';
 
 class Level extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.state = { pressed: false}
+    this.state = { pressed: false, pattern: []}
     this.gettingPlay = this.gettingPlay.bind(this);
   }
 
+
+  componentDidMount(){
+
+  //   $.ajax({
+
+  //     method: 'GET',
+  //     url: `http://localhost:9000/api?level=${this.props.level}`,
+  //     success: result => this.setState({pattern: result, pressed: true})
+  // })
+
+  }
+
+
   gettingPlay(){
+
+
 
     this.setState({pressed: true})
     console.log('here');
 
-  }
+
+}
+
+
+
+
 
 
   render(){
@@ -26,7 +46,7 @@ class Level extends React.Component {
 
       console.log(this.props.level);
       this.props.fitLevel(this.props.level);
-      this.props.handle();
+      this.props.handle(this.props.level);
     console.log('pressedfromField');
 
 

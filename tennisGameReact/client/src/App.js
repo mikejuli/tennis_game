@@ -2,36 +2,41 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Levels from './components/levels';
-import Field from './components/gameField'
+import Field from './components/gameField';
+import $ from 'jquery'
 
 class App extends React.Component{
   constructor(props){
     super(props);
-    this.state = {levelChosen:false, level: 0 };
+    this.state = {levelChosen:false, level: 0 , pattern: undefined};
     this.handle = this.handle.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
   }
 
 
-  handle(){
+  handle(level){
 
 this.setState({levelChosen:true})
+
+
+
   }
 
   fitLevel(level){
 
     this.setState({level: level})
+
   }
 
-  // componentDidUpdate(){
+  componentDidMount(){
 
-  //   if(this.state.levelChosen === true){
+    console.log('was mounter');
 
-  //     console.log('pressed from App');
+    $.ajax({method: 'GET',
+    url: `http://localhost:9000/api?level=${this.state.level}`,
+    success: result => this.setState({pattern: result})})
 
-  //   }
-
-  // }
+  }
 
 
 
@@ -42,7 +47,7 @@ render(){
 
   if(this.state.levelChosen){
 
-   popUp = <div><Field level = {this.state.level}/> <div>{this.state.level}</div></div>
+   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern}/> <div>{this.state.level}</div></div>
 
   } else { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel}/>}
 
@@ -54,6 +59,8 @@ render(){
     <div className="App">
 
     <div>{popUp}</div>
+
+
 
     </div>
 
