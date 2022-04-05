@@ -53,9 +53,11 @@ var firstEnter;
 var inMove = 0;
 
 
-var ballRunning = function(){
+var ballRunning = function(pat){
 
   inMove = 1;
+
+
 
   var r = setInterval ( ()=>{
 
@@ -193,13 +195,14 @@ var ballRunning = function(){
   }
 
 
-  brickBouncer(tops,lefts,pattern);
+  brickBouncer(tops,lefts,pat);
 
 
 } , 5);
 
 };
-//const box = document.getElementById ('box');
+
+
 
 
 document.addEventListener ('mousemove', e => {
@@ -225,12 +228,12 @@ if(!inMove){
 
 })
 
-
+var pat = this.props.pattern;
+//console.log(this.props.pattern , 'hereee')
 document.addEventListener('click', function(){
+  if(inMove === 0){
 
-if(inMove === 0){
-
-  ballRunning();
+  ballRunning(pat);
 
 }
 
@@ -263,7 +266,7 @@ var creatingWall = function(pattern){
 
 }
 
-creatingWall(pattern);
+creatingWall(this.props.pattern);
 
 // document.getElementById('brick').style.top = 140;
 // document.getElementById('brick').style.left = 200;
