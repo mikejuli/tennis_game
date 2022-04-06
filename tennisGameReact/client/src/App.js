@@ -8,7 +8,7 @@ import $ from 'jquery'
 class App extends React.Component{
   constructor(props){
     super(props);
-    this.state = {levelChosen:false, level: 0 , pattern: undefined};
+    this.state = {levelChosen:false, level: 0 , pattern: []};
     this.handle = this.handle.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
   }
@@ -32,13 +32,27 @@ this.setState({levelChosen:true})
 
     console.log('was mounter');
 
-    $.ajax({method: 'GET',
-    url: `http://localhost:9000/api?level=${this.state.level}`,
-    success: result => this.setState({pattern: result})})
+    // $.ajax({method: 'GET',
+    // url: `http://localhost:9000/api?level=${this.state.level}`,
+    // success: result => this.setState({pattern: result})})
 
   }
 
 
+
+
+  componentDidUpdate( prevProps, prevState){
+    if(prevState.level!== this.state.level){
+
+
+      $.ajax({method: 'GET',
+      url: `http://localhost:9000/api?level=${this.state.level}`,
+      success: result => this.setState({pattern: result, patternChosen: true})})
+
+      console.log('update');
+
+    }
+  }
 
 
 render(){

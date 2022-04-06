@@ -8,14 +8,13 @@ import pattern from './brickPattern';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern})
     }
 
 
-    componentDidMount(){
-
-
-
+    componentDidUpdate( prevProps, prevState){
+      if(prevProps.pattern!== this.props.pattern){
+        console.log(prevProps.pattern, this.props.pattern)
 
 
 
@@ -23,6 +22,7 @@ import pattern from './brickPattern';
 
 
       console.log('check');
+
 
 
 
@@ -372,6 +372,13 @@ var brickBouncer = function (top,left,bricksArray){
 
     }
 
+
+
+
+
+
+
+        }
 
     render(){
 
