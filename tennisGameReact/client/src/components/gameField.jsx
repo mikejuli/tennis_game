@@ -53,7 +53,8 @@ var firstEnter;
 var inMove = 0;
 
 
-var ballRunning = function(pat){
+
+var ballRunning = function(pat, handleOff){
 
   inMove = 1;
 
@@ -64,12 +65,12 @@ var ballRunning = function(pat){
   tops = tops+switcherTop;
   lefts = lefts + switcherLeft;
 
-  //  console.log(tops,lefts);
-
+  //  here is suppose to be the way to figure out if the component on fire????? here is some block to prevent errors
+if(document.getElementById('ball')){
   document.getElementById('ball').style.left = lefts + 'px';
 
   document.getElementById('ball').style.top = tops + 'px';
-
+}
   //some changes
   if(tops >= height-22 && (pos < lefts && pos +plate > lefts) ) {
 
@@ -212,7 +213,8 @@ if(e.offsetX<width-plate){
   pos = e.offsetX;
 }else { pos = width-plate}
 
-document.getElementById('plate').style.left = pos + 'px';
+if(document.getElementById('plate')){
+document.getElementById('plate').style.left = pos + 'px';}
 
 if(!inMove){
   document.getElementById('ball').style.left = pos +(plate/2)-5 + 'px';
@@ -229,6 +231,7 @@ if(!inMove){
 })
 
 var pat = this.props.pattern;
+var handleOff = this.props.handleOff;
 //console.log(this.props.pattern , 'hereee')
 document.addEventListener('click', function(){
   if(inMove === 0){
@@ -323,7 +326,9 @@ var brickBouncer = function (top,left,bricksArray){
         //  bricksArray.splice(x,1)
 
 
-         if(bricksArray.length === 0) { alert("You Win!")}
+         if(bricksArray.length === 0) {
+
+          alert("You Win!")}
 
          } else
 
@@ -352,7 +357,7 @@ var brickBouncer = function (top,left,bricksArray){
           console.log(bricksArray[x][2]);
          bricksArray.splice(x,1)
 
-         if(bricksArray.length === 0) { alert("You Win!")}
+         if(bricksArray.length === 0) {handleOff();}
 
          }
   }

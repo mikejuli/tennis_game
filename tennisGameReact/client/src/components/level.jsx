@@ -46,7 +46,7 @@ class Level extends React.Component {
 
       console.log(this.props.level);
       this.props.fitLevel(this.props.level);
-      this.props.handle(this.props.level);
+      this.props.handle();
     console.log('pressedfromField');
 
 
