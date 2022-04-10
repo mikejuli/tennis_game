@@ -6,12 +6,21 @@ class Level extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { pressed: false, pattern: []}
+    this.state = { pressed: false, pattern: [], passed: this.props.passed}
     this.gettingPlay = this.gettingPlay.bind(this);
   }
 
 
-  componentDidMount(){
+  componentDidUpdate( prevProps, prevState){
+    if(prevProps.passed!== this.props.passed){
+
+      this.setState({passed: this.props.passed})
+
+
+    }
+
+  }
+
 
   //   $.ajax({
 
@@ -20,7 +29,9 @@ class Level extends React.Component {
   //     success: result => this.setState({pattern: result, pressed: true})
   // })
 
-  }
+
+
+
 
 
   gettingPlay(){
@@ -46,13 +57,29 @@ class Level extends React.Component {
 
       console.log(this.props.level);
       this.props.fitLevel(this.props.level);
-      this.props.handle(this.props.level);
+      this.props.handle();
     console.log('pressedfromField');
 
 
 
      } else {
-    pr = <button onClick={()=>this.gettingPlay(this)} >Level {this.props.level}</button>
+
+      if(this.state.passed){
+
+      if (this.state.passed.passed){
+
+        pr = <button onClick={()=>this.gettingPlay(this)} >Level {this.props.level}</button>
+
+
+      } else {
+
+        pr = <button disabled onClick={()=>this.gettingPlay(this)} >Level {this.props.level}</button>
+
+
+      }
+
+    }
+
     }
 
     return(

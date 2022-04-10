@@ -1,14 +1,29 @@
 import React from 'react';
 import Level from './level';
+import $ from 'jquery';
 
 class Levels extends React.Component {
 
   constructor(props){
     super(props)
 
-    this.state = {selected: false}
+    this.state = {selected: false , active: []}
 
   }
+
+
+  componentDidMount(){
+
+    $.ajax({method: 'GET',
+    url: `http://localhost:9000/active`,
+    success: result => this.setState({active: result})
+
+  })
+
+    }
+
+
+
 
 
   render() {
@@ -22,7 +37,7 @@ class Levels extends React.Component {
       arr = [];
       for(var j = 0; j<10; j++){
         s++;
-        arr.push(<td > <Level level = {s} handle = {this.props.handle} fitLevel = {this.props.fitLevel}/> </td>);
+        arr.push(<td > <Level level = {s} handle = {this.props.handle} fitLevel = {this.props.fitLevel} passed = {this.state.active[s-1]}/> </td>);
       }
 
 

@@ -10,17 +10,21 @@ class App extends React.Component{
     super(props);
     this.state = {levelChosen:false, level: 0 , pattern: []};
     this.handle = this.handle.bind(this);
+    this.handleOff = this.handleOff.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
   }
 
 
-  handle(level){
-
+  handle(){
 this.setState({levelChosen:true})
-
-
-
   }
+
+
+  handleOff(){
+    console.log('invoked handleOff')
+    this.setState({levelChosen:false})
+      }
+
 
   fitLevel(level){
 
@@ -28,15 +32,15 @@ this.setState({levelChosen:true})
 
   }
 
-  componentDidMount(){
+  // componentDidMount(){
 
-    console.log('was mounter');
+  //   console.log('was mounter');
 
-    // $.ajax({method: 'GET',
-    // url: `http://localhost:9000/api?level=${this.state.level}`,
-    // success: result => this.setState({pattern: result})})
+  //   $.ajax({method: 'GET',
+  //   url: `http://localhost:9000/api?level=${this.state.level}`,
+  //   success: result => this.setState({pattern: result})})
 
-  }
+  // }
 
 
 
@@ -61,7 +65,7 @@ render(){
 
   if(this.state.levelChosen){
 
-   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern}/> <div>{this.state.level}</div></div>
+   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff}/> <div>{this.state.level}</div></div>
 
   } else { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel}/>}
 
