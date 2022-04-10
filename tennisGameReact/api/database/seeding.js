@@ -11,5 +11,5 @@ for(var i = 1; i<=50; i++){
 
     db.save(user);
 }
-db.replace();
+db.replace(1);
 console.log(user);

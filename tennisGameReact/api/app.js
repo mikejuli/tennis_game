@@ -37,6 +37,13 @@ app.use('/users', usersRouter);
 app.use('/testAPI', testAPIRouter);
 
 
+app.post('/active', function(req, res){
+
+console.log('---------',req.body.level);
+  res.send('works')
+  db.replace(req.body.level);
+})
+
 app.get('/api', function (req, res) {
   // db.save();
   console.log(req.query.level);

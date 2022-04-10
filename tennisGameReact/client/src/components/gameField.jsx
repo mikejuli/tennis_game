@@ -232,6 +232,8 @@ if(!inMove){
 
 var pat = this.props.pattern;
 var handleOff = this.props.handleOff;
+var lvl = this.props.level;
+console.log('here is lvl ',lvl);
 //console.log(this.props.pattern , 'hereee')
 document.addEventListener('click', function(){
   if(inMove === 0){
@@ -357,7 +359,7 @@ var brickBouncer = function (top,left,bricksArray){
           console.log(bricksArray[x][2]);
          bricksArray.splice(x,1)
 
-         if(bricksArray.length === 0) {handleOff();}
+         if(bricksArray.length === 0) {handleOff(lvl);}
 
          }
   }
