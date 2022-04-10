@@ -20,8 +20,16 @@ this.setState({levelChosen:true})
   }
 
 
-  handleOff(){
-    console.log('invoked handleOff')
+  handleOff(level){
+    console.log('invoked handleOff +', level)
+
+    $.ajax({method: 'POST',
+    url: `http://localhost:9000/active`,
+    data: {level: level+1},
+    success: result => console.log(result)
+    })
+
+
     this.setState({levelChosen:false})
       }
 
