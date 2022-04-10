@@ -8,7 +8,7 @@ import $ from 'jquery'
 class App extends React.Component{
   constructor(props){
     super(props);
-    this.state = {levelChosen:false, level: 0 , pattern: []};
+    this.state = {levelChosen:false, level: 0 , pattern: [], active:[]};
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
@@ -22,17 +22,22 @@ this.setState({levelChosen:true})
 
   handleOff(level){
     console.log('invoked handleOff +', level)
+    this.setState({levelChosen:false})
 
     $.ajax({method: 'POST',
     url: `http://localhost:9000/active`,
     data: {level: level+1},
-    success: result => console.log(result)
-    })
+    success: (result) => {
 
+      console.log(result,'from success')
 
-    this.setState({levelChosen:false})
+      this.setState({active: result})
+
       }
 
+    })
+
+  }
 
   fitLevel(level){
 
@@ -40,15 +45,15 @@ this.setState({levelChosen:true})
 
   }
 
-  // componentDidMount(){
+   componentDidMount(){
+    console.log('WAS MOUNT');
+    $.ajax({method: 'GET',
+    url: `http://localhost:9000/active`,
+    success: result => this.setState({active: result})
 
-  //   console.log('was mounter');
+  })
 
-  //   $.ajax({method: 'GET',
-  //   url: `http://localhost:9000/api?level=${this.state.level}`,
-  //   success: result => this.setState({pattern: result})})
-
-  // }
+    }
 
 
 
@@ -75,7 +80,7 @@ render(){
 
    popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff}/> <div>{this.state.level}</div></div>
 
-  } else { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel}/>}
+  } else { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active}/>}
 
 
 

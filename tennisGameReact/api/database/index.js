@@ -42,13 +42,13 @@ let get = (level, cb) => {
 
 };
 
-let findAndReplace = (level) => {
+let findAndReplace = (level, cb) => {
   console.log(level, 'from find');
  Level.findOneAndUpdate( {user: '1', level:level} , {$set:{passed: true}}, {new: true}, (err, doc) => {
   if (err) {
       console.log("Something wrong when updating data!");
   }
-
+  Level.find({}).exec((err, result) => { cb(err,result) });
   console.log(doc);
 
 })

@@ -40,8 +40,11 @@ app.use('/testAPI', testAPIRouter);
 app.post('/active', function(req, res){
 
 console.log('---------',req.body.level);
-  res.send('works')
-  db.replace(req.body.level);
+
+  db.replace(req.body.level,(err,result)=>{res.send(result)});
+
+
+
 })
 
 app.get('/api', function (req, res) {
@@ -66,22 +69,17 @@ if(req.query.level == 2){
 
   var pattern =
 
-[
-  1,1,1,1,1,1,
-  1,0,0,0,0,1,
-  1,0,0,0,0,1,
-  1,0,0,0,0,1,
-  1,1,1,1,1,1
-  ]
+  [
+    0,0,0,0,1
+    ]
 
 } else  {
 
   var pattern =
 
-[
-  1,1,
-  1,1
-  ]
+  [
+    0,0,0,0,1
+    ]
 
 }
 
