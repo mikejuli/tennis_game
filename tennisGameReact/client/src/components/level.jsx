@@ -68,12 +68,12 @@ class Level extends React.Component {
 
       if (this.state.passed.passed){
 
-        pr = <button onClick={()=>this.gettingPlay(this)} >Level {this.props.level}</button>
+        pr = <button class='button' onClick={()=>this.gettingPlay(this)} >Level {this.props.level}</button>
 
 
       } else {
 
-        pr = <button disabled onClick={()=>this.gettingPlay(this)} >Level {this.props.level}</button>
+        pr = <button class='disButton' disabled onClick={()=>this.gettingPlay(this)} >Level {this.props.level}</button>
 
 
       }

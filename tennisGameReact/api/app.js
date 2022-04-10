@@ -70,7 +70,7 @@ if(req.query.level == 2){
   var pattern =
 
   [
-    0,0,0,0,1
+    0,0,0,1,1
     ]
 
 } else  {

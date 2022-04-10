@@ -62,6 +62,8 @@ var ballRunning = function(pat, handleOff){
 
   var r = setInterval ( ()=>{
 
+  function clear() { clearInterval(r);}
+
   tops = tops+switcherTop;
   lefts = lefts + switcherLeft;
 
@@ -196,10 +198,13 @@ if(document.getElementById('ball')){
   }
 
 
-  brickBouncer(tops,lefts,pat);
+  brickBouncer(tops,lefts,pat,clear);
 
 
 } , 5);
+
+
+
 
 };
 
@@ -279,7 +284,7 @@ creatingWall(this.props.pattern);
 
 
 
-var brickBouncer = function (top,left,bricksArray){
+var brickBouncer = function (top,left,bricksArray,clear){
 
   //console.log('top:',top, '  left:',left);
 
@@ -301,7 +306,7 @@ var brickBouncer = function (top,left,bricksArray){
          bricksArray.splice(x,1)
 
 
-          if(bricksArray.length === 0) { alert("You Win!")}
+         if(bricksArray.length === 0) {clear();handleOff(lvl);}
 
 
 
@@ -314,10 +319,17 @@ var brickBouncer = function (top,left,bricksArray){
         left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 60 )
         { switcherTop = -switcherTop;
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
-           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('style', document.getElementById('wall').childNodes[bricksArray[x][2]].getAttribute('style')+`;background: rgb(45, ${ 159 - (3-document.getElementById('wall').childNodes[bricksArray[x][2]].health) * 20}, 253)` );
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+          document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
+          console.log(bricksArray[x][2]);
+         bricksArray.splice(x,1)
+
+
+          // document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+          //  document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('style', document.getElementById('wall').childNodes[bricksArray[x][2]].getAttribute('style')+`;background: rgb(45, ${ 159 - (3-document.getElementById('wall').childNodes[bricksArray[x][2]].health) * 20}, 253)` );
+
+          // document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
 
 
@@ -328,9 +340,7 @@ var brickBouncer = function (top,left,bricksArray){
         //  bricksArray.splice(x,1)
 
 
-         if(bricksArray.length === 0) {
-
-          alert("You Win!")}
+        if(bricksArray.length === 0) {clear();handleOff(lvl);}
 
          } else
 
@@ -345,7 +355,7 @@ var brickBouncer = function (top,left,bricksArray){
           console.log(bricksArray[x][2]);
          bricksArray.splice(x,1) //indebricksArray[x]of
 
-         if(bricksArray.length === 0) { alert("You Win!")}
+         if(bricksArray.length === 0) {clear();handleOff(lvl);}
 
          } else
 
@@ -359,7 +369,7 @@ var brickBouncer = function (top,left,bricksArray){
           console.log(bricksArray[x][2]);
          bricksArray.splice(x,1)
 
-         if(bricksArray.length === 0) {handleOff(lvl);}
+         if(bricksArray.length === 0) {clear();handleOff(lvl);}
 
          }
   }

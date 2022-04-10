@@ -22,7 +22,7 @@ this.setState({levelChosen:true})
 
   handleOff(level){
     console.log('invoked handleOff +', level)
-    this.setState({levelChosen:false})
+    this.setState({levelChosen:false, level:0})
 
     $.ajax({method: 'POST',
     url: `http://localhost:9000/active`,
@@ -59,6 +59,10 @@ this.setState({levelChosen:true})
 
 
   componentDidUpdate( prevProps, prevState){
+
+    //instead of this request we should change it on just retriving data(pattern) from active by using level as an index
+
+
     if(prevState.level!== this.state.level){
 
 
@@ -69,6 +73,8 @@ this.setState({levelChosen:true})
       console.log('update');
 
     }
+
+
   }
 
 
