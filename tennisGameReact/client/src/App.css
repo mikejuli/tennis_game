@@ -45,8 +45,8 @@ td {
 
 
   background-color: rgb(157, 212, 193);
-  height: 400px;
-  width: 500px;
+  height: 480px;
+  width: 640px;
   position: relative;
   z-index: -1;
 }
@@ -85,8 +85,8 @@ border-radius: 15%;
 background: rgb(45,159,253);
 background: linear-gradient(0deg, rgba(45,159,253,1) 11%, rgba(17,217,219,1) 82%);
 
-height: 30px;
-width: 60px;
+height: 20px;
+width: 40px;
 
 position: absolute;
 

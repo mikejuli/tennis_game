@@ -66,12 +66,49 @@ this.setState({levelChosen:true})
     if(prevState.level!== this.state.level){
 
 
-      $.ajax({method: 'GET',
-      url: `http://localhost:9000/api?level=${this.state.level}`,
-      success: result => this.setState({pattern: result, patternChosen: true})})
+      if(this.state.level){
+      var filtred = this.state.active.sort((a,b)=>a.level-b.level);
 
-      console.log('update');
+      var createPattern = filtred[this.state.level-1].pattern.split('').map(x=>parseInt(x));
 
+
+      var top = 42;
+var left = 2;
+var count = 0;
+var num = -1;
+createPattern = createPattern.map( (x) => {
+
+
+  if(count===13)
+
+    {top+= 22; left = 2;count=0;}
+
+    count++;
+
+  if(x===0)
+    {left += 42;return 0} else
+
+    if (x===1)
+      {
+        num++;
+        left += 42;
+        return [top,left,num] }
+
+
+})
+
+
+ createPattern = createPattern.filter(x=>x!==0);
+
+
+      this.setState({pattern: createPattern, patternChosen: true})
+
+      // $.ajax({method: 'GET',
+      // url: `http://localhost:9000/api?level=${this.state.level}`,
+      // success: result => this.setState({pattern: result, patternChosen: true})})
+
+      // console.log('update');
+      }
     }
 
 
