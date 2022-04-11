@@ -28,8 +28,8 @@ import pattern from './brickPattern';
 
 console.log(pattern);
 
-var height = 400;
-var width = 500;
+var height = 480;
+var width = 640;
 var plate = 100;
 var speed = 1;
 
@@ -240,15 +240,23 @@ var handleOff = this.props.handleOff;
 var lvl = this.props.level;
 console.log('here is lvl ',lvl);
 //console.log(this.props.pattern , 'hereee')
-document.addEventListener('click', function(){
-  if(inMove === 0){
-
-  ballRunning(pat);
-
-}
 
 
-})
+//to prevent immidite fire the ball by click
+setTimeout(()=>{
+
+  document.addEventListener('click', function(){
+    if(inMove === 0){
+
+    ballRunning(pat);
+
+  }
+
+
+  })
+
+
+},1000)
 
 
 var creatingBrick = function (arr){
@@ -286,15 +294,26 @@ creatingWall(this.props.pattern);
 
 var brickBouncer = function (top,left,bricksArray,clear){
 
+
+  //to prevent the ball go through 2 bricks the same time.
+  var switcherLeftWasChanged = false;
+  var switcherTopWasChanged = false;
+
   //console.log('top:',top, '  left:',left);
 
   for( var x=0 ; x< bricksArray.length;x++){
 
 
     //top side of the brick //-2 moved touch line
-    if ((top >= bricksArray[x][0]-10 -2 && top <= bricksArray[x][0]-10 -1) &&
-        left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 60)
-        { switcherTop = -switcherTop;
+    if ((top >= bricksArray[x][0]-10  && top <= bricksArray[x][0]-10 +1) &&
+        left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 40)
+        {
+          if(!switcherTopWasChanged){
+
+            switcherTop = -switcherTop;
+            switcherTopWasChanged = true;
+
+          }
 
 
 
@@ -315,9 +334,18 @@ var brickBouncer = function (top,left,bricksArray,clear){
 
 
     //bottom side of the brick  //+2 moved touch line
-    if ((top <= bricksArray[x][0]+30 + 2 && top >= bricksArray[x][0]+30 + 1) &&
-        left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 60 )
-        { switcherTop = -switcherTop;
+    if ((top <= bricksArray[x][0]+20 && top >= bricksArray[x][0]+20 - 1) &&
+        left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 40 )
+        {
+
+          if(!switcherTopWasChanged){
+
+            switcherTop = -switcherTop;
+            switcherTopWasChanged = true;
+
+          }
+
+
 
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
@@ -346,23 +374,46 @@ var brickBouncer = function (top,left,bricksArray,clear){
 
 
     //left side of the brick
-    if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+30 &&
+    if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+20 &&
         (left >= bricksArray[x][1]-10-2 && left <= bricksArray[x][1]-10-1) ) //moved touch line a bit left, to prevent the ball through move
-        { switcherLeft = -switcherLeft;
+        {
+
+          if(!switcherLeftWasChanged){
+
+            switcherLeft = -switcherLeft;
+            switcherLeftWasChanged = true;
+
+          }
+
+
+
+
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
 
           console.log(bricksArray[x][2]);
          bricksArray.splice(x,1) //indebricksArray[x]of
 
+
          if(bricksArray.length === 0) {clear();handleOff(lvl);}
 
          } else
 
     //right side of the brick //+2 moved touch line
-    if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+30 &&
-        (left <= bricksArray[x][1]+60+2 && left >= bricksArray[x][1]+60+1) )
-        { switcherLeft = -switcherLeft;
+    if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+20 &&
+        (left <= bricksArray[x][1]+40+2 && left >= bricksArray[x][1]+40+1) )
+        {
+
+          if(!switcherLeftWasChanged){
+
+            switcherLeft = -switcherLeft;
+            switcherLeftWasChanged = true;
+
+          }
+
+
+
+
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
 

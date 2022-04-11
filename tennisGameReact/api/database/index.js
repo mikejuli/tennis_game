@@ -44,7 +44,7 @@ let get = (level, cb) => {
 
 let findAndReplace = (level, cb) => {
   console.log(level, 'from find');
- Level.findOneAndUpdate( {user: '1', level:level} , {$set:{passed: true}}, {new: true}, (err, doc) => {
+ Level.findOneAndUpdate( {user: '1', level:level} , {$set:{passed:true}}, {new: true}, (err, doc) => {
   if (err) {
       console.log("Something wrong when updating data!");
   }
