@@ -11,7 +11,7 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:1, turn:0}
+    this.state = {selected: false , active: [],arrow:1, turn:0, changeArrow: 0}
 
     this.changeLevels = this.changeLevels.bind(this)
   }
@@ -34,12 +34,12 @@ class Levels extends React.Component {
     console.log(this.state.arrow);
     if(arrow === 1){
       var g = this.state.arrow+1;
-      this.setState({arrow:g})
+      this.setState({arrow:g, changeArrow: 1})
     }
 
     if(arrow === -1){
       var g = this.state.arrow-1;
-      this.setState({arrow:g})
+      this.setState({arrow:g, changeArrow: -1})
     }
 
   }
@@ -94,7 +94,37 @@ class Levels extends React.Component {
 
 
     }
-    if(this.state.arrow===1){var page = 'home'} else {var page = 'about'}
+    if(this.state.arrow===1){var page = 'first'} else
+    if(this.state.arrow===2) {var page = 'second'} else
+    if(this.state.arrow===3) {var page = 'third'} else
+    if(this.state.arrow===4) {var page = 'fourth'} else
+    if(this.state.arrow===5) {var page = 'fifth'}
+
+
+    if(this.state.changeArrow===1){
+
+       var rend = <ReactCSSTransitionGroup
+        transitionName="background"
+        transitionEnterTimeout={1000}
+        transitionLeaveTimeout={1000}
+      >
+      <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
+      </ReactCSSTransitionGroup>
+
+    } else {
+
+      var rend =  <ReactCSSTransitionGroup
+      transitionName="backgroundBack"
+      transitionEnterTimeout={1000}
+      transitionLeaveTimeout={1000}
+    >
+    <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
+    </ReactCSSTransitionGroup>
+
+    }
+
+
+
 
     return(<div id = 'levels'>
 
@@ -104,13 +134,7 @@ class Levels extends React.Component {
 
       <table id = 'level'>
 
-      <ReactCSSTransitionGroup
-          transitionName="background"
-          transitionEnterTimeout={5000}
-          transitionLeaveTimeout={5000}
-        >
-        <BackgroundImage page={page} key={page} comp = {this.state.arrow} />
-        </ReactCSSTransitionGroup>
+      {rend}
 
         </table>
 

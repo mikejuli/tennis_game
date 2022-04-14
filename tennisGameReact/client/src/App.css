@@ -130,7 +130,7 @@ button.disButton {
   height: 350px;
   width: 600px;
   position: absolute;
-
+  overflow: hidden;
 
 }
 
@@ -152,9 +152,11 @@ button.back {
 
 
 .tenLevels{
-  height: auto;
+  padding-top: 20%;
+  height: 200px;
   width: 100%;
   background-image: url(./grass.png);
+
 
 }
 
@@ -164,12 +166,28 @@ button.back {
 }
 .background-enter.background-enter-active {
   transform: translateY(0%);
-  transition: transform 5000ms ease-in-out;
+  transition: transform 1000ms ease-in-out;
 }
 .background-leave {
   transform: translateY(0%);
 }
 .background-leave.background-leave-active {
   transform: translateY(-100%);
-  transition: transform 5000ms ease-in-out;
+  transition: transform 1000ms ease-in-out;
+}
+
+
+.backgroundBack-enter {
+  transform: translateY(-100%);
+}
+.backgroundBack-enter.backgroundBack-enter-active {
+  transform: translateY(0%);
+  transition: transform 1000ms ease-in-out;
+}
+.backgroundBack-leave {
+  transform: translateY(0%);
+}
+.backgroundBack-leave.backgroundBack-leave-active {
+  transform: translateY(100%);
+  transition: transform 1000ms ease-in-out;
 }
