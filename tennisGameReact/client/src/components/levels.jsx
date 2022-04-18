@@ -1,7 +1,10 @@
 import React from 'react';
 import Level from './level';
-import TenLevels from './tenlevels'
+import TenLevels from './tenlevels';
+import BarMenu from './BarMenu';
 import $ from 'jquery';
+import grass from './grass.png';
+import snow from './snow.jpeg'
 
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import BackgroundImage from './BackgroundImage';
@@ -11,7 +14,7 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:1, turn:0}
+    this.state = {selected: false , active: [],arrow:1, turn:0, changeArrow: 0}
 
     this.changeLevels = this.changeLevels.bind(this)
   }
@@ -34,12 +37,12 @@ class Levels extends React.Component {
     console.log(this.state.arrow);
     if(arrow === 1){
       var g = this.state.arrow+1;
-      this.setState({arrow:g})
+      this.setState({arrow:g, changeArrow: 1})
     }
 
     if(arrow === -1){
       var g = this.state.arrow-1;
-      this.setState({arrow:g})
+      this.setState({arrow:g, changeArrow: -1})
     }
 
   }
@@ -88,13 +91,57 @@ class Levels extends React.Component {
 
       }
 
+      var style = {
+        backgroundImage: `url(${grass})`
+      }
 
-      arrS.push(<div class= 'tenLevels'><TenLevels arr = {arr} number = {i+1} picked = {this.state.arrow}/></div>);
+      if(i==1){
+         style = {
+          backgroundImage: `url(${snow})`
+        }
+
+        console.log(style.backgroundImage)
+
+      }
+
+
+
+      arrS.push(<div class= 'tenLevels' style = {style}><TenLevels arr = {arr} number = {i+1} picked = {this.state.arrow}/></div>);
 
 
 
     }
-    if(this.state.arrow===1){var page = 'home'} else {var page = 'about'}
+    if(this.state.arrow===1){var page = 'first'} else
+    if(this.state.arrow===2) {var page = 'second'} else
+    if(this.state.arrow===3) {var page = 'third'} else
+    if(this.state.arrow===4) {var page = 'fourth'} else
+    if(this.state.arrow===5) {var page = 'fifth'}
+
+
+    if(this.state.changeArrow===1){
+
+       var rend = <ReactCSSTransitionGroup
+        transitionName="background"
+        transitionEnterTimeout={5000}
+        transitionLeaveTimeout={5000}
+      >
+      <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
+      </ReactCSSTransitionGroup>
+
+    } else {
+
+      var rend =  <ReactCSSTransitionGroup
+      transitionName="backgroundBack"
+      transitionEnterTimeout={5000}
+      transitionLeaveTimeout={5000}
+    >
+    <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
+    </ReactCSSTransitionGroup>
+
+    }
+
+
+
 
     return(<div id = 'levels'>
 
@@ -104,20 +151,12 @@ class Levels extends React.Component {
 
       <table id = 'level'>
 
-      <ReactCSSTransitionGroup
-          transitionName="background"
-          transitionEnterTimeout={5000}
-          transitionLeaveTimeout={5000}
-        >
-        <BackgroundImage page={page} key={page} comp = {this.state.arrow} />
-        </ReactCSSTransitionGroup>
+      {rend}
 
         </table>
 
 
-
-
-
+    <BarMenu currentLevel = {this.props.currentLevel}/>
 
       <button class = 'next' onClick = {()=>this.changeLevels(1)}>down arrow</button>
 
