@@ -12,7 +12,10 @@ const levelsSchema = mongoose.Schema ({
 
 })
 
+
+
 let Level = mongoose.model('Level', levelsSchema);
+
 
 
 let save = (data) => {
@@ -33,6 +36,25 @@ let save = (data) => {
   });
 
 };
+
+let saveUser = (data) => {
+
+  var add = new User({
+      user: data.user,
+      level: data.level,
+
+  });
+
+  console.log('here');
+
+
+  add.save((err) => {
+    console.log(err);
+
+  });
+
+};
+
 
 
 let get = (level, cb) => {

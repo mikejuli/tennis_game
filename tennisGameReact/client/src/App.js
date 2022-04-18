@@ -8,7 +8,7 @@ import $ from 'jquery'
 class App extends React.Component{
   constructor(props){
     super(props);
-    this.state = {levelChosen:false, level: 0 , pattern: [], active:[]};
+    this.state = {levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: 0};
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
@@ -22,7 +22,7 @@ this.setState({levelChosen:true})
 
   handleOff(level){
     console.log('invoked handleOff +', level)
-    this.setState({levelChosen:false, level:0})
+    this.setState({levelChosen:false, level:0, currentLevel: level})
 
     $.ajax({method: 'POST',
     url: `http://localhost:9000/active`,
@@ -123,7 +123,7 @@ render(){
 
    popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff}/> <div>{this.state.level}</div></div>
 
-  } else { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active}/>}
+  } else { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel}/>}
 
 
 

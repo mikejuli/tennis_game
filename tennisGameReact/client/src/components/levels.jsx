@@ -1,7 +1,10 @@
 import React from 'react';
 import Level from './level';
-import TenLevels from './tenlevels'
+import TenLevels from './tenlevels';
+import BarMenu from './BarMenu';
 import $ from 'jquery';
+import grass from './grass.png';
+import snow from './snow.jpeg'
 
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import BackgroundImage from './BackgroundImage';
@@ -88,8 +91,22 @@ class Levels extends React.Component {
 
       }
 
+      var style = {
+        backgroundImage: `url(${grass})`
+      }
 
-      arrS.push(<div class= 'tenLevels'><TenLevels arr = {arr} number = {i+1} picked = {this.state.arrow}/></div>);
+      if(i==1){
+         style = {
+          backgroundImage: `url(${snow})`
+        }
+
+        console.log(style.backgroundImage)
+
+      }
+
+
+
+      arrS.push(<div class= 'tenLevels' style = {style}><TenLevels arr = {arr} number = {i+1} picked = {this.state.arrow}/></div>);
 
 
 
@@ -105,8 +122,8 @@ class Levels extends React.Component {
 
        var rend = <ReactCSSTransitionGroup
         transitionName="background"
-        transitionEnterTimeout={1000}
-        transitionLeaveTimeout={1000}
+        transitionEnterTimeout={5000}
+        transitionLeaveTimeout={5000}
       >
       <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
       </ReactCSSTransitionGroup>
@@ -115,8 +132,8 @@ class Levels extends React.Component {
 
       var rend =  <ReactCSSTransitionGroup
       transitionName="backgroundBack"
-      transitionEnterTimeout={1000}
-      transitionLeaveTimeout={1000}
+      transitionEnterTimeout={5000}
+      transitionLeaveTimeout={5000}
     >
     <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
     </ReactCSSTransitionGroup>
@@ -139,9 +156,7 @@ class Levels extends React.Component {
         </table>
 
 
-
-
-
+    <BarMenu currentLevel = {this.props.currentLevel}/>
 
       <button class = 'next' onClick = {()=>this.changeLevels(1)}>down arrow</button>
 
