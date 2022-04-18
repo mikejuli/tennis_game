@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 
-mongoose.connect('mongodb://localhost/Level')
+mongoose.connect('mongodb://localhost/Level') //the name has to be changed!
 
 
 const levelsSchema = mongoose.Schema ({
@@ -12,11 +12,17 @@ const levelsSchema = mongoose.Schema ({
 
 })
 
+const userSchema = mongoose.Schema ({
+
+  user: String,
+  level: Number,
+
+})
 
 
 let Level = mongoose.model('Level', levelsSchema);
 
-
+let User = mongoose.model('User', userSchema);
 
 let save = (data) => {
 
@@ -64,6 +70,14 @@ let get = (level, cb) => {
 
 };
 
+let getUser = (user, cb) => {
+
+  console.log(user, '<---');
+  User.find({}).exec((err, result) => { cb(err,result) });
+
+};
+
+
 let findAndReplace = (level, cb) => {
   console.log(level, 'from find');
  Level.findOneAndUpdate( {user: '1', level:level} , {$set:{passed:true}}, {new: true}, (err, doc) => {
@@ -77,9 +91,39 @@ let findAndReplace = (level, cb) => {
 
 }
 
+let findAndReplaceUserLevel = ( cb) => {
+
+  User.find({user: '1'}).exec((err, result) => {
+
+    var s =result[0].level + 1;
+    console.log(s);
+
+    User.findOneAndUpdate( {user: '1'} , {$set:{level:s}}, {new: true}, (err, doc) => {
+    if (err) {
+        console.log("Something wrong when updating data!");
+    }
+    User.find({}).exec((err, result) => { cb(err,result) });
+    console.log(doc);
+
+  })
+
+
+
+    });
+
+
+
+
+
+}
+
+
 
 console.log('done');
 
 module.exports.save = save;
 module.exports.get = get;
 module.exports.replace = findAndReplace;
+module.exports.saveUser = saveUser;
+module.exports.getUser = getUser;
+module.exports.replaceLevel = findAndReplaceUserLevel;

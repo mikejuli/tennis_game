@@ -12,5 +12,13 @@ var user = {};
 //     db.save(user);
 // }
 
-db.replace(1,(err,result)=>{if(err){console.log(err)}});
-console.log(user);
+ db.replace(1,(err,result)=>{if(err){console.log(err)}});
+// console.log(user);
+
+user.user = 1;
+user.level = 1;
+
+//db.saveUser(user);
+
+//  db.replaceLevel((err,result)=>console.log(result));
+
