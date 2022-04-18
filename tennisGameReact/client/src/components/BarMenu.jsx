@@ -28,7 +28,7 @@ class BarMenu extends React.Component {
 
       <div id = 'baseInfo'>
         <div id = 'gold'> 1434 gold &#9748; </div>
-  <div id = 'currentLvl'>Level: {this.props.currentLevel+1}/50</div>
+  <div id = 'currentLvl'>Level: {this.props.currentLevel}/50</div>
         <div id = 'skin'>Skin: Common</div>
       </div>
 

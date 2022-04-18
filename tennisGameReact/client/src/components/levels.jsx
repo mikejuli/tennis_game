@@ -14,7 +14,7 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:1, turn:0, changeArrow: 0}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0}
 
     this.changeLevels = this.changeLevels.bind(this)
   }
@@ -51,10 +51,22 @@ class Levels extends React.Component {
 
   componentDidUpdate( prevProps, prevState){
     if(prevProps.active!== this.props.active){
-
       this.setState({active:this.props.active})
+    }
 
-    }}
+
+
+
+    if(prevProps.arrow !== this.props.arrow){
+      this.setState({arrow: this.props.arrow, changeArrow: 1})
+    }
+
+    }
+
+
+    componentDidMount(){
+      this.setState({active:this.props.active, arrow:this.props.arrow})
+    }
 
 
 //       $.ajax({method: 'GET',

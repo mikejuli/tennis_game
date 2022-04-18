@@ -47,6 +47,16 @@ console.log('---------',req.body.level);
 
 })
 
+app.post('/user', function(req, res){
+
+  console.log('---------',req.body.level);
+
+    db.replaceLevel((err,result)=>{res.send(result)});
+
+
+  })
+
+
 app.get('/api', function (req, res) {
   // db.save();
   console.log(req.query.level);
@@ -126,6 +136,16 @@ app.get('/active', function (req, res) {
 
   //db.save();
   db.get(1,(err,result)=>(res.send(result)));
+
+})
+
+
+app.get('/user', function (req, res) {
+
+  console.log('here');
+  //db.save();
+  db.getUser(1,(err,result)=>(res.send(result)));
+
 
 })
 

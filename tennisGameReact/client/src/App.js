@@ -8,7 +8,7 @@ import $ from 'jquery'
 class App extends React.Component{
   constructor(props){
     super(props);
-    this.state = {levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: 0};
+    this.state = {levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: undefined};
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
@@ -21,8 +21,25 @@ this.setState({levelChosen:true})
 
 
   handleOff(level){
+    console.log('!!!!!',this.state.currentLevel,this.state.level);
+      if(this.state.currentLevel===this.state.level){
+      $.ajax({method: 'POST',
+      url: `http://localhost:9000/user`,
+      success: (result) => {
+
+        console.log(result,'from success')
+
+        this.setState({currentLevel: result[0].level})
+
+        }
+
+      })
+
+    }
+
+
     console.log('invoked handleOff +', level)
-    this.setState({levelChosen:false, level:0, currentLevel: level})
+    this.setState({levelChosen:false, level:0})
 
     $.ajax({method: 'POST',
     url: `http://localhost:9000/active`,
@@ -37,6 +54,8 @@ this.setState({levelChosen:true})
 
     })
 
+
+
   }
 
   fitLevel(level){
@@ -50,8 +69,12 @@ this.setState({levelChosen:true})
     $.ajax({method: 'GET',
     url: `http://localhost:9000/active`,
     success: result => this.setState({active: result})
-
   })
+
+  $.ajax({method: 'GET',
+  url: `http://localhost:9000/user`,
+  success: result => this.setState({currentLevel: result[0].level})
+})
 
     }
 
@@ -61,6 +84,8 @@ this.setState({levelChosen:true})
   componentDidUpdate( prevProps, prevState){
 
     //instead of this request we should change it on just retriving data(pattern) from active by using level as an index
+
+
 
 
     if(prevState.level!== this.state.level){
@@ -123,7 +148,7 @@ render(){
 
    popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff}/> <div>{this.state.level}</div></div>
 
-  } else { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel}/>}
+  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1}/>}
 
 
 
