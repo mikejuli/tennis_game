@@ -57,6 +57,15 @@ app.post('/user', function(req, res){
   })
 
 
+  app.post('/gold', function(req, res){
+
+    console.log('---------from gold',req.body.gold);
+       db.replaceGold(req.body.gold,(err,result)=>{res.send(result)});
+
+
+    })
+
+
 app.get('/api', function (req, res) {
   // db.save();
   console.log(req.query.level);

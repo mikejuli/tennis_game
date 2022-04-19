@@ -27,17 +27,17 @@ class BarMenu extends React.Component {
       </div>
 
       <div id = 'baseInfo'>
-        <div id = 'gold'> 1434 gold &#9748; </div>
-  <div id = 'currentLvl'>Level: {this.props.currentLevel}/50</div>
+        <div id = 'gold'> {this.props.gold} gold &#9748; </div>
+  <div id = 'currentLvl'>Level 🔝 : {this.props.currentLevel}/50</div>
         <div id = 'skin'>Skin: Common</div>
       </div>
 
       <div id = 'skills'>
-        <div id = 'bigPlate'>BigPlate</div>
-        <div id = 'bigBall'>bigBall</div>
-        <div id = 'freezing'>frezzing</div>
-        <div id = 'flying'>flying</div>
-        <div id = 'shooting'>shooting</div>
+        <div id = 'bigPlate'>BigPlate ➖</div>
+        <div id = 'bigBall'>bigBall ⚪</div>
+        <div id = 'freezing'>frezzing ❄</div>
+        <div id = 'flying'>flying 🚀</div>
+        <div id = 'shooting'>shooting☄</div>
       </div>
 
 

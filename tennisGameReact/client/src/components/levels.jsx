@@ -168,7 +168,7 @@ class Levels extends React.Component {
         </table>
 
 
-    <BarMenu currentLevel = {this.props.currentLevel}/>
+    <BarMenu currentLevel = {this.props.currentLevel} gold = {this.props.gold}/>
 
       <button class = 'next' onClick = {()=>this.changeLevels(1)}>down arrow</button>
 
