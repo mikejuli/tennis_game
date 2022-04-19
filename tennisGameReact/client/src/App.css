@@ -245,3 +245,9 @@ button.back {
   height: 30px;
 
 }
+
+
+#drop {
+  background-color: green;
+  position: absolute;
+}

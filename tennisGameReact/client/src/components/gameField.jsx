@@ -349,8 +349,32 @@ var brickBouncer = function (top,left,bricksArray,clear){
             document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
 
 
+            var topI = bricksArray[x][0];
+            var leftI = bricksArray[x][1];;
 
             bricksArray.splice(x,1);
+
+            //if this brick has an item
+            //run component
+
+            // in (top,left)
+            var drop = document.createElement('div');
+            var wall = document.getElementById('box');
+            wall.appendChild(drop);
+
+          var df = setInterval(()=>{
+
+
+  drop.setAttribute('id', 'drop');
+  drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
+
+topI = topI + 1;
+//leftI = leftI + 1;
+
+              if(topI===500){clearInterval(df)}
+
+          }, 10)
+
           }
 
 
