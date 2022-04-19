@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema ({
 
   user: String,
   level: Number,
+  gold: Number
 
 })
 
@@ -48,6 +49,7 @@ let saveUser = (data) => {
   var add = new User({
       user: data.user,
       level: data.level,
+      gold: data.gold
 
   });
 
@@ -106,14 +108,20 @@ let findAndReplaceUserLevel = ( cb) => {
     console.log(doc);
 
   })
-
-
-
     });
+}
 
 
+let findAndReplaceUserGold = ( gold, cb) => {
 
+    User.findOneAndUpdate( {user: '1'} , {$set:{gold:gold}}, {new: true}, (err, doc) => {
+    if (err) {
+        console.log("Something wrong when updating data!");
+    }
 
+    cb(err,doc);
+
+  })
 
 }
 
@@ -127,3 +135,4 @@ module.exports.replace = findAndReplace;
 module.exports.saveUser = saveUser;
 module.exports.getUser = getUser;
 module.exports.replaceLevel = findAndReplaceUserLevel;
+module.exports.replaceGold = findAndReplaceUserGold;

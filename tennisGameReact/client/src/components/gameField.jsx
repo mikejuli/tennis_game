@@ -8,11 +8,25 @@ import pattern from './brickPattern';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0})
+
+    this.addGold = this.addGold.bind(this);
+
+
+    }
+
+
+    addGold(value){
+
+      this.setState({gold: this.state.gold + value})
+
     }
 
 
     componentDidUpdate( prevProps, prevState){
+
+
+
       if(prevProps.pattern!== this.props.pattern){
         console.log(prevProps.pattern, this.props.pattern)
 
@@ -238,6 +252,11 @@ if(!inMove){
 var pat = this.props.pattern;
 var handleOff = this.props.handleOff;
 var lvl = this.props.level;
+var addGold = this.addGold;
+var currentGold = this.state.gold;
+
+var updateGold = () => currentGold = this.state.gold;
+
 console.log('here is lvl ',lvl);
 //console.log(this.props.pattern , 'hereee')
 
@@ -264,7 +283,8 @@ var creatingBrick = function (arr){
   //arr[0] is a top value ; arr[1] is a left value
 
   var newBrick = document.createElement('div');
-  newBrick.health = 3;
+  newBrick.health = arr[3];
+  newBrick.gold = arr[4];
   newBrick.setAttribute('id', 'brick');
   newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px`);
   newBrick.textContent = newBrick.health;
@@ -318,14 +338,23 @@ var brickBouncer = function (top,left,bricksArray,clear){
 
 
 
-         document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 
-         console.log(bricksArray[x][2]);
+          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
-         bricksArray.splice(x,1)
+          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
+
+            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
+
+            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
 
 
-         if(bricksArray.length === 0) {clear();handleOff(lvl);}
+
+            bricksArray.splice(x,1);
+          }
+
+
+         if(bricksArray.length === 0) {clear();updateGold();handleOff(lvl, currentGold);}
 
 
 
@@ -348,16 +377,28 @@ var brickBouncer = function (top,left,bricksArray,clear){
 
 
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
 
           console.log(bricksArray[x][2]);
-         bricksArray.splice(x,1)
 
 
-          // document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+
+          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+
+          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+
+          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
+
+            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
+
+            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
+            bricksArray.splice(x,1);
+          }
+
+
           //  document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('style', document.getElementById('wall').childNodes[bricksArray[x][2]].getAttribute('style')+`;background: rgb(45, ${ 159 - (3-document.getElementById('wall').childNodes[bricksArray[x][2]].health) * 20}, 253)` );
 
-          // document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
 
 
@@ -368,7 +409,7 @@ var brickBouncer = function (top,left,bricksArray,clear){
         //  bricksArray.splice(x,1)
 
 
-        if(bricksArray.length === 0) {clear();handleOff(lvl);}
+        if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
 
          } else
 
@@ -388,14 +429,21 @@ var brickBouncer = function (top,left,bricksArray,clear){
 
 
 
+          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
-          console.log(bricksArray[x][2]);
-         bricksArray.splice(x,1) //indebricksArray[x]of
+          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
+
+            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
+
+            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
+            bricksArray.splice(x,1);
+          }
 
 
-         if(bricksArray.length === 0) {clear();handleOff(lvl);}
+         if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
 
          } else
 
@@ -412,15 +460,23 @@ var brickBouncer = function (top,left,bricksArray,clear){
           }
 
 
+document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+
+          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+
+          console.log(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
+
+          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
 
 
+            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
 
-          console.log(bricksArray[x][2]);
-         bricksArray.splice(x,1)
+            bricksArray.splice(x,1);
+          }
 
-         if(bricksArray.length === 0) {clear();handleOff(lvl);}
+         if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
 
          }
   }
@@ -460,6 +516,8 @@ var brickBouncer = function (top,left,bricksArray,clear){
           GAME!
 
           <div> {LevelGrid[this.state.level]} </div>
+
+      <div>gold: {this.state.gold}</div>
 
         <div>
 

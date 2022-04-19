@@ -8,7 +8,7 @@ import $ from 'jquery'
 class App extends React.Component{
   constructor(props){
     super(props);
-    this.state = {levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: undefined};
+    this.state = {levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: undefined, gold: 0};
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
@@ -20,8 +20,29 @@ this.setState({levelChosen:true})
   }
 
 
-  handleOff(level){
-    console.log('!!!!!',this.state.currentLevel,this.state.level);
+  handleOff(level, currentGold){
+      console.log(currentGold);
+      this.setState({gold: this.state.gold+ currentGold}, ()=>{
+
+
+        $.ajax({method: 'POST',
+        url: `http://localhost:9000/gold`,
+        data: {gold: this.state.gold},
+        success: (result) => {
+
+          console.log(result,'from gold');
+
+
+          }
+        })
+
+
+      });
+
+
+
+
+
       if(this.state.currentLevel===this.state.level){
       $.ajax({method: 'POST',
       url: `http://localhost:9000/user`,
@@ -73,7 +94,7 @@ this.setState({levelChosen:true})
 
   $.ajax({method: 'GET',
   url: `http://localhost:9000/user`,
-  success: result => this.setState({currentLevel: result[0].level})
+  success: result => this.setState({currentLevel: result[0].level, gold: result[0].gold})
 })
 
     }
@@ -103,6 +124,8 @@ var count = 0;
 var num = -1;
 createPattern = createPattern.map( (x) => {
 
+  var health = 1;
+  var gold = 45;
 
   if(count===13)
 
@@ -117,7 +140,7 @@ createPattern = createPattern.map( (x) => {
       {
         num++;
         left += 42;
-        return [top,left,num] }
+        return [top,left,num, health, gold] }
 
 
 })
@@ -148,7 +171,7 @@ render(){
 
    popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff}/> <div>{this.state.level}</div></div>
 
-  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1}/>}
+  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1} gold = {this.state.gold}/>}
 
 
 
