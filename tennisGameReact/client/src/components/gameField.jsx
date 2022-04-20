@@ -8,10 +8,10 @@ import pattern from './brickPattern';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined})
 
     this.addGold = this.addGold.bind(this);
-
+    this.addAttribute = this.addAttribute.bind(this);
 
     }
 
@@ -19,6 +19,12 @@ import pattern from './brickPattern';
     addGold(value){
 
       this.setState({gold: this.state.gold + value})
+
+    }
+
+    addAttribute(value){
+
+      this.setState({attribute: value})
 
     }
 
@@ -254,6 +260,7 @@ var handleOff = this.props.handleOff;
 var lvl = this.props.level;
 var addGold = this.addGold;
 var currentGold = this.state.gold;
+var addAttribute = this.addAttribute;
 
 var updateGold = () => currentGold = this.state.gold;
 
@@ -285,6 +292,7 @@ var creatingBrick = function (arr){
   var newBrick = document.createElement('div');
   newBrick.health = arr[3];
   newBrick.gold = arr[4];
+  newBrick.attribute = arr[5];
   newBrick.setAttribute('id', 'brick');
   newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px`);
   newBrick.textContent = newBrick.health;
@@ -349,8 +357,10 @@ var brickBouncer = function (top,left,bricksArray,clear){
             document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
 
 
+
             var topI = bricksArray[x][0];
             var leftI = bricksArray[x][1];;
+            var attributeI = bricksArray[x][5];
 
             bricksArray.splice(x,1);
 
@@ -367,11 +377,24 @@ var brickBouncer = function (top,left,bricksArray,clear){
 
   drop.setAttribute('id', 'drop');
   drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
-
+          //  drop.textContent = '⚪';
 topI = topI + 1;
 //leftI = leftI + 1;
 
               if(topI===500){clearInterval(df)}
+
+              if(leftI>=pos && leftI<=pos+plate  && topI>=465 && topI<=470){
+                clearInterval(df);
+
+
+                addAttribute(attributeI);
+
+                console.log('got it',);
+
+                drop.setAttribute('id','empty');
+
+              }
+
 
           }, 10)
 

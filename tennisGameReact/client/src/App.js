@@ -126,6 +126,7 @@ createPattern = createPattern.map( (x) => {
 
   var health = 1;
   var gold = 45;
+  var attribute = 'rocket';
 
   if(count===13)
 
@@ -140,7 +141,7 @@ createPattern = createPattern.map( (x) => {
       {
         num++;
         left += 42;
-        return [top,left,num, health, gold] }
+        return [top,left,num, health, gold, attribute] }
 
 
 })
