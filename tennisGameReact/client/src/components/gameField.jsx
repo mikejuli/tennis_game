@@ -8,12 +8,15 @@ import pattern from './brickPattern';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
+    this.plateFun = this.plateFun.bind(this);
 
     }
+
+    plateFun (cb){ cb(this.state.plate);};
 
 
     addGold(value){
@@ -25,12 +28,22 @@ import pattern from './brickPattern';
     addAttribute(value){
 
       this.setState({attribute: value})
+      this.setState({plate:200})
 
     }
 
 
     componentDidUpdate( prevProps, prevState){
 
+      var plate = this.state.plate;
+      document.getElementById('plate').style.width = plate + 'px';
+
+
+      if(prevState.plate!==this.state.plate){
+
+        var plate = this.state.plate;
+        document.getElementById('plate').style.width = plate + 'px';
+      }
 
 
       if(prevProps.pattern!== this.props.pattern){
@@ -50,7 +63,11 @@ console.log(pattern);
 
 var height = 480;
 var width = 640;
-var plate = 100;
+
+
+
+
+
 var speed = 1;
 
 var tops = 400;
@@ -74,13 +91,15 @@ var inMove = 0;
 
 
 
-var ballRunning = function(pat, handleOff){
+var ballRunning = function(pat, handleOff,plateFun){
 
   inMove = 1;
 
-
-
   var r = setInterval ( ()=>{
+
+    //have to find the way to change it
+    plateFun( (x) => {plate = x;});
+
 
   function clear() { clearInterval(r);}
 
@@ -255,6 +274,7 @@ if(!inMove){
 
 })
 
+var plateFun = this.plateFun;
 var pat = this.props.pattern;
 var handleOff = this.props.handleOff;
 var lvl = this.props.level;
@@ -268,13 +288,15 @@ console.log('here is lvl ',lvl);
 //console.log(this.props.pattern , 'hereee')
 
 
+
 //to prevent immidite fire the ball by click
 setTimeout(()=>{
 
+
+
   document.addEventListener('click', function(){
     if(inMove === 0){
-
-    ballRunning(pat);
+    ballRunning(pat,undefined,plateFun);
 
   }
 

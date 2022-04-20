@@ -67,7 +67,7 @@
 #plate {
 
 height: 10px;
-width: 100px;
+
 position: absolute;
 top: calc(100% - 10px);
 left: 50%;
