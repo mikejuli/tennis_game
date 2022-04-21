@@ -126,7 +126,7 @@ createPattern = createPattern.map( (x) => {
 
   var health = 1;
   var gold = 45;
-  var attribute = 'onfire';
+  var attribute = 'flight';
 
   if(count===13)
 
@@ -173,7 +173,7 @@ render(){
 
   if(this.state.levelChosen){
 
-   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff}/> <div>{this.state.level}</div></div>
+   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff}/> </div>
 
   } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1} gold = {this.state.gold}/>}
 

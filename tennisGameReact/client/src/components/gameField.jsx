@@ -8,18 +8,20 @@ import pattern from './brickPattern';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, ball: 10, onfire: false})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, ball: 10, onfire: false, flight: false})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
     this.plateFun = this.plateFun.bind(this);
     this.ballFun = this.ballFun.bind(this);
     this.onfireFun = this.onfireFun.bind(this);
+
   }
 
     plateFun (cb){ cb(this.state.plate);};
     ballFun(cb) {cb(this.state.ball)}
     onfireFun(cb){cb(this.state.onfire)}
+
 
 
     addGold(value){
@@ -43,6 +45,10 @@ import pattern from './brickPattern';
       if(this.state.attribute==='onfire'){
         this.setState({onfire: true})
 
+      }
+
+      if(this.state.attribute==='flight'){
+        this.setState({flight: true})
       }
     }
 
@@ -103,6 +109,7 @@ var coeff = 1;
 var firstEnter;
 var inMove = 0;
 
+var posY = height-12;
 
 
 var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun){
@@ -115,6 +122,7 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
     plateFun( (x) => {plate = x;});
     ballFun((x)=> {ball =x;})
     onfireFun((x)=>{onfire=x;})
+
 
   function clear() { clearInterval(r);}
 
@@ -139,31 +147,36 @@ if(document.getElementById('ball')){
 
 
   //some changes
-  if((tops >= height-12-ball) && (pos < lefts + (ball/2)) && (pos + plate > lefts + (ball/2)) ) {
+  // if((tops >= height-12-ball) && (pos < lefts + (ball/2)) && (pos + plate > lefts + (ball/2)) ) {
+
+    if((tops >= posY - ball) && (pos < lefts + (ball/2)) && (pos + plate > lefts + (ball/2)) ) {
 
 
+      console.log(tops);
     // refactoring this section to async function
     // 1) eventlistener ->-> removelistener -> switcherTop value
 
 
     //  var funcEnter = ( (e)=> {
-      if(tops >= height-12-ball && tops <= height-11-ball){
-        console.log(tops);
-      firstEnter = pos;}
+
+
+      if(tops >= posY-ball && tops <= posY+1-ball){
+          console.log(tops);
+        firstEnter = pos;}
 
 
 
-      // var powerOfTouching = lefts - pos;
-
-      // if(powerOfTouching>=90){ powerOfTouching = 90;}
-
+        // var powerOfTouching = lefts - pos;
+        // if(powerOfTouching>=90){ powerOfTouching = 90;}
 
 
-        if(tops >= height-5-ball && tops <= height-4-ball){
 
+        if(tops >= posY - ball +6 && tops <= posY-ball+8){
+
+          console.log(pos, firstEnter);
           var powerOfTouching = firstEnter - pos;
 
-          console.log(powerOfTouching);
+          console.log(powerOfTouching, 'powerOfTouching');
 
 
           Math.Sin = function(w){
@@ -283,8 +296,21 @@ if(e.offsetX<width-plate){
   pos = e.offsetX;
 }else { pos = width-plate}
 
+if(this.state.flight){
+if(e.offsetY<height-10){
+  posY = e.offsetY;
+}else {
+  posY = height-10;
+}
+}
+
 if(document.getElementById('plate')){
-document.getElementById('plate').style.left = pos + 'px';}
+document.getElementById('plate').style.left = pos + 'px';
+
+if(this.state.flight){
+document.getElementById('plate').style.top = posY + 'px';
+}
+}
 
 if(!inMove){
   document.getElementById('ball').style.left = pos +(plate/2)-(ball/2) + 'px';
@@ -435,8 +461,8 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire){
 
   drop.setAttribute('id', 'drop');
   drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
-  if(attributeI==='plate'){
-    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: red; `);
+  if(attributeI==='flight'){
+    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: yellow; `);
   }
 
   if(attributeI==='onfire'){
@@ -633,7 +659,7 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
         <div>
           GAME!
 
-          <div> {LevelGrid[this.state.level]} </div>
+          <div> level: {this.state.level} </div>
 
       <div>gold: {this.state.gold}</div>
 
