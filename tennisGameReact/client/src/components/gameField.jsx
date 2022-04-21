@@ -8,16 +8,16 @@ import pattern from './brickPattern';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, ball: 10})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
     this.plateFun = this.plateFun.bind(this);
-
+    this.ballFun = this.ballFun.bind(this);
     }
 
     plateFun (cb){ cb(this.state.plate);};
-
+    ballFun(cb) {cb(this.state.ball)}
 
     addGold(value){
 
@@ -28,7 +28,14 @@ import pattern from './brickPattern';
     addAttribute(value){
 
       this.setState({attribute: value})
-      this.setState({plate:200})
+
+      if(this.state.attribute==='plate'){
+        this.setState({plate:200})
+      }
+
+      if(this.state.attribute==='ball'){
+        this.setState({ball:20});
+      }
 
     }
 
@@ -91,7 +98,7 @@ var inMove = 0;
 
 
 
-var ballRunning = function(pat, handleOff,plateFun){
+var ballRunning = function(pat, handleOff,plateFun,ball,ballFun){
 
   inMove = 1;
 
@@ -99,7 +106,7 @@ var ballRunning = function(pat, handleOff,plateFun){
 
     //have to find the way to change it
     plateFun( (x) => {plate = x;});
-
+    ballFun((x)=> {ball =x;})
 
   function clear() { clearInterval(r);}
 
@@ -108,12 +115,15 @@ var ballRunning = function(pat, handleOff,plateFun){
 
   //  here is suppose to be the way to figure out if the component on fire????? here is some block to prevent errors
 if(document.getElementById('ball')){
-  document.getElementById('ball').style.left = lefts + 'px';
 
+  document.getElementById('ball').style.height = ball + 'px';
+  document.getElementById('ball').style.width = ball + 'px';
+
+  document.getElementById('ball').style.left = lefts + 'px';
   document.getElementById('ball').style.top = tops + 'px';
 }
   //some changes
-  if(tops >= height-22 && (pos < lefts && pos +plate > lefts) ) {
+  if(tops >= height-12-ball && (pos < lefts && pos +plate > lefts) ) {
 
 
     // refactoring this section to async function
@@ -121,7 +131,7 @@ if(document.getElementById('ball')){
 
 
     //  var funcEnter = ( (e)=> {
-      if(tops >= height-22 && tops <= height-21){
+      if(tops >= height-12-ball && tops <= height-11-ball){
         console.log(tops);
       firstEnter = pos;}
 
@@ -133,7 +143,7 @@ if(document.getElementById('ball')){
 
 
 
-        if(tops >= height-15 && tops <= height-14){
+        if(tops >= height-5-ball && tops <= height-4-ball){
 
           var powerOfTouching = firstEnter - pos;
 
@@ -226,8 +236,8 @@ if(document.getElementById('ball')){
       switcherTop = -switcherTop;
   }
 
-  if (lefts >= width-10){
-    lefts = width-10;
+  if (lefts >= width-ball){
+    lefts = width-ball;
     switcherLeft = -switcherLeft;
   }
 
@@ -261,11 +271,16 @@ if(document.getElementById('plate')){
 document.getElementById('plate').style.left = pos + 'px';}
 
 if(!inMove){
-  document.getElementById('ball').style.left = pos +(plate/2)-5 + 'px';
-  document.getElementById('ball').style.top = height-20 + 'px';
+  document.getElementById('ball').style.left = pos +(plate/2)-(ball/2) + 'px';
+  document.getElementById('ball').style.top = height-10-ball + 'px';
 
-  tops = height-20;
-  lefts = pos + (plate/2)-5;
+  document.getElementById('ball').style.height = ball + 'px';
+  document.getElementById('ball').style.width = ball + 'px';
+
+
+
+  tops = height-10-ball;
+  lefts = pos + (plate/2)-(ball/2);
 
 }
 
@@ -275,12 +290,14 @@ if(!inMove){
 })
 
 var plateFun = this.plateFun;
+var ballFun = this.ballFun;
 var pat = this.props.pattern;
 var handleOff = this.props.handleOff;
 var lvl = this.props.level;
 var addGold = this.addGold;
 var currentGold = this.state.gold;
 var addAttribute = this.addAttribute;
+var ball = this.state.ball;
 
 var updateGold = () => currentGold = this.state.gold;
 
@@ -296,7 +313,7 @@ setTimeout(()=>{
 
   document.addEventListener('click', function(){
     if(inMove === 0){
-    ballRunning(pat,undefined,plateFun);
+    ballRunning(pat,undefined,plateFun,ball,ballFun);
 
   }
 
@@ -355,8 +372,8 @@ var brickBouncer = function (top,left,bricksArray,clear){
 
 
     //top side of the brick //-2 moved touch line
-    if ((top >= bricksArray[x][0]-10  && top <= bricksArray[x][0]-10 +1) &&
-        left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 40)
+    if ((top >= bricksArray[x][0]-ball  && top <= bricksArray[x][0]-ball +1) &&
+        left >= bricksArray[x][1]-ball && left <= bricksArray[x][1]+ 40)
         {
           if(!switcherTopWasChanged){
 
@@ -399,6 +416,11 @@ var brickBouncer = function (top,left,bricksArray,clear){
 
   drop.setAttribute('id', 'drop');
   drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
+  if(attributeI==='plate'){
+    console.log('att')
+    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: red; `);
+
+  }
           //  drop.textContent = '⚪';
 topI = topI + 1;
 //leftI = leftI + 1;
@@ -433,7 +455,7 @@ topI = topI + 1;
 
     //bottom side of the brick  //+2 moved touch line
     if ((top <= bricksArray[x][0]+20 && top >= bricksArray[x][0]+20 - 1) &&
-        left >= bricksArray[x][1]-10 && left <= bricksArray[x][1]+ 40 )
+        left >= bricksArray[x][1]-ball && left <= bricksArray[x][1]+ 40 )
         {
 
           if(!switcherTopWasChanged){
@@ -484,8 +506,8 @@ topI = topI + 1;
 
 
     //left side of the brick
-    if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+20 &&
-        (left >= bricksArray[x][1]-10-2 && left <= bricksArray[x][1]-10-1) ) //moved touch line a bit left, to prevent the ball through move
+    if (top >= bricksArray[x][0]-ball && top <= bricksArray[x][0]+20 &&
+        (left >= bricksArray[x][1]-ball-2 && left <= bricksArray[x][1]-ball-1) ) //moved touch line a bit left, to prevent the ball through move
         {
 
           if(!switcherLeftWasChanged){
@@ -517,7 +539,7 @@ topI = topI + 1;
          } else
 
     //right side of the brick //+2 moved touch line
-    if (top >= bricksArray[x][0]-10 && top <= bricksArray[x][0]+20 &&
+    if (top >= bricksArray[x][0]-ball && top <= bricksArray[x][0]+20 &&
         (left <= bricksArray[x][1]+40+2 && left >= bricksArray[x][1]+40+1) )
         {
 
