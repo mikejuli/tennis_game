@@ -8,16 +8,19 @@ import pattern from './brickPattern';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, ball: 10})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, ball: 10, onfire: false})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
     this.plateFun = this.plateFun.bind(this);
     this.ballFun = this.ballFun.bind(this);
-    }
+    this.onfireFun = this.onfireFun.bind(this);
+  }
 
     plateFun (cb){ cb(this.state.plate);};
     ballFun(cb) {cb(this.state.ball)}
+    onfireFun(cb){cb(this.state.onfire)}
+
 
     addGold(value){
 
@@ -30,13 +33,17 @@ import pattern from './brickPattern';
       this.setState({attribute: value})
 
       if(this.state.attribute==='plate'){
-        this.setState({plate:200})
+        this.setState({plate:this.state.plate + 100})
       }
 
       if(this.state.attribute==='ball'){
-        this.setState({ball:20});
+        this.setState({ball: this.state.ball + 10});
       }
 
+      if(this.state.attribute==='onfire'){
+        this.setState({onfire: true})
+
+      }
     }
 
 
@@ -98,7 +105,7 @@ var inMove = 0;
 
 
 
-var ballRunning = function(pat, handleOff,plateFun,ball,ballFun){
+var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun){
 
   inMove = 1;
 
@@ -107,6 +114,7 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun){
     //have to find the way to change it
     plateFun( (x) => {plate = x;});
     ballFun((x)=> {ball =x;})
+    onfireFun((x)=>{onfire=x;})
 
   function clear() { clearInterval(r);}
 
@@ -247,7 +255,7 @@ if(document.getElementById('ball')){
   }
 
 
-  brickBouncer(tops,lefts,pat,clear);
+  brickBouncer(tops,lefts,pat,clear,onfire);
 
 
 } , 5);
@@ -298,7 +306,8 @@ var addGold = this.addGold;
 var currentGold = this.state.gold;
 var addAttribute = this.addAttribute;
 var ball = this.state.ball;
-
+var onfire = this.state.onfire;
+var onfireFun = this.onfireFun;
 var updateGold = () => currentGold = this.state.gold;
 
 console.log('here is lvl ',lvl);
@@ -313,7 +322,7 @@ setTimeout(()=>{
 
   document.addEventListener('click', function(){
     if(inMove === 0){
-    ballRunning(pat,undefined,plateFun,ball,ballFun);
+    ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun);
 
   }
 
@@ -359,7 +368,7 @@ creatingWall(this.props.pattern);
 
 
 
-var brickBouncer = function (top,left,bricksArray,clear){
+var brickBouncer = function (top,left,bricksArray,clear,onfire){
 
 
   //to prevent the ball go through 2 bricks the same time.
@@ -375,13 +384,15 @@ var brickBouncer = function (top,left,bricksArray,clear){
     if ((top >= bricksArray[x][0]-ball  && top <= bricksArray[x][0]-ball +1) &&
         left >= bricksArray[x][1]-ball && left <= bricksArray[x][1]+ 40)
         {
+
+          if(!onfire){
           if(!switcherTopWasChanged){
 
             switcherTop = -switcherTop;
             switcherTopWasChanged = true;
 
           }
-
+        }
 
 
 
@@ -417,10 +428,13 @@ var brickBouncer = function (top,left,bricksArray,clear){
   drop.setAttribute('id', 'drop');
   drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
   if(attributeI==='plate'){
-    console.log('att')
     drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: red; `);
-
   }
+
+  if(attributeI==='onfire'){
+    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: orange; `);
+  }
+
           //  drop.textContent = '⚪';
 topI = topI + 1;
 //leftI = leftI + 1;
@@ -458,13 +472,14 @@ topI = topI + 1;
         left >= bricksArray[x][1]-ball && left <= bricksArray[x][1]+ 40 )
         {
 
+          if(!onfire){
           if(!switcherTopWasChanged){
 
             switcherTop = -switcherTop;
             switcherTopWasChanged = true;
 
           }
-
+        }
 
 
 
@@ -510,13 +525,14 @@ topI = topI + 1;
         (left >= bricksArray[x][1]-ball-2 && left <= bricksArray[x][1]-ball-1) ) //moved touch line a bit left, to prevent the ball through move
         {
 
+          if(!onfire){
           if(!switcherLeftWasChanged){
 
             switcherLeft = -switcherLeft;
             switcherLeftWasChanged = true;
 
           }
-
+        }
 
 
 
@@ -543,13 +559,14 @@ topI = topI + 1;
         (left <= bricksArray[x][1]+40+2 && left >= bricksArray[x][1]+40+1) )
         {
 
+          if(!onfire){
           if(!switcherLeftWasChanged){
 
             switcherLeft = -switcherLeft;
             switcherLeftWasChanged = true;
 
           }
-
+        }
 
 document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 
