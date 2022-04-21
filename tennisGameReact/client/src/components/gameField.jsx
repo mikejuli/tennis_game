@@ -112,21 +112,28 @@ var inMove = 0;
 var posY = height-12;
 
 
+var bulletX, bulletY;
+
 var bulletRunning = function(){
 
   var bullet = document.createElement('div');
   var wall = document.getElementById('box');
   wall.appendChild(bullet);
 
-  var bulletX = pos + (plate/2);
-  var bulletY = posY;
 
-  setInterval(()=>{
+  bulletX = pos + (plate/2);
+  bulletY = posY;
+
+  var bul = setInterval(()=>{
     console.log(pos,posY)
   bullet.setAttribute('id', 'bullet');
   bullet.setAttribute('style', `top: ${bulletY}px ; left:${bulletX}px; width: 5px; height: 5px `);
 
   bulletY = bulletY - 4;
+
+  if(bulletY<0){
+    clearInterval(bul);
+  }
 
   },20)
 
@@ -433,7 +440,7 @@ creatingWall(this.props.pattern);
 
 var brickBouncer = function (top,left,bricksArray,clear,onfire){
 
-
+  console.log(bulletX,bulletY,'bullet');
   //to prevent the ball go through 2 bricks the same time.
   var switcherLeftWasChanged = false;
   var switcherTopWasChanged = false;
@@ -531,6 +538,38 @@ topI = topI + 1;
         } else
 
 
+
+        //here is squized a shooting module//
+        /////////////////////////////////////
+        if ((bulletY <= bricksArray[x][0]+20 && bulletY >= bricksArray[x][0]) &&
+        bulletX >= bricksArray[x][1]-2 && bulletX <= bricksArray[x][1]+ 40+2 ){
+
+
+
+
+
+
+
+          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+
+          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+
+          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
+
+            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
+
+            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
+            bricksArray.splice(x,1);
+          }
+
+
+        if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
+
+
+        } else
+
+        ////////////////////////////////////
 
     //bottom side of the brick  //+2 moved touch line
     if ((top <= bricksArray[x][0]+20 && top >= bricksArray[x][0]+20 - 1) &&
