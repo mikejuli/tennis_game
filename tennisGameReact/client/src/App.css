@@ -70,7 +70,11 @@
 
 }
 
-
+#bullet{
+  position: absolute;
+  background-color: rgb(224, 50, 240);
+  border-radius: 50%;
+}
 
 #plate {
 

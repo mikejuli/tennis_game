@@ -8,7 +8,7 @@ import pattern from './brickPattern';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, ball: 10, onfire: false, flight: false})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, ball: 10, onfire: false, flight: false, gun: true})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
@@ -112,7 +112,32 @@ var inMove = 0;
 var posY = height-12;
 
 
+var bulletRunning = function(){
+
+  var bullet = document.createElement('div');
+  var wall = document.getElementById('box');
+  wall.appendChild(bullet);
+
+  var bulletX = pos + (plate/2);
+  var bulletY = posY;
+
+  setInterval(()=>{
+    console.log(pos,posY)
+  bullet.setAttribute('id', 'bullet');
+  bullet.setAttribute('style', `top: ${bulletY}px ; left:${bulletX}px; width: 5px; height: 5px `);
+
+  bulletY = bulletY - 4;
+
+  },20)
+
+};
+
+
+
 var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun){
+
+  bulletRunning();
+
 
   inMove = 1;
 
@@ -361,6 +386,10 @@ setTimeout(()=>{
   }
 
 
+
+
+
+
   })
 
 
@@ -477,7 +506,7 @@ topI = topI + 1;
 
               if(topI===500){clearInterval(df)}
 
-              if(leftI>=pos && leftI<=pos+plate  && topI>=465 && topI<=470){
+              if(leftI>=pos && leftI<=pos+plate  && topI>=posY-5 && topI<=posY){
                 clearInterval(df);
 
 
