@@ -130,8 +130,16 @@ if(document.getElementById('ball')){
   document.getElementById('ball').style.left = lefts + 'px';
   document.getElementById('ball').style.top = tops + 'px';
 }
+
+  if(onfire){
+
+    document.getElementById('ball').style.animation = 'blink 1s infinite';
+
+  }
+
+
   //some changes
-  if(tops >= height-12-ball && (pos < lefts && pos +plate > lefts) ) {
+  if((tops >= height-12-ball) && (pos < lefts + (ball/2)) && (pos + plate > lefts + (ball/2)) ) {
 
 
     // refactoring this section to async function
@@ -434,6 +442,8 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire){
   if(attributeI==='onfire'){
     drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: orange; `);
   }
+
+
 
           //  drop.textContent = '⚪';
 topI = topI + 1;

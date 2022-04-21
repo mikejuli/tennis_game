@@ -142,7 +142,7 @@ createPattern = createPattern.map( (x) => {
         num++;
         left += 42;
         //testing
-        // if(count%2==0){attribute='plate'}
+         if(count%2==0){attribute='ball'}
         //
         return [top,left,num, health, gold, attribute] }
 
