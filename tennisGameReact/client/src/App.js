@@ -126,7 +126,7 @@ createPattern = createPattern.map( (x) => {
 
   var health = 1;
   var gold = 45;
-  var attribute = 'flight';
+  var attribute = 'gun';
 
   if(count===13)
 

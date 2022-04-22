@@ -114,28 +114,44 @@ var posY = height-12;
 
 var bulletX, bulletY;
 
-var bulletRunning = function(){
+
+
+
+
+
+var bulletRunning = function(clear){
+
+  var clearBullet = ()=>{
+    clearInterval(bul);
+    bullet.setAttribute('id','empty');
+  }
 
   var bullet = document.createElement('div');
   var wall = document.getElementById('box');
   wall.appendChild(bullet);
 
 
-  bulletX = pos + (plate/2);
-  bulletY = posY;
+  var bulletX = pos + (plate/2);
+  var bulletY = posY;
 
   var bul = setInterval(()=>{
-    console.log(pos,posY)
+    //console.log(pos,posY)
   bullet.setAttribute('id', 'bullet');
   bullet.setAttribute('style', `top: ${bulletY}px ; left:${bulletX}px; width: 5px; height: 5px `);
 
+
+
   bulletY = bulletY - 4;
+
+
+
+  brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet);
 
   if(bulletY<0){
     clearInterval(bul);
   }
 
-  },20)
+  },10)
 
 };
 
@@ -143,10 +159,14 @@ var bulletRunning = function(){
 
 var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun){
 
-  bulletRunning();
+  function clear() { clearInterval(r);}
+
+  setInterval(()=>{bulletRunning(clear);},200)
+
 
 
   inMove = 1;
+
 
   var r = setInterval ( ()=>{
 
@@ -156,7 +176,6 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
     onfireFun((x)=>{onfire=x;})
 
 
-  function clear() { clearInterval(r);}
 
   tops = tops+switcherTop;
   lefts = lefts + switcherLeft;
@@ -539,35 +558,7 @@ topI = topI + 1;
 
 
 
-        //here is squized a shooting module//
-        /////////////////////////////////////
-        if ((bulletY <= bricksArray[x][0]+20 && bulletY >= bricksArray[x][0]) &&
-        bulletX >= bricksArray[x][1]-2 && bulletX <= bricksArray[x][1]+ 40+2 ){
 
-
-
-
-
-
-
-          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
-
-          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
-
-          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
-
-            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
-
-            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
-
-            bricksArray.splice(x,1);
-          }
-
-
-        if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
-
-
-        } else
 
         ////////////////////////////////////
 
@@ -691,6 +682,9 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
          if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
 
          }
+
+
+
   }
 
   //console.log(bricksArray);
@@ -705,6 +699,49 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 
  // console.log(top, left, x);
 }
+
+
+var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet){
+
+
+         //here is squized a shooting module//
+        /////////////////////////////////////
+
+        for( var x=0 ; x< bricksArray.length;x++){
+
+        if ((bulletY <= bricksArray[x][0]+20 && bulletY >= bricksArray[x][0]) &&
+        bulletX >= bricksArray[x][1]-2 && bulletX <= bricksArray[x][1]+ 40+2 ){
+
+
+          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+
+          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+
+          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
+
+            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
+
+            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+
+            bricksArray.splice(x,1);
+
+            clearBullet();
+
+          }
+
+
+        if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
+
+
+        }
+
+        }
+
+
+}
+
+
+
 
     }
 
