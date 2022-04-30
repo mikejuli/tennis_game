@@ -143,6 +143,15 @@ createPattern = createPattern.map( (x) => {
         left += 42;
         //testing
          if(count%2==0){attribute='flight'}
+         if(count%3==0){
+           attribute='plate'
+         }
+         if(count%4==0){
+          attribute='ball'
+        }
+        if(count%5==0){
+          attribute='onfire'
+        }
         //
         return [top,left,num, health, gold, attribute] }
 

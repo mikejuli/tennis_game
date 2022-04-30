@@ -35,7 +35,7 @@ import pattern from './brickPattern';
       this.setState({attribute: value})
 
       if(this.state.attribute==='plate'){
-        this.setState({plate:this.state.plate + 100})
+        this.setState({plate:this.state.plate + 20})
       }
 
       if(this.state.attribute==='ball'){
@@ -59,6 +59,7 @@ import pattern from './brickPattern';
 
     componentDidUpdate( prevProps, prevState){
 
+
       var plate = this.state.plate;
       document.getElementById('plate').style.width = plate + 'px';
 
@@ -71,6 +72,10 @@ import pattern from './brickPattern';
 
 
       if(prevProps.pattern!== this.props.pattern){
+
+
+
+
         console.log(prevProps.pattern, this.props.pattern)
 
 
@@ -139,7 +144,7 @@ var bulletRunning = function(clear){
   var bulletY = posY;
 
   var bul = setInterval(()=>{
-    console.log(pos,posY)
+    //console.log(pos,posY)
   bullet.setAttribute('id', 'bullet');
   bullet.setAttribute('style', `top: ${bulletY}px ; left:${bulletX}px; width: 5px; height: 5px `);
 
@@ -173,18 +178,33 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
   inMove = 1;
 
 
+
+
+
+  var shootingInt;
+
+
   var r = setInterval ( ()=>{
 
-    var shootingInt;
+
+    console.log(shootingInt, 'shootingInt');
     //have to find the way to change it
     plateFun( (x) => {plate = x;});
     ballFun((x)=> {ball =x;})
     onfireFun((x)=>{onfire=x;})
-    gunFun((x)=>{if(x & (shooting===false)){shooting = true; shootingInt = setInterval(()=>{bulletRunning(clear);},200)
+    gunFun((x)=>{if(x & (shooting===false)){shooting = true; shootingInt = setInterval( ()=>
+
+      {
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+          bulletRunning(
+
+          ()=>{ clearInterval(shootingInt); clearInterval(r);}
+
+          )},200)
   }})
 
 
-    function clear() { clearInterval(shootingInt); clearInterval(r);}
+    function clear() {clearInterval(r);clearInterval(shootingInt);}
 
 
   tops = tops+switcherTop;
@@ -350,12 +370,13 @@ if(document.getElementById('ball')){
 
 var mousemove = (e) => {
 
+  var flightActual = this.state.flight;
 
   if(e.offsetX<width-plate){
     pos = e.offsetX;
   }else { pos = width-plate}
 
-  if(this.state.flight){
+  if(flightActual){
   if(e.offsetY<height-10){
     posY = e.offsetY;
   }else {
@@ -366,7 +387,7 @@ var mousemove = (e) => {
   if(document.getElementById('plate')){
   document.getElementById('plate').style.left = pos + 'px';
 
-  if(this.state.flight){
+  if(flightActual){
   document.getElementById('plate').style.top = posY + 'px';
   }
   }
@@ -470,7 +491,7 @@ creatingWall(this.props.pattern);
 
 var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet){
 
-  console.log(bulletX,bulletY,'bullet');
+  //console.log(bulletX,bulletY,'bullet');
   //to prevent the ball go through 2 bricks the same time.
   var switcherLeftWasChanged = false;
   var switcherTopWasChanged = false;
@@ -527,12 +548,25 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet){
 
   drop.setAttribute('id', 'drop');
   drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
+
   if(attributeI==='gun'){
     drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: white; `);
   }
 
   if(attributeI==='onfire'){
     drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: orange; `);
+  }
+
+  if(attributeI==='ball'){
+    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: green; `);
+  }
+
+  if(attributeI==='plate'){
+    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: yellow; `);
+  }
+
+  if(attributeI==='flight'){
+    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: black; `);
   }
 
 
@@ -714,7 +748,7 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 
 var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet){
 
-
+ // console.log('from brickbouncerbullet');
          //here is squized a shooting module//
         /////////////////////////////////////
 
