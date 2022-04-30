@@ -142,7 +142,7 @@ createPattern = createPattern.map( (x) => {
         num++;
         left += 42;
         //testing
-         if(count%2==0){attribute='onfire'}
+         if(count%2==0){attribute='flight'}
         //
         return [top,left,num, health, gold, attribute] }
 

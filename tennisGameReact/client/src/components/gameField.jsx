@@ -8,20 +8,20 @@ import pattern from './brickPattern';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, ball: 10, onfire: false, flight: false, gun: true})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, ball: 10, onfire: false, flight: false, gun: false})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
     this.plateFun = this.plateFun.bind(this);
     this.ballFun = this.ballFun.bind(this);
     this.onfireFun = this.onfireFun.bind(this);
-
+    this.gunFun = this.gunFun.bind(this);
   }
 
     plateFun (cb){ cb(this.state.plate);};
     ballFun(cb) {cb(this.state.ball)}
     onfireFun(cb){cb(this.state.onfire)}
-
+    gunFun(cb){cb(this.state.gun)}
 
 
     addGold(value){
@@ -49,6 +49,10 @@ import pattern from './brickPattern';
 
       if(this.state.attribute==='flight'){
         this.setState({flight: true})
+      }
+
+      if(this.state.attribute==='gun'){
+        this.setState({gun:true})
       }
     }
 
@@ -128,14 +132,14 @@ var bulletRunning = function(clear){
 
   var bullet = document.createElement('div');
   var wall = document.getElementById('box');
-  wall.appendChild(bullet);
+  if(wall){wall.appendChild(bullet)};
 
 
   var bulletX = pos + (plate/2);
   var bulletY = posY;
 
   var bul = setInterval(()=>{
-    //console.log(pos,posY)
+    console.log(pos,posY)
   bullet.setAttribute('id', 'bullet');
   bullet.setAttribute('style', `top: ${bulletY}px ; left:${bulletX}px; width: 5px; height: 5px `);
 
@@ -157,12 +161,13 @@ var bulletRunning = function(clear){
 
 
 
-var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun){
+var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun, gunFun){
 
-  function clear() { clearInterval(r);}
 
-  setInterval(()=>{bulletRunning(clear);},200)
 
+
+
+  var shooting = false;
 
 
   inMove = 1;
@@ -170,11 +175,16 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
 
   var r = setInterval ( ()=>{
 
+    var shootingInt;
     //have to find the way to change it
     plateFun( (x) => {plate = x;});
     ballFun((x)=> {ball =x;})
     onfireFun((x)=>{onfire=x;})
+    gunFun((x)=>{if(x & (shooting===false)){shooting = true; shootingInt = setInterval(()=>{bulletRunning(clear);},200)
+  }})
 
+
+    function clear() { clearInterval(shootingInt); clearInterval(r);}
 
 
   tops = tops+switcherTop;
@@ -338,49 +348,49 @@ if(document.getElementById('ball')){
 };
 
 
+var mousemove = (e) => {
 
 
-document.addEventListener ('mousemove', e => {
+  if(e.offsetX<width-plate){
+    pos = e.offsetX;
+  }else { pos = width-plate}
 
+  if(this.state.flight){
+  if(e.offsetY<height-10){
+    posY = e.offsetY;
+  }else {
+    posY = height-10;
+  }
+  }
 
-if(e.offsetX<width-plate){
-  pos = e.offsetX;
-}else { pos = width-plate}
+  if(document.getElementById('plate')){
+  document.getElementById('plate').style.left = pos + 'px';
 
-if(this.state.flight){
-if(e.offsetY<height-10){
-  posY = e.offsetY;
-}else {
-  posY = height-10;
-}
-}
+  if(this.state.flight){
+  document.getElementById('plate').style.top = posY + 'px';
+  }
+  }
 
-if(document.getElementById('plate')){
-document.getElementById('plate').style.left = pos + 'px';
+  if(!inMove){
+    document.getElementById('ball').style.left = pos +(plate/2)-(ball/2) + 'px';
+    document.getElementById('ball').style.top = height-10-ball + 'px';
 
-if(this.state.flight){
-document.getElementById('plate').style.top = posY + 'px';
-}
-}
-
-if(!inMove){
-  document.getElementById('ball').style.left = pos +(plate/2)-(ball/2) + 'px';
-  document.getElementById('ball').style.top = height-10-ball + 'px';
-
-  document.getElementById('ball').style.height = ball + 'px';
-  document.getElementById('ball').style.width = ball + 'px';
+    document.getElementById('ball').style.height = ball + 'px';
+    document.getElementById('ball').style.width = ball + 'px';
 
 
 
-  tops = height-10-ball;
-  lefts = pos + (plate/2)-(ball/2);
+    tops = height-10-ball;
+    lefts = pos + (plate/2)-(ball/2);
 
-}
+  }
 
 
-//console.log(pos);
+  //console.log(pos);
 
-})
+  }
+
+document.addEventListener ('mousemove', mousemove)
 
 var plateFun = this.plateFun;
 var ballFun = this.ballFun;
@@ -393,6 +403,7 @@ var addAttribute = this.addAttribute;
 var ball = this.state.ball;
 var onfire = this.state.onfire;
 var onfireFun = this.onfireFun;
+var gunFun = this.gunFun;
 var updateGold = () => currentGold = this.state.gold;
 
 console.log('here is lvl ',lvl);
@@ -407,7 +418,7 @@ setTimeout(()=>{
 
   document.addEventListener('click', function(){
     if(inMove === 0){
-    ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun);
+    ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun,gunFun);
 
   }
 
@@ -457,7 +468,7 @@ creatingWall(this.props.pattern);
 
 
 
-var brickBouncer = function (top,left,bricksArray,clear,onfire){
+var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet){
 
   console.log(bulletX,bulletY,'bullet');
   //to prevent the ball go through 2 bricks the same time.
@@ -516,8 +527,8 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire){
 
   drop.setAttribute('id', 'drop');
   drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
-  if(attributeI==='flight'){
-    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: yellow; `);
+  if(attributeI==='gun'){
+    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: white; `);
   }
 
   if(attributeI==='onfire'){
@@ -550,7 +561,7 @@ topI = topI + 1;
           }
 
 
-         if(bricksArray.length === 0) {clear();updateGold();handleOff(lvl, currentGold);}
+         if(bricksArray.length === 0) {document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold); }
 
 
 
@@ -610,7 +621,7 @@ topI = topI + 1;
         //  bricksArray.splice(x,1)
 
 
-        if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
+        if(bricksArray.length === 0) {console.log(currentGold);document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold);}
 
          } else
 
@@ -645,7 +656,7 @@ topI = topI + 1;
           }
 
 
-         if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
+         if(bricksArray.length === 0) {console.log(currentGold);document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold);}
 
          } else
 
@@ -679,7 +690,7 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
             bricksArray.splice(x,1);
           }
 
-         if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
+         if(bricksArray.length === 0) {console.log(currentGold);document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold);}
 
          }
 
