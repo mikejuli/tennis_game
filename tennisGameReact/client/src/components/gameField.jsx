@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import LevelGrid from './levelGrid';
 import pattern from './brickPattern';
+import GameBar from './GameBar';
+
 
   class Field extends React.Component {
 
@@ -16,12 +18,16 @@ import pattern from './brickPattern';
     this.ballFun = this.ballFun.bind(this);
     this.onfireFun = this.onfireFun.bind(this);
     this.gunFun = this.gunFun.bind(this);
+    this.flightBackState = this.flightBackState.bind(this);
   }
 
     plateFun (cb){ cb(this.state.plate);};
     ballFun(cb) {cb(this.state.ball)}
     onfireFun(cb){cb(this.state.onfire)}
     gunFun(cb){cb(this.state.gun)}
+
+
+
 
 
     addGold(value){
@@ -57,6 +63,13 @@ import pattern from './brickPattern';
     }
 
 
+    flightBackState(){
+      this.setState({flight:false})
+
+    }
+
+
+
     componentDidUpdate( prevProps, prevState){
 
 
@@ -69,6 +82,8 @@ import pattern from './brickPattern';
         var plate = this.state.plate;
         document.getElementById('plate').style.width = plate + 'px';
       }
+
+
 
 
       if(prevProps.pattern!== this.props.pattern){
@@ -128,7 +143,9 @@ var bulletX, bulletY;
 
 
 
-var bulletRunning = function(clear){
+var bulletRunning = function(clear,flightBackState){
+
+
 
   var clearBullet = ()=>{
     clearInterval(bul);
@@ -154,7 +171,7 @@ var bulletRunning = function(clear){
 
 
 
-  brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet);
+  brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet,flightBackState);
 
   if(bulletY<0){
     clearInterval(bul);
@@ -166,7 +183,7 @@ var bulletRunning = function(clear){
 
 
 
-var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun, gunFun){
+var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun, gunFun,flightBackState){
 
 
 
@@ -186,8 +203,8 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
 
   var r = setInterval ( ()=>{
 
+   // console.log(shootingInt, 'shootingInt');
 
-    console.log(shootingInt, 'shootingInt');
     //have to find the way to change it
     plateFun( (x) => {plate = x;});
     ballFun((x)=> {ball =x;})
@@ -195,16 +212,15 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
     gunFun((x)=>{if(x & (shooting===false)){shooting = true; shootingInt = setInterval( ()=>
 
       {
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-          bulletRunning(
+         bulletRunning(
 
-          ()=>{ clearInterval(shootingInt); clearInterval(r);}
+          ()=>{ clearInterval(shootingInt); clearInterval(r);}, flightBackState
 
           )},200)
   }})
 
 
-    function clear() {clearInterval(r);clearInterval(shootingInt);}
+    function clear() {document.removeEventListener ('mousemove', mousemove);clearInterval(r);clearInterval(shootingInt)}
 
 
   tops = tops+switcherTop;
@@ -357,7 +373,7 @@ if(document.getElementById('ball')){
   }
 
 
-  brickBouncer(tops,lefts,pat,clear,onfire);
+  brickBouncer(tops,lefts,pat,clear,onfire,flightBackState);
 
 
 } , 5);
@@ -372,6 +388,8 @@ var mousemove = (e) => {
 
   var flightActual = this.state.flight;
 
+
+  //console.log(flightActual,this.state.flight);
   if(e.offsetX<width-plate){
     pos = e.offsetX;
   }else { pos = width-plate}
@@ -426,6 +444,7 @@ var onfire = this.state.onfire;
 var onfireFun = this.onfireFun;
 var gunFun = this.gunFun;
 var updateGold = () => currentGold = this.state.gold;
+var flightBackState = this.flightBackState;
 
 console.log('here is lvl ',lvl);
 //console.log(this.props.pattern , 'hereee')
@@ -439,7 +458,7 @@ setTimeout(()=>{
 
   document.addEventListener('click', function(){
     if(inMove === 0){
-    ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun,gunFun);
+    ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun,gunFun,flightBackState);
 
   }
 
@@ -489,7 +508,7 @@ creatingWall(this.props.pattern);
 
 
 
-var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet){
+var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flightBackState){
 
   //console.log(bulletX,bulletY,'bullet');
   //to prevent the ball go through 2 bricks the same time.
@@ -595,7 +614,7 @@ topI = topI + 1;
           }
 
 
-         if(bricksArray.length === 0) {document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold); }
+         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold); }
 
 
 
@@ -655,7 +674,7 @@ topI = topI + 1;
         //  bricksArray.splice(x,1)
 
 
-        if(bricksArray.length === 0) {console.log(currentGold);document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold);}
+        if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
          } else
 
@@ -690,7 +709,7 @@ topI = topI + 1;
           }
 
 
-         if(bricksArray.length === 0) {console.log(currentGold);document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold);}
+         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
          } else
 
@@ -724,7 +743,7 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
             bricksArray.splice(x,1);
           }
 
-         if(bricksArray.length === 0) {console.log(currentGold);document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold);}
+         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
          }
 
@@ -746,7 +765,7 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 }
 
 
-var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet){
+var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet,flightBackState){
 
  // console.log('from brickbouncerbullet');
          //here is squized a shooting module//
@@ -775,7 +794,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           }
 
 
-        if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
+        if(bricksArray.length === 0) {console.log(currentGold);flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
 
         }
@@ -819,6 +838,10 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
             <div id = 'wall'></div>
             <div id = 'ball'></div>
             <div id = 'plate'></div>
+        </div>
+
+        <div id ='gamebar'>
+          <GameBar/>
         </div>
 
         </div>
