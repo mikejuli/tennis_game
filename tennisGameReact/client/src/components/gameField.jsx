@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import LevelGrid from './levelGrid';
 import pattern from './brickPattern';
+import GameBar from './GameBar';
+
 
   class Field extends React.Component {
 
@@ -16,12 +18,16 @@ import pattern from './brickPattern';
     this.ballFun = this.ballFun.bind(this);
     this.onfireFun = this.onfireFun.bind(this);
     this.gunFun = this.gunFun.bind(this);
+    this.flightBackState = this.flightBackState.bind(this);
   }
 
     plateFun (cb){ cb(this.state.plate);};
     ballFun(cb) {cb(this.state.ball)}
     onfireFun(cb){cb(this.state.onfire)}
     gunFun(cb){cb(this.state.gun)}
+
+
+
 
 
     addGold(value){
@@ -35,7 +41,7 @@ import pattern from './brickPattern';
       this.setState({attribute: value})
 
       if(this.state.attribute==='plate'){
-        this.setState({plate:this.state.plate + 100})
+        this.setState({plate:this.state.plate + 20})
       }
 
       if(this.state.attribute==='ball'){
@@ -57,7 +63,15 @@ import pattern from './brickPattern';
     }
 
 
+    flightBackState(){
+      this.setState({flight:false})
+
+    }
+
+
+
     componentDidUpdate( prevProps, prevState){
+
 
       var plate = this.state.plate;
       document.getElementById('plate').style.width = plate + 'px';
@@ -70,7 +84,13 @@ import pattern from './brickPattern';
       }
 
 
+
+
       if(prevProps.pattern!== this.props.pattern){
+
+
+
+
         console.log(prevProps.pattern, this.props.pattern)
 
 
@@ -123,7 +143,9 @@ var bulletX, bulletY;
 
 
 
-var bulletRunning = function(clear){
+var bulletRunning = function(clear,flightBackState){
+
+
 
   var clearBullet = ()=>{
     clearInterval(bul);
@@ -139,7 +161,7 @@ var bulletRunning = function(clear){
   var bulletY = posY;
 
   var bul = setInterval(()=>{
-    console.log(pos,posY)
+    //console.log(pos,posY)
   bullet.setAttribute('id', 'bullet');
   bullet.setAttribute('style', `top: ${bulletY}px ; left:${bulletX}px; width: 5px; height: 5px `);
 
@@ -149,7 +171,7 @@ var bulletRunning = function(clear){
 
 
 
-  brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet);
+  brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet,flightBackState);
 
   if(bulletY<0){
     clearInterval(bul);
@@ -161,7 +183,7 @@ var bulletRunning = function(clear){
 
 
 
-var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun, gunFun){
+var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun, gunFun,flightBackState){
 
 
 
@@ -173,18 +195,32 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
   inMove = 1;
 
 
+
+
+
+  var shootingInt;
+
+
   var r = setInterval ( ()=>{
 
-    var shootingInt;
+   // console.log(shootingInt, 'shootingInt');
+
     //have to find the way to change it
     plateFun( (x) => {plate = x;});
     ballFun((x)=> {ball =x;})
     onfireFun((x)=>{onfire=x;})
-    gunFun((x)=>{if(x & (shooting===false)){shooting = true; shootingInt = setInterval(()=>{bulletRunning(clear);},200)
+    gunFun((x)=>{if(x & (shooting===false)){shooting = true; shootingInt = setInterval( ()=>
+
+      {
+         bulletRunning(
+
+          ()=>{ clearInterval(shootingInt); clearInterval(r);}, flightBackState
+
+          )},200)
   }})
 
 
-    function clear() { clearInterval(shootingInt); clearInterval(r);}
+    function clear() {document.removeEventListener ('mousemove', mousemove);clearInterval(r);clearInterval(shootingInt)}
 
 
   tops = tops+switcherTop;
@@ -337,7 +373,7 @@ if(document.getElementById('ball')){
   }
 
 
-  brickBouncer(tops,lefts,pat,clear,onfire);
+  brickBouncer(tops,lefts,pat,clear,onfire,flightBackState);
 
 
 } , 5);
@@ -350,12 +386,15 @@ if(document.getElementById('ball')){
 
 var mousemove = (e) => {
 
+  var flightActual = this.state.flight;
 
+
+  //console.log(flightActual,this.state.flight);
   if(e.offsetX<width-plate){
     pos = e.offsetX;
   }else { pos = width-plate}
 
-  if(this.state.flight){
+  if(flightActual){
   if(e.offsetY<height-10){
     posY = e.offsetY;
   }else {
@@ -366,7 +405,7 @@ var mousemove = (e) => {
   if(document.getElementById('plate')){
   document.getElementById('plate').style.left = pos + 'px';
 
-  if(this.state.flight){
+  if(flightActual){
   document.getElementById('plate').style.top = posY + 'px';
   }
   }
@@ -405,6 +444,7 @@ var onfire = this.state.onfire;
 var onfireFun = this.onfireFun;
 var gunFun = this.gunFun;
 var updateGold = () => currentGold = this.state.gold;
+var flightBackState = this.flightBackState;
 
 console.log('here is lvl ',lvl);
 //console.log(this.props.pattern , 'hereee')
@@ -418,7 +458,7 @@ setTimeout(()=>{
 
   document.addEventListener('click', function(){
     if(inMove === 0){
-    ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun,gunFun);
+    ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun,gunFun,flightBackState);
 
   }
 
@@ -468,9 +508,9 @@ creatingWall(this.props.pattern);
 
 
 
-var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet){
+var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flightBackState){
 
-  console.log(bulletX,bulletY,'bullet');
+  //console.log(bulletX,bulletY,'bullet');
   //to prevent the ball go through 2 bricks the same time.
   var switcherLeftWasChanged = false;
   var switcherTopWasChanged = false;
@@ -527,12 +567,29 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet){
 
   drop.setAttribute('id', 'drop');
   drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
+
   if(attributeI==='gun'){
     drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: white; `);
   }
 
   if(attributeI==='onfire'){
-    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: orange; `);
+    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: orange; `);
+    drop.textContent = '☄';
+  }
+
+  if(attributeI==='ball'){
+    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: green; `);
+    drop.textContent = '⚪';
+  }
+
+  if(attributeI==='plate'){
+    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: yellow; `);
+    drop.textContent = '➖';
+  }
+
+  if(attributeI==='flight'){
+    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: black; `);
+    drop.textContent = '🚀';
   }
 
 
@@ -561,7 +618,7 @@ topI = topI + 1;
           }
 
 
-         if(bricksArray.length === 0) {document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold); }
+         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold); }
 
 
 
@@ -621,7 +678,7 @@ topI = topI + 1;
         //  bricksArray.splice(x,1)
 
 
-        if(bricksArray.length === 0) {console.log(currentGold);document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold);}
+        if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
          } else
 
@@ -656,7 +713,7 @@ topI = topI + 1;
           }
 
 
-         if(bricksArray.length === 0) {console.log(currentGold);document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold);}
+         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
          } else
 
@@ -690,7 +747,7 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
             bricksArray.splice(x,1);
           }
 
-         if(bricksArray.length === 0) {console.log(currentGold);document.removeEventListener('mousemove', mousemove);clear();updateGold();handleOff(lvl, currentGold);}
+         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
          }
 
@@ -712,9 +769,9 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 }
 
 
-var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet){
+var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet,flightBackState){
 
-
+ // console.log('from brickbouncerbullet');
          //here is squized a shooting module//
         /////////////////////////////////////
 
@@ -741,7 +798,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           }
 
 
-        if(bricksArray.length === 0) {console.log(currentGold);clear();updateGold();handleOff(lvl, currentGold);}
+        if(bricksArray.length === 0) {console.log(currentGold);flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
 
         }
@@ -785,6 +842,10 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
             <div id = 'wall'></div>
             <div id = 'ball'></div>
             <div id = 'plate'></div>
+        </div>
+
+        <div id ='gamebar'>
+          <GameBar/>
         </div>
 
         </div>
