@@ -573,19 +573,23 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
   }
 
   if(attributeI==='onfire'){
-    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: orange; `);
+    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: orange; `);
+    drop.textContent = '☄';
   }
 
   if(attributeI==='ball'){
-    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: green; `);
+    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: green; `);
+    drop.textContent = '⚪';
   }
 
   if(attributeI==='plate'){
-    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: yellow; `);
+    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: yellow; `);
+    drop.textContent = '➖';
   }
 
   if(attributeI==='flight'){
-    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: black; `);
+    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: black; `);
+    drop.textContent = '🚀';
   }
 
 

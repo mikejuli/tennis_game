@@ -264,6 +264,11 @@ button.back {
 
 
 #drop {
-  background-color: green;
+
   position: absolute;
+}
+
+#gamebar {
+  float: left;
+  width: 100px;
 }
