@@ -376,7 +376,8 @@ if(document.getElementById('ball')){
   }
 
 
-  brickBouncer(tops,lefts,pat,clear,onfire,flightBackState);
+  brickBouncer(tops,lefts,pat,clear,onfire,1,flightBackState);
+
 
 
 } , 5);
