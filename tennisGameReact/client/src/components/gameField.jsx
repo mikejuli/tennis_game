@@ -10,7 +10,7 @@ import GameBar from './GameBar';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, ball: 10, onfire: false, flight: false, gun: false})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
@@ -19,6 +19,7 @@ import GameBar from './GameBar';
     this.onfireFun = this.onfireFun.bind(this);
     this.gunFun = this.gunFun.bind(this);
     this.flightBackState = this.flightBackState.bind(this);
+
   }
 
     plateFun (cb){ cb(this.state.plate);};
@@ -41,11 +42,11 @@ import GameBar from './GameBar';
       this.setState({attribute: value})
 
       if(this.state.attribute==='plate'){
-        this.setState({plate:this.state.plate + 20})
+        this.setState({plate:this.state.plate + 20, platePoint:this.state.platePoint+1})
       }
 
       if(this.state.attribute==='ball'){
-        this.setState({ball: this.state.ball + 10});
+        this.setState({ball: this.state.ball + 10, ballPoint:this.state.ballPoint+1});
       }
 
       if(this.state.attribute==='onfire'){
@@ -64,7 +65,7 @@ import GameBar from './GameBar';
 
 
     flightBackState(){
-      this.setState({flight:false})
+      this.setState({flight:false});
 
     }
 
@@ -75,6 +76,8 @@ import GameBar from './GameBar';
 
       var plate = this.state.plate;
       document.getElementById('plate').style.width = plate + 'px';
+
+
 
 
       if(prevState.plate!==this.state.plate){
@@ -384,6 +387,7 @@ if(document.getElementById('ball')){
 };
 
 
+
 var mousemove = (e) => {
 
   var flightActual = this.state.flight;
@@ -406,6 +410,7 @@ var mousemove = (e) => {
   document.getElementById('plate').style.left = pos + 'px';
 
   if(flightActual){
+    console.log('fliiiiii')
   document.getElementById('plate').style.top = posY + 'px';
   }
   }
@@ -430,6 +435,8 @@ var mousemove = (e) => {
   }
 
 document.addEventListener ('mousemove', mousemove)
+
+
 
 var plateFun = this.plateFun;
 var ballFun = this.ballFun;
@@ -605,6 +612,7 @@ topI = topI + 1;
 
 
                 addAttribute(attributeI);
+
 
                 console.log('got it',);
 
@@ -798,7 +806,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           }
 
 
-        if(bricksArray.length === 0) {console.log(currentGold);flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
+        if(bricksArray.length === 0) {document.removeEventListener('mousemove',mousemove);console.log(currentGold);flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
 
         }
@@ -836,16 +844,17 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
       <div>gold: {this.state.gold}</div>
 
-        <div>
+        <div id = 'inside'>
 
+<div id  = 'boxCover'>
         <div id = 'box'>
             <div id = 'wall'></div>
             <div id = 'ball'></div>
             <div id = 'plate'></div>
         </div>
-
+</div>
         <div id ='gamebar'>
-          <GameBar/>
+          <GameBar gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint }/>
         </div>
 
         </div>
