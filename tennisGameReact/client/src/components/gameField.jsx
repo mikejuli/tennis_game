@@ -38,30 +38,11 @@ import GameBar from './GameBar';
     }
 
     addAttribute(value){
-
       this.setState({attribute: value})
-
-      if(this.state.attribute==='plate'){
-        this.setState({plate:this.state.plate + 20, platePoint:this.state.platePoint+1})
-      }
-
-      if(this.state.attribute==='ball'){
-        this.setState({ball: this.state.ball + 10, ballPoint:this.state.ballPoint+1});
-      }
-
-      if(this.state.attribute==='onfire'){
-        this.setState({onfire: true})
-
-      }
-
-      if(this.state.attribute==='flight'){
-        this.setState({flight: true})
-      }
-
-      if(this.state.attribute==='gun'){
-        this.setState({gun:true})
-      }
     }
+
+
+
 
 
     flightBackState(){
@@ -73,6 +54,30 @@ import GameBar from './GameBar';
 
     componentDidUpdate( prevProps, prevState){
 
+      if(prevState.attribute!==this.state.attribute){
+
+        if(this.state.attribute==='plate'){
+          this.setState({plate:this.state.plate + 20, platePoint:this.state.platePoint+1})
+        }
+
+        if(this.state.attribute==='ball'){
+          this.setState({ball: this.state.ball + 10, ballPoint:this.state.ballPoint+1});
+        }
+
+        if(this.state.attribute==='onfire'){
+          this.setState({onfire: true})
+
+        }
+
+        if(this.state.attribute==='flight'){
+          this.setState({flight: true})
+        }
+
+        if(this.state.attribute==='gun'){
+          this.setState({gun:true})
+        }
+
+      }
 
       var plate = this.state.plate;
       document.getElementById('plate').style.width = plate + 'px';
@@ -549,7 +554,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
-
+            console.log('addgold top');
             addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
             document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
@@ -666,7 +671,7 @@ topI = topI + 1;
           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
-
+            console.log('addgold bottom');
             addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
             document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
@@ -713,7 +718,7 @@ topI = topI + 1;
           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
-
+            console.log('addgold left');
             addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
             document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
@@ -750,7 +755,7 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 
 
             addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
-
+            console.log('addgold right', document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
             document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
 
             bricksArray.splice(x,1);
