@@ -194,7 +194,7 @@ var bulletRunning = function(clear,flightBackState){
   brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet,flightBackState);
 
   if(bulletY<0){
-    clearInterval(bul);
+    clearBullet();
   }
 
   },10)
@@ -808,7 +808,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
         for( var x=0 ; x< bricksArray.length;x++){
 
 
-        if(bulletY === 0){clearBullet();}
+        if(bulletY < 0){clearBullet();}
 
 
         if ((bulletY <= bricksArray[x][0]+20 && bulletY >= bricksArray[x][0]) &&
