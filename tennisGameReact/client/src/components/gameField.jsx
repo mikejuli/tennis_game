@@ -51,8 +51,14 @@ import GameBar from './GameBar';
     }
 
 
+    componentDidMount(){
+
+        this.setState({onfire: this.props.onfire})
+
+    }
 
     componentDidUpdate( prevProps, prevState){
+
 
       if(prevState.attribute!==this.state.attribute){
 
@@ -860,7 +866,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
         </div>
 </div>
         <div id ='gamebar'>
-          <GameBar gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint }/>
+          <GameBar gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint } onFire = {this.state.onfire}/>
         </div>
 
         </div>
