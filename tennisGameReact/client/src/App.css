@@ -298,3 +298,10 @@ button.back {
 #inside {
   width: 100%;
 }
+
+#checkBox{
+  width: 30px;
+  height: 30px;
+  background-color: wheat;
+  float: right;
+}
