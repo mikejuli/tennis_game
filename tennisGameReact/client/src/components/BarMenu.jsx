@@ -33,11 +33,28 @@ class BarMenu extends React.Component {
       </div>
 
       <div id = 'skills'>
-        <div id = 'bigPlate'>BigPlate ➖</div>
+        <div id = 'bigPlate'>BigPlate ➖ </div>
+
+
+
+
         <div id = 'bigBall'>bigBall ⚪</div>
         <div id = 'freezing'>frezzing ❄</div>
         <div id = 'flying'>flying 🚀</div>
-        <div id = 'shooting'>shooting☄</div>
+
+        <button class='buttonBuy' onClick={()=>this.props.buyItem(5000,'flying')} > buy 5000</button>
+
+
+        <div id = 'shooting'>shooting🏹</div>
+
+        <button class='buttonBuy' onClick={()=>this.props.buyItem(8000,'shooting')} > buy 8000</button>
+
+        <div id = 'onFire'>onFire☄</div>
+
+        <button class='buttonBuy' onClick={()=>this.props.buyItem(10000,'onfire')} > buy 10000</button>
+
+
+
       </div>
 
 

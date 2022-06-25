@@ -8,16 +8,58 @@ import $ from 'jquery'
 class App extends React.Component{
   constructor(props){
     super(props);
-    this.state = {levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: undefined, gold: 0};
+    this.state = {levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: undefined, gold: 0, onfire:false, flying:false, shooting:false};
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
+    this.buyItem = this.buyItem.bind(this);
   }
 
 
   handle(){
 this.setState({levelChosen:true})
   }
+
+
+
+  buyItem(price, item){
+
+    console.log(price);
+    this.setState({gold: this.state.gold - price}, ()=>{
+
+
+      $.ajax({method: 'POST',
+      url: `http://localhost:9000/gold`,
+      data: {gold: this.state.gold},
+      success: (result) => {
+
+        console.log(result,'from gold');
+
+
+        }
+      })
+
+
+    });
+
+
+    if(item === 'onfire'){
+      this.setState({onfire: true})
+    }
+
+    if(item === 'flying'){
+      this.setState({flying: true})
+    }
+
+    if(item === 'shooting'){
+      this.setState({shooting: true})
+    }
+
+
+
+  }
+
+
 
 
   handleOff(level, currentGold){
@@ -182,9 +224,9 @@ render(){
 
   if(this.state.levelChosen){
 
-   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff}/> </div>
+   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff} onfire = {this.state.onfire}/> </div>
 
-  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1} gold = {this.state.gold}/>}
+  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1} gold = {this.state.gold} buyItem ={this.buyItem} />}
 
 
 

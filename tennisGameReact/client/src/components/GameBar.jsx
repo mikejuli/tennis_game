@@ -40,6 +40,7 @@ BarMenu
   <div id = 'freezing'>frezzing ❄</div>
   <div id = 'flying'>flying 🚀</div> {props.flight?<div>1</div>:<div>0</div>}
   <div id = 'shooting'>shooting☄</div> {props.gun?<div>1</div>:<div>0</div>}
+  <div id = 'onFire'>onFire</div> {props.onFire?<div>1</div>:<div>0</div>}
 </div>
 
 
