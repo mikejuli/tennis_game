@@ -10,7 +10,7 @@ import GameBar from './GameBar';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false, flightActual:false})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
@@ -19,6 +19,7 @@ import GameBar from './GameBar';
     this.onfireFun = this.onfireFun.bind(this);
     this.gunFun = this.gunFun.bind(this);
     this.flightBackState = this.flightBackState.bind(this);
+    this.flightActual = this.flightActual.bind(this);
 
   }
 
@@ -29,7 +30,11 @@ import GameBar from './GameBar';
 
 
 
+  flightActual(){
 
+    this.setState({flightActual:true});
+
+  }
 
     addGold(value){
 
@@ -54,7 +59,8 @@ import GameBar from './GameBar';
     componentDidMount(){
 
         this.setState({onfire: this.props.onfire})
-
+        this.setState({flight: this.props.flying})
+        this.setState({gun: this.props.shooting})
     }
 
     componentDidUpdate( prevProps, prevState){
@@ -76,7 +82,7 @@ import GameBar from './GameBar';
         }
 
         if(this.state.attribute==='flight'){
-          this.setState({flight: true})
+          this.setState({flight: true , flightActual: true})
         }
 
         if(this.state.attribute==='gun'){
@@ -403,14 +409,14 @@ if(document.getElementById('ball')){
 var mousemove = (e) => {
 
   var flightActual = this.state.flight;
-
+  var flightActualD = this.state.flightActual;
 
   //console.log(flightActual,this.state.flight);
   if(e.offsetX<width-plate){
     pos = e.offsetX;
   }else { pos = width-plate}
 
-  if(flightActual){
+  if(flightActual && flightActualD){
   if(e.offsetY<height-10){
     posY = e.offsetY;
   }else {
@@ -422,7 +428,6 @@ var mousemove = (e) => {
   document.getElementById('plate').style.left = pos + 'px';
 
   if(flightActual){
-    console.log('fliiiiii')
   document.getElementById('plate').style.top = posY + 'px';
   }
   }
@@ -465,6 +470,8 @@ var gunFun = this.gunFun;
 var updateGold = () => currentGold = this.state.gold;
 var flightBackState = this.flightBackState;
 
+var flightActual = this.flightActual;
+
 console.log('here is lvl ',lvl);
 //console.log(this.props.pattern , 'hereee')
 
@@ -476,6 +483,9 @@ setTimeout(()=>{
 
 
   document.addEventListener('click', function(){
+
+    flightActual();
+
     if(inMove === 0){
     ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun,gunFun,flightBackState);
 
@@ -797,13 +807,17 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
         for( var x=0 ; x< bricksArray.length;x++){
 
+
+        if(bulletY === 0){clearBullet();}
+
+
         if ((bulletY <= bricksArray[x][0]+20 && bulletY >= bricksArray[x][0]) &&
         bulletX >= bricksArray[x][1]-2 && bulletX <= bricksArray[x][1]+ 40+2 ){
 
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+          // document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
 
