@@ -61,6 +61,10 @@ import GameBar from './GameBar';
         this.setState({onfire: this.props.onfire})
         this.setState({flight: this.props.flying})
         this.setState({gun: this.props.shooting})
+        this.setState({platePoint: this.props.bigPlate, plate: this.state.plate + (this.props.bigPlate*20)})
+
+
+
     }
 
     componentDidUpdate( prevProps, prevState){

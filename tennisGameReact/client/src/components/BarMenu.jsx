@@ -35,25 +35,44 @@ class BarMenu extends React.Component {
       <div id = 'skills'>
         <div id = 'bigPlate'>BigPlate ➖ </div>
 
+        <button class='buttonBuy' onClick={()=>{this.props.buyItem(1000,'bigPlate');
 
+        var next = document.getElementById('scale').firstElementChild;
+        for(var i = 0; i < this.props.bigPlate+1;i++){
 
+          next.style.backgroundColor = 'rgb(62, 250, 72)';
+          next = next.nextSibling;
+        }
+
+        }} > buy 1000</button>
+
+        <div id = 'scale'>
+        <div class = 'checkBox' id = 'checkBox4'></div>
+        <div class = 'checkBox' id = 'checkBox4'></div>
+        <div class = 'checkBox' id = 'checkBox4'></div>
+        <div class = 'checkBox' id = 'checkBox4'></div>
+        <div class = 'checkBox' id = 'checkBox4'></div>
+        </div>
 
         <div id = 'bigBall'>bigBall ⚪</div>
         <div id = 'freezing'>frezzing ❄</div>
+
+
         <div id = 'flying'>flying 🚀</div>
-
-        <button class='buttonBuy' onClick={()=>this.props.buyItem(5000,'flying')} > buy 5000</button>
-
+        <button class='buttonBuy' onClick={()=>{this.props.buyItem(5000,'flying'); document.getElementById('checkBox3').style.backgroundColor = 'rgb(62, 250, 72)';
+        document.getElementById('checkBox3').style.animation = 'blinkCheckBox 5s infinite'; }} > buy 5000</button>
+        <div class = 'checkBox' id = 'checkBox3'></div>
 
         <div id = 'shooting'>shooting🏹</div>
 
-        <button class='buttonBuy' onClick={()=>this.props.buyItem(8000,'shooting')} > buy 8000</button>
+        <button class='buttonBuy' onClick={()=>{this.props.buyItem(8000,'shooting'); document.getElementById('checkBox1').style.backgroundColor = 'rgb(62, 250, 72)'}} > buy 8000</button>
+        <div class = 'checkBox' id = 'checkBox1'></div>
+
 
         <div id = 'onFire'>onFire☄</div>
 
-        <button class='buttonBuy' onClick={()=>{this.props.buyItem(10000,'onfire'); document.getElementById('checkBox').style.backgroundColor = 'rgb(190, 245, 179)'}} > buy 10000</button>
-
-        <div id = 'checkBox'></div>
+        <button class='buttonBuy' onClick={()=>{this.props.buyItem(10000,'onfire'); document.getElementById('checkBox2').style.backgroundColor = 'rgb(62, 250, 72)'}} > buy 10000</button>
+        <div class = 'checkBox' id = 'checkBox2'></div>
 
 
 
