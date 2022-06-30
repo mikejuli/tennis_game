@@ -8,7 +8,7 @@ import $ from 'jquery'
 class App extends React.Component{
   constructor(props){
     super(props);
-    this.state = {levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: undefined, gold: 0, onfire:false, flying:false, shooting:false};
+    this.state = {levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: undefined, gold: 0, onfire:false, flying:false, shooting:false, bigPlate: 0};
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
@@ -55,7 +55,9 @@ this.setState({levelChosen:true})
       this.setState({shooting: true})
     }
 
-
+    if(item == 'bigPlate'){
+      this.setState({bigPlate: this.state.bigPlate+1})
+    }
 
   }
 
@@ -64,7 +66,7 @@ this.setState({levelChosen:true})
 
   handleOff(level, currentGold){
       console.log(currentGold);
-      this.setState({gold: this.state.gold+ currentGold}, ()=>{
+      this.setState({gold: this.state.gold + currentGold}, ()=>{
 
 
         $.ajax({method: 'POST',
@@ -224,9 +226,9 @@ render(){
 
   if(this.state.levelChosen){
 
-   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff} onfire = {this.state.onfire} flying = {this.state.flying} shooting = {this.state.shooting}/> </div>
+   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff} onfire = {this.state.onfire} flying = {this.state.flying} shooting = {this.state.shooting} bigPlate = {this.state.bigPlate}/> </div>
 
-  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1} gold = {this.state.gold} buyItem ={this.buyItem} />}
+  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1} gold = {this.state.gold} buyItem ={this.buyItem} bigPlate = {this.state.bigPlate}/>}
 
 
 
