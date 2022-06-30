@@ -72,6 +72,7 @@ class BarMenu extends React.Component {
         <div id = 'onFire'>onFire☄</div>
 
         <button class='buttonBuy' onClick={()=>{this.props.buyItem(10000,'onfire'); document.getElementById('checkBox2').style.backgroundColor = 'rgb(62, 250, 72)'}} > buy 10000</button>
+
         <div class = 'checkBox' id = 'checkBox2'></div>
 
 

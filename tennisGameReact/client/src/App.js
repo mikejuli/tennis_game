@@ -240,7 +240,7 @@ render(){
 
   return (
 
-    <div className="App">
+    <div className="App" >
 
     <div>{popUp}</div>
 
