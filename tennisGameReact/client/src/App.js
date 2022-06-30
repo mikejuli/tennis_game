@@ -65,6 +65,11 @@ this.setState({levelChosen:true})
 
 
   handleOff(level, currentGold){
+
+
+      this.setState({onfire: false, flying: false, shooting: false, bigPlate: 0})
+
+
       console.log(currentGold);
       this.setState({gold: this.state.gold + currentGold}, ()=>{
 
@@ -235,7 +240,7 @@ render(){
 
   return (
 
-    <div className="App">
+    <div className="App" >
 
     <div>{popUp}</div>
 

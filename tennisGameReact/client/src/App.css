@@ -34,19 +34,22 @@
   }
 }
 
+.App{
+  margin: auto;
+  width: 800px;
+  height: 600px;
 
-
+}
 
 
 #box {
-
-
   background-color: rgb(157, 212, 193);
   height: 480px;
   width: 640px;
   position: relative;
-  z-index: -1;
+
 }
+
 
 #boxCover {
 
@@ -97,7 +100,7 @@ background-color: darkslateblue;
 
 
 #brick {
-
+  pointer-events: none;
 border-radius: 15%;
 background: rgb(45,159,253);
 background: linear-gradient(0deg, rgba(45,159,253,1) 11%, rgba(17,217,219,1) 82%);
@@ -138,6 +141,7 @@ button.disButton {
 
 
 #levels{
+
   background-color: lightblue;
   height: 600px;
   width: 800px;
@@ -314,5 +318,8 @@ button.back {
   33% {background-color: rgb(15, 202, 46)}
   77% {background-color: rgb(18, 228, 53);}
   100% {background-color: rgb(23, 216, 55);}
+  100% { -webkit-transform: rotate(360deg); transform:rotate(360deg);
+}
 
 }
+

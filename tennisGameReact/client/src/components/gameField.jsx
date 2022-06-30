@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import LevelGrid from './levelGrid';
 import pattern from './brickPattern';
 import GameBar from './GameBar';
+import $ from 'jquery';
 
 
   class Field extends React.Component {
@@ -412,17 +413,20 @@ if(document.getElementById('ball')){
 
 var mousemove = (e) => {
 
+
+  var y = e.offsetY
+  var x = e.offsetX
+
   var flightActual = this.state.flight;
   var flightActualD = this.state.flightActual;
 
-  //console.log(flightActual,this.state.flight);
-  if(e.offsetX<width-plate){
-    pos = e.offsetX;
+  if(x<width-plate){
+    pos = x;
   }else { pos = width-plate}
 
   if(flightActual && flightActualD){
-  if(e.offsetY<height-10){
-    posY = e.offsetY;
+  if(y<height-10){
+    posY = y;
   }else {
     posY = height-10;
   }
@@ -454,6 +458,8 @@ var mousemove = (e) => {
   //console.log(pos);
 
   }
+
+  var s = document.getElementById('box');
 
 document.addEventListener ('mousemove', mousemove)
 
@@ -877,11 +883,12 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
         <div id = 'inside'>
 
 <div id  = 'boxCover'>
+        <div id = 'boxS'>
         <div id = 'box'>
             <div id = 'wall'></div>
             <div id = 'ball'></div>
             <div id = 'plate'></div>
-        </div>
+        </div></div>
 </div>
         <div id ='gamebar'>
           <GameBar gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint } onFire = {this.state.onfire}/>
