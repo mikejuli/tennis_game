@@ -38,6 +38,7 @@
   margin: auto;
   width: 800px;
   height: 600px;
+  margin-top: auto;
 
 }
 
@@ -86,6 +87,7 @@
 #plate {
 
 height: 10px;
+pointer-events: none;
 
 position: absolute;
 top: calc(100% - 10px);
