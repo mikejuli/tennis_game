@@ -192,7 +192,7 @@ var bulletRunning = function(clear,flightBackState){
 
 
 
-  bulletY = bulletY - 4;
+  bulletY = bulletY - 8;
 
 
 
@@ -202,7 +202,7 @@ var bulletRunning = function(clear,flightBackState){
     clearBullet();
   }
 
-  },10)
+  },20)
 
 };
 
@@ -426,6 +426,8 @@ var mousemove = (e) => {
   var flightActual = this.state.flight;
   var flightActualD = this.state.flightActual;
 
+
+  if(x<=0){pos = 0} else
   if(x<width-plate){
     pos = x;
   }else { pos = width-plate}

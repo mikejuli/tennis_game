@@ -56,6 +56,15 @@ app.post('/user', function(req, res){
 
   })
 
+  app.post('/auth', function(req,res){
+
+    db.loginUser(req.body.login,req.body.password, (err,result)=>{console.log(result);if(result === []){result = null};res.send(result)});
+
+    console.log('here',req.body.login, req.body.password)
+
+
+  })
+
 
   app.post('/gold', function(req, res){
 

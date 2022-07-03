@@ -48,7 +48,7 @@
   height: 480px;
   width: 640px;
   position: relative;
-
+  cursor: none;
 }
 
 
@@ -148,6 +148,7 @@ button.disButton {
   height: 600px;
   width: 800px;
   position: absolute;
+
 }
 
 #level{
