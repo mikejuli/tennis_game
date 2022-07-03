@@ -15,6 +15,7 @@ const levelsSchema = mongoose.Schema ({
 const userSchema = mongoose.Schema ({
 
   user: String,
+  password: String,
   level: Number,
   gold: Number
 
@@ -29,6 +30,7 @@ let save = (data) => {
 
   var add = new Level({
       user: data.user,
+
       level: data.level,
       passed: data.passed,
       pattern: data.pattern
@@ -76,6 +78,13 @@ let getUser = (user, cb) => {
 
   console.log(user, '<---');
   User.find({}).exec((err, result) => { cb(err,result) });
+
+};
+
+let loginUser = (user,password, cb) => {
+
+  console.log(user,password, '<-------?-');
+  User.findOne({user:user, password: password}).exec((err, result) => {cb(err,result) });
 
 };
 
@@ -136,3 +145,4 @@ module.exports.saveUser = saveUser;
 module.exports.getUser = getUser;
 module.exports.replaceLevel = findAndReplaceUserLevel;
 module.exports.replaceGold = findAndReplaceUserGold;
+module.exports.loginUser = loginUser;

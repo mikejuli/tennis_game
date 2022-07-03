@@ -192,7 +192,7 @@ var bulletRunning = function(clear,flightBackState){
 
 
 
-  bulletY = bulletY - 4;
+  bulletY = bulletY - 8;
 
 
 
@@ -202,7 +202,7 @@ var bulletRunning = function(clear,flightBackState){
     clearBullet();
   }
 
-  },10)
+  },20)
 
 };
 
@@ -402,7 +402,7 @@ if(document.getElementById('ball')){
 
 
 
-} , 5);
+} , 1);
 
 
 
@@ -413,13 +413,21 @@ if(document.getElementById('ball')){
 
 var mousemove = (e) => {
 
+  //if e.curenttatget is not box do calculate
 
-  var y = e.offsetY
-  var x = e.offsetX
+  //if(e.clientY>50){var y = e.clientY} else {var y = 50}
+  //if(e.clientX>50){var x = e.clientX} else {var x = 50}
+   var y = e.clientY ;
+   var x = e.clientX -100;
+
+
+  // if(e.target.id==='box'){
 
   var flightActual = this.state.flight;
   var flightActualD = this.state.flightActual;
 
+
+  if(x<=0){pos = 0} else
   if(x<width-plate){
     pos = x;
   }else { pos = width-plate}
@@ -428,7 +436,7 @@ var mousemove = (e) => {
   if(y<height-10){
     posY = y;
   }else {
-    posY = height-10;
+   posY = height-10;
   }
   }
 
@@ -454,12 +462,51 @@ var mousemove = (e) => {
 
   }
 
+  // }else{
 
-  //console.log(pos);
+  //   var y = e.clientY
+  //   var x = e.clientX
 
-  }
+  //   var flightActual = this.state.flight;
+  //   var flightActualD = this.state.flightActual;
 
-  var s = document.getElementById('box');
+  //   if(x<width-plate){
+  //     pos = x;
+  //   }else { pos = width-plate}
+
+  //   if(flightActual && flightActualD){
+  //   if(y<height-10){
+  //     posY = y;
+  //   }else {
+  //    posY = height-10;
+  //   }
+  //   }
+
+  //   if(document.getElementById('plate')){
+  //   document.getElementById('plate').style.left = pos + 'px';
+
+  //   if(flightActual){
+  //   document.getElementById('plate').style.top = posY + 'px';
+  //   }
+  //   }
+
+  //   if(!inMove){
+  //     document.getElementById('ball').style.left = pos +(plate/2)-(ball/2) + 'px';
+  //     document.getElementById('ball').style.top = height-10-ball + 'px';
+
+  //     document.getElementById('ball').style.height = ball + 'px';
+  //     document.getElementById('ball').style.width = ball + 'px';
+
+
+
+  //     tops = height-10-ball;
+  //     lefts = pos + (plate/2)-(ball/2);
+
+  // }
+  // //console.log(pos);
+
+  // }
+}
 
 document.addEventListener ('mousemove', mousemove)
 
@@ -580,6 +627,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
+            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
             console.log('addgold top');
             addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
@@ -697,6 +745,7 @@ topI = topI + 1;
           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
+            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
             console.log('addgold bottom');
             addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
@@ -744,6 +793,7 @@ topI = topI + 1;
           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
+            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
             console.log('addgold left');
             addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
@@ -778,7 +828,7 @@ document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
           console.log(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
-
+            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
 
             addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
             console.log('addgold right', document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
@@ -831,6 +881,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
 
+            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
             addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
             document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');

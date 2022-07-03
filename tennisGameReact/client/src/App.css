@@ -38,6 +38,7 @@
   margin: auto;
   width: 800px;
   height: 600px;
+  margin-top: auto;
 
 }
 
@@ -47,7 +48,7 @@
   height: 480px;
   width: 640px;
   position: relative;
-
+  cursor: none;
 }
 
 
@@ -86,6 +87,7 @@
 #plate {
 
 height: 10px;
+pointer-events: none;
 
 position: absolute;
 top: calc(100% - 10px);
@@ -146,6 +148,7 @@ button.disButton {
   height: 600px;
   width: 800px;
   position: absolute;
+
 }
 
 #level{
