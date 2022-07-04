@@ -8,7 +8,7 @@ import $ from 'jquery'
 class AppGame extends React.Component{
   constructor(props){
     super(props);
-    this.state = {levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: undefined, gold: 0, onfire:false, flying:false, shooting:false, bigPlate: 0};
+    this.state = {user:undefined,levelChosen:false, level: 0 , pattern: [], active:[], currentLevel: undefined, gold: 0, onfire:false, flying:false, shooting:false, bigPlate: 0};
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
@@ -27,10 +27,10 @@ this.setState({levelChosen:true})
     console.log(price);
     this.setState({gold: this.state.gold - price}, ()=>{
 
-
+   //done
       $.ajax({method: 'POST',
       url: `http://localhost:9000/gold`,
-      data: {gold: this.state.gold},
+      data: {user: this.state.user, gold: this.state.gold},
       success: (result) => {
 
         console.log(result,'from gold');
@@ -73,10 +73,10 @@ this.setState({levelChosen:true})
       console.log(currentGold);
       this.setState({gold: this.state.gold + currentGold}, ()=>{
 
-
+        //done
         $.ajax({method: 'POST',
         url: `http://localhost:9000/gold`,
-        data: {gold: this.state.gold},
+        data: {user: this.state.user,gold: this.state.gold},
         success: (result) => {
 
           console.log(result,'from gold');
@@ -91,10 +91,11 @@ this.setState({levelChosen:true})
 
 
 
-
+//done
       if(this.state.currentLevel===this.state.level){
       $.ajax({method: 'POST',
       url: `http://localhost:9000/user`,
+      data: {user: this.state.user},
       success: (result) => {
 
         console.log(result,'from success')
@@ -107,13 +108,13 @@ this.setState({levelChosen:true})
 
     }
 
-
+//done
     console.log('invoked handleOff +', level)
     this.setState({levelChosen:false, level:0})
 
     $.ajax({method: 'POST',
     url: `http://localhost:9000/active`,
-    data: {level: level+1},
+    data: {user: this.state.user, level: level+1},
     success: (result) => {
 
       console.log(result,'from success')
@@ -135,23 +136,39 @@ this.setState({levelChosen:true})
   }
 
    componentDidMount(){
-    console.log('WAS MOUNT');
-    $.ajax({method: 'GET',
-    url: `http://localhost:9000/active`,
-    success: result => this.setState({active: result})
-  })
 
-  $.ajax({method: 'GET',
-  url: `http://localhost:9000/user`,
-  success: result => this.setState({currentLevel: result[0].level, gold: result[0].gold})
-})
+    if(!this.state.user){
 
+      this.setState({user: localStorage.getItem('user')}, ()=>{
+
+        console.log(this.state.user,'WAS MOUNT');
+        //done
+            $.ajax({method: 'POST',
+            url: `http://localhost:9000/activeGET`,
+            data: {user:this.state.user},
+            success: result => this.setState({active: result})
+          })
+        //done
+          $.ajax({method: 'POST',
+          url: `http://localhost:9000/userGET`,
+          data: {user:this.state.user},
+          success: result => this.setState({currentLevel: result[0].level, gold: result[0].gold})
+        })
+      }
+
+    )
+
+
+    }
     }
 
 
 
 
   componentDidUpdate( prevProps, prevState){
+
+
+
 
     //instead of this request we should change it on just retriving data(pattern) from active by using level as an index
 
@@ -233,7 +250,7 @@ render(){
 
    popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff} onfire = {this.state.onfire} flying = {this.state.flying} shooting = {this.state.shooting} bigPlate = {this.state.bigPlate}/> </div>
 
-  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1} gold = {this.state.gold} buyItem ={this.buyItem} bigPlate = {this.state.bigPlate}/>}
+  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1} gold = {this.state.gold} buyItem ={this.buyItem} bigPlate = {this.state.bigPlate} handleLogout = {this.props.handleLogout}/>}
 
 
 

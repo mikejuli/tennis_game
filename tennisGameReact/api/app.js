@@ -41,7 +41,7 @@ app.post('/active', function(req, res){
 
 console.log('---------',req.body.level);
 
-  db.replace(req.body.level,(err,result)=>{res.send(result)});
+  db.replace(req.body.user,req.body.level,(err,result)=>{res.send(result)});
 
 
 
@@ -51,7 +51,7 @@ app.post('/user', function(req, res){
 
   console.log('---------',req.body.level);
 
-    db.replaceLevel((err,result)=>{res.send(result)});
+    db.replaceLevel(req.body.user,(err,result)=>{res.send(result)});
 
 
   })
@@ -85,7 +85,7 @@ app.post('/user', function(req, res){
   app.post('/gold', function(req, res){
 
     console.log('---------from gold',req.body.gold);
-       db.replaceGold(req.body.gold,(err,result)=>{res.send(result)});
+       db.replaceGold(req.body.user,req.body.gold,(err,result)=>{res.send(result)});
 
 
     })
@@ -166,19 +166,20 @@ console.log(pattern);
 });
 
 
-app.get('/active', function (req, res) {
+app.post('/activeGET', function (req, res) {
 
   //db.save();
-  db.get(1,(err,result)=>(res.send(result)));
+  console.log(req.body.user);
+  db.get(req.body.user,(err,result)=>(res.send(result)));
 
 })
 
 
-app.get('/user', function (req, res) {
+app.post('/userGET', function (req, res) {
 
-  console.log('here');
+  console.log('here123',req.body.user);
   //db.save();
-  db.getUser(1,(err,result)=>(res.send(result)));
+  db.getUser(req.body.user,(err,result)=>(res.send(result)));
 
 
 })

@@ -51,6 +51,8 @@ let saveUser = (data) => {
 
   var add = new User({
       user: data.user,
+      password: data.password,
+      token: data.token,
       level: data.level,
       gold: data.gold
 
@@ -68,17 +70,17 @@ let saveUser = (data) => {
 
 
 
-let get = (level, cb) => {
+let get = (user, cb) => {
 
-  console.log(level, '<---');
-  Level.find({}).exec((err, result) => { cb(err,result) });
+  console.log(user, '<!!!!!!!>');
+  Level.find({user: user}).exec((err, result) => { cb(err,result) });
 
 };
 
 let getUser = (user, cb) => {
 
   console.log(user, '<---');
-  User.find({}).exec((err, result) => { cb(err,result) });
+  User.find({user: user}).exec((err, result) => { cb(err,result) });
 
 };
 
@@ -98,27 +100,27 @@ let loginUserToken = (user,token, cb) => {
 };
 
 
-let findAndReplace = (level, cb) => {
+let findAndReplace = (user,level, cb) => {
   console.log(level, 'from find');
- Level.findOneAndUpdate( {user: '1', level:level} , {$set:{passed:true}}, {new: true}, (err, doc) => {
+ Level.findOneAndUpdate( {user: user, level:level} , {$set:{passed:true}}, {new: true}, (err, doc) => {
   if (err) {
       console.log("Something wrong when updating data!");
   }
-  Level.find({}).exec((err, result) => { cb(err,result) });
+  Level.find({user:user}).exec((err, result) => { cb(err,result) });
   console.log(doc);
 
 })
 
 }
 
-let findAndReplaceUserLevel = ( cb) => {
+let findAndReplaceUserLevel = (user,cb) => {
 
-  User.find({user: '1'}).exec((err, result) => {
+  User.find({user: user}).exec((err, result) => {
 
     var s =result[0].level + 1;
     console.log(s);
 
-    User.findOneAndUpdate( {user: '1'} , {$set:{level:s}}, {new: true}, (err, doc) => {
+    User.findOneAndUpdate( {user: user} , {$set:{level:s}}, {new: true}, (err, doc) => {
     if (err) {
         console.log("Something wrong when updating data!");
     }
@@ -130,9 +132,9 @@ let findAndReplaceUserLevel = ( cb) => {
 }
 
 
-let findAndReplaceUserGold = ( gold, cb) => {
+let findAndReplaceUserGold = ( user, gold, cb) => {
 
-    User.findOneAndUpdate( {user: '1'} , {$set:{gold:gold}}, {new: true}, (err, doc) => {
+    User.findOneAndUpdate( {user: user} , {$set:{gold:gold}}, {new: true}, (err, doc) => {
     if (err) {
         console.log("Something wrong when updating data!");
     }

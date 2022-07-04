@@ -9,7 +9,7 @@ class App extends React.Component{
     this.state = {
       currentView: "",
   }
-
+  this.handleLogout = this.handleLogout.bind(this)
 
 }
 
@@ -49,7 +49,11 @@ class App extends React.Component{
 
   }
 
+  handleLogout = () => {
 
+    localStorage.clear();
+    this.setState({currentView:'logIn'})
+  };
 
 
   changeView = (view) => {
@@ -77,7 +81,7 @@ class App extends React.Component{
         localStorage.setItem('token', result.token);
 
 
-        this.setState({currentView:'game'})
+        this.setState({currentView:'game', user: result.user})
 
       }
 
@@ -166,7 +170,7 @@ class App extends React.Component{
       case "game":
         return(
 
-          <AppGame/>
+          <AppGame handleLogout = {this.handleLogout}/>
 
           )
       default:

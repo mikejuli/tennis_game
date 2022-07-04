@@ -25,7 +25,7 @@ class BarMenu extends React.Component {
         <div id = 'avatar'></div>
         <div id = 'name'>BeaterMike</div>
       </div>
-
+      <button onClick={this.props.handleLogout}>logout</button>
       <div id = 'baseInfo'>
         <div id = 'gold'> {this.props.gold} gold &#9748; </div>
   <div id = 'currentLvl'>Level 🔝 : {this.props.currentLevel}/50</div>
