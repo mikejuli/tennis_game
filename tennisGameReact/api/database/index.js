@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema ({
 
   user: String,
   password: String,
+  token: String,
   level: Number,
   gold: Number
 
@@ -89,6 +90,14 @@ let loginUser = (user,password, cb) => {
 };
 
 
+let loginUserToken = (user,token, cb) => {
+
+  console.log(user,token, '<-------?-');
+  User.findOne({user:user, token: token}).exec((err, result) => {cb(err,result) });
+
+};
+
+
 let findAndReplace = (level, cb) => {
   console.log(level, 'from find');
  Level.findOneAndUpdate( {user: '1', level:level} , {$set:{passed:true}}, {new: true}, (err, doc) => {
@@ -146,3 +155,4 @@ module.exports.getUser = getUser;
 module.exports.replaceLevel = findAndReplaceUserLevel;
 module.exports.replaceGold = findAndReplaceUserGold;
 module.exports.loginUser = loginUser;
+module.exports.loginUserToken = loginUserToken;
