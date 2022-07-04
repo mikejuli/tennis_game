@@ -7,8 +7,49 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      currentView: "logIn"
-  }}
+      currentView: "",
+  }
+
+
+}
+
+
+
+  componentDidMount(){
+
+    console.log('mount');
+    var loggedUser = localStorage.getItem('user');
+    console.log(loggedUser);
+    if(loggedUser) {
+
+
+      var token = localStorage.getItem('token');
+
+
+      $.ajax({method: 'POST',
+      url: `http://localhost:9000/authRefresh`,
+      data: {loggedUser,token},
+      success: (result) => {
+
+        if(result){ this.setState({currentView:'game'}) }
+
+       // console.log(result,'from success')
+
+        }
+
+      })
+
+
+
+    } else {
+
+      this.setState({currentView:'logIn'});
+
+    }
+
+  }
+
+
 
 
   changeView = (view) => {
@@ -21,22 +62,31 @@ class App extends React.Component{
 
     console.log(login,password)
 
+
+
+
     $.ajax({method: 'POST',
       url: `http://localhost:9000/auth`,
       data: {login,password},
       success: (result) => {
 
-        console.log(result);
-        if(result){ this.setState({currentView:'game'}) }
+        console.log(result,'from success')
+        if(result){
 
-       // console.log(result,'from success')
+          localStorage.setItem('user', result.user);
+        localStorage.setItem('token', result.token);
+
+
+        this.setState({currentView:'game'})
+
+      }
+
 
         }
 
       })
 
 
-   // this.setState({currentView:'game'})
   }
 
   currentView = () => {

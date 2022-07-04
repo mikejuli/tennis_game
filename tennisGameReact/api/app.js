@@ -58,7 +58,23 @@ app.post('/user', function(req, res){
 
   app.post('/auth', function(req,res){
 
+
+    //here we'll implement the way how to generate token every 24 hour a day.
+
     db.loginUser(req.body.login,req.body.password, (err,result)=>{console.log(result);if(result === []){result = null};res.send(result)});
+
+    console.log('here',req.body.login, req.body.password)
+
+
+  })
+
+
+  app.post('/authRefresh', function(req,res){
+
+
+    //here we'll implement the way how to generate token every 24 hour a day.
+    console.log(req.body.loggedUser,req.body.token)
+    db.loginUserToken(req.body.loggedUser,req.body.token, (err,result)=>{console.log(result);if(result === []){result = null};res.send(result)});
 
     console.log('here',req.body.login, req.body.password)
 
