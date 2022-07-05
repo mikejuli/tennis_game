@@ -326,3 +326,22 @@ button.back {
 
 }
 
+form {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255,255,255,0.9);
+  border-radius: 10px;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.2);
+  width: 300px;
+}
+
+  h2 {
+    margin-bottom: 5px;
+    text-align: center;
+    text-shadow: 0 4px 16px #fff;
+    font-size: 30px;
+    font-weight: 100;
+  }
+
+
+

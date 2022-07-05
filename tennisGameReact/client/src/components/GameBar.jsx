@@ -25,7 +25,7 @@ BarMenu
 
 <div id = 'nameAndAvatar'>
   <div id = 'avatar'></div>
-  <div id = 'name'>BeaterMike</div>
+  <div id = 'name'>BeaterMike {props.user}</div>
 </div>
 
 <div id = 'baseInfo'>
