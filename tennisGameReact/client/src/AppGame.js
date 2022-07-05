@@ -248,9 +248,9 @@ render(){
 
   if(this.state.levelChosen){
 
-   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff} onfire = {this.state.onfire} flying = {this.state.flying} shooting = {this.state.shooting} bigPlate = {this.state.bigPlate}/> </div>
+   popUp = <div><Field level = {this.state.level} pattern = {this.state.pattern} handleOff = {this.handleOff} onfire = {this.state.onfire} flying = {this.state.flying} shooting = {this.state.shooting} bigPlate = {this.state.bigPlate} user = {this.state.user}/> </div>
 
-  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1} gold = {this.state.gold} buyItem ={this.buyItem} bigPlate = {this.state.bigPlate} handleLogout = {this.props.handleLogout}/>}
+  } else if(this.state.currentLevel) { popUp = <Levels handle = {this.handle} fitLevel = {this.fitLevel} active = {this.state.active} currentLevel = {this.state.currentLevel} arrow = {parseInt((this.state.currentLevel-1)/10)+1} gold = {this.state.gold} buyItem ={this.buyItem} bigPlate = {this.state.bigPlate} handleLogout = {this.props.handleLogout} user = {this.state.user}/>}
 
 
 

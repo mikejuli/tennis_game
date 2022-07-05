@@ -942,7 +942,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
         </div></div>
 </div>
         <div id ='gamebar'>
-          <GameBar gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint } onFire = {this.state.onfire}/>
+          <GameBar gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint } onFire = {this.state.onfire} user = {this.props.user}/>
         </div>
 
         </div>
