@@ -49,7 +49,7 @@ console.log('---------',req.body.level);
 
 app.post('/user', function(req, res){
 
-  console.log('---------',req.body.level);
+  console.log('---!---',req.body.level);
 
     db.replaceLevel(req.body.user,(err,result)=>{res.send(result)});
 
