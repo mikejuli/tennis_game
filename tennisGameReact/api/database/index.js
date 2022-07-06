@@ -118,13 +118,13 @@ let findAndReplaceUserLevel = (user,cb) => {
   User.find({user: user}).exec((err, result) => {
 
     var s =result[0].level + 1;
-    console.log(s);
+    console.log('last level',s);
 
     User.findOneAndUpdate( {user: user} , {$set:{level:s}}, {new: true}, (err, doc) => {
     if (err) {
         console.log("Something wrong when updating data!");
     }
-    User.find({}).exec((err, result) => { cb(err,result) });
+    User.find({user:user}).exec((err, result) => { cb(err,result) });
     console.log(doc);
 
   })
