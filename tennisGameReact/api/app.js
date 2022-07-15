@@ -56,6 +56,63 @@ app.post('/user', function(req, res){
 
   })
 
+
+  app.post('/newPlayer', function(req,res){
+
+
+    console.log(req.body.login,req.body.password)
+
+    db.getUser(req.body.login,(err,result)=>{
+
+
+      if(err){res.send(err)}
+
+      if(result.length!==0){
+        res.send('exist');
+      } else {
+
+    var user = {};
+
+        user.user = req.body.login;
+        user.level = 1;
+        user.passed = true;
+        user.pattern = '111111000000111111000000111111'
+
+        db.save(user);
+
+    for(var i = 2; i<=50; i++){
+
+        user.user = req.body.login;
+        user.level = i;
+        user.passed = false;
+        user.pattern = '111111000000111111000000111111'
+
+        db.save(user);
+    }
+
+        data = {};
+      data.user = req.body.login,
+      data.password = req.body.password,
+      data.token = '13244532',
+      data.level = 1,
+      data.gold = 0
+
+
+        db.saveUser(data);
+
+
+        res.send('created');
+
+     }
+
+
+    });
+
+
+
+
+  })
+
   app.post('/auth', function(req,res){
 
 
