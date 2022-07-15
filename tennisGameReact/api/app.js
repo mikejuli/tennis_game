@@ -100,6 +100,7 @@ app.post('/user', function(req, res){
 
         db.saveUser(data);
 
+    //here should be added async function right after we saved a new data we should send response
 
         res.send('created');
 

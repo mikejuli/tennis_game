@@ -69,8 +69,15 @@ class App extends React.Component{
       data: {login,password},
       success: (result) => {
 
-        console.log(result,'from success registration')
-        if(result){
+        console.log('from success registration')
+        if(result === 'exist'){
+
+
+          alert('Player already exists')
+
+      } else if (result === 'created'){
+
+        alert ('You just created a new player')
 
       }
 

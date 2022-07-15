@@ -86,13 +86,54 @@ let getUser = (user, cb) => {
 
 let loginUser = (user,password, cb) => {
 
+
+  //craete token for each session
+  const rand = () => {
+    return Math.random().toString(36).substr(2);
+  };
+
+  const token = () => {
+    return rand() + rand();
+  };
+
+  var tokenCreated = token();
+
+
+
   console.log(user,password, '<-------?-');
-  User.findOne({user:user, password: password}).exec((err, result) => {cb(err,result) });
+  User.findOne({user:user, password: password}).exec((err, result) => {
+
+
+    User.findOneAndUpdate( {user: user} , {$set:{token:tokenCreated}}, {new: true}, (err, doc) => {
+      if (err) {
+          console.log("Something wrong when updating data!");
+      }
+
+
+      User.findOne({user:user, password: password}).exec((err, result) => {
+
+
+        cb(err,result)
+
+      })
+
+
+
+    })
+
+
+
+
+  });
 
 };
 
 
 let loginUserToken = (user,token, cb) => {
+
+
+
+
 
   console.log(user,token, '<-------?-');
   User.findOne({user:user, token: token}).exec((err, result) => {cb(err,result) });
