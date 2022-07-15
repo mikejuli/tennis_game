@@ -62,6 +62,27 @@ class App extends React.Component{
     })
   }
 
+  newAcc = (login,password) => {
+
+    $.ajax({method: 'POST',
+      url: `http://localhost:9000/newPlayer`,
+      data: {login,password},
+      success: (result) => {
+
+        console.log(result,'from success registration')
+        if(result){
+
+      }
+
+
+        }
+
+      })
+
+
+
+  }
+
   login = (login,password) => {
 
     console.log(login,password)
@@ -116,7 +137,7 @@ class App extends React.Component{
                 </li>
               </ul>
             </fieldset>
-            <button>Submit</button>
+            <button type = "button" onClick = { ()=>this.newAcc(document.getElementById('username').value,document.getElementById('password').value)}>Submit</button>
             <button type="button" onClick={ () => this.changeView("logIn")}>Have an Account?</button>
           </form>
         )
