@@ -18,7 +18,8 @@ const GameBar = (props) => {
 
   return (
     <div className='container'>
-
+<div><img src="LeetCoin.png"  width="14"
+     height="14"></img></div>
       <div id = 'BarMenuIn'>
 
 BarMenu
@@ -29,7 +30,9 @@ BarMenu
 </div>
 
 <div id = 'baseInfo'>
-  <div id = 'gold'> {props.gold} gold &#9748; </div>
+  <div id = 'gold'> {props.gold} coins  </div>
+  <div><img src="LeetCoin.png"  width="14"
+     height="14"></img></div>
 <div id = 'currentLvl'>Level 🔝 : {props.level}/50</div>
   <div id = 'skin'>Skin: Common</div>
 </div>
