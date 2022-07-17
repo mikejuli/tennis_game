@@ -21,8 +21,8 @@ RUN npm install react-addons-css-transition-group
 
 
 RUN npm run build
-RUN npm install -g serve
+RUN npm install -g
 # What port will the container talk to the outside world with once created?
-EXPOSE 3000
+EXPOSE 3006
 
 # How do you start your app?
