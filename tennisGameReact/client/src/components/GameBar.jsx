@@ -18,8 +18,7 @@ const GameBar = (props) => {
 
   return (
     <div className='container'>
-<div><img src="LeetCoin.png"  width="14"
-     height="14"></img></div>
+
       <div id = 'BarMenuIn'>
 
 BarMenu

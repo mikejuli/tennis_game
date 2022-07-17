@@ -12,9 +12,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=3006 react-scripts start",
-    "build": "react-scripts build",
-    "buildRun": "serve -s -n build",
+    "start": "cd client  && npm start",
+    "serve": "cd api/bin && node www",
+    "buildRun": "cd client && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

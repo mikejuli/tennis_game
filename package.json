@@ -9,5 +9,12 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "dependencies": {}
+  "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "mongoose": "^6.2.10",
+    "react": "^18.0.0",
+    "react-bootstrap-carousel": "^4.1.1",
+    "react-dom": "^18.0.0",
+    "react-transition-group": "^1.2.1"
+  }
 }
