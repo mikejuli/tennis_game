@@ -17,7 +17,7 @@ class App extends React.Component{
 
   componentDidMount(){
 
-    console.log('mount');
+    console.log('mount' ,this.state.currentView);
     var loggedUser = localStorage.getItem('user');
     console.log(loggedUser);
     if(loggedUser) {
@@ -33,7 +33,7 @@ class App extends React.Component{
 
         if(result){ this.setState({currentView:'game'}) }
 
-       // console.log(result,'from success')
+        console.log(result,'from success')
 
         }
 
@@ -42,12 +42,15 @@ class App extends React.Component{
 
 
     } else {
-
+      console.log('here123');
       this.setState({currentView:'logIn'});
 
     }
 
   }
+
+
+
 
   handleLogout = () => {
 
@@ -92,7 +95,7 @@ class App extends React.Component{
 
   login = (login,password) => {
 
-    console.log(login,password)
+    console.log('here!!',login,password)
 
 
 
@@ -105,7 +108,7 @@ class App extends React.Component{
         console.log(result,'from success')
         if(result){
 
-          localStorage.setItem('user', result.user);
+        localStorage.setItem('user', result.user);
         localStorage.setItem('token', result.token);
 
 
@@ -127,7 +130,7 @@ class App extends React.Component{
         return (
           <form>
             <h2>Sign Up!</h2>
-            <fieldset>
+            <div>
               <legend>Create Account</legend>
               <ul>
                 <li>
@@ -143,7 +146,7 @@ class App extends React.Component{
                   <input type="password" id="password" required/>
                 </li>
               </ul>
-            </fieldset>
+            </div>
             <button type = "button" onClick = { ()=>this.newAcc(document.getElementById('username').value,document.getElementById('password').value)}>Submit</button>
             <button type="button" onClick={ () => this.changeView("logIn")}>Have an Account?</button>
           </form>
@@ -151,9 +154,9 @@ class App extends React.Component{
         break
       case "logIn":
         return (
-          <form>
+          <div>
             <h2>Welcome Back!</h2>
-            <fieldset>
+            <div>
               <legend>Log In</legend>
               <ul>
                 <li>
@@ -169,10 +172,11 @@ class App extends React.Component{
                   <a onClick={ () => this.changeView("PWReset")} href="#">Forgot Password?</a>
                 </li>
               </ul>
-            </fieldset>
+            </div>
             <button onClick ={()=>{this.login(document.getElementById('username').value, document.getElementById('password').value);}}>Login</button>
             <button type="button" onClick={ () => this.changeView("signUp")}>Create an Account</button>
-          </form>
+          </div>
+
         )
         break
       case "PWReset":
@@ -196,8 +200,8 @@ class App extends React.Component{
         </form>
         )
       case "game":
+        console.log('asd');
         return(
-
           <AppGame handleLogout = {this.handleLogout}/>
 
           )
@@ -210,13 +214,18 @@ class App extends React.Component{
 render(){
 
 
-
   return (
 
     <div className="App" >
 
-<section id="entry-page">
+      <section id="entry-page">
+
+
+
         {this.currentView()}
+
+
+
       </section>
 
 
