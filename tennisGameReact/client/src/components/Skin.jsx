@@ -7,13 +7,11 @@ const Skin = () => {
   const [changer, setChanger] = useState("default");
   const [menu, setMenu] = useState(false);
 
-  const toggle = () => {
-    var g = document.getElementById("selectSkin").options[
-      document.getElementById("selectSkin").selectedIndex
-    ].text;
+  const toggle = (selector) => {
 
-    setChanger(g);
-    dispatch(setSkin(g));
+
+    setChanger(selector);
+    dispatch(setSkin(selector));
   };
 
 
@@ -27,20 +25,23 @@ const Skin = () => {
 
   const dispatch = useDispatch();
 
-  //const skin = useSelector((state)=> state.skin.value);
+  //  const skin = useSelector((state)=> state);
+
+
 
   return (
     <div>
-      <div id = 'dropDownMenu' onClick = {openMenu}>
+      <div id = 'dropDownMenu' style = {{cursor:'pointer'}}onClick = {openMenu}>
         Skin: {changer}
         </div>
-        {menu?<div>
+        {menu?<div id = 'dropDown' >
 
-          <option>common</option>
-        <option>rare</option>
-        <option>epic</option>
-        <option>legendary</option>
-        <option>mythic</option>
+        <div id = 'common' onClick = {()=>{toggle('common')}}>common</div>
+        <div id = 'rare' onClick = {()=>{toggle('rare')}}>rare</div>
+        <div id = 'epic' onClick = {()=>{toggle('epic')}}>epic</div>
+        <div id = 'legendary' onClick = {()=>{toggle('legendary')}}>legendary</div>
+        <div id = 'mythic' onClick = {()=>{toggle('mythic')}}>mythic</div>
+
 
 
 

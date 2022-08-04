@@ -5,6 +5,7 @@ import Levels from "./components/levels";
 import Field from "./components/gameField";
 import $ from "jquery";
 import { connect } from 'react-redux';
+import { buyItem } from "./features/skinCoin";
 
 class AppGame extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class AppGame extends React.Component {
 
   buyItem(price, item) {
     console.log(price);
+    this.props.buyItemFromRedux();
     this.setState({ gold: this.state.gold - price }, () => {
       //done
       $.ajax({
@@ -259,8 +261,16 @@ class AppGame extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  //()=> dispatch(buyItem('1234'))
+  console.log('HEEEEEEEE');
+  return {buyItemFromRedux: ()=>buyItem('123')}
+};
 
-const mapStateToProps = state => ({ skin: state.skin.value })
 
 
-export default connect(mapStateToProps)(AppGame);
+const mapStateToProps = state => ({ skin: state.skin.value, coin: state })
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps())(AppGame);

@@ -6,14 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import skinReducer from './features/skin'
-
-
+import skinReducerCoin from './features/skinCoin'
 
 const store = configureStore({
 
 
   reducer:{
-    skin: skinReducer
+    skin: skinReducer,
+    gold: skinReducerCoin
   }
 
 })
