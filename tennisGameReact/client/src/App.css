@@ -128,13 +128,17 @@ border-color: lightsalmon;
 
 button.button {
 
-  border-radius: 30%;
-  background-color: rgb(105, 212, 111);
+  border-radius: 50%;
+  background-color: rgb(105, 212, 111)
+  ;
+  width: 50px;
+  height: 50px;
 }
 
 button.disButton {
-
-  border-radius: 30%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   background-color: rgb(148, 143, 143)
 }
 

@@ -3,6 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 import AppGame from './AppGame.js';
 import $ from 'jquery';
+import {configureStore} from '@reduxjs/toolkit';
+import {Provider} from 'react-redux';
+
+const store = configureStore({
+
+
+  reducer:{}
+
+})
+
+
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -202,6 +213,7 @@ class App extends React.Component{
       case "game":
         console.log('asd');
         return(
+
           <AppGame handleLogout = {this.handleLogout}/>
 
           )
