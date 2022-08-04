@@ -7,7 +7,7 @@ export const skinSlice = createSlice({
 
 
 
-    skin: (state,action)=> {
+    setSkin: (state,action)=> {
 
       state.value = action.payload;
 
@@ -15,7 +15,7 @@ export const skinSlice = createSlice({
   }
 })
 
-//export const {skin} = skinSlice.actions;
+export const {setSkin} = skinSlice.actions;
 
 console.log(skinSlice)
 
