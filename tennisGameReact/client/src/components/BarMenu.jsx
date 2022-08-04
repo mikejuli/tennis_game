@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Skin from './Skin'
 
 class BarMenu extends React.Component {
 
@@ -29,7 +29,8 @@ class BarMenu extends React.Component {
       <div id = 'baseInfo'>
         <div id = 'gold'> {this.props.gold} gold &#9748; </div>
   <div id = 'currentLvl'>Level 🔝 : {this.props.currentLevel}/50</div>
-        <div id = 'skin'>Skin: Common</div>
+      <Skin/>
+
       </div>
 
       <div id = 'skills'>

@@ -76,7 +76,7 @@ app.post('/user', function(req, res){
         user.user = req.body.login;
         user.level = 1;
         user.passed = true;
-        user.pattern = '111111000000111111000000111111'
+        user.pattern = '1111111111111111111111111111'
 
         db.save(user);
 
@@ -85,7 +85,7 @@ app.post('/user', function(req, res){
         user.user = req.body.login;
         user.level = i;
         user.passed = false;
-        user.pattern = '111111000000111111000000111111'
+        user.pattern = '11111100000000000000000111111'
 
         db.save(user);
     }

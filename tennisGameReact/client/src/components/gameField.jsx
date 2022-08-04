@@ -56,7 +56,7 @@ import $ from 'jquery';
 
     }
 
-
+//changed from componentDidmount
     componentDidMount(){
 
         this.setState({onfire: this.props.onfire})
