@@ -6,7 +6,8 @@ import Field from "./components/gameField";
 import $ from "jquery";
 import { connect } from 'react-redux';
 import { buyItem } from "./features/skinCoin";
-import {updateItem} from './features/availiableSkin'
+import {updateItem} from './features/availiableSkin';
+import {setSkin} from './features/skin'
 
 class AppGame extends React.Component {
   constructor(props) {
@@ -162,6 +163,8 @@ class AppGame extends React.Component {
           success: (result) => {
 
 
+            this.props.setSkinFromRedux(result[0].activeSkin);
+
             this.props.updateItemFromRedux({common : result[0].common, rare: result[0].rare, epic: result[0].epic, legendary: result[0].legendary,mythic: result[0].mythic })
 
 
@@ -176,12 +179,31 @@ class AppGame extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-
+   //???? should change logic here
     if(prevProps.coin !== this.props.coin){
 
       this.buyItem(this.props.coin, 'skin');
 
     }
+
+
+    if(prevProps.skin!==this.props.skin){
+
+      $.ajax({
+        method: "POST",
+        url: `http://localhost:9000/activeSkin`,
+        data: { user: this.state.user, activeSkin: this.props.skin},
+        success: (result) => {
+          console.log(result, "from skin");
+
+
+
+        },
+      });
+
+
+    }
+
 
 
     //instead of this request we should change it on just retriving data(pattern) from active by using level as an index
@@ -268,6 +290,7 @@ class AppGame extends React.Component {
             shooting={this.state.shooting}
             bigPlate={this.state.bigPlate}
             user={this.state.user}
+            skin = {this.props.skin}
           />{" "}
         </div>
       );
@@ -298,7 +321,8 @@ class AppGame extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {buyItemFromRedux: (x)=>buyItem(x),
-          updateItemFromRedux: (x)=>updateItem(x)
+          updateItemFromRedux: (x)=>updateItem(x),
+          setSkinFromRedux: (x)=>setSkin(x)
   }
 };
 

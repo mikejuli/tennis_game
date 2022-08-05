@@ -64,7 +64,14 @@ import $ from 'jquery';
         this.setState({gun: this.props.shooting})
         this.setState({platePoint: this.props.bigPlate, plate: this.state.plate + (this.props.bigPlate*20)})
 
+      if(this.props.skin === 'rare'){
+        // document.getElementById('plate').style.background = 'orange'
 
+        document.getElementById('plate').style.background = 'linear-gradient(-135deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)';
+
+          document.getElementById('plate').style.border = 'solid 1px black'
+
+      }
 
     }
 

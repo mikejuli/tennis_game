@@ -156,6 +156,14 @@ app.post('/user', function(req, res){
 
       })
 
+      app.post('/activeSkin', function(req, res){
+
+        console.log('---------from activeSkin',req.body.activeSkin);
+           db.activeSkin(req.body.user,req.body.activeSkin,(err,result)=>{res.send(result)});
+
+
+        })
+
 
 
 app.get('/api', function (req, res) {

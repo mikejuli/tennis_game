@@ -6,18 +6,28 @@ import { buyItem } from "../features/skinCoin";
 
 
 const Skin = () => {
-  const [changer, setChanger] = useState("default");
+  const [changer, setChanger] = useState('');
   const [menu, setMenu] = useState(false);
 
 
   const toggle = (selector,price) => {
 
-
     setChanger(selector);
     dispatch(setSkin(selector));
     dispatch(buyItem(price));
-
+    openMenu();
   };
+
+
+ const toggleSetSkin = (selector)=>{
+
+  if(skin.skinArray.value[selector]){
+    setChanger(selector);
+    dispatch(setSkin(selector));
+    openMenu();
+  }
+
+ };
 
 
   const openMenu = () => {
@@ -26,9 +36,18 @@ const Skin = () => {
 
   const skin = useSelector((state)=> state);
 
-  useEffect(() => {
-    console.log(skin, '<_!!!!');
+  const initialCheck = () => {
 
+    if(skin.skin.value!==changer){
+      setChanger(skin.skin.value)
+    }
+
+  }
+
+
+  useEffect(() => {
+    console.log(skin.skin.value, '<_!!!!');
+    initialCheck();
 
   });
 
@@ -43,16 +62,16 @@ console.log(skin, 'from Skin');
   return (
     <div>
       <div id = 'dropDownMenu' style = {{cursor:'pointer'}}onClick = {openMenu}>
-        Skin: {changer}
+  Skin: {changer}  { menu? <h7>🔼</h7>:<h7>🔽</h7> }
         </div>
         {menu?<div id = 'dropDown' >
 
         <div id = 'leftDropDown'>
-        <div id = 'common' style = {skin.skinArray.value.common?{backgroundColor: 'blue'}:{}}>common </div>
-        <div id = 'rare' style = {skin.skinArray.value.rare?{backgroundColor: 'blue'}:{}}>rare </div>
-        <div id = 'epic' style = {skin.skinArray.value.epic?{backgroundColor: 'blue'}:{}}>epic </div>
-        <div id = 'legendary' style = {skin.skinArray.value.legendary?{backgroundColor: 'blue'}:{}}>legendary </div>
-        <div id = 'mythic' style = {skin.skinArray.value.mythic?{backgroundColor: 'blue'}:{}}>mythic </div>
+        <div id = 'common' style = {skin.skinArray.value.common?{backgroundColor: 'blue'}:{}} onClick = {()=>{ toggleSetSkin('common')}}>common </div>
+        <div id = 'rare' style = {skin.skinArray.value.rare?{backgroundColor: 'blue'}:{}} onClick = {()=>{ toggleSetSkin('rare')}}>rare </div>
+        <div id = 'epic' style = {skin.skinArray.value.epic?{backgroundColor: 'blue'}:{}} onClick = {()=>{ toggleSetSkin('epic')}}>epic </div>
+        <div id = 'legendary' style = {skin.skinArray.value.legendary?{backgroundColor: 'blue'}:{}} onClick = {()=>{ toggleSetSkin('legendary')}}>legendary </div>
+        <div id = 'mythic' style = {skin.skinArray.value.mythic?{backgroundColor: 'blue'}:{}} onClick = {()=>{ toggleSetSkin('mythic')}}>mythic </div>
         </div>
 
         <div id = 'rightDropDown'>
@@ -66,7 +85,7 @@ console.log(skin, 'from Skin');
 
 
 
-        </div>:<div>no</div>}
+        </div>:<div></div>}
 
 
 

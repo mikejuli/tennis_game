@@ -25,6 +25,8 @@ const userSchema = mongoose.Schema ({
   level: Number,
   gold: Number,
 
+  activeSkin:String,
+
   common: Boolean,
   rare: Boolean,
   epic: Boolean,
@@ -66,6 +68,7 @@ let saveUser = (data) => {
       level: data.level,
       gold: data.gold,
 
+      activeSkin:'default',
 
   common: false,
   rare: false,
@@ -216,6 +219,19 @@ console.log('skin->>>>', skin);
 
 }
 
+let findAndActiveUserSkin = ( user, activeSkin, cb) => {
+  console.log('skin->>>>', activeSkin);
+    User.findOneAndUpdate( {user: user} , {$set:{activeSkin:activeSkin}}, {new: true}, (err, doc) => {
+    if (err) {
+        console.log("Something wrong when updating data!");
+    }
+
+    cb(err,doc);
+
+  })
+
+  }
+
 
 
 console.log('done');
@@ -230,3 +246,4 @@ module.exports.replaceGold = findAndReplaceUserGold;
 module.exports.loginUser = loginUser;
 module.exports.loginUserToken = loginUserToken;
 module.exports.buySkin = findAndBuyUserSkin;
+module.exports.activeSkin = findAndActiveUserSkin;
