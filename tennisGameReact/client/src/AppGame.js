@@ -74,8 +74,14 @@ class AppGame extends React.Component {
         data: { user: this.state.user, skin: this.props.skin},
         success: (result) => {
           console.log(result, "from skin");
+
+          console.log(result.common);
+          this.props.updateItemFromRedux({common : result.common, rare: result.rare, epic: result.epic, legendary: result.legendary,mythic: result.mythic })
+
         },
       });
+
+
 
     }
   }

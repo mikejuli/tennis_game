@@ -9,6 +9,7 @@ const Skin = () => {
   const [changer, setChanger] = useState("default");
   const [menu, setMenu] = useState(false);
 
+
   const toggle = (selector,price) => {
 
 
@@ -23,15 +24,21 @@ const Skin = () => {
       setMenu(!menu);
   }
 
+  const skin = useSelector((state)=> state);
+
   useEffect(() => {
-    console.log(changer);
+    console.log(skin, '<_!!!!');
+
+
   });
 
   const dispatch = useDispatch();
 
-    const skin = useSelector((state)=> state);
 
-console.log(skin);
+
+//const checkBuy = (x) => { skin.some((y)=>y===x)}
+
+console.log(skin, 'from Skin');
 
   return (
     <div>
@@ -41,11 +48,11 @@ console.log(skin);
         {menu?<div id = 'dropDown' >
 
         <div id = 'leftDropDown'>
-        <div id = 'common' >common </div>
-        <div id = 'rare' >rare </div>
-        <div id = 'epic' >epic </div>
-        <div id = 'legendary' >legendary </div>
-        <div id = 'mythic' >mythic </div>
+        <div id = 'common' style = {skin.skinArray.value.common?{backgroundColor: 'blue'}:{}}>common </div>
+        <div id = 'rare' style = {skin.skinArray.value.rare?{backgroundColor: 'blue'}:{}}>rare </div>
+        <div id = 'epic' style = {skin.skinArray.value.epic?{backgroundColor: 'blue'}:{}}>epic </div>
+        <div id = 'legendary' style = {skin.skinArray.value.legendary?{backgroundColor: 'blue'}:{}}>legendary </div>
+        <div id = 'mythic' style = {skin.skinArray.value.mythic?{backgroundColor: 'blue'}:{}}>mythic </div>
         </div>
 
         <div id = 'rightDropDown'>
