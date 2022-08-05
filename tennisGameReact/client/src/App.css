@@ -362,7 +362,7 @@ background-color: coral;
   cursor:'pointer'
 }
 
-#dropDown > div:hover {
+#rightDropDown > div:hover {
 
   background-color: darkmagenta;
 }
@@ -371,5 +371,13 @@ background-color: coral;
 background-color: darkgreen;
 }
 
+#leftDropDown{
+  width: 50%;
+  float: left;
+}
 
+#rightDropDown{
+  width: 50%;
+  float: left;
+}
 

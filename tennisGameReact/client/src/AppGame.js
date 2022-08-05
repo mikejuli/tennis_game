@@ -35,7 +35,7 @@ class AppGame extends React.Component {
 
   buyItem(price, item) {
     console.log(price);
-    this.props.buyItemFromRedux();
+   // this.props.buyItemFromRedux(this.state.gold);
     this.setState({ gold: this.state.gold - price }, () => {
       //done
       $.ajax({
@@ -62,6 +62,20 @@ class AppGame extends React.Component {
 
     if (item == "bigPlate") {
       this.setState({ bigPlate: this.state.bigPlate + 1 });
+    }
+
+    if(item === 'skin'){
+      console.log('skin!');
+
+      $.ajax({
+        method: "POST",
+        url: `http://localhost:9000/buySkin`,
+        data: { user: this.state.user, skin: this.props.skin},
+        success: (result) => {
+          console.log(result, "from skin");
+        },
+      });
+
     }
   }
 
@@ -149,6 +163,14 @@ class AppGame extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+
+    if(prevProps.coin !== this.props.coin){
+
+      this.buyItem(this.props.coin, 'skin');
+
+    }
+
+
     //instead of this request we should change it on just retriving data(pattern) from active by using level as an index
 
     if (prevState.level !== this.state.level) {
@@ -262,14 +284,12 @@ class AppGame extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  //()=> dispatch(buyItem('1234'))
-  console.log('HEEEEEEEE');
-  return {buyItemFromRedux: ()=>buyItem('123')}
+  return {buyItemFromRedux: (x)=>buyItem(x)}
 };
 
 
 
-const mapStateToProps = state => ({ skin: state.skin.value, coin: state })
+const mapStateToProps = state => ({ skin: state.skin.value, coin: state.gold.value })
 
 
 

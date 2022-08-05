@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 export const skinSliceCoin = createSlice({
   name: 'coin',
-  initialState: { value: "1234"},
+  initialState: { value: 0, },
   reducers: {
 
 
