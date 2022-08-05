@@ -5,6 +5,8 @@ import Levels from "./components/levels";
 import Field from "./components/gameField";
 import $ from "jquery";
 import { connect } from 'react-redux';
+import { buyItem } from "./features/skinCoin";
+import {updateItem} from './features/availiableSkin'
 
 class AppGame extends React.Component {
   constructor(props) {
@@ -34,6 +36,7 @@ class AppGame extends React.Component {
 
   buyItem(price, item) {
     console.log(price);
+   // this.props.buyItemFromRedux(this.state.gold);
     this.setState({ gold: this.state.gold - price }, () => {
       //done
       $.ajax({
@@ -60,6 +63,20 @@ class AppGame extends React.Component {
 
     if (item == "bigPlate") {
       this.setState({ bigPlate: this.state.bigPlate + 1 });
+    }
+
+    if(item === 'skin'){
+      console.log('skin!');
+
+      $.ajax({
+        method: "POST",
+        url: `http://localhost:9000/buySkin`,
+        data: { user: this.state.user, skin: this.props.skin},
+        success: (result) => {
+          console.log(result, "from skin");
+        },
+      });
+
     }
   }
 
@@ -136,17 +153,31 @@ class AppGame extends React.Component {
           method: "POST",
           url: `http://localhost:9000/userGET`,
           data: { user: this.state.user },
-          success: (result) =>
+          success: (result) => {
+
+
+            this.props.updateItemFromRedux({common : result[0].common, rare: result[0].rare, epic: result[0].epic, legendary: result[0].legendary,mythic: result[0].mythic })
+
+
             this.setState({
               currentLevel: result[0].level,
               gold: result[0].gold,
-            }),
+            })},
         });
+
       });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
+
+    if(prevProps.coin !== this.props.coin){
+
+      this.buyItem(this.props.coin, 'skin');
+
+    }
+
+
     //instead of this request we should change it on just retriving data(pattern) from active by using level as an index
 
     if (prevState.level !== this.state.level) {
@@ -259,8 +290,16 @@ class AppGame extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {buyItemFromRedux: (x)=>buyItem(x),
+          updateItemFromRedux: (x)=>updateItem(x)
+  }
+};
 
-const mapStateToProps = state => ({ skin: state.skin.value })
 
 
-export default connect(mapStateToProps)(AppGame);
+const mapStateToProps = state => ({ skin: state.skin.value, coin: state.gold.value })
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps())(AppGame);

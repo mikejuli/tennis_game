@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 export const skinSlice = createSlice({
   name: 'skin',
-  initialState: { value: "legendary"},
+  initialState: { value: "default"},
   reducers: {
 
 
@@ -11,11 +11,17 @@ export const skinSlice = createSlice({
 
       state.value = action.payload;
 
-    }
+    },
+
+
+
   }
 })
 
+
+
 export const {setSkin} = skinSlice.actions;
+
 
 console.log(skinSlice)
 

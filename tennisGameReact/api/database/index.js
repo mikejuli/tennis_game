@@ -23,8 +23,13 @@ const userSchema = mongoose.Schema ({
   password: String,
   token: String,
   level: Number,
-  gold: Number
+  gold: Number,
 
+  common: Boolean,
+  rare: Boolean,
+  epic: Boolean,
+  legendary : Boolean,
+  mythic: Boolean
 })
 
 
@@ -59,7 +64,14 @@ let saveUser = (data) => {
       password: data.password,
       token: data.token,
       level: data.level,
-      gold: data.gold
+      gold: data.gold,
+
+
+  common: false,
+  rare: false,
+  epic: false,
+  legendary : false,
+  mythic: false
 
   });
 
@@ -191,6 +203,19 @@ let findAndReplaceUserGold = ( user, gold, cb) => {
 
 }
 
+let findAndBuyUserSkin = ( user, skin, cb) => {
+console.log('skin->>>>', skin);
+  User.findOneAndUpdate( {user: user} , {$set:{[skin]:true}}, {new: true}, (err, doc) => {
+  if (err) {
+      console.log("Something wrong when updating data!");
+  }
+
+  cb(err,doc);
+
+})
+
+}
+
 
 
 console.log('done');
@@ -204,3 +229,4 @@ module.exports.replaceLevel = findAndReplaceUserLevel;
 module.exports.replaceGold = findAndReplaceUserGold;
 module.exports.loginUser = loginUser;
 module.exports.loginUserToken = loginUserToken;
+module.exports.buySkin = findAndBuyUserSkin;

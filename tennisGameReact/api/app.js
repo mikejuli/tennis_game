@@ -148,6 +148,15 @@ app.post('/user', function(req, res){
 
     })
 
+    app.post('/buySkin', function(req, res){
+
+      console.log('---------from buySkin',req.body.skin);
+         db.buySkin(req.body.user,req.body.skin,(err,result)=>{res.send(result)});
+
+
+      })
+
+
 
 app.get('/api', function (req, res) {
   // db.save();
