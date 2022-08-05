@@ -6,6 +6,7 @@ import Field from "./components/gameField";
 import $ from "jquery";
 import { connect } from 'react-redux';
 import { buyItem } from "./features/skinCoin";
+import {updateItem} from './features/availiableSkin'
 
 class AppGame extends React.Component {
   constructor(props) {
@@ -152,12 +153,18 @@ class AppGame extends React.Component {
           method: "POST",
           url: `http://localhost:9000/userGET`,
           data: { user: this.state.user },
-          success: (result) =>
+          success: (result) => {
+
+
+            this.props.updateItemFromRedux({common : result[0].common, rare: result[0].rare, epic: result[0].epic, legendary: result[0].legendary,mythic: result[0].mythic })
+
+
             this.setState({
               currentLevel: result[0].level,
               gold: result[0].gold,
-            }),
+            })},
         });
+
       });
     }
   }
@@ -284,7 +291,9 @@ class AppGame extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {buyItemFromRedux: (x)=>buyItem(x)}
+  return {buyItemFromRedux: (x)=>buyItem(x),
+          updateItemFromRedux: (x)=>updateItem(x)
+  }
 };
 
 

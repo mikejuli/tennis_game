@@ -15,6 +15,7 @@ const Skin = () => {
     setChanger(selector);
     dispatch(setSkin(selector));
     dispatch(buyItem(price));
+
   };
 
 
@@ -28,9 +29,9 @@ const Skin = () => {
 
   const dispatch = useDispatch();
 
-  //  const skin = useSelector((state)=> state);
+    const skin = useSelector((state)=> state);
 
-
+console.log(skin);
 
   return (
     <div>
