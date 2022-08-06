@@ -297,6 +297,7 @@ class AppGame extends React.Component {
     } else if (this.state.currentLevel) {
       popUp = (
         <Levels
+          character = {this.props.character}
           handle={this.handle}
           fitLevel={this.fitLevel}
           active={this.state.active}

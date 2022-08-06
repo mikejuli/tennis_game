@@ -31,7 +31,10 @@ const userSchema = mongoose.Schema ({
   rare: Boolean,
   epic: Boolean,
   legendary : Boolean,
-  mythic: Boolean
+  mythic: Boolean,
+
+  activeCharacter: String
+
 })
 
 
@@ -74,7 +77,9 @@ let saveUser = (data) => {
   rare: false,
   epic: false,
   legendary : false,
-  mythic: false
+  mythic: false,
+
+  activeCharacter: 'none'
 
   });
 
@@ -233,6 +238,28 @@ let findAndActiveUserSkin = ( user, activeSkin, cb) => {
   }
 
 
+  let findAndActiveUserCharacter = ( user,activeCharacter, cb) => {
+    console.log('character->>>>', user);
+      User.findOneAndUpdate( {user: user} , {$set:{activeCharacter:activeCharacter}}, {new: true}, (err, doc) => {
+      if (err) {
+          console.log("Something wrong when updating data!");
+      }
+
+      cb(err,doc);
+
+    })
+
+    }
+
+    let checkUserCharacter = ( user, cb) => {
+      console.log('!!!character->>>>', user);
+      User.find({user:user}).exec((err, result) => { console.log(result[0].activeCharacter,'result');cb(err,result) });
+
+
+      }
+
+
+
 
 console.log('done');
 
@@ -247,3 +274,5 @@ module.exports.loginUser = loginUser;
 module.exports.loginUserToken = loginUserToken;
 module.exports.buySkin = findAndBuyUserSkin;
 module.exports.activeSkin = findAndActiveUserSkin;
+module.exports.setCharacter = findAndActiveUserCharacter;
+module.exports.checkCharacter = checkUserCharacter;
