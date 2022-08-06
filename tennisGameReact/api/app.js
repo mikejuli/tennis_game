@@ -260,6 +260,30 @@ app.post('/userGET', function (req, res) {
 })
 
 
+app.post('/getUserCharacter', function(req,res) {
+
+db.setCharacter( req.body.user, req.body.character,
+
+  (err,resullt) => (res.send(req.body.user)
+
+))
+
+} )
+
+app.get('/checkUserCharacter', function(req,res) {
+console.log(req.query);
+  db.checkCharacter( req.query.user,
+
+    (err,result) => {
+
+        res.send(result)
+
+    }
+    )
+
+  } )
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

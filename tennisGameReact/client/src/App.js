@@ -3,22 +3,15 @@ import logo from './logo.svg';
 import './App.css';
 import AppGame from './AppGame.js';
 import $ from 'jquery';
-import {configureStore} from '@reduxjs/toolkit';
-import {Provider} from 'react-redux';
-
-const store = configureStore({
-
-
-  reducer:{}
-
-})
-
+import AppCharacter from './AppCharacter';
+import axios from 'axios'
 
 class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       currentView: "",
+      choosen: ''
   }
   this.handleLogout = this.handleLogout.bind(this)
 
@@ -42,11 +35,32 @@ class App extends React.Component{
       data: {loggedUser,token},
       success: (result) => {
 
-        if(result){ this.setState({currentView:'game'}) }
 
-        console.log(result,'from success')
+          axios
+            .get(`http://localhost:9000/checkUserCharacter`, {
+              params: { user: loggedUser },
+            })
+            .then((response) => {
+              console.log(response,'HEREEEEEEEEEEEEEEE')
+              if(response.data[0].activeCharacter !== 'none'){
+
+                this.setState({choosen: 'selected'})
+                console.log('hee', response.data)
+              }
+            }).then( ()=>{
+
+              if(result){ this.setState({currentView:'game'}) }
+
+            }  );
+            console.log(result,'from success')
 
         }
+
+
+
+
+
+
 
       })
 
@@ -66,6 +80,7 @@ class App extends React.Component{
   handleLogout = () => {
 
     localStorage.clear();
+    this.setState({choosen:false});
     this.setState({currentView:'logIn'})
   };
 
@@ -123,12 +138,34 @@ class App extends React.Component{
         localStorage.setItem('token', result.token);
 
 
-        this.setState({currentView:'game', user: result.user})
+        axios
+        .get(`http://localhost:9000/checkUserCharacter`, {
+          params: { user: login },
+        })
+        .then((response) => {
+          if(response.data[0].activeCharacter !== 'none'){
+
+            this.setState({choosen: 'selected'})
+
+          }
+        }).then( ()=>{
+
+
+          this.setState({currentView:'game', user: result.user})
+
+        }
+
+          );
 
       }
 
 
-        }
+
+
+      }
+
+
+
 
       })
 
@@ -214,8 +251,10 @@ class App extends React.Component{
         console.log('asd');
         return(
 
-          <AppGame handleLogout = {this.handleLogout}/>
-
+          <div>
+          {this.state.choosen === 'selected'?<AppGame handleLogout = {this.handleLogout}/>:
+          <AppCharacter handleLogout = {this.handleLogout}/>}
+        </div>
           )
       default:
         break
