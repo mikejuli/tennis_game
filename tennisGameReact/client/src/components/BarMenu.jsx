@@ -22,7 +22,7 @@ class BarMenu extends React.Component {
       BarMenu
 
       <div id = 'nameAndAvatar'>
-        <div id = 'avatar'></div>
+        <div id = 'avatar' style = {{backgroundImage: `url('./${this.props.character}.png')`}}></div>
   <div id = 'name'>{this.props.character} BeaterMike {this.props.user}</div>
       </div>
       <button onClick={this.props.handleLogout}>logout</button>

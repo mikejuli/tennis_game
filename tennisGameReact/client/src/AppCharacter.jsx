@@ -10,16 +10,14 @@ const AppCharacter = (props) => {
     setCharacter(character);
   };
 
-  useEffect(()=>{
-
-  //  checkCharacter();
-
-  })
+  useEffect(() => {
+    //  checkCharacter();
+  });
 
   //if localUser has user -> fetch and check if user has picked user.
   async function getCharacter() {
     var user = localStorage.getItem("user");
-    console.log('here');
+    console.log("here");
     axios
       .post(`http://localhost:9000/getUserCharacter`, {
         user: user,
@@ -27,7 +25,7 @@ const AppCharacter = (props) => {
       })
       .then((response) => {
         setStart(true);
-        console.log(response.data[0].activeCharacter );
+        console.log(response.data[0].activeCharacter);
       });
 
     //setCharacter(response);
@@ -36,14 +34,15 @@ const AppCharacter = (props) => {
 
   async function checkCharacter() {
     var user = localStorage.getItem("user");
-console.log('here');
+    console.log("here");
     axios
       .get(`http://localhost:9000/checkUserCharacter`, {
         params: { user: user },
       })
       .then((response) => {
-        if(response.data[0].activeCharacter !== 'none'){
-        setStart(true)}
+        if (response.data[0].activeCharacter !== "none") {
+          setStart(true);
+        }
       });
 
     //setCharacter(response);
@@ -52,16 +51,15 @@ console.log('here');
 
   return (
     <div>
-
-
       {start ? (
         <AppGame handleLogout={props.handleLogout} character={character} />
       ) : (
         <div>
           {" "}
           <div id="character">{character}</div>
+          <div id = 'grid'>
           <div
-            id="button"
+            id="buttonC"
             onClick={() => {
               switchCharacter("wizard");
             }}
@@ -69,7 +67,7 @@ console.log('here');
             Wizard
           </div>
           <div
-            id="button"
+            id="buttonB"
             onClick={() => {
               switchCharacter("golem");
             }}
@@ -77,12 +75,13 @@ console.log('here');
             Golem
           </div>
           <div
-            id="button"
+            id="buttonA"
             onClick={() => {
               switchCharacter("gunners");
             }}
           >
             Gunners
+          </div>
           </div>
           <div
             id="next"
