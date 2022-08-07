@@ -425,3 +425,17 @@ background-color: darkgreen;
   justify-content: space-evenly;
   padding-top: 20%;
 }
+
+
+#win {
+  text-align: center;
+  top: 200px;
+  left: 225px;
+position: absolute;
+  z-index: 1;
+  width: 200px;
+  height: 150px;
+  background-color: peru;
+  border-radius: 5%;
+  justify-content: center;
+}
