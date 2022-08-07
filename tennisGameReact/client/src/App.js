@@ -11,7 +11,8 @@ class App extends React.Component{
     super(props);
     this.state = {
       currentView: "",
-      choosen: ''
+      choosen: '',
+      character: ''
   }
   this.handleLogout = this.handleLogout.bind(this)
 
@@ -35,7 +36,7 @@ class App extends React.Component{
       data: {loggedUser,token},
       success: (result) => {
 
-
+          //should get this gata from global redux
           axios
             .get(`http://localhost:9000/checkUserCharacter`, {
               params: { user: loggedUser },
@@ -44,7 +45,8 @@ class App extends React.Component{
               console.log(response,'HEREEEEEEEEEEEEEEE')
               if(response.data[0].activeCharacter !== 'none'){
 
-                this.setState({choosen: 'selected'})
+                this.setState({choosen: 'selected'});
+                this.setState({character : response.data[0].activeCharacter})
                 console.log('hee', response.data)
               }
             }).then( ()=>{
@@ -138,6 +140,7 @@ class App extends React.Component{
         localStorage.setItem('token', result.token);
 
 
+          //should get this gata from global redux
         axios
         .get(`http://localhost:9000/checkUserCharacter`, {
           params: { user: login },
@@ -252,7 +255,7 @@ class App extends React.Component{
         return(
 
           <div>
-          {this.state.choosen === 'selected'?<AppGame handleLogout = {this.handleLogout}/>:
+          {this.state.choosen === 'selected'?<AppGame handleLogout = {this.handleLogout} character = {this.state.character}/>:
           <AppCharacter handleLogout = {this.handleLogout}/>}
         </div>
           )

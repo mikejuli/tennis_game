@@ -3,7 +3,7 @@ import LevelGrid from './levelGrid';
 import pattern from './brickPattern';
 import GameBar from './GameBar';
 import $ from 'jquery';
-
+import Win from './Win'
 
   class Field extends React.Component {
 
@@ -11,7 +11,7 @@ import $ from 'jquery';
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false, flightActual:false})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false, flightActual:false, win: false})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
@@ -522,7 +522,7 @@ document.addEventListener ('mousemove', mousemove)
 var plateFun = this.plateFun;
 var ballFun = this.ballFun;
 var pat = this.props.pattern;
-var handleOff = this.props.handleOff;
+var handleOff = () => {  this.setState({win: true});  };
 var lvl = this.props.level;
 var addGold = this.addGold;
 var currentGold = this.state.gold;
@@ -937,7 +937,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           <div> level: {this.state.level} </div>
 
       <div>gold: {this.state.gold}</div>
-
+      <div>{this.state.win?<Win handleOff = {this.props.handleOff} level = {this.props.level} currentGold = {this.state.gold} />:<div></div>}</div>
         <div id = 'inside'>
 
 <div id  = 'boxCover'>
@@ -949,7 +949,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
         </div></div>
 </div>
         <div id ='gamebar'>
-          <GameBar gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint } onFire = {this.state.onfire} user = {this.props.user}/>
+          <GameBar character = {this.props.character} gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint } onFire = {this.state.onfire} user = {this.props.user}/>
         </div>
 
         </div>

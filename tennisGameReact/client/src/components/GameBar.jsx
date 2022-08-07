@@ -24,7 +24,7 @@ const GameBar = (props) => {
 BarMenu
 
 <div id = 'nameAndAvatar'>
-  <div id = 'avatar'></div>
+<div id = 'avatar' style = {{backgroundImage: `url('./${props.character}.png')`}}></div>
   <div id = 'name'>BeaterMike {props.user}</div>
 </div>
 

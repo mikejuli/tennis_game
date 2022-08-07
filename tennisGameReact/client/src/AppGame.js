@@ -282,6 +282,7 @@ class AppGame extends React.Component {
       popUp = (
         <div>
           <Field
+          character = {this.props.character}
             level={this.state.level}
             pattern={this.state.pattern}
             handleOff={this.handleOff}

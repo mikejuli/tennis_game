@@ -251,13 +251,13 @@ button.back {
 }
 
 #avatar {
-  background-image: url('./components/guy.png');
+  /* background-image: url('./components/guy.png'); */
   width: 100px;
   height: 100px;
   border-radius: 50%;
   margin: 0 auto;
   margin-top: 10px;
-
+  background-position: 50%;
 }
 
 
@@ -382,3 +382,60 @@ background-color: darkgreen;
 }
 
 
+#buttonC {
+
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  float: left;
+  position: relative;
+  background-image: url('./crystal.png');
+  background-position: 50%;
+}
+
+#buttonB {
+
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  float: left;
+  position: relative;
+  background-image: url('./golem.png');
+  background-position: 50%;
+}
+
+#buttonA {
+
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  float: left;
+  position: relative;
+  background-image: url('./gunner.png');
+  background-position: 50%;
+}
+
+
+
+#grid {
+
+  top: 100px;
+
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 20%;
+}
+
+
+#win {
+  text-align: center;
+  top: 200px;
+  left: 225px;
+position: absolute;
+  z-index: 1;
+  width: 200px;
+  height: 150px;
+  background-color: peru;
+  border-radius: 5%;
+  justify-content: center;
+}
