@@ -29,6 +29,7 @@ class AppGame extends React.Component {
     this.handleOff = this.handleOff.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
     this.buyItem = this.buyItem.bind(this);
+    this.handleLose = this.handleLose.bind(this);
   }
 
   handle() {
@@ -87,6 +88,22 @@ class AppGame extends React.Component {
     }
   }
 
+
+  handleLose(){
+
+    this.setState({
+      onfire: false,
+      flying: false,
+      shooting: false,
+      bigPlate: 0,
+    });
+
+    this.setState({ levelChosen: false, level: 0 });
+
+
+  }
+
+
   handleOff(level, currentGold) {
     this.setState({
       onfire: false,
@@ -96,6 +113,7 @@ class AppGame extends React.Component {
     });
 
     console.log(currentGold);
+
     this.setState({ gold: this.state.gold + currentGold }, () => {
       //done
       $.ajax({
@@ -286,6 +304,7 @@ class AppGame extends React.Component {
             level={this.state.level}
             pattern={this.state.pattern}
             handleOff={this.handleOff}
+            handleLose={this.handleLose}
             onfire={this.state.onfire}
             flying={this.state.flying}
             shooting={this.state.shooting}
