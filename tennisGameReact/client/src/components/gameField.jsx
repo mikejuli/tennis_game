@@ -586,8 +586,9 @@ var creatingBrick = function (arr){
   newBrick.attribute = arr[5];
   newBrick.setAttribute('id', 'brick');
 
-  if( newBrick.health===1){var background = 'red'}
-  if( newBrick.health===2){var background = 'greed'}
+  if( newBrick.health===1){var background = 'linear-gradient(0deg, rgba(197,26,26,1) 11%, rgba(223,148,148,1) 82%);'}
+
+  // if( newBrick.health===2){var background = 'linear-gradient(0deg, rgba(45,159,253,1) 11%, rgba(17,217,219,1) 82%);'}
 
   newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px; background: ${background}`);
   newBrick.textContent = newBrick.health;
@@ -645,6 +646,14 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 
+          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health===1){
+
+           // console.log('GGGGGGGGGGGG')
+
+          document.getElementById('wall').childNodes[bricksArray[x][2]].style.background = 'red'}
+
+
+          //wrong way to change colors
           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
