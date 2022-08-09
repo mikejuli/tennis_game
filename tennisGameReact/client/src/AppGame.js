@@ -239,8 +239,9 @@ class AppGame extends React.Component {
         var count = 0;
         var num = -1;
         createPattern = createPattern.map((x) => {
-          var health = 1;
-          var gold = 45;
+         // console.log(x);
+          var health = x;
+          var gold = 45 * x;
           var attribute = "gun";
 
           if (count === 13) {
@@ -254,7 +255,7 @@ class AppGame extends React.Component {
           if (x === 0) {
             left += 42;
             return 0;
-          } else if (x === 1) {
+          } else if (x !== 0) {
             num++;
             left += 42;
             //testing

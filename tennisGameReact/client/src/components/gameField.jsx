@@ -585,7 +585,11 @@ var creatingBrick = function (arr){
   newBrick.gold = arr[4];
   newBrick.attribute = arr[5];
   newBrick.setAttribute('id', 'brick');
-  newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px`);
+
+  if( newBrick.health===1){var background = 'red'}
+  if( newBrick.health===2){var background = 'greed'}
+
+  newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px; background: ${background}`);
   newBrick.textContent = newBrick.health;
   var wall = document.getElementById('wall');
   wall.appendChild(newBrick);
@@ -891,10 +895,13 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
         if ((bulletY <= bricksArray[x][0]+20 && bulletY >= bricksArray[x][0]) &&
         bulletX >= bricksArray[x][1]-2 && bulletX <= bricksArray[x][1]+ 40+2 ){
 
+          clearBullet();
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 
-          // document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+          console.log(document.getElementById('wall').childNodes[bricksArray[x][2]].health);
+
+           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
 
@@ -905,7 +912,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
             bricksArray.splice(x,1);
 
-            clearBullet();
+
 
           }
 
