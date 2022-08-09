@@ -652,6 +652,8 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].style.background = 'red'}
 
+
+          //wrong way to change colors
           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
