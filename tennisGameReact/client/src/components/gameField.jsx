@@ -3,15 +3,15 @@ import LevelGrid from './levelGrid';
 import pattern from './brickPattern';
 import GameBar from './GameBar';
 import $ from 'jquery';
-import Win from './Win'
-
+import Win from './Win';
+import Lose from './Lose'
   class Field extends React.Component {
 
 
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false, flightActual:false, win: false})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false, flightActual:false, win: false, lose: false})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
@@ -387,7 +387,16 @@ if(document.getElementById('ball')){
   // }
 
 
-  if (tops >= height){ clearInterval (r);}
+  if (tops >= height){
+    //
+    //
+    //Lose game
+    //
+    //
+    clearInterval (r);
+    flightBackState();clear();
+    handleLose();
+    console.log('lose')}
 
   if (tops <= 0 ) {
     tops =0;
@@ -523,6 +532,7 @@ var plateFun = this.plateFun;
 var ballFun = this.ballFun;
 var pat = this.props.pattern;
 var handleOff = () => {  this.setState({win: true});  };
+var handleLose = () => { this.setState({lose: true});};
 var lvl = this.props.level;
 var addGold = this.addGold;
 var currentGold = this.state.gold;
@@ -575,7 +585,11 @@ var creatingBrick = function (arr){
   newBrick.gold = arr[4];
   newBrick.attribute = arr[5];
   newBrick.setAttribute('id', 'brick');
-  newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px`);
+
+  if( newBrick.health===1){var background = 'red'}
+  if( newBrick.health===2){var background = 'greed'}
+
+  newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px; background: ${background}`);
   newBrick.textContent = newBrick.health;
   var wall = document.getElementById('wall');
   wall.appendChild(newBrick);
@@ -881,10 +895,13 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
         if ((bulletY <= bricksArray[x][0]+20 && bulletY >= bricksArray[x][0]) &&
         bulletX >= bricksArray[x][1]-2 && bulletX <= bricksArray[x][1]+ 40+2 ){
 
+          clearBullet();
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
 
-          // document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+          console.log(document.getElementById('wall').childNodes[bricksArray[x][2]].health);
+
+           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
           if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
 
@@ -895,7 +912,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
             bricksArray.splice(x,1);
 
-            clearBullet();
+
 
           }
 
@@ -937,10 +954,11 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           <div> level: {this.state.level} </div>
 
       <div>gold: {this.state.gold}</div>
-      <div>{this.state.win?<Win handleOff = {this.props.handleOff} level = {this.props.level} currentGold = {this.state.gold} />:<div></div>}</div>
         <div id = 'inside'>
 
 <div id  = 'boxCover'>
+        <div>{this.state.win?<Win handleOff = {this.props.handleOff} level = {this.props.level} currentGold = {this.state.gold} />:<div></div>}</div>
+      <div>{this.state.lose?<Lose handleLose = {this.props.handleLose}/>:<div></div>}</div>
         <div id = 'boxS'>
         <div id = 'box'>
             <div id = 'wall'></div>

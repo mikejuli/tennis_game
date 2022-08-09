@@ -20,10 +20,12 @@ class App extends React.Component{
 
 
 
+
   componentDidMount(){
 
     console.log('mount' ,this.state.currentView);
     var loggedUser = localStorage.getItem('user');
+
     console.log(loggedUser);
     if(loggedUser) {
 
@@ -83,7 +85,8 @@ class App extends React.Component{
 
     localStorage.clear();
     this.setState({choosen:false});
-    this.setState({currentView:'logIn'})
+    this.setState({currentView:'logIn'});
+    this.setState({character:''})
   };
 
 
@@ -149,7 +152,7 @@ class App extends React.Component{
           if(response.data[0].activeCharacter !== 'none'){
 
             this.setState({choosen: 'selected'})
-
+            this.setState({character: response.data[0].activeCharacter})
           }
         }).then( ()=>{
 
