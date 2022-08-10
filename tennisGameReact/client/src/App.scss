@@ -44,7 +44,7 @@
 
 
 #box {
-  background-color: rgb(157, 212, 193);
+  background-color: rgb(36, 128, 96);
   height: 480px;
   width: 640px;
   position: relative;
@@ -93,6 +93,7 @@ position: absolute;
 top: calc(100% - 10px);
 left: 50%;
 
+
 background-color: darkslateblue;
 
 
@@ -102,10 +103,11 @@ background-color: darkslateblue;
 
 
 #brick {
+
+
   pointer-events: none;
 border-radius: 15%;
-background: rgb(45,159,253);
-background: linear-gradient(0deg, rgba(45,159,253,1) 11%, rgba(17,217,219,1) 82%);
+background: gray;
 
 height: 20px;
 width: 40px;
@@ -113,6 +115,13 @@ width: 40px;
 position: absolute;
 
 }
+
+
+
+
+
+
+
 
 #item {
 
@@ -452,3 +461,4 @@ position: absolute;
   border-radius: 5%;
   justify-content: center;
 }
+
