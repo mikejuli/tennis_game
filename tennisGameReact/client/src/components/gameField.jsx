@@ -4,7 +4,8 @@ import pattern from './brickPattern';
 import GameBar from './GameBar';
 import $ from 'jquery';
 import Win from './Win';
-import Lose from './Lose'
+import Lose from './Lose';
+import variables from '../variables.scss';
   class Field extends React.Component {
 
 
@@ -69,7 +70,7 @@ import Lose from './Lose'
 
         document.getElementById('plate').style.background = 'linear-gradient(-135deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)';
 
-          document.getElementById('plate').style.border = 'solid 1px black'
+          document.getElementById('plate').style.border = 'solid 1px aqua'
 
       }
 
@@ -586,12 +587,19 @@ var creatingBrick = function (arr){
   newBrick.attribute = arr[5];
   newBrick.setAttribute('id', 'brick');
 
-  if( newBrick.health===1){var background = 'linear-gradient(0deg, rgba(197,26,26,1) 11%, rgba(223,148,148,1) 82%);'}
+  var background;
+  switch (newBrick.health){
 
-  // if( newBrick.health===2){var background = 'linear-gradient(0deg, rgba(45,159,253,1) 11%, rgba(17,217,219,1) 82%);'}
+    case 1: background = variables.background1; break;
+    case 2: background = variables.background2; break;
+    case 3: background = variables.background3; break;
+
+
+  }
+
 
   newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px; background: ${background}`);
-  newBrick.textContent = newBrick.health;
+  // newBrick.textContent = newBrick.health;
   var wall = document.getElementById('wall');
   wall.appendChild(newBrick);
 
@@ -642,26 +650,29 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
           }
         }
 
+          var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
+
+          currentBrick.health--;
 
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+          switch (currentBrick.health){
 
-          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health===1){
+            case 1: currentBrick.style.background = variables.background1; break;
+            case 2: currentBrick.style.background = variables.background2; break;
+            case 3: currentBrick.style.background = variables.background3; break;
 
-           // console.log('GGGGGGGGGGGG')
-
-          document.getElementById('wall').childNodes[bricksArray[x][2]].style.background = 'red'}
+          }
 
 
           //wrong way to change colors
-          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+          currentBrick.textContent = currentBrick.health;
 
-          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
-            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
+          if(currentBrick.health === 0){
+            currentBrick.textContent = '';
             console.log('addgold top');
-            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
+            addGold(currentBrick.gold);
 
-            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+            currentBrick.setAttribute('id', 'empty');
 
 
 
@@ -769,8 +780,19 @@ topI = topI + 1;
           console.log(bricksArray[x][2]);
 
 
+          var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+          currentBrick.health--;
+
+
+          switch (currentBrick.health){
+
+            case 1: currentBrick.style.background = variables.background1; break;
+            case 2: currentBrick.style.background = variables.background2; break;
+            case 3: currentBrick.style.background = variables.background3; break;
+
+          }
+
 
           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 

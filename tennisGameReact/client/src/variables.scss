@@ -1,0 +1,14 @@
+$background-color1: linear-gradient(0deg, rgba(45,159,253,1) 11%, rgba(17,217,219,1) 82%);
+$background-color2: linear-gradient(0deg, rgb(255, 41, 41) 11%, rgba(223,148,148,1) 82%);
+$background-color3: linear-gradient(0deg, rgb(39, 248, 50) 11%, rgba(128,217,134,1) 82%);
+
+
+
+
+:export {
+
+background1: $background-color1;
+background2: $background-color2;
+background3: $background-color3;
+}
+

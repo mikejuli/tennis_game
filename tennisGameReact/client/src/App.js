@@ -1,10 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import AppGame from './AppGame.js';
 import $ from 'jquery';
 import AppCharacter from './AppCharacter';
-import axios from 'axios'
+import axios from 'axios';
 
 class App extends React.Component{
   constructor(props){
