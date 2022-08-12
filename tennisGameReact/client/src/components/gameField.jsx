@@ -173,7 +173,88 @@ var bulletX, bulletY;
 
 
 
+var startDropItem = function(topI,leftI,attributeI){
 
+if(attributeI!==undefined){
+  var drop = document.createElement('div');
+  var wall = document.getElementById('box');
+  wall.appendChild(drop);
+
+var df = setInterval(()=>{
+
+
+drop.setAttribute('id', 'drop');
+drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
+
+if(attributeI==='gun'){
+drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: white; `);
+}
+
+if(attributeI==='onfire'){
+drop.textContent = '☄';
+}
+
+if(attributeI==='ball'){
+drop.textContent = '⚪';
+}
+
+if(attributeI==='plate'){
+drop.textContent = '➖';
+}
+
+if(attributeI==='flight'){
+drop.textContent = '🚀';
+}
+
+
+
+//  drop.textContent = '⚪';
+topI = topI + 1;
+//leftI = leftI + 1;
+
+    if(topI===500){
+      clearInterval(df);
+      drop.parentNode.removeChild(drop);
+}
+
+    if(leftI>=pos && leftI<=pos+plate  && topI>=posY-5 && topI<=posY){
+      clearInterval(df);
+
+
+      addAttribute(attributeI);
+
+
+      console.log('got it',);
+
+      drop.parentNode.removeChild(drop);
+
+    }
+
+
+}, 10)
+}
+
+}
+
+
+var colorChanger = function (currentBrick){
+
+  var myAudio = new Audio('mixkit.wav');
+
+  myAudio.play();
+  switch (currentBrick.health){
+
+    case 1: currentBrick.style.background = variables.background1; break;
+    case 2: currentBrick.style.background = variables.background2; break;
+    case 3: currentBrick.style.background = variables.background3; break;
+    case 4: currentBrick.style.background = variables.background4; break;
+    case 5: currentBrick.style.background = variables.background5; break;
+
+
+  }
+
+
+}
 
 
 var bulletRunning = function(clear,flightBackState){
@@ -282,7 +363,7 @@ if(document.getElementById('ball')){
     if((tops >= posY - ball) && (pos < lefts + (ball/2)) && (pos + plate > lefts + (ball/2)) ) {
 
 
-      console.log(tops);
+     // console.log(tops);
     // refactoring this section to async function
     // 1) eventlistener ->-> removelistener -> switcherTop value
 
@@ -291,7 +372,7 @@ if(document.getElementById('ball')){
 
 
       if(tops >= posY-ball && tops <= posY+1-ball){
-          console.log(tops);
+       //   console.log(tops);
         firstEnter = pos;}
 
 
@@ -593,8 +674,8 @@ var creatingBrick = function (arr){
     case 1: background = variables.background1; break;
     case 2: background = variables.background2; break;
     case 3: background = variables.background3; break;
-
-
+    case 4: background = variables.background4; break;
+    case 5: background = variables.background5; break;
   }
 
 
@@ -633,6 +714,12 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
   //console.log('top:',top, '  left:',left);
 
+
+
+
+
+
+
   for( var x=0 ; x< bricksArray.length;x++){
 
 
@@ -655,94 +742,33 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
           currentBrick.health--;
 
 
-          switch (currentBrick.health){
 
-            case 1: currentBrick.style.background = variables.background1; break;
-            case 2: currentBrick.style.background = variables.background2; break;
-            case 3: currentBrick.style.background = variables.background3; break;
-
-          }
-
+        colorChanger(currentBrick);
 
           //wrong way to change colors
-          currentBrick.textContent = currentBrick.health;
+          // currentBrick.textContent = currentBrick.health;
 
           if(currentBrick.health === 0){
-            currentBrick.textContent = '';
-            console.log('addgold top');
+            // currentBrick.textContent = '';
+            // console.log('addgold top');
+
             addGold(currentBrick.gold);
 
             currentBrick.setAttribute('id', 'empty');
-
 
 
             var topI = bricksArray[x][0];
             var leftI = bricksArray[x][1];;
             var attributeI = bricksArray[x][5];
 
+
             bricksArray.splice(x,1);
 
+            startDropItem (topI,leftI,attributeI);
             //if this brick has an item
             //run component
 
-            // in (top,left)
-            var drop = document.createElement('div');
-            var wall = document.getElementById('box');
-            wall.appendChild(drop);
 
-          var df = setInterval(()=>{
-
-
-  drop.setAttribute('id', 'drop');
-  drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
-
-  if(attributeI==='gun'){
-    drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: white; `);
-  }
-
-  if(attributeI==='onfire'){
-    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: orange; `);
-    drop.textContent = '☄';
-  }
-
-  if(attributeI==='ball'){
-    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: green; `);
-    drop.textContent = '⚪';
-  }
-
-  if(attributeI==='plate'){
-    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: yellow; `);
-    drop.textContent = '➖';
-  }
-
-  if(attributeI==='flight'){
-    // drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: black; `);
-    drop.textContent = '🚀';
-  }
-
-
-
-          //  drop.textContent = '⚪';
-topI = topI + 1;
-//leftI = leftI + 1;
-
-              if(topI===500){clearInterval(df)}
-
-              if(leftI>=pos && leftI<=pos+plate  && topI>=posY-5 && topI<=posY){
-                clearInterval(df);
-
-
-                addAttribute(attributeI);
-
-
-                console.log('got it',);
-
-                drop.setAttribute('id','empty');
-
-              }
-
-
-          }, 10)
 
           }
 
@@ -776,47 +802,41 @@ topI = topI + 1;
 
 
 
+        var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-          console.log(bricksArray[x][2]);
-
-
-          var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
-
-          currentBrick.health--;
-
-
-          switch (currentBrick.health){
-
-            case 1: currentBrick.style.background = variables.background1; break;
-            case 2: currentBrick.style.background = variables.background2; break;
-            case 3: currentBrick.style.background = variables.background3; break;
-
-          }
-
-
-          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
-
-          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
-            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
-            console.log('addgold bottom');
-            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
-
-            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
-
-            bricksArray.splice(x,1);
-          }
-
-
-          //  document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('style', document.getElementById('wall').childNodes[bricksArray[x][2]].getAttribute('style')+`;background: rgb(45, ${ 159 - (3-document.getElementById('wall').childNodes[bricksArray[x][2]].health) * 20}, 253)` );
+        currentBrick.health--;
 
 
 
+      colorChanger(currentBrick);
+
+        //wrong way to change colors
+        // currentBrick.textContent = currentBrick.health;
+
+        if(currentBrick.health === 0){
+          // currentBrick.textContent = '';
+          // console.log('addgold top');
+
+          addGold(currentBrick.gold);
+
+          currentBrick.setAttribute('id', 'empty');
+
+          var topI = bricksArray[x][0];
+          var leftI = bricksArray[x][1];;
+          var attributeI = bricksArray[x][5];
 
 
-        //   document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+          bricksArray.splice(x,1);
 
-        //   console.log(bricksArray[x][2]);
-        //  bricksArray.splice(x,1)
+          startDropItem (topI,leftI,attributeI);
+          //if this brick has an item
+          //run component
+
+          // in (top,left)
+
+        }
+
+
 
 
         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
@@ -840,19 +860,40 @@ topI = topI + 1;
 
 
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+        var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+        currentBrick.health--;
 
-          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
-            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
-            console.log('addgold left');
-            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
-            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
 
-            bricksArray.splice(x,1);
-          }
+      colorChanger(currentBrick);
+
+        //wrong way to change colors
+        // currentBrick.textContent = currentBrick.health;
+
+        if(currentBrick.health === 0){
+          // currentBrick.textContent = '';
+          // console.log('addgold top');
+
+          addGold(currentBrick.gold);
+
+          currentBrick.setAttribute('id', 'empty');
+
+          var topI = bricksArray[x][0];
+          var leftI = bricksArray[x][1];;
+          var attributeI = bricksArray[x][5];
+
+
+          bricksArray.splice(x,1);
+
+          startDropItem (topI,leftI,attributeI);
+          //if this brick has an item
+          //run component
+
+          // in (top,left)
+
+        }
+
 
 
          if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
@@ -873,21 +914,40 @@ topI = topI + 1;
           }
         }
 
-document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+        var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+        currentBrick.health--;
 
-          console.log(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
 
-          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
-            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
 
-            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
-            console.log('addgold right', document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
-            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+      colorChanger(currentBrick);
 
-            bricksArray.splice(x,1);
-          }
+        //wrong way to change colors
+        // currentBrick.textContent = currentBrick.health;
+
+        if(currentBrick.health === 0){
+          // currentBrick.textContent = '';
+          // console.log('addgold top');
+
+          addGold(currentBrick.gold);
+
+          currentBrick.setAttribute('id', 'empty');
+
+          var topI = bricksArray[x][0];
+          var leftI = bricksArray[x][1];;
+          var attributeI = bricksArray[x][5];
+
+
+          bricksArray.splice(x,1);
+
+          startDropItem (topI,leftI,attributeI);
+          //if this brick has an item
+          //run component
+
+          // in (top,left)
+
+        }
+
 
          if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
@@ -928,18 +988,22 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
           clearBullet();
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+          var currentBrick = document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-          console.log(document.getElementById('wall').childNodes[bricksArray[x][2]].health);
+          currentBrick.health--;
 
-           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+          colorChanger(currentBrick);
 
-          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
+          //console.log(currentBrick.health);
 
-            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
-            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
+          //  document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
-            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+          if(currentBrick.health === 0){
+
+           // currentBrick.textContent = '';
+            addGold(currentBrick.gold);
+
+            currentBrick.setAttribute('id', 'empty');
 
             bricksArray.splice(x,1);
 
