@@ -212,7 +212,10 @@ drop.textContent = '🚀';
 topI = topI + 1;
 //leftI = leftI + 1;
 
-    if(topI===500){clearInterval(df)}
+    if(topI===500){
+      clearInterval(df);
+      drop.parentNode.removeChild(drop);
+}
 
     if(leftI>=pos && leftI<=pos+plate  && topI>=posY-5 && topI<=posY){
       clearInterval(df);
@@ -223,7 +226,7 @@ topI = topI + 1;
 
       console.log('got it',);
 
-      drop.setAttribute('id','empty');
+      drop.parentNode.removeChild(drop);
 
     }
 
@@ -236,12 +239,17 @@ topI = topI + 1;
 
 var colorChanger = function (currentBrick){
 
+  var myAudio = new Audio('mixkit.wav');
 
+  myAudio.play();
   switch (currentBrick.health){
 
     case 1: currentBrick.style.background = variables.background1; break;
     case 2: currentBrick.style.background = variables.background2; break;
     case 3: currentBrick.style.background = variables.background3; break;
+    case 4: currentBrick.style.background = variables.background4; break;
+    case 5: currentBrick.style.background = variables.background5; break;
+
 
   }
 
@@ -355,7 +363,7 @@ if(document.getElementById('ball')){
     if((tops >= posY - ball) && (pos < lefts + (ball/2)) && (pos + plate > lefts + (ball/2)) ) {
 
 
-      console.log(tops);
+     // console.log(tops);
     // refactoring this section to async function
     // 1) eventlistener ->-> removelistener -> switcherTop value
 
@@ -364,7 +372,7 @@ if(document.getElementById('ball')){
 
 
       if(tops >= posY-ball && tops <= posY+1-ball){
-          console.log(tops);
+       //   console.log(tops);
         firstEnter = pos;}
 
 
@@ -666,8 +674,8 @@ var creatingBrick = function (arr){
     case 1: background = variables.background1; break;
     case 2: background = variables.background2; break;
     case 3: background = variables.background3; break;
-
-
+    case 4: background = variables.background4; break;
+    case 5: background = variables.background5; break;
   }
 
 
@@ -748,6 +756,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
             currentBrick.setAttribute('id', 'empty');
 
+
             var topI = bricksArray[x][0];
             var leftI = bricksArray[x][1];;
             var attributeI = bricksArray[x][5];
@@ -759,7 +768,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
             //if this brick has an item
             //run component
 
-            // in (top,left)
+
 
           }
 
@@ -979,18 +988,22 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
           clearBullet();
 
-          document.getElementById('wall').childNodes[bricksArray[x][2]].health--;
+          var currentBrick = document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-          console.log(document.getElementById('wall').childNodes[bricksArray[x][2]].health);
+          currentBrick.health--;
 
-           document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
+          colorChanger(currentBrick);
 
-          if(document.getElementById('wall').childNodes[bricksArray[x][2]].health === 0){
+          //console.log(currentBrick.health);
 
-            document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = '';
-            addGold(document.getElementById('wall').childNodes[bricksArray[x][2]].gold);
+          //  document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
-            document.getElementById('wall').childNodes[bricksArray[x][2]].setAttribute('id', 'empty');
+          if(currentBrick.health === 0){
+
+           // currentBrick.textContent = '';
+            addGold(currentBrick.gold);
+
+            currentBrick.setAttribute('id', 'empty');
 
             bricksArray.splice(x,1);
 

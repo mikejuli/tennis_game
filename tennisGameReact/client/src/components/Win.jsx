@@ -1,10 +1,18 @@
-import React, {useState, userEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 
 
 const Win = (props) => {
 
 
 console.log(props.level, props.currentGold)
+
+useEffect(()=>{
+  var myAudio = new Audio('mixkit-win.wav');
+
+
+  myAudio.play();
+
+})
 
 
   return (
