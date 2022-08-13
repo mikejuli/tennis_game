@@ -23,15 +23,14 @@ import variables from '../variables.scss';
     this.gunFun = this.gunFun.bind(this);
     this.flightBackState = this.flightBackState.bind(this);
     this.flightActual = this.flightActual.bind(this);
-
+    this.loseFun = this.loseFun.bind(this);
   }
 
     plateFun (cb){ cb(this.state.plate);};
     ballFun(cb) {cb(this.state.ball)}
     onfireFun(cb){cb(this.state.onfire)}
     gunFun(cb){cb(this.state.gun)}
-
-
+    loseFun(cb){cb(this.state.lose)}
 
   flightActual(){
 
@@ -101,6 +100,10 @@ import variables from '../variables.scss';
 
         if(this.state.attribute==='gun'){
           this.setState({gun:true})
+        }
+
+        if(this.state.attribute==='tnt'){
+          this.setState({lose:true})
         }
 
       }
@@ -207,6 +210,10 @@ if(attributeI==='flight'){
 drop.textContent = '🚀';
 }
 
+if(attributeI === 'tnt'){
+  drop.textContent = '💣';
+}
+
 
 
 //  drop.textContent = '⚪';
@@ -221,8 +228,34 @@ topI = topI + 2;
     if(leftI>=pos && leftI<=pos+plate  && topI>=posY-5 && topI<=posY){
       clearInterval(df);
 
+      var topInew = topI+10;
+      var leftInew = leftI+10;
 
-      addAttribute(attributeI);
+      if(attributeI === 'tnt'){
+        console.log('BOOOOM!',topI,leftI);
+        var boom = document.createElement('div');
+        boom.setAttribute('id', 'boom');
+        boom.setAttribute('style', `top: ${topInew}px ; left:${leftInew}px`);
+        var wall = document.getElementById('box');
+        wall.appendChild(boom);
+
+
+        var myAudio = new Audio('mixkit-explosion.wav');
+      myAudio.play();
+
+
+        document.removeEventListener('mousemove',mousemove);
+        setTimeout(()=>{addAttribute(attributeI);
+        },1000);
+      }else {
+
+
+        addAttribute(attributeI);
+
+      }
+
+
+
 
 
       console.log('got it',);
@@ -304,7 +337,7 @@ var bulletRunning = function(clear,flightBackState){
 
 
 
-var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun, gunFun,flightBackState){
+var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun, gunFun,flightBackState, loseFun){
 
 
 
@@ -327,6 +360,8 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
    // console.log(shootingInt, 'shootingInt');
 
     //have to find the way to change it
+    var lose;
+    loseFun((x)=>{lose =x})
     plateFun( (x) => {plate = x;});
     ballFun((x)=> {ball =x;})
     onfireFun((x)=>{onfire=x;})
@@ -339,6 +374,8 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
 
           )},200)
   }})
+
+
 
 
     function clear() {document.removeEventListener ('mousemove', mousemove);clearInterval(r);clearInterval(shootingInt)}
@@ -378,7 +415,7 @@ if(document.getElementById('ball')){
     //  var funcEnter = ( (e)=> {
 
 
-      if(tops >= posY-ball && tops <= posY+1-ball){
+      if(tops >= posY-ball-3 && tops <= posY+2-ball){
        //   console.log(tops);
         firstEnter = pos;}
 
@@ -475,8 +512,7 @@ if(document.getElementById('ball')){
 
   // }
 
-
-  if (tops >= height){
+  if (tops >= height || lose === true){
     //
     //
     //Lose game
@@ -633,6 +669,7 @@ var updateGold = () => currentGold = this.state.gold;
 var flightBackState = this.flightBackState;
 
 var flightActual = this.flightActual;
+var loseFun = this.loseFun;
 
 console.log('here is lvl ',lvl);
 //console.log(this.props.pattern , 'hereee')
@@ -649,7 +686,7 @@ setTimeout(()=>{
     flightActual();
 
     if(inMove === 0){
-    ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun,gunFun,flightBackState);
+    ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun,gunFun,flightBackState,loseFun);
 
   }
 
