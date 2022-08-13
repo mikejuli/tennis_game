@@ -271,6 +271,9 @@ class AppGame extends React.Component {
             if (count % 5 == 0) {
               attribute = "onfire";
             }
+            if (count % 6 == 0) {
+              attribute = 'tnt';
+            }
             //
             return [top, left, num, health, gold, attribute];
           }
