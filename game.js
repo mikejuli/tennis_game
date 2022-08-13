@@ -172,7 +172,7 @@ var ballRunning = function(){
   brickBouncer(tops,lefts,pattern);
 
 
-} , 5);
+} , 1);
 
 };
 //const box = document.getElementById ('box');

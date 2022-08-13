@@ -6,6 +6,7 @@ import $ from 'jquery';
 import Win from './Win';
 import Lose from './Lose';
 import variables from '../variables.scss';
+
   class Field extends React.Component {
 
 
@@ -145,7 +146,7 @@ var width = 640;
 
 
 
-var speed = 1;
+var speed = 4;
 
 var tops = 400;
 var lefts = 250;
@@ -209,7 +210,7 @@ drop.textContent = '🚀';
 
 
 //  drop.textContent = '⚪';
-topI = topI + 1;
+topI = topI + 2;
 //leftI = leftI + 1;
 
     if(topI===500){
@@ -231,7 +232,7 @@ topI = topI + 1;
     }
 
 
-}, 10)
+},16.6666667)
 }
 
 }
@@ -241,7 +242,7 @@ var colorChanger = function (currentBrick){
 
   var myAudio = new Audio('mixkit.wav');
 
-  myAudio.play();
+  //myAudio.play();
   switch (currentBrick.health){
 
     case 1: currentBrick.style.background = variables.background1; break;
@@ -263,7 +264,13 @@ var bulletRunning = function(clear,flightBackState){
 
   var clearBullet = ()=>{
     clearInterval(bul);
-    bullet.setAttribute('id','empty');
+
+    bullet.setAttribute('id','emptyB');
+
+    var elem = document.getElementById("emptyB");
+    if(elem){
+    elem.parentNode.removeChild(elem);
+    }
   }
 
   var bullet = document.createElement('div');
@@ -291,7 +298,7 @@ var bulletRunning = function(clear,flightBackState){
     clearBullet();
   }
 
-  },20)
+  },16.6666667)
 
 };
 
@@ -382,7 +389,7 @@ if(document.getElementById('ball')){
 
 
 
-        if(tops >= posY - ball +6 && tops <= posY-ball+8){
+        if(tops >= posY - ball +6 && tops <= posY-ball+12){
 
           console.log(pos, firstEnter);
           var powerOfTouching = firstEnter - pos;
@@ -500,8 +507,7 @@ if(document.getElementById('ball')){
 
 
 
-} , 1);
-
+} , 16.6666667);
 
 
 
@@ -716,24 +722,26 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
 
 
-
+  var wasChangedDirection = false;
 
 
 
   for( var x=0 ; x< bricksArray.length;x++){
 
+    //if(wasChangedDirection){console.log('break');break;}
 
     //top side of the brick //-2 moved touch line
-    if ((top >= bricksArray[x][0]-ball  && top <= bricksArray[x][0]-ball +1) &&
-        left >= bricksArray[x][1]-ball && left <= bricksArray[x][1]+ 40)
-        {
+    if ((top >= bricksArray[x][0]-ball  && top <= bricksArray[x][0]-ball + 5) &&
+        left >= bricksArray[x][1]-ball && left <= bricksArray[x][1]+ 40 + ball/2  )
+        {if (switcherTop>0){
 
           if(!onfire){
           if(!switcherTopWasChanged){
-
+            if(!wasChangedDirection){
             switcherTop = -switcherTop;
             switcherTopWasChanged = true;
-
+            wasChangedDirection = true;
+            }
           }
         }
 
@@ -774,7 +782,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
 
          if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold); }
-
+        }
 
 
         } else
@@ -786,17 +794,19 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
         ////////////////////////////////////
 
     //bottom side of the brick  //+2 moved touch line
-    if ((top <= bricksArray[x][0]+20 && top >= bricksArray[x][0]+20 - 1) &&
+    if ((top <= bricksArray[x][0]+20 && top >= bricksArray[x][0]+20 - 5) &&
         left >= bricksArray[x][1]-ball && left <= bricksArray[x][1]+ 40 )
         {
+          if(switcherTop<0){
 
           if(!onfire){
           if(!switcherTopWasChanged){
-
+            if(!wasChangedDirection){
             switcherTop = -switcherTop;
             switcherTopWasChanged = true;
-
+            wasChangedDirection = true;
           }
+        }
         }
 
 
@@ -840,21 +850,22 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
 
         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
-
+      }
          } else
 
 
     //left side of the brick
     if (top >= bricksArray[x][0]-ball && top <= bricksArray[x][0]+20 &&
-        (left >= bricksArray[x][1]-ball-2 && left <= bricksArray[x][1]-ball-1) ) //moved touch line a bit left, to prevent the ball through move
+        (left >= bricksArray[x][1]-ball-5 && left <= bricksArray[x][1]-ball) ) //moved touch line a bit left, to prevent the ball through move
         {
-
+          if(switcherLeft>0){
           if(!onfire){
           if(!switcherLeftWasChanged){
-
+            if(!wasChangedDirection){
             switcherLeft = -switcherLeft;
             switcherLeftWasChanged = true;
-
+            wasChangedDirection = true;
+            }
           }
         }
 
@@ -897,20 +908,21 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
 
          if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
-
+      }
          } else
 
     //right side of the brick //+2 moved touch line
     if (top >= bricksArray[x][0]-ball && top <= bricksArray[x][0]+20 &&
-        (left <= bricksArray[x][1]+40+2 && left >= bricksArray[x][1]+40+1) )
+        (left <= bricksArray[x][1]+40+5 && left >= bricksArray[x][1]+40) )
         {
-
+if(switcherLeft<0){
           if(!onfire){
           if(!switcherLeftWasChanged){
-
+            if(!wasChangedDirection){
             switcherLeft = -switcherLeft;
             switcherLeftWasChanged = true;
-
+            wasChangedDirection = true;
+            }
           }
         }
 
@@ -950,7 +962,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
 
          if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
-
+      }
          }
 
 
@@ -1001,11 +1013,18 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           if(currentBrick.health === 0){
 
            // currentBrick.textContent = '';
-            addGold(currentBrick.gold);
+           addGold(currentBrick.gold);
 
-            currentBrick.setAttribute('id', 'empty');
+           currentBrick.setAttribute('id', 'empty');
 
-            bricksArray.splice(x,1);
+           var topI = bricksArray[x][0];
+           var leftI = bricksArray[x][1];;
+           var attributeI = bricksArray[x][5];
+
+
+           bricksArray.splice(x,1);
+
+           startDropItem (topI,leftI,attributeI);
 
 
 
