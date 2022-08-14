@@ -103,7 +103,8 @@ import variables from '../variables.scss';
         }
 
         if(this.state.attribute==='tnt'){
-          this.setState({lose:true})
+          if(!this.state.win){
+          this.setState({lose:true})}
         }
 
       }
@@ -231,6 +232,9 @@ topI = topI + 2;
       var topInew = topI+10;
       var leftInew = leftI+10;
 
+
+      //if you cought tnt run this block. should be moved to separate component
+
       if(attributeI === 'tnt'){
         console.log('BOOOOM!',topI,leftI);
         var boom = document.createElement('div');
@@ -335,10 +339,9 @@ var bulletRunning = function(clear,flightBackState){
 
 };
 
-
+var runAnimationFrame = true;
 
 var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun, gunFun,flightBackState, loseFun){
-
 
 
 
@@ -355,7 +358,9 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
   var shootingInt;
 
 
-  var r = setInterval ( ()=>{
+
+  //var r;
+  var r = ()=>{
 
    // console.log(shootingInt, 'shootingInt');
 
@@ -370,7 +375,8 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
       {
          bulletRunning(
 
-          ()=>{ clearInterval(shootingInt); clearInterval(r);}, flightBackState
+          ()=>{ clearInterval(shootingInt);
+            runAnimationFrame = false }, flightBackState
 
           )},200)
   }})
@@ -378,7 +384,7 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
 
 
 
-    function clear() {document.removeEventListener ('mousemove', mousemove);clearInterval(r);clearInterval(shootingInt)}
+    function clear() {document.removeEventListener ('mousemove', mousemove);runAnimationFrame = false;clearInterval(shootingInt)}
 
 
   tops = tops+switcherTop;
@@ -518,10 +524,12 @@ if(document.getElementById('ball')){
     //Lose game
     //
     //
-    clearInterval (r);
+    //clearInterval (r);
     flightBackState();clear();
     handleLose();
-    console.log('lose')}
+    console.log('lose')
+   runAnimationFrame=false
+  }
 
   if (tops <= 0 ) {
     tops =0;
@@ -542,14 +550,41 @@ if(document.getElementById('ball')){
   brickBouncer(tops,lefts,pat,clear,onfire,1,flightBackState);
 
 
+  if(runAnimationFrame){requestAnimationFrame(r)};
 
-} , 16.6666667);
 
 
+}//,16)
+
+r();
 
 };
 
+// const ballS = document.getElementById("ballS");
+// let mouseX = 0;
+// let mouseY = 0;
 
+// let ballX = 0;
+// let ballY = 0;
+
+// let speeds = 0.04;
+
+// function animate(){
+
+//   let distX = mouseX - ballX;
+//   let distY = mouseY - ballY;
+
+
+//   ballX = ballX + (distX * speeds);
+//   ballY = ballY + (distY * speeds);
+// console.log(ballX);
+// console.log(ballY);
+//   ballS.style.left = ballX + "px";
+//   ballS.style.top = ballY + "px";
+
+//   requestAnimationFrame(animate);
+// }
+// animate();
 
 var mousemove = (e) => {
 
@@ -559,7 +594,8 @@ var mousemove = (e) => {
   //if(e.clientX>50){var x = e.clientX} else {var x = 50}
    var y = e.clientY ;
    var x = e.clientX -100;
-
+  //  mouseX = x;
+  //  mouseY = y;
 
   // if(e.target.id==='box'){
 
@@ -1115,6 +1151,8 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
             <div id = 'wall'></div>
             <div id = 'ball'></div>
             <div id = 'plate'></div>
+
+            {/* <div id = 'ballS'></div> */}
         </div></div>
 </div>
         <div id ='gamebar'>
