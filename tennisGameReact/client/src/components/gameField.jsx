@@ -78,11 +78,15 @@ import variables from '../variables.scss';
 
     componentDidUpdate( prevProps, prevState){
 
+      var changePlate=0;
 
       if(prevState.attribute!==this.state.attribute){
 
         if(this.state.attribute==='plate'){
-          this.setState({plate:this.state.plate + 20, platePoint:this.state.platePoint+1})
+          this.setState({plate:this.state.plate + 20, platePoint:this.state.platePoint+1, attribute: undefined})
+          changePlate++;
+          var myAudio = new Audio('mixkit-fast-small-sweep.wav');
+      myAudio.play();
         }
 
         if(this.state.attribute==='ball'){
@@ -593,7 +597,7 @@ var mousemove = (e) => {
   //if(e.clientY>50){var y = e.clientY} else {var y = 50}
   //if(e.clientX>50){var x = e.clientX} else {var x = 50}
    var y = e.clientY ;
-   var x = e.clientX -100;
+   var x = e.clientX -100 - (changePlate*10);
   //  mouseX = x;
   //  mouseY = y;
 
