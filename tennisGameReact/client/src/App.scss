@@ -1,3 +1,11 @@
+@font-face {
+
+  font-family: JosefinSlab;
+  src: url('./JosefinSlab-SemiBold.ttf');
+
+}
+
+
 
 .App-logo {
   height: 40vmin;
@@ -96,8 +104,10 @@ left: 50%;
 
 background-color: darkslateblue;
 
+transition: width 0.7s ease-in-out;
 
-
+-webkit-border-radius: 15px;
+border-radius: 15px;
 }
 
 
@@ -391,7 +401,7 @@ background-color: darkgreen;
 }
 
 
-#buttonC {
+#wizardButton {
 
   width: 200px;
   height: 200px;
@@ -400,9 +410,13 @@ background-color: darkgreen;
   position: relative;
   background-image: url('./crystal.png');
   background-position: 50%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  cursor: pointer
 }
 
-#buttonB {
+#golemButton {
 
   width: 200px;
   height: 200px;
@@ -411,9 +425,13 @@ background-color: darkgreen;
   position: relative;
   background-image: url('./golem.png');
   background-position: 50%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  cursor: pointer;
 }
 
-#buttonA {
+#gunnersButton {
 
   width: 200px;
   height: 200px;
@@ -422,6 +440,10 @@ background-color: darkgreen;
   position: relative;
   background-image: url('./gunner.png');
   background-position: 50%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  cursor: pointer;
 }
 
 
@@ -432,7 +454,7 @@ background-color: darkgreen;
 
   display: flex;
   justify-content: space-evenly;
-  padding-top: 20%;
+
 }
 
 
@@ -492,17 +514,80 @@ to {
 
 }
 
-#ballS{
-  background-color: #ffffff;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  mix-blend-mode: difference;
+// #ballS{
+//   background-color: #ffffff;
+//   width: 40px;
+//   height: 40px;
+//   border-radius: 50%;
+//   pointer-events: none;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   transform: translate(-50%, -50%);
+//   z-index: 2;
+//   mix-blend-mode: difference;
+
+// }
+
+#next {
+  width: 150px;
+  height: 50px;
+
+  background-color: orchid;
+
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  text-align: center;
+
+position: relative;
+line-height: 50px;
+margin: 0 auto;
+margin-top: 50px
+}
+
+#next:hover{
+
+  background-color: rgb(255, 79, 79);
+  cursor: pointer;
+}
+
+#nextWrap {
+
+  width: auto;
+  height: 150px;
+  justify-content: center;
+  text-align: center;
+}
+
+#character {
+
+  width: 100%;
+  height: 150px;
+position: relative;
+
+padding-top: 40px;
+}
+
+
+#characterText {
+  visibility: hidden;
+  background-color: rgb(231, 183, 80);
+  text-align: center;
+  margin: 0 auto;
+
+  height: 100px;
+  justify-content: center;
+  display: flex;
+
+font-family: JosefinSlab;
+
+position: relative;
+line-height:20px;
+width: 400px;
+text-align: justify;
+font-size: 20px;
+padding: 10px;
+
+overflow: hidden;
 
 }

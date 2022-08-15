@@ -1,13 +1,32 @@
 import React, { useState, useEffect } from "react";
 import AppGame from "./AppGame";
 import axios from "axios";
-
+import story from './story'
 const AppCharacter = (props) => {
   const [character, setCharacter] = useState("wizard");
   const [start, setStart] = useState(false);
 
+  const [text, setText] = useState('');
+
   const switchCharacter = (character) => {
     setCharacter(character);
+
+    var all = document.getElementsByClassName('sel');
+
+    for (var g of all){
+      g.setAttribute('style','border: none')
+    }
+
+    document.getElementById(`${character}Button`).setAttribute('style','border: 3px solid gold')
+
+    // var story = {
+    //   golem:'golem story',
+    //   wizard: 'wizard story',
+    //   gunners: 'gunners story'
+    // }
+    document.getElementById('characterText').setAttribute('style','visibility: visible')
+
+    setText(story[character])
   };
 
   useEffect(() => {
@@ -56,33 +75,41 @@ const AppCharacter = (props) => {
       ) : (
         <div>
           {" "}
-          <div id="character">{character}</div>
+          <div id="character">
+            <div id = 'characterText'>
+
+            &emsp;&emsp;{text}
+            </div>
+
+          </div>
           <div id = 'grid'>
           <div
-            id="buttonC"
+             class = 'sel' id="wizardButton"
             onClick={() => {
               switchCharacter("wizard");
+
             }}
           >
-            Wizard
+            {/* Wizard */}
           </div>
           <div
-            id="buttonB"
+            class = 'sel' id="golemButton"
             onClick={() => {
               switchCharacter("golem");
             }}
           >
-            Golem
+            {/* Golem */}
           </div>
           <div
-            id="buttonA"
+            class = 'sel' id="gunnersButton"
             onClick={() => {
               switchCharacter("gunners");
             }}
           >
-            Gunners
+            {/* Gunners */}
           </div>
           </div>
+          <div id = "nextWrap">
           <div
             id="next"
             onClick={() => {
@@ -91,6 +118,7 @@ const AppCharacter = (props) => {
           >
             {" "}
             Start the game
+          </div>
           </div>
         </div>
       )}
