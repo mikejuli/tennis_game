@@ -15,8 +15,6 @@ class BarMenu extends React.Component {
   render(){
 
 
-
-
     return(<div id = 'BarMenu'>
 
       BarMenu
@@ -26,14 +24,25 @@ class BarMenu extends React.Component {
   <div id = 'name'>{this.props.character} BeaterMike {this.props.user}</div>
       </div>
       <button onClick={this.props.handleLogout}>logout</button>
-      <div id = 'baseInfo'>
-        <div id = 'gold'> {this.props.gold} gold &#9748; </div>
-  <div id = 'currentLvl'>Level 🔝 : {this.props.currentLevel}/50</div>
-      <Skin/>
+      <div id = 'baseInfo' style = {{webKitBorderRadius:'15px', borderRadius: '15px 0px 0px 15px'}}>
+
+
+        <div id = 'gold' style = {{padding:"5px"}}>
+        <div>
+        <img src = 'coin.png' style = {{marginLeft:'10px',height:'30px', width:'45px', float: 'left'}}></img></div>
+
+           <div id = 'coinIn' style = {{height:'30px', backgroundColor:'gray', borderRadius:'50%',webkitBorderRadius: '15px', fontColor:'gold', color: 'gold', textAlign:'center', lineHeight: '30px'}}>{this.props.gold}</div>
+         </div>
+
+
+         <div>
+      <Skin style = {{float: 'left', height:'40px', width: '40px'}}/>
+  <div id = 'currentLvl' style = {{float: 'left', height: '30px', width:'30px', left: '50%',position:"absolute"}}>{this.props.currentLevel}/50</div>
+  </div>
 
       </div>
 
-      <div id = 'skills'>
+      {/* <div id = 'skills'>
         <div id = 'bigPlate'>BigPlate ➖ </div>
 
         <button class='buttonBuy' onClick={()=>{this.props.buyItem(1000,'bigPlate');
@@ -56,7 +65,7 @@ class BarMenu extends React.Component {
         </div>
 
         <div id = 'bigBall'>bigBall ⚪</div>
-        <div id = 'freezing'>frezzing ❄</div>
+
 
 
         <div id = 'flying'>flying 🚀</div>
@@ -78,7 +87,17 @@ class BarMenu extends React.Component {
 
 
 
+      </div> */}
+
+      <div id = 'skills' >
+      <div class = 'skillWrap' id = 'bigPlate'>➖</div>
+      <div class = 'skillWrap' id = 'bigBall'>⚪</div>
+      <div class = 'skillWrap' id = 'flying'>🚀</div>
+      <div class = 'skillWrap' id = 'shooting'>🏹</div>
+      <div class = 'skillWrap' id = 'onFire'>☄</div>
+
       </div>
+
 
 
     </div>)

@@ -60,9 +60,9 @@ const Skin = () => {
 console.log(skin, 'from Skin');
 
   return (
-    <div>
+    <div style = {{width:'30px', height:'30px', position:'absolute'}}>
       <div id = 'dropDownMenu' style = {{cursor:'pointer'}}onClick = {openMenu}>
-  Skin: {changer}  { menu? <h7>🔼</h7>:<h7>🔽</h7> }
+   {changer}  { menu? <h7>🔼</h7>:<h7>🔽</h7> }
         </div>
         {menu?<div id = 'dropDown' >
 

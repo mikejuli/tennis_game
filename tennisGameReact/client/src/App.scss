@@ -48,6 +48,9 @@
   height: 600px;
   margin-top: auto;
 
+
+    font-family: JosefinSlab;
+    font-size: 20px;
 }
 
 
@@ -168,14 +171,14 @@ button.disButton {
   height: 600px;
   width: 800px;
   position: absolute;
-
+  overflow: hidden;
 }
 
 #level{
-  top: 15%;
+
   background-color: lightblue;
-  height: 350px;
-  width: 600px;
+  height: 100%;
+  width: 100%;
   position: absolute;
   overflow: hidden;
 
@@ -186,11 +189,11 @@ button.next {
   position: absolute;
   top: 90%;
   left: 50%;
-
+  z-index: 4;
 }
 
 button.back {
-
+  z-index: 4;
   position: absolute;
   top: 5%;
   left: 50%;
@@ -199,12 +202,10 @@ button.back {
 
 
 .tenLevels{
-  display: flex;
-  align-items: center;
-  height: 400px;
-  width: 100%;
-  /* background-image: url(./grass.png); */
 
+  height: 600px;
+  width: 800px;
+  /* background-image: url(./grass.png); */
 
 }
 
@@ -242,12 +243,13 @@ button.back {
 
 
 #BarMenu{
-  position: absolute;
-  margin: 20px;
-  left: 75%;
+
+  margin: 20px 0px 20px 20px;
+  float: right;
+  position: relative;
   width: 150px;
   height: 500px;
-
+ // visibility: hidden;
 }
 
 #BarMenuIn{
@@ -293,11 +295,37 @@ button.back {
 #skills {
 
   position: absolute;
-  width: 100%;
-  height: 50%;
-  background-color: olivedrab;
-  top: 60%
+  left: 80px;
+  width: 250px;
+  height: 10%;
+  background-color: rgb(14, 37, 116);
+  top: 60%;
+  display: flex;
+    align-items: center;
+
+    -webkit-border-radius: 25px;
+    border-radius: 25px 0px 0px 25px;
+     transition: left 0.7s ease-in-out;
+
 }
+
+#skills:hover {
+
+  position: absolute;
+
+  width: 250px;
+  height: 10%;
+  left: -90px;
+  background-color: rgb(14, 37, 116);
+  top: 60%;
+  display: flex;
+    align-items: center;
+
+    -webkit-border-radius: 25px;
+    border-radius: 25px 0px 0px 25px;
+}
+
+
 
 #skillsIn {
 
@@ -363,6 +391,7 @@ form {
     text-shadow: 0 4px 16px #fff;
     font-size: 30px;
     font-weight: 100;
+
   }
 
 
@@ -591,3 +620,16 @@ padding: 10px;
 overflow: hidden;
 
 }
+
+.skillWrap {
+  width: 36px;
+  height: 36px;
+  float: left;
+  background-color: goldenrod;
+  border-radius: 50%;
+
+  text-align: center;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
