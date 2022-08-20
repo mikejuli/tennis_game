@@ -6,10 +6,20 @@ class BarMenu extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {};
+    this.state = {moveIn: false};
 
   }
 
+toggle = () => {
+
+  if(this.state.moveIn == true){
+
+    this.setState({moveIn:false});
+    document.getElementById('skills').style = 'left: 150px;';
+
+
+       }else{document.getElementById('skills').style = 'left: -90px;'; this.setState({moveIn:true})}
+  }
 
 
   render(){
@@ -37,7 +47,11 @@ class BarMenu extends React.Component {
 
          <div>
       <Skin style = {{float: 'left', height:'40px', width: '40px'}}/>
-  <div id = 'currentLvl' style = {{float: 'left', height: '30px', width:'30px', left: '50%',position:"absolute"}}>{this.props.currentLevel}/50</div>
+
+  <div id = 'currentLvl' style = {{float: 'left', left: '20%', height: '45px', width:'90px',position: 'absolute', textAlign: 'center', lineHeight: '45px', marginTop: '3px'}}>{this.props.currentLevel}/50</div>
+
+  <div id = 'skillsInBox' onClick = {this.toggle}></div>
+
   </div>
 
       </div>
@@ -90,7 +104,7 @@ class BarMenu extends React.Component {
       </div> */}
 
       <div id = 'skills' >
-      <div class = 'skillWrap' id = 'bigPlate'>➖</div>
+      <div class = 'skillWrap' id = 'bigPlate' onClick = {()=>{console.log(this)}}>➖</div>
       <div class = 'skillWrap' id = 'bigBall'>⚪</div>
       <div class = 'skillWrap' id = 'flying'>🚀</div>
       <div class = 'skillWrap' id = 'shooting'>🏹</div>
