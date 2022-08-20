@@ -61,12 +61,40 @@ console.log(skin, 'from Skin');
 
   return (
     <div style = {{width:'30px', height:'30px', position:'absolute'}}>
-      <div id = 'dropDownMenu' style = {{cursor:'pointer'}}onClick = {openMenu}>
+      {/* <div id = 'dropDownMenu' style = {{cursor:'pointer'}}onClick = {openMenu}>
    {changer}  { menu? <h7>🔼</h7>:<h7>🔽</h7> }
-        </div>
-        {menu?<div id = 'dropDown' >
+        </div> */}
+        {/* {menu? */}
+        <div >
 
-        <div id = 'leftDropDown'>
+        <nav class="menu">
+        <input class="menu-toggler" type="checkbox"/>
+
+
+  <ul>
+    <li class="menu-item">
+      <a class="fas fa-cat"></a>
+    </li>
+    <li class="menu-item">
+      <a class="fas fa-cookie-bite" ></a>
+    </li>
+    <li class="menu-item">
+      <a class="fab fa-earlybirds" ></a>
+    </li>
+    <li class="menu-item">
+      <a class="fab fa-fly"></a>
+    </li>
+    <li class="menu-item">
+      <a class ="far fa-gem" ></a>
+    </li>
+  </ul>
+
+
+
+
+</nav>
+
+        {/* <div id = 'leftDropDown'>
         <div id = 'common' style = {skin.skinArray.value.common?{backgroundColor: 'blue'}:{}} onClick = {()=>{ toggleSetSkin('common')}}>common </div>
         <div id = 'rare' style = {skin.skinArray.value.rare?{backgroundColor: 'blue'}:{}} onClick = {()=>{ toggleSetSkin('rare')}}>rare </div>
         <div id = 'epic' style = {skin.skinArray.value.epic?{backgroundColor: 'blue'}:{}} onClick = {()=>{ toggleSetSkin('epic')}}>epic </div>
@@ -80,16 +108,16 @@ console.log(skin, 'from Skin');
         <div id = 'epic' onClick = {()=>{toggle('epic',50000)}}> 50000</div>
         <div id = 'legendary' onClick = {()=>{toggle('legendary',100000)}}> 100000</div>
         <div id = 'mythic' onClick = {()=>{toggle('mythic',1000000)}}> 1000000</div>
-        </div>
+        </div> */}
 
 
 
 
-        </div>:<div></div>}
+        {/* </div>:<div></div>} */}
 
 
 
-<div>
+{/* <div> */}
 
 
 </div>
