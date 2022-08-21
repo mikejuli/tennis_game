@@ -27,14 +27,20 @@ toggle = () => {
 
     return(<div id = 'BarMenu'>
 
-      BarMenu
+
 
       <div id = 'nameAndAvatar'>
         <div id = 'avatar' style = {{backgroundImage: `url('./${this.props.character}.png')`}}></div>
-  <div id = 'name'>{this.props.character} BeaterMike {this.props.user}</div>
-      </div>
-      <button onClick={this.props.handleLogout}>logout</button>
-      <div id = 'baseInfo' style = {{webKitBorderRadius:'15px', borderRadius: '15px 0px 0px 15px'}}>
+        <div id = 'circle' style = {{backgroundColor: 'white', width: '20px', height: '20px', left:'120px', position: 'absolute', top: '15px', borderRadius:'50%'}}></div>
+        <div id = 'circle' style = {{backgroundColor: 'white', width: '20px', height: '20px', left:'120px', position: 'absolute', top: '45px', borderRadius:'50%'}}></div>
+        <div id = 'circle' style = {{backgroundColor: 'white', width: '20px', height: '20px', left:'120px', position: 'absolute', top: '75px', borderRadius:'50%'}}></div>
+        <div id = 'circle' style = {{backgroundColor: 'white', width: '20px', height: '20px', left:'120px', position: 'absolute', top: '105px', borderRadius:'50%'}}></div>
+  <div id = 'name'>{this.props.user}</div>
+
+
+
+
+      <div id = 'baseInfo' style = {{webKitBorderRadius:'15px', borderRadius: '15px 0px 0px 30px'}}>
 
 
         <div id = 'gold' style = {{padding:"5px"}}>
@@ -50,11 +56,58 @@ toggle = () => {
 
   <div id = 'currentLvl' style = {{float: 'left', left: '20%', height: '45px', width:'90px',position: 'absolute', textAlign: 'center', lineHeight: '45px', marginTop: '3px'}}>{this.props.currentLevel}/50</div>
 
-  <div id = 'skillsInBox' onClick = {this.toggle}></div>
+  <div id = 'skillsInBox' >
+
+{/*
+  <div id = 'skills' style = {{width:'30px', height:'30px', position:'absolute'}} > */}
+
+
+<nav class="menuS">
+  <input class="menu-togglerS" type="checkbox"/>
+
+
+<ul>
+<li class="menu-itemS">
+<a class="fas fa-cat">➖</a>
+</li>
+<li class="menu-itemS">
+<a class="fas fa-cookie-bite" >⚪</a>
+</li>
+<li class="menu-itemS">
+<a class="fab fa-earlybirds" >🚀</a>
+</li>
+<li class="menu-itemS">
+<a class="fab fa-fly">🏹</a>
+</li>
+<li class="menu-itemS">
+<a class ="far fa-gem" >☄</a>
+</li>
+</ul>
+
+
+
+
+</nav>
+
+
+
+{/* <div class = 'skillWrap' id = 'bigPlate' onClick = {()=>{console.log(this)}}>➖</div>
+<div class = 'skillWrap' id = 'bigBall'>⚪</div>
+<div class = 'skillWrap' id = 'flying'>🚀</div>
+<div class = 'skillWrap' id = 'shooting'>🏹</div>
+<div class = 'skillWrap' id = 'onFire'>☄</div> */}
+
+{/* </div> */}
+
+
+  </div>
 
   </div>
 
       </div>
+
+      </div>
+
 
       {/* <div id = 'skills'>
         <div id = 'bigPlate'>BigPlate ➖ </div>
@@ -103,16 +156,9 @@ toggle = () => {
 
       </div> */}
 
-      <div id = 'skills' >
-      <div class = 'skillWrap' id = 'bigPlate' onClick = {()=>{console.log(this)}}>➖</div>
-      <div class = 'skillWrap' id = 'bigBall'>⚪</div>
-      <div class = 'skillWrap' id = 'flying'>🚀</div>
-      <div class = 'skillWrap' id = 'shooting'>🏹</div>
-      <div class = 'skillWrap' id = 'onFire'>☄</div>
-
-      </div>
 
 
+<button style = {{position: 'relative', float: 'left', top: '100%'}} onClick={this.props.handleLogout}>logout</button>
 
     </div>)
 
