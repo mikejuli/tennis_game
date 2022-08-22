@@ -31,10 +31,14 @@ toggle = () => {
 
       <div id = 'nameAndAvatar'>
         <div id = 'avatar' style = {{backgroundImage: `url('./${this.props.character}.png')`}}></div>
-        <div id = 'circle' style = {{backgroundColor: 'white', width: '20px', height: '20px', left:'120px', position: 'absolute', top: '15px', borderRadius:'50%'}}></div>
-        <div id = 'circle' style = {{backgroundColor: 'white', width: '20px', height: '20px', left:'120px', position: 'absolute', top: '45px', borderRadius:'50%'}}></div>
-        <div id = 'circle' style = {{backgroundColor: 'white', width: '20px', height: '20px', left:'120px', position: 'absolute', top: '75px', borderRadius:'50%'}}></div>
-        <div id = 'circle' style = {{backgroundColor: 'white', width: '20px', height: '20px', left:'120px', position: 'absolute', top: '105px', borderRadius:'50%'}}></div>
+        <div id = 'circlePanel'>
+        <div id = 'circle'></div>
+        <div id = 'circle'></div>
+        <div id = 'circle'></div>
+        <div id = 'circle'></div>
+        <div id = 'circle'></div>
+        </div>
+
   <div id = 'name'>{this.props.user}</div>
 
 
