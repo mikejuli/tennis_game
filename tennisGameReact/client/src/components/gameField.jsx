@@ -154,7 +154,7 @@ var width = 640;
 
 
 
-var speed = 4;
+var speed = 2;
 
 var tops = 400;
 var lefts = 250;
@@ -597,7 +597,7 @@ var mousemove = (e) => {
   //if(e.clientY>50){var y = e.clientY} else {var y = 50}
   //if(e.clientX>50){var x = e.clientX} else {var x = 50}
    var y = e.clientY ;
-   var x = e.clientX -100 - (changePlate*10);
+   var x = e.clientX -100 ;
   //  mouseX = x;
   //  mouseY = y;
 
