@@ -30,33 +30,61 @@ componentDidUpdate(prevProps, prevState){
 
   render(){
 
+    var color;
+
+    switch(this.props.changer){
+
+      case 'common' :
+        color = 'red'
+        break;
+      case 'rare' :
+        color = 'pink'
+        break;
+      case 'legendary' :
+        color = 'white'
+        break;
+      case 'epic' :
+        color = 'orange'
+        break;
+      case 'mythic' :
+        color = 'yellow'
+        break;
+      case 'default' :
+        color = 'rgb(169 252 74)';
+        break;
+      default:
+        color = 'rgb(169 252 74)';
+
+    }
+
 
 return(<div>
 
 <div >
 
 <nav class="menu">
-<input class="menu-toggler" type="checkbox" onClick = {()=>{this.cancelF(false)}}/>
+
+<input class="menu-toggler" type="checkbox" style = {{backgroundColor: color}} onClick = {()=>{this.cancelF(false)}}/>
 
 
 <ul>
 
 <li class="menu-item">
-<Description skin = {'1'} cancel = {this.state.cancel} cancelFun = {this.cancelF}/>
+<Description skin = {'common'} price = {1000} cancel = {this.state.cancel} cancelFun = {this.cancelF} color = 'red' changer = {this.props.changer}/>
 </li>
 
 <li class="menu-item">
-<Description skin = {'2'} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'}/>
+<Description skin = {'rare'} price = {5000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'pink' changer = {this.props.changer}/>
 </li>
 
 <li class="menu-item">
-<Description skin = {'3'} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'}/>
+<Description skin = {'epic'} price = {10000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'orange' changer = {this.props.changer}/>
 </li>
 <li class="menu-item">
-<Description skin = {'4'} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'}/>
+<Description skin = {'legendary'} price = {20000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'white' changer = {this.props.changer}/>
 </li>
 <li class="menu-item">
-<Description skin = {'5'} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'}/>
+<Description skin = {'mythic'} price = {50000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'} color = 'yellow' changer = {this.props.changer}/>
 </li>
 </ul>
 

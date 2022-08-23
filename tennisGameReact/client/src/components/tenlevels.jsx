@@ -48,8 +48,8 @@ return (
 
 
 // <div>{this.state.showed?this.props.arr:<div></div>}</div>
-
-<div id = 'tenLevels' style = {{display: 'none'}}>{this.props.arr}</div>
+//style = {{display: 'none'}}
+<div id = 'tenLevels' style = {{display: 'none'}} >{this.props.arr}</div>
 
 )
 
