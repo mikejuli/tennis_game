@@ -6,7 +6,7 @@ import { buyItem } from "../features/skinCoin";
 import Description from './Description';
 import SkinInner from './SkinInner'
 
-const Skin = () => {
+const Skin = (props) => {
   const [changer, setChanger] = useState('');
   const [menu, setMenu] = useState(false);
 
@@ -49,7 +49,6 @@ const Skin = () => {
   useEffect(() => {
     console.log(skin.skin.value, '<_!!!!');
     initialCheck();
-
   });
 
   const dispatch = useDispatch();
@@ -67,7 +66,7 @@ console.log(skin, 'from Skin');
    {changer}  { menu? <h7>🔼</h7>:<h7>🔽</h7> }
         </div> */}
         {/* {menu? */}
-      <SkinInner menu = {menu} changer = {changer}/>
+      <SkinInner menu = {menu} changer = {changer} changeOpenMenu = {props.changeOpenMenu}/>
 
 
     </div>

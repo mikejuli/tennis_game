@@ -1,6 +1,6 @@
 import React from 'react'
 import Description from './Description'
-
+import $ from 'jquery'
 class SkinInner extends React.Component {
 
   constructor(props){
@@ -24,6 +24,40 @@ componentDidUpdate(prevProps, prevState){
       this.setState({cancel:false})
   }
 
+  if(document.querySelector(".menu-toggler").checked === true && this.state.cancel === false){
+
+    //this.props.changeOpenMenu();
+   var listener = (e) => {
+
+
+    console.log('asdf');
+
+       // console.log(document.querySelector('.menu'));
+        if (document.querySelector('.menu').contains(e.target)){
+          // Clicked in box
+        } else{
+          // Clicked outside the box
+          document.querySelector(".menu-toggler").checked = false;
+          this.setState({cancel:false})
+          window.removeEventListener('click', listener);
+
+        }
+
+
+
+    }
+
+
+    window.addEventListener('click', listener);
+
+
+
+console.log('from skininner')
+   }
+
+
+
+
 }
 
 
@@ -35,16 +69,16 @@ componentDidUpdate(prevProps, prevState){
     switch(this.props.changer){
 
       case 'common' :
-        color = 'red'
+        color = 'green'
         break;
       case 'rare' :
-        color = 'pink'
+        color = 'blue'
         break;
       case 'legendary' :
-        color = 'white'
+        color = 'purple'
         break;
       case 'epic' :
-        color = 'orange'
+        color = 'gold'
         break;
       case 'mythic' :
         color = 'yellow'
@@ -70,18 +104,18 @@ return(<div>
 <ul>
 
 <li class="menu-item">
-<Description skin = {'common'} price = {1000} cancel = {this.state.cancel} cancelFun = {this.cancelF} color = 'red' changer = {this.props.changer}/>
+<Description skin = {'common'} price = {1000} cancel = {this.state.cancel} cancelFun = {this.cancelF} color = 'green' changer = {this.props.changer}/>
 </li>
 
 <li class="menu-item">
-<Description skin = {'rare'} price = {5000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'pink' changer = {this.props.changer}/>
+<Description skin = {'rare'} price = {5000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'blue' changer = {this.props.changer}/>
 </li>
 
 <li class="menu-item">
-<Description skin = {'epic'} price = {10000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'orange' changer = {this.props.changer}/>
+<Description skin = {'epic'} price = {10000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'gold' changer = {this.props.changer}/>
 </li>
 <li class="menu-item">
-<Description skin = {'legendary'} price = {20000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'white' changer = {this.props.changer}/>
+<Description skin = {'legendary'} price = {20000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'purple' changer = {this.props.changer}/>
 </li>
 <li class="menu-item">
 <Description skin = {'mythic'} price = {50000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'} color = 'yellow' changer = {this.props.changer}/>

@@ -14,9 +14,10 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false}
 
     this.changeLevels = this.changeLevels.bind(this)
+    this.changeOpenMenu = this.changeOpenMenu.bind(this)
   }
 
 
@@ -31,6 +32,15 @@ class Levels extends React.Component {
   //   }
 
 
+  changeOpenMenu(){
+    if(this.state.openedMenu===false){
+      console.log('from change')
+    this.setState({openedMenu:true})
+    var s = document.querySelector('#levels');
+    var g = ()=>{ this.setState({openedMenu:false})};
+    s.addEventListener ('click', function (e){ g(); console.log('asd') } );
+    }
+  }
 
 
   changeLevels(arrow){
@@ -161,14 +171,14 @@ class Levels extends React.Component {
 <button class = 'back' onClick = {()=>{this.changeLevels(-1); }}>back arrow</button>
 
 
-      <table id = 'level'>
+      <table id = 'level' >
 
       {rend}
 
         </table>
 
 
-    <BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} handleLogout = {this.props.handleLogout} user = {this.props.user}/>
+    <BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} handleLogout = {this.props.handleLogout} user = {this.props.user} changeOpenMenu = {this.changeOpenMenu}/>
 
       <button class = 'next' onClick = {()=>this.changeLevels(1)}>down arrow</button>
 

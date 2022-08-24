@@ -31,6 +31,7 @@ toggle = () => {
 
       <div id = 'nameAndAvatar'>
         <div id = 'avatar' style = {{backgroundImage: `url('./${this.props.character}.png')`}}></div>
+
         <div id = 'circlePanel'>
         <div id = 'circle'></div>
         <div id = 'circle'></div>
@@ -56,7 +57,7 @@ toggle = () => {
 
 
          <div>
-      <Skin style = {{float: 'left', height:'40px', width: '40px'}}/>
+      <Skin style = {{float: 'left', height:'40px', width: '40px'}} changeOpenMenu = {this.props.changeOpenMenu}/>
 
   <div id = 'currentLvl' style = {{float: 'left', left: '20%', height: '45px', width:'90px',position: 'absolute', textAlign: 'center', lineHeight: '45px', marginTop: '3px'}}>{this.props.currentLevel}/50</div>
 
