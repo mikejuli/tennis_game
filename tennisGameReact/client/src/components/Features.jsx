@@ -21,8 +21,8 @@ class Features extends React.Component {
 
 toggle(){
 
+    console.log(this.state.inner.id)
   var listenerItem = (e) => {
-
 
     console.log('listenerItem');
 
@@ -34,7 +34,7 @@ toggle(){
           document.querySelector(".menu-togglerS").checked = false;
           this.setState({inner:{id:false,item:false,price:false}})
           window.removeEventListener('click', listenerItem);
-
+          console.log('listenerItem been removed');
         }
 
 
@@ -87,19 +87,19 @@ return (
 
   <ul>
 <li class="menu-itemS">
-<a id="plateMenu" onClick = {()=>{this.setItems('plate','➖',1000)}}>➖</a>
+<a id="bigPlateMenu" onClick = {()=>{this.setItems('bigPlate','➖',1000)}}>➖</a>
 </li>
 <li class="menu-itemS">
 <a id="ballMenu" onClick = {()=>{this.setItems('ball','⚪',2000)}} >⚪</a>
 </li>
 <li class="menu-itemS">
-<a id="flightMenu" onClick = {()=>{this.setItems('flight','🚀',3000)}}>🚀</a>
+<a id="flyingMenu" onClick = {()=>{this.setItems('flying','🚀',3000)}}>🚀</a>
 </li>
 <li class="menu-itemS">
 <a id="shootingMenu" onClick = {()=>{this.setItems('shooting','🏹',4000)}}>🏹</a>
 </li>
 <li class="menu-itemS">
-<a id ="onFireMenu" onClick = {()=>{this.setItems('onFire','☄',5000)}}>☄</a>
+<a id ="onfireMenu" onClick = {()=>{this.setItems('onfire','☄',5000)}}>☄</a>
 </li>
 </ul>
 

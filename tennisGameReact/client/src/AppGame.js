@@ -37,7 +37,7 @@ class AppGame extends React.Component {
   }
 
   buyItem(price, item) {
-    console.log(price);
+    console.log(price, item);
    // this.props.buyItemFromRedux(this.state.gold);
     this.setState({ gold: this.state.gold - price }, () => {
       //done
