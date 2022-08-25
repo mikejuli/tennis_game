@@ -708,8 +708,8 @@ overflow: hidden;
   margin: 3px 3px 3px 9px;
 
   transition-property: top, left;
-  transition-duration: 0.5s, 0.5s;
-  transition-delay: 0s, 0.5s;
+  transition-duration: 0.3s, 0.3s;
+  transition-delay: 0s, 0.3s;
 
 
   //transition: left 1s linear, top 1s linear
@@ -982,3 +982,12 @@ position: absolute;
   line-height: 0px;
 }
 
+#featuresDescription {
+  left: -200px;
+  top: 120px;
+  height: 100px;
+  width: 200px;
+  background-color: rgb(103, 139, 48);
+position: absolute;
+
+}
