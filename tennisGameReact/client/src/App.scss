@@ -188,16 +188,49 @@ button.next {
 
   position: absolute;
   top: 90%;
-  left: 50%;
+  left: 375px;
   z-index: 4;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background: no-repeat;
+  background-color: #51b3b5;
+  background-image: url('./components/buttonDown.png');
+  background-position: 50% 70%;
+  background-size: 60%;
+  cursor:pointer;
+  transition: 0.2s;
 }
+
+button.next:hover {
+  background-color: rgb(20 136 156);
+
+  transform: scale(1.2,1.2);
+}
+
 
 button.back {
   z-index: 4;
   position: absolute;
-  top: 5%;
-  left: 50%;
+  top: 2%;
+  left: 375px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background: no-repeat;
+  background-color: #51b3b5;
+  background-image: url('./components/buttonUp.png');
+  background-position: 47% 40%;
+  background-size: 60%;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
+
+button.back:hover {
+  background-color: rgb(20 136 156);
+
+  transform: scale(1.2,1.2);
 }
 
 
@@ -245,7 +278,7 @@ button.back {
 
 #BarMenu{
 
-  margin: 60px 0px 20px 20px;
+  margin: 80px 0px 20px 20px;
   float: right;
   position: relative;
   width: 150px;
@@ -806,8 +839,11 @@ overflow: hidden;
   -webkit-appearance: none;
   -moz-appearance: none;
        appearance: none;
-       background-color: rgb(255, 96, 194);
+       background-color: rgb(180, 39, 126);
   border-radius: 50%;
+  background-image: url('./components/model.png');
+background-position: 20% 30%;
+  background-size: 200%;
 }
 
 .menu-togglerS:checked ~ ul .menu-itemS {
@@ -959,27 +995,29 @@ position: absolute;
 #descSet {
 
   cursor: pointer;
-  position: relative;
+  position: absolute;
   float: left;
-  top: 80px;
+  top: 110px;
   left: 10px;
   width: 40px;
-  height: 20px;
+  height: 30px;
   background-color: goldenrod;
+  text-align: center;
+  line-height: 30px;
 }
 
 #descPrice {
 
   cursor: pointer;
-  position: relative;
+  position: absolute;
 
   width: 80px;
   height: 30px;
   background-color: goldenrod;
-  left: 100px;
-  top: 70px;
+  left: 110px;
+  top: 110px;
   text-align: center;
-  line-height: 0px;
+  line-height: 30px;
 }
 
 #featuresDescription {
@@ -987,7 +1025,82 @@ position: absolute;
   top: 120px;
   height: 100px;
   width: 200px;
-  background-color: rgb(103, 139, 48);
+  background-color: rgb(172, 207, 119);
 position: absolute;
 
+}
+
+#circleInM {
+
+  width: 15px;
+  height: 15px;
+  top:17px;
+  left: 17px;
+  border-radius: 50%;
+  background-color: rgb(221, 176, 211);
+  position: absolute;
+  transition: 1s;
+
+}
+
+#main {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(231, 111, 31);
+  border-radius: 50%;
+ float: left;
+ top: 20px;
+ left:20px;
+
+}
+
+#mainWrap {
+  position: absolute;
+  left: 120px;
+  width: 90px;
+  height: 90px;
+  background-color: rgb(34, 153, 74);
+  border-radius: 50%;
+
+
+}
+
+$tx: translateY(35px);
+
+
+#circleInM:nth-child(1) {
+  transform: $tx;
+}
+
+#circleInM:nth-child(2) {
+  transform: rotate(40deg) $tx;
+}
+
+#circleInM:nth-child(3) {
+  transform: rotate(80deg) $tx;
+}
+
+#circleInM:nth-child(4) {
+  transform: rotate(120deg) $tx;
+}
+
+#circleInM:nth-child(5) {
+  transform: rotate(160deg) $tx;
+}
+
+#circleInM:nth-child(6) {
+  transform: rotate(200deg) $tx;;
+}
+
+#circleInM:nth-child(7) {
+  transform: rotate(240deg) $tx;
+}
+
+#circleInM:nth-child(8) {
+  transform: rotate(280deg) $tx;
+}
+
+#circleInM:nth-child(9) {
+  transform: rotate(320deg) $tx;
 }

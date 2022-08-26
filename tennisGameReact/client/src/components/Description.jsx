@@ -70,7 +70,7 @@ useEffect(()=>{
   {skin.skinArray.description[props.skin]}
 
   <div id = 'descSet'  onClick = {()=>{ toggleSetSkin(props.skin)}}>Set </div>
-  {skin.skinArray.value[props.skin]?<div></div> : <div id = 'descPrice' onClick = {()=>{toggle(props.skin, props.price)}}> {props.price} <img src = 'coin1.png' width = '20px' height = '20px' ></img> </div>}
+  {skin.skinArray.value[props.skin]?<div></div> : <div id = 'descPrice' onClick = {()=>{toggle(props.skin, props.price)}}><div style = {{position: 'relative', width: '55px', float: 'left'}}>{props.price}</div> <img src = 'coin1.png' width = '20px' height = '20px' style= {{marginTop: '3px'}}></img> </div>}
 
 
   </div>
@@ -78,7 +78,7 @@ useEffect(()=>{
 
 :
 <div>
-<a class="desc" style = {skin.skinArray.value[props.skin]?{backgroundColor:props.color, border: 'greenyellow 2px solid'}:{backgroundColor:props.color, filter: 'grayscale(80%)'}} onClick = {()=>{ openMenu(true)}}  onMouseEnter = {()=>{openMenu()}}></a>
+<a class="desc" style = {skin.skinArray.value[props.skin]?{backgroundColor:props.color, border: 'greenyellow 2px solid'}:{backgroundColor:props.color, filter: 'grayscale(100%)'}} onClick = {()=>{ openMenu(true)}}  onMouseEnter = {()=>{openMenu()}}></a>
 
 
 </div>

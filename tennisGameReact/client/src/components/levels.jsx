@@ -159,7 +159,7 @@ class Levels extends React.Component {
     return(<div id = 'levels'>
 
 
-<button class = 'back' onClick = {()=>{this.changeLevels(-1); }}>back arrow</button>
+<button class = 'back' onClick = {()=>{this.changeLevels(-1); }}></button>
 
 
       <table id = 'level' >
@@ -171,7 +171,7 @@ class Levels extends React.Component {
 
     <BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} handleLogout = {this.props.handleLogout} user = {this.props.user} />
 
-      <button class = 'next' onClick = {()=>this.changeLevels(1)}>down arrow</button>
+      <button class = 'next' onClick = {()=>this.changeLevels(1)}></button>
 
       </div>
 

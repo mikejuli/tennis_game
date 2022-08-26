@@ -75,13 +75,13 @@ console.log('from skininner')
         color = 'blue'
         break;
       case 'legendary' :
-        color = 'purple'
-        break;
-      case 'epic' :
         color = 'gold'
         break;
+      case 'epic' :
+        color = '#e422e4'
+        break;
       case 'mythic' :
-        color = 'yellow'
+        color = '#00BCFB'
         break;
       case 'default' :
         color = 'rgb(169 252 74)';
@@ -112,13 +112,13 @@ return(<div>
 </li>
 
 <li class="menu-item">
-<Description skin = {'epic'} price = {10000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'gold' changer = {this.props.changer}/>
+<Description skin = {'epic'} price = {10000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = '#e422e4' changer = {this.props.changer}/>
 </li>
 <li class="menu-item">
-<Description skin = {'legendary'} price = {20000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'purple' changer = {this.props.changer}/>
+<Description skin = {'legendary'} price = {20000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'gold' changer = {this.props.changer}/>
 </li>
 <li class="menu-item">
-<Description skin = {'mythic'} price = {50000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'} color = 'yellow' changer = {this.props.changer}/>
+<Description skin = {'mythic'} price = {50000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'} color = '#00BCFB' changer = {this.props.changer}/>
 </li>
 </ul>
 
