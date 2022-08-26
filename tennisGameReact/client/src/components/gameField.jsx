@@ -154,7 +154,7 @@ var width = 640;
 
 
 
-var speed = 2;
+var speed = 4;
 
 var tops = 400;
 var lefts = 250;

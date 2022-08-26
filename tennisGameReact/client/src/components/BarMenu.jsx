@@ -1,5 +1,6 @@
 import React from 'react';
 import Skin from './Skin'
+import Features from './Features'
 
 class BarMenu extends React.Component {
 
@@ -31,6 +32,7 @@ toggle = () => {
 
       <div id = 'nameAndAvatar'>
         <div id = 'avatar' style = {{backgroundImage: `url('./${this.props.character}.png')`}}></div>
+
         <div id = 'circlePanel'>
         <div id = 'circle'></div>
         <div id = 'circle'></div>
@@ -65,8 +67,9 @@ toggle = () => {
 {/*
   <div id = 'skills' style = {{width:'30px', height:'30px', position:'absolute'}} > */}
 
+<Features buyItem = {this.props.buyItem}/>
 
-<nav class="menuS">
+{/* <nav class="menuS">
   <input class="menu-togglerS" type="checkbox"/>
 
 
@@ -91,7 +94,7 @@ toggle = () => {
 
 
 
-</nav>
+</nav> */}
 
 
 

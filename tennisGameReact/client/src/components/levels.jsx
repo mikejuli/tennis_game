@@ -14,7 +14,7 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false}
 
     this.changeLevels = this.changeLevels.bind(this)
   }
@@ -29,6 +29,7 @@ class Levels extends React.Component {
   // })
 
   //   }
+
 
 
 
@@ -158,19 +159,19 @@ class Levels extends React.Component {
     return(<div id = 'levels'>
 
 
-<button class = 'back' onClick = {()=>{this.changeLevels(-1); }}>back arrow</button>
+<button class = 'back' onClick = {()=>{this.changeLevels(-1); }}></button>
 
 
-      <table id = 'level'>
+      <table id = 'level' >
 
       {rend}
 
         </table>
 
 
-    <BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} handleLogout = {this.props.handleLogout} user = {this.props.user}/>
+    <BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} handleLogout = {this.props.handleLogout} user = {this.props.user} />
 
-      <button class = 'next' onClick = {()=>this.changeLevels(1)}>down arrow</button>
+      <button class = 'next' onClick = {()=>this.changeLevels(1)}></button>
 
       </div>
 
