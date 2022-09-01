@@ -1026,6 +1026,23 @@ position: absolute;
   line-height: 30px;
 }
 
+#buyI {
+
+  cursor: pointer;
+  position: absolute;
+
+  width: 80px;
+  height: 30px;
+  background-color: goldenrod;
+  left: 10px;
+  top: 60px;
+  text-align: center;
+  line-height: 30px;
+}
+
+
+
+
 #featuresDescription {
   left: -200px;
   top: 120px;
@@ -1034,6 +1051,13 @@ position: absolute;
   background-color: rgb(172, 207, 119);
 position: absolute;
 
+}
+
+#titleFeature {
+
+  padding-left: 10px;
+  padding-top: 10px;
+  float: left;
 }
 
 #circleInM {
@@ -1061,15 +1085,30 @@ position: absolute;
 
 }
 
+
+#mainIn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color:rgb(122 122 180);
+  border-radius: 50%;
+ float: left;
+ top: 30px;
+ left:130px;
+ line-height: 50px;
+
+}
+
 #mainWrap {
   position: absolute;
-  left: 120px;
+  left: 105px;
+  top: 5px;
   width: 90px;
   height: 90px;
-  background-color: rgb(34, 153, 74);
+  background-color: rgb(21, 143, 112);
   border-radius: 50%;
-  transform: rotate(0deg);
-  transition: 1s;
+  transform: rotate(40deg);
+  transition:  transform 1s;
 }
 
 $tx: translateY(35px);
