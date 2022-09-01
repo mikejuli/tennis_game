@@ -6,15 +6,16 @@ import $ from 'jquery';
 import grass from './grass.png';
 import snow from './snow.jpeg'
 
-import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import CSSTransition from 'react-transition-group/CSSTransitionGroup'
 import BackgroundImage from './BackgroundImage';
+
 
 class Levels extends React.Component {
 
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 3000}
 
     this.changeLevels = this.changeLevels.bind(this)
   }
@@ -35,6 +36,9 @@ class Levels extends React.Component {
 
 
   changeLevels(arrow){
+  if(this.state.inProcess === false){
+    this.setState({inProcess: true})
+
     console.log(this.state.arrow);
     if(arrow === 1){
       var g = this.state.arrow+1;
@@ -45,6 +49,9 @@ class Levels extends React.Component {
       var g = this.state.arrow-1;
       this.setState({arrow:g, changeArrow: -1})
     }
+
+    setTimeout(()=>{this.setState({inProcess: false})},this.state.transitionTime)
+  }
 
   }
 
@@ -98,25 +105,60 @@ class Levels extends React.Component {
       arr = [];
       for(var j = 0; j<10; j++){
         s++;
-        arr.push(<td > <Level level = {s} handle = {this.props.handle} fitLevel = {this.props.fitLevel} passed = {filtred[s-1]}/> </td>);
+        arr.push( <Level level = {s} handle = {this.props.handle} fitLevel = {this.props.fitLevel} passed = {filtred[s-1]}/> );
 
         //passed = this.state.active.filter(level[s-1]) smth like this
 
       }
 
       var style = {
-        backgroundImage: `url(${grass})`
+        backgroundImage: `url(${grass})`,
+        backgroundSize: '100%',
+        backgroundPosition: '0% 4%'
       }
 
       if(i==1){
          style = {
-          backgroundImage: `url(${snow})`
+          backgroundImage: `url(${grass})`,
+        backgroundSize: '100%',
+        backgroundPosition: '0% 27.6%'
         }
-
         console.log(style.backgroundImage)
 
       }
 
+
+      if(i==2){
+        style = {
+         backgroundImage: `url(${grass})`,
+       backgroundSize: '100%',
+       backgroundPosition: '0% 51.14%'
+       }
+       console.log(style.backgroundImage)
+
+     }
+
+
+     if(i==3){
+      style = {
+       backgroundImage: `url(${grass})`,
+     backgroundSize: '100%',
+     backgroundPosition: '0% 74.75%'
+     }
+     console.log(style.backgroundImage)
+
+   }
+
+
+   if(i==4){
+    style = {
+     backgroundImage: `url(${grass})`,
+   backgroundSize: '100%',
+   backgroundPosition: '0% 98.3%'
+   }
+   console.log(style.backgroundImage)
+
+ }
 
 
       arrS.push(<div class= 'tenLevels' style = {style}><TenLevels arr = {arr} number = {i+1} picked = {this.state.arrow}/></div>);
@@ -133,23 +175,26 @@ class Levels extends React.Component {
 
     if(this.state.changeArrow===1){
 
-       var rend = <ReactCSSTransitionGroup
+       var rend = <CSSTransition
         transitionName="background"
-        transitionEnterTimeout={5000}
-        transitionLeaveTimeout={5000}
+        transitionEnterTimeout={this.state.transitionTime}
+        transitionLeaveTimeout={this.state.transitionTime}
+
+
       >
       <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
-      </ReactCSSTransitionGroup>
+      </CSSTransition>
 
     } else {
 
-      var rend =  <ReactCSSTransitionGroup
+      var rend =  <CSSTransition
       transitionName="backgroundBack"
-      transitionEnterTimeout={5000}
-      transitionLeaveTimeout={5000}
+      transitionEnterTimeout={this.state.transitionTime}
+      transitionLeaveTimeout={this.state.transitionTime}
+
     >
     <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
-    </ReactCSSTransitionGroup>
+    </CSSTransition>
 
     }
 
@@ -159,7 +204,7 @@ class Levels extends React.Component {
     return(<div id = 'levels'>
 
 
-<button class = 'back' onClick = {()=>{this.changeLevels(-1); }}></button>
+{page!== 'first' ? <button class = 'back' onClick = {()=>{this.changeLevels(-1); }}></button> : <div></div>}
 
 
       <table id = 'level' >
@@ -171,7 +216,7 @@ class Levels extends React.Component {
 
     <BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} handleLogout = {this.props.handleLogout} user = {this.props.user} />
 
-      <button class = 'next' onClick = {()=>this.changeLevels(1)}></button>
+     {page!== 'fifth' ? <button class = 'next' onClick = {()=>this.changeLevels(1)}></button> : <div></div> }
 
       </div>
 

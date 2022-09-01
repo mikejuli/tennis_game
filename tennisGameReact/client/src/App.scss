@@ -149,19 +149,25 @@ border-color: lightsalmon;
 }
 
 button.button {
-
+  font-family: JosefinSlab ;
+  font-size: 22px;
   border-radius: 50%;
   background-color: rgb(105, 212, 111)
   ;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  transition:2s
 }
 
 button.disButton {
-  width: 50px;
-  height: 50px;
+  font-family: JosefinSlab ;
+  font-size: 22px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background-color: rgb(148, 143, 143)
+  background-color: rgb(148, 143, 143);
+  transition:2s
 }
 
 
@@ -249,14 +255,14 @@ button.back:hover {
 }
 .background-enter.background-enter-active {
   transform: translateY(0%);
-  transition: transform 5000ms ease-in-out;
+  transition: transform 3000ms ease-in-out;
 }
 .background-leave {
   transform: translateY(0%);
 }
 .background-leave.background-leave-active {
   transform: translateY(-100%);
-  transition: transform 5000ms ease-in-out;
+  transition: transform 3000ms ease-in-out;
 }
 
 
@@ -265,14 +271,14 @@ button.back:hover {
 }
 .backgroundBack-enter.backgroundBack-enter-active {
   transform: translateY(0%);
-  transition: transform 5000ms ease-in-out;
+  transition: transform 3000ms ease-in-out;
 }
 .backgroundBack-leave {
   transform: translateY(0%);
 }
 .backgroundBack-leave.backgroundBack-leave-active {
   transform: translateY(100%);
-  transition: transform 5000ms ease-in-out;
+  transition: transform 3000ms ease-in-out;
 }
 
 
@@ -1062,8 +1068,8 @@ position: absolute;
   height: 90px;
   background-color: rgb(34, 153, 74);
   border-radius: 50%;
-
-
+  transform: rotate(0deg);
+  transition: 1s;
 }
 
 $tx: translateY(35px);
@@ -1103,4 +1109,404 @@ $tx: translateY(35px);
 
 #circleInM:nth-child(9) {
   transform: rotate(320deg) $tx;
+}
+
+#s1 {
+
+  top: 80px;
+  left: 40px;
+  position: absolute;
+
+}
+
+#s2 {
+
+  top: 60px;
+  left: 120px;
+  position: absolute;
+
+}
+
+#s3 {
+
+  top: 60px;
+  left: 200px;
+  position: absolute;
+
+}
+
+#s4 {
+
+  top: 90px;
+  left: 275px;
+  position: absolute;
+
+}
+
+#s5 {
+
+  top: 155px;
+  left: 330px;
+  position: absolute;
+
+}
+
+#s6 {
+
+  top: 230px;
+  left: 360px;
+  position: absolute;
+
+}
+
+#s7 {
+
+  top: 310px;
+  left: 380px;
+  position: absolute;
+
+}
+
+#s8 {
+
+  top: 385px;
+  left: 410px;
+  position: absolute;
+
+}
+
+#s9 {
+
+  top: 445px;
+  left: 465px;
+  position: absolute;
+
+}
+
+#s10 {
+
+  top: 520px;
+  left: 500px;
+  position: absolute;
+
+}
+
+#s11 {
+
+  top: 20px;
+  left: 490px;
+  position: absolute;
+
+}
+
+#s12 {
+
+  top: 80px;
+  left: 430px;
+  position: absolute;
+
+}
+
+#s13 {
+
+  top: 130px;
+  left: 340px;
+  position: absolute;
+
+}
+
+#s14 {
+
+  top: 190px;
+  left: 260px;
+  position: absolute;
+
+}
+
+#s15 {
+
+  top: 270px;
+  left: 225px;
+  position: absolute;
+
+}
+
+#s16 {
+
+  top: 340px;
+  left: 270px;
+  position: absolute;
+
+}
+
+#s17 {
+
+  top: 390px;
+  left: 340px;
+  position: absolute;
+
+}
+
+#s18 {
+
+  top: 430px;
+  left: 410px;
+  position: absolute;
+
+}
+
+#s19 {
+
+  top: 470px;
+  left: 480px;
+  position: absolute;
+
+}
+
+#s20 {
+
+  top: 520px;
+  left: 550px;
+  position: absolute;
+
+}
+
+#s21 {
+
+  top: 20px;
+  left: 510px;
+  position: absolute;
+
+}
+
+#s22 {
+
+  top: 80px;
+  left: 440px;
+  position: absolute;
+
+}
+
+#s23 {
+
+  top: 130px;
+  left: 360px;
+  position: absolute;
+
+}
+
+#s24 {
+
+  top: 180px;
+  left: 280px;
+  position: absolute;
+
+}
+
+#s25 {
+
+  top: 270px;
+  left: 190px;
+  position: absolute;
+
+}
+
+#s26 {
+
+  top: 370px;
+  left: 200px;
+  position: absolute;
+
+}
+
+#s27 {
+
+  top: 410px;
+  left: 280px;
+  position: absolute;
+
+}
+
+#s28 {
+
+  top: 430px;
+  left: 370px;
+  position: absolute;
+
+}
+
+#s29 {
+
+  top: 460px;
+  left: 470px;
+  position: absolute;
+
+}
+
+#s30 {
+
+  top: 490px;
+  left: 560px;
+  position: absolute;
+
+}
+
+#s31 {
+
+  top: 20px;
+  left: 600px;
+  position: absolute;
+
+}
+
+#s32 {
+
+  top: 80px;
+  left: 530px;
+  position: absolute;
+
+}
+
+#s33 {
+
+  top: 170px;
+  left: 550px;
+  position: absolute;
+
+}
+
+#s34 {
+
+  top: 280px;
+  left: 550px;
+  position: absolute;
+
+}
+
+#s35 {
+
+  top: 310px;
+  left: 450px;
+  position: absolute;
+
+}
+
+#s36 {
+
+  top: 300px;
+  left: 350px;
+  position: absolute;
+
+}
+
+#s37 {
+
+  top: 290px;
+  left: 250px;
+  position: absolute;
+
+}
+
+#s38 {
+
+  top: 310px;
+  left: 150px;
+  position: absolute;
+
+}
+
+#s39 {
+
+  top: 360px;
+  left: 50px;
+  position: absolute;
+
+}
+
+#s40 {
+
+  top: 460px;
+  left: 20px;
+  position: absolute;
+
+}
+
+#s41 {
+
+  top: 20px;
+  left: 130px;
+  position: absolute;
+
+}
+
+#s42 {
+
+  top: 80px;
+  left: 200px;
+  position: absolute;
+
+}
+
+#s43 {
+
+  top: 170px;
+  left: 140px;
+  position: absolute;
+
+}
+
+#s44 {
+
+  top: 260px;
+  left: 170px;
+  position: absolute;
+
+}
+
+#s45 {
+
+  top: 270px;
+  left: 300px;
+  position: absolute;
+
+}
+
+#s46 {
+
+  top: 300px;
+  left: 430px;
+  position: absolute;
+
+}
+
+#s47 {
+
+  top: 390px;
+  left: 480px;
+  position: absolute;
+
+}
+
+#s48 {
+
+  top: 470px;
+  left: 440px;
+  position: absolute;
+
+}
+
+#s49 {
+
+  top: 520px;
+  left: 350px;
+  position: absolute;
+
+}
+
+#s50 {
+
+  top: 520px;
+  left: 250px;
+  position: absolute;
+
 }
