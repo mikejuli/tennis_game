@@ -301,6 +301,7 @@ class AppGame extends React.Component {
     var popUp;
 
     if (this.state.levelChosen) {
+
       popUp = (
         <div>
           <Field

@@ -1,24 +1,12 @@
 import React, {useState, useEffect} from 'react';
-
+import SoundPlayer from './SoundPlayer'
 
 const Lose = (props) => {
-
-const [sound, soundPlayed] = useState(true);
-
-
-  useEffect(()=>{
-
-    if(sound){
-      soundPlayed(false);
-    var myAudio = new Audio('mixkit-lose.wav');
-    myAudio.play();
-    }
-  })
 
   return (
 <div>
     <div id = 'lose' >LOSE
-
+    <SoundPlayer path = 'mixkit-lose.wav'/>
     <button id = 'winButton' onClick = {()=>{props.handleLose()
     }}>Ok</button>
      </div>

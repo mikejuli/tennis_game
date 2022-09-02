@@ -51,6 +51,7 @@
 
     font-family: JosefinSlab;
     font-size: 20px;
+    user-select: none;
 }
 
 
@@ -1548,4 +1549,41 @@ $tx: translateY(35px);
   left: 250px;
   position: absolute;
 
+}
+
+
+#mainMenu {
+
+
+  position: absolute;
+  top: 245px;
+  left: 300px;
+  width: 200px;
+  height: 150px;
+  background-color: khaki;
+
+}
+
+#menuButton:hover {
+
+  background-color: lightblue;
+
+}
+
+
+#menuButton {
+
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 50%;
+  background-color: #0f520c;
+  transition: 0.2s;
+  line-height: 55px;
+  text-align: center;
+}
+
+#menuButton:hover {
+  background-color: #0c4c52
 }

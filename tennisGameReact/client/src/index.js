@@ -8,6 +8,7 @@ import {Provider} from "react-redux";
 import skinReducer from './features/skin'
 import skinReducerCoin from './features/skinCoin'
 import skinReducedUpdate from './features/availiableSkin'
+import soundReducer from './features/sound'
 
 const store = configureStore({
 
@@ -15,7 +16,9 @@ const store = configureStore({
   reducer:{
     skin: skinReducer,
     gold: skinReducerCoin,
-    skinArray: skinReducedUpdate
+    skinArray: skinReducedUpdate,
+    sound: soundReducer
+
   }
 
 })
@@ -31,3 +34,6 @@ root.render(<Provider store = {store}><App /></Provider>);
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
+//add reference to Music by <a href="https://pixabay.com/users/nojisuma-23737290/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=109881">nojisuma</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=109881">Pixabay</a>

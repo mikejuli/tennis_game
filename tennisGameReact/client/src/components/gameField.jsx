@@ -6,6 +6,9 @@ import $ from 'jquery';
 import Win from './Win';
 import Lose from './Lose';
 import variables from '../variables.scss';
+import SoundPlayer from './SoundPlayer'
+import {connect} from 'react-redux';
+import {setSound} from '../features/sound'
 
   class Field extends React.Component {
 
@@ -60,6 +63,8 @@ import variables from '../variables.scss';
 //changed from componentDidmount
     componentDidMount(){
 
+
+
         this.setState({onfire: this.props.onfire})
         this.setState({flight: this.props.flying})
         this.setState({gun: this.props.shooting})
@@ -85,8 +90,12 @@ import variables from '../variables.scss';
         if(this.state.attribute==='plate'){
           this.setState({plate:this.state.plate + 20, platePoint:this.state.platePoint+1, attribute: undefined})
           changePlate++;
+
+          if(this.props.sound){
           var myAudio = new Audio('mixkit-fast-small-sweep.wav');
-      myAudio.play();
+          myAudio.play();
+          }
+
         }
 
         if(this.state.attribute==='ball'){
@@ -247,10 +256,10 @@ topI = topI + 2;
         var wall = document.getElementById('box');
         wall.appendChild(boom);
 
-
+        if(this.props.sound){
         var myAudio = new Audio('mixkit-explosion.wav');
-      myAudio.play();
-
+        myAudio.play();
+        }
 
         document.removeEventListener('mousemove',mousemove);
         setTimeout(()=>{addAttribute(attributeI);
@@ -278,12 +287,16 @@ topI = topI + 2;
 
 }
 
+startDropItem = startDropItem.bind(this);
+
 
 var colorChanger = function (currentBrick){
 
+  console.log(this.props.sound);
+  if(this.props.sound){
   var myAudio = new Audio('mixkit.wav');
+  myAudio.play();}
 
-  //myAudio.play();
   switch (currentBrick.health){
 
     case 1: currentBrick.style.background = variables.background1; break;
@@ -297,6 +310,8 @@ var colorChanger = function (currentBrick){
 
 
 }
+
+colorChanger = colorChanger.bind(this)
 
 
 var bulletRunning = function(clear,flightBackState){
@@ -1175,5 +1190,13 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
   }
 
+  const mapDispatchToProps = dispatch => {
 
-  export default Field;
+    return {setSoundFromRedux: (x)=>setSound(x)}
+
+  }
+
+  const mapStateToProps = state => ({sound: state.sound.value})
+
+  export default connect(mapStateToProps, mapDispatchToProps())(Field);
+

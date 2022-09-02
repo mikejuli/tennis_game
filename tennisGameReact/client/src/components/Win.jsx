@@ -1,18 +1,29 @@
 import React, {useState, useEffect} from 'react';
-
+import {useSelector} from 'react-redux';
+import {setSound} from '../features/sound'
 
 const Win = (props) => {
 
+  const [sound, soundPlayed] = useState(true);
 
-console.log(props.level, props.currentGold)
+  const soundRedux = useSelector((state)=>state)
 
 useEffect(()=>{
-  var myAudio = new Audio('mixkit-win.wav');
 
+  if(soundRedux.sound.value){
+    if(sound){
 
-  myAudio.play();
+      soundPlayed(false);
+      var myAudio = new Audio('mixkit-win.wav');
+      myAudio.play();
+
+    }
+  }
+
 
 })
+
+console.log(props.level, props.currentGold)
 
 
   return (

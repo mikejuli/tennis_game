@@ -165,7 +165,7 @@ toggle = () => {
 
 
 
-<button style = {{position: 'relative', float: 'left', top: '100%'}} onClick={this.props.handleLogout}>logout</button>
+
 
     </div>)
 

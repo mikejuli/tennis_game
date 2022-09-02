@@ -33,6 +33,7 @@ componentDidUpdate(prevProps, prevState){
     console.log('asdf');
 
        // console.log(document.querySelector('.menu'));
+       if(document.querySelector('.menu')){
         if (document.querySelector('.menu').contains(e.target)){
           // Clicked in box
         } else{
@@ -41,7 +42,7 @@ componentDidUpdate(prevProps, prevState){
           this.setState({cancel:false})
           window.removeEventListener('click', listener);
 
-        }
+        }} else window.removeEventListener('click', listener);
 
 
 
