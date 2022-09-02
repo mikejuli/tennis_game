@@ -4,20 +4,23 @@ import TenLevels from './tenlevels';
 import BarMenu from './BarMenu';
 import $ from 'jquery';
 import grass from './grass.png';
-import snow from './snow.jpeg'
-
+import MainMenu from './MainMenu'
+import SoundsToggle from './SoundsToggle'
 import CSSTransition from 'react-transition-group/CSSTransitionGroup'
 import BackgroundImage from './BackgroundImage';
-
+import SoundPlayer from './SoundPlayer'
+import Player from './Player'
 
 class Levels extends React.Component {
 
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 3000}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 3000, openLogOutMenu: false, soundToggle: true}
 
     this.changeLevels = this.changeLevels.bind(this)
+    this.openLogOutMenu = this.openLogOutMenu.bind(this)
+
   }
 
 
@@ -33,6 +36,12 @@ class Levels extends React.Component {
 
 
 
+
+  openLogOutMenu(){
+    this.setState({
+      openLogOutMenu: !this.state.openLogOutMenu
+    })
+  }
 
 
   changeLevels(arrow){
@@ -74,6 +83,9 @@ class Levels extends React.Component {
 
     componentDidMount(){
       this.setState({active:this.props.active, arrow:this.props.arrow})
+
+
+
     }
 
 
@@ -89,6 +101,9 @@ class Levels extends React.Component {
 
 
   render() {
+
+
+
    // console.log(this.state.active);
     var arr = [];
     var arrS = [];
@@ -204,6 +219,7 @@ class Levels extends React.Component {
     return(<div id = 'levels'>
 
 
+
 {page!== 'first' ? <button class = 'back' onClick = {()=>{this.changeLevels(-1); }}></button> : <div></div>}
 
 
@@ -214,9 +230,19 @@ class Levels extends React.Component {
         </table>
 
 
-    <BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} handleLogout = {this.props.handleLogout} user = {this.props.user} />
+    <BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} user = {this.props.user} />
 
      {page!== 'fifth' ? <button class = 'next' onClick = {()=>this.changeLevels(1)}></button> : <div></div> }
+
+
+     {this.state.openLogOutMenu ? <MainMenu handleLogout = {this.props.handleLogout} openLogOutMenu = {this.openLogOutMenu}/> : <div></div>}
+<div style = {{position: 'absolute', float: 'left', top: '90%', left: '85%', width:'100px', fontSize:'30px',display: 'flex', justifyContent: 'space-around'}}>
+
+      <SoundsToggle/>
+     <div id = 'menuButton' onClick={()=>this.openLogOutMenu()}>🚪</div>
+</div>
+
+
 
       </div>
 

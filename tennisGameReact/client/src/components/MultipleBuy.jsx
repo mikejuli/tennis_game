@@ -8,7 +8,7 @@ const [point, setPoint] = useState(0);
 const r = () => {
 
   var s = document.querySelectorAll('#circleInM')
-  if(point<s.length){s[point].style.backgroundColor = 'rgb(255, 29, 206)';}
+  if(point<s.length){s[point].style.backgroundColor = 'rgb(0 253 63)';}
   setPoint(point+1)
   document.getElementById('mainWrap').style = `transform: rotate(-${40*point}deg)`
 

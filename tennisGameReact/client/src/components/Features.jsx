@@ -25,7 +25,7 @@ toggle(){
   var listenerItem = (e) => {
 
     console.log('listenerItem');
-
+        if(document.querySelector('#menuSCover')){
        // console.log(document.querySelector('.menu'));
         if (document.querySelector('#menuSCover').contains(e.target)){
           // Clicked in box
@@ -36,7 +36,7 @@ toggle(){
           window.removeEventListener('click', listenerItem);
           console.log('listenerItem been removed');
         }
-
+      }else window.removeEventListener('click', listenerItem);
 
 
     }
