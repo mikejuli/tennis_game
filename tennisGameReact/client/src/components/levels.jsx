@@ -16,7 +16,7 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 3000, openLogOutMenu: false, soundToggle: true}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 3100, openLogOutMenu: false, soundToggle: true}
 
     this.changeLevels = this.changeLevels.bind(this)
     this.openLogOutMenu = this.openLogOutMenu.bind(this)
@@ -242,7 +242,7 @@ class Levels extends React.Component {
      <div id = 'menuButton' onClick={()=>this.openLogOutMenu()}>🚪</div>
 </div>
 
-
+      <Player url = 'backgroundmusic.mp3'/>
 
       </div>
 
