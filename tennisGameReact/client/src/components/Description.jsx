@@ -14,7 +14,8 @@ const Description = (props) => {
   const toggle = (selector,price) => {
 
     //***********************/
-    //in case if we want to buy set skin once we bought it
+    //in case if we want to buy
+    //set skin once we bought it
     //uncomment lines bellow
     //**********************/
 
@@ -63,7 +64,7 @@ useEffect(()=>{
 <div>
 {menu?
   <div id = 'bounce' >
-  <a class="desc" onClick = {()=>{ if(props.changer===props.skin){openMenu(true)}; if(toggleSetSkin(props.skin)===false){openMenu(true)}} } style = {skin.skinArray.value[props.skin]?{backgroundColor:props.color}:{backgroundColor:props.color, filter: 'grayscale(80%)' }} ></a>
+  <a class="desc" onClick = {()=>{ if(props.changer===props.skin){openMenu(true)}; if(toggleSetSkin(props.skin)===false){openMenu(true)}} } style = {skin.skinArray.value[props.skin]?{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./${props.skillButton}')`,backgroundColor:props.color}:{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./${props.skillButton}')`,backgroundColor:props.color, filter: 'grayscale(80%)' }} ></a>
 
   <div id = 'description' style = {{top: props.top}}>
   {props.skin}
@@ -78,7 +79,7 @@ useEffect(()=>{
 
 :
 <div>
-<a class="desc" style = {skin.skinArray.value[props.skin]?{backgroundColor:props.color, border: 'greenyellow 2px solid'}:{backgroundColor:props.color, filter: 'grayscale(100%)'}} onClick = {()=>{ openMenu(true)}}  onMouseEnter = {()=>{openMenu()}}></a>
+<a class="desc" style = {skin.skinArray.value[props.skin]?{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./${props.skillButton}')`,backgroundColor:props.color, border: 'greenyellow 2px solid'}:{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./${props.skillButton}')`,backgroundColor:props.color, filter: 'grayscale(100%)'}} onClick = {()=>{ openMenu(true)}}  onMouseEnter = {()=>{openMenu()}}></a>
 
 
 </div>
