@@ -16,7 +16,7 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 3100, openLogOutMenu: false, soundToggle: true}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 2900, openLogOutMenu: false, soundToggle: true}
 
     this.changeLevels = this.changeLevels.bind(this)
     this.openLogOutMenu = this.openLogOutMenu.bind(this)
@@ -236,9 +236,11 @@ class Levels extends React.Component {
 
 
      {this.state.openLogOutMenu ? <MainMenu handleLogout = {this.props.handleLogout} openLogOutMenu = {this.openLogOutMenu}/> : <div></div>}
-<div style = {{position: 'absolute', float: 'left', top: '90%', left: '85%', width:'100px', fontSize:'30px',display: 'flex', justifyContent: 'space-around'}}>
+<div style = {{position: 'absolute', float: 'left', top: '90%', left: '82%', width:'140px', fontSize:'30px',display: 'flex', justifyContent: 'space-around'}}>
 
       <SoundsToggle/>
+
+     <div id = 'menuButton' onClick={()=>this.openLogOutMenu()}>🏆</div>
      <div id = 'menuButton' onClick={()=>this.openLogOutMenu()}>🚪</div>
 </div>
 

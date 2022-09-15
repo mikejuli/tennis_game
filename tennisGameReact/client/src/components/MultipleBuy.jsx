@@ -11,6 +11,9 @@ const r = () => {
   if(point<s.length){s[point].style.backgroundColor = 'rgb(0 253 63)';}
   setPoint(point+1)
   document.getElementById('mainWrap').style = `transform: rotate(-${40*point}deg)`
+  document.getElementById('mainIn').style = `
+  background: linear-gradient(0deg, rgb(0 253 63) ${(point*12)}% ,  rgb(122 122 180) ${(point*12)+20}% ) ;`
+
 
   props.buyItem(props.price,props.id);
 

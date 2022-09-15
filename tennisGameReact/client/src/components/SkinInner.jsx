@@ -66,23 +66,29 @@ console.log('from skininner')
   render(){
 
     var color;
+    var backgroundImage;
 
     switch(this.props.changer){
 
       case 'common' :
         color = 'green'
+        backgroundImage = 'SkillButton1.png'
         break;
       case 'rare' :
         color = 'blue'
+        backgroundImage = 'SkillButton3.png'
         break;
       case 'legendary' :
         color = 'gold'
+        backgroundImage = 'SkillButton4.png'
         break;
       case 'epic' :
         color = '#e422e4'
+        backgroundImage = 'SkillButton2.png'
         break;
       case 'mythic' :
         color = '#00BCFB'
+        backgroundImage = 'SkillButton5.png'
         break;
       case 'default' :
         color = 'rgb(169 252 74)';
@@ -99,27 +105,28 @@ return(<div>
 
 <nav class="menu">
 
-<input class="menu-toggler" type="checkbox" style = {{backgroundColor: color}} onClick = {()=>{this.cancelF(false)}}/>
+<input class="menu-toggler" type="checkbox" style = {{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundColor: color, backgroundImage: `url('./${backgroundImage}')`}} onClick = {()=>{this.cancelF(false)}}/>
 
 
 <ul>
 
 <li class="menu-item">
-<Description skin = {'common'} price = {1000} cancel = {this.state.cancel} cancelFun = {this.cancelF} color = 'green' changer = {this.props.changer}/>
+<Description skin = {'common'} price = {1000} cancel = {this.state.cancel} cancelFun = {this.cancelF} color = 'green' changer = {this.props.changer} skillButton = 'SkillButton1.png'/>
 </li>
 
 <li class="menu-item">
-<Description skin = {'rare'} price = {5000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'blue' changer = {this.props.changer}/>
+<Description skin = {'rare'} price = {5000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'blue' changer = {this.props.changer}
+skillButton = 'SkillButton3.png'/>
 </li>
 
 <li class="menu-item">
-<Description skin = {'epic'} price = {10000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = '#e422e4' changer = {this.props.changer}/>
+<Description skin = {'epic'} price = {10000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = '#e422e4' changer = {this.props.changer} skillButton = 'SkillButton2.png'/>
 </li>
 <li class="menu-item">
-<Description skin = {'legendary'} price = {20000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'gold' changer = {this.props.changer}/>
+<Description skin = {'legendary'} price = {20000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'gold' changer = {this.props.changer} skillButton = 'SkillButton4.png'/>
 </li>
 <li class="menu-item">
-<Description skin = {'mythic'} price = {50000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'} color = '#00BCFB' changer = {this.props.changer}/>
+<Description skin = {'mythic'} price = {50000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'} color = '#00BCFB' changer = {this.props.changer} skillButton = 'SkillButton5.png'/>
 </li>
 </ul>
 
