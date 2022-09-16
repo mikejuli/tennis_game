@@ -41,7 +41,7 @@ toggle = () => {
         <div id = 'circle'></div>
         </div>
 
-  <div id = 'name'>{this.props.user}</div>
+  <div id = 'name' style = {{paddingRight:'30px'}}>{this.props.user}</div>
 
 
 

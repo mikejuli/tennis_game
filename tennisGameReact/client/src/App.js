@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
-import AppGame from './AppGame.js';
+import AppGame from './AppGame.jsx';
 import $ from 'jquery';
 import AppCharacter from './AppCharacter';
 import axios from 'axios';
