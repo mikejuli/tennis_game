@@ -9,7 +9,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPIRouter = require('./routes/testAPI')
-
+var levelsTable = require('./levelsTable')
 
 
 const db = require('./database/index.js');
@@ -59,6 +59,7 @@ app.post('/user', function(req, res){
 
   app.post('/newPlayer', function(req,res){
 
+    console.log('leveltable=>>',levelsTable, levelsTable.levelsTable['1']);
 
     console.log(req.body.login,req.body.password)
 
@@ -76,27 +77,36 @@ app.post('/user', function(req, res){
         user.user = req.body.login;
         user.level = 1;
         user.passed = true;
-        user.pattern =
-   '111111111111120000000000023000044400003200004440000210000000000011122220222221'
-
+        user.pattern = levelsTable.levelsTable[1];
        db.save(user);
 
 
-       user.level = 2;
-       user.passed = false;
-       user.pattern =
-  '55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555'
-
-      db.save(user);
+    //    user.level = 2;
+    //    user.passed = false;
+    //    user.pattern = levelsTable.levelsTable[2];
+    //   db.save(user);
 
 
-    for(var i = 3; i<=50; i++){
+    //   user.level = 3;
+    //   user.passed = false;
+    //   user.pattern = levelsTable.levelsTable[3];
+    //  db.save(user);
+
+
+    //   user.level = 4;
+    //   user.passed = false;
+    //   user.pattern = levelsTable.levelsTable[4];
+    //  db.save(user);
+
+
+
+    for(var i = 2; i<=50; i++){
 
         user.user = req.body.login;
         user.level = i;
         user.passed = false;
         user.pattern =
-"1111111111111100000000000110111111111011015000000101101111111010110000000001011111111111101"
+        levelsTable.levelsTable[i];
 
         db.save(user);
     }
