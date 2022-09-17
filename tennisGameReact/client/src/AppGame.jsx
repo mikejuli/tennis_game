@@ -229,7 +229,7 @@ class AppGame extends React.Component {
     if (prevState.level !== this.state.level) {
       if (this.state.level) {
         var filtred = this.state.active.sort((a, b) => a.level - b.level);
-
+        console.log(filtred);
         var createPattern = filtred[this.state.level - 1].pattern
           .split("")
           .map((x) => parseInt(x));

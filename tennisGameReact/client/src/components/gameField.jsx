@@ -9,6 +9,7 @@ import variables from '../variables.scss';
 import SoundPlayer from './SoundPlayer'
 import {connect} from 'react-redux';
 import {setSound} from '../features/sound'
+import Player from './Player'
 
   class Field extends React.Component {
 
@@ -16,7 +17,7 @@ import {setSound} from '../features/sound'
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false, flightActual:false, win: false, lose: false})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false, flightActual:false, win: false, lose: false, sound: false})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
@@ -27,6 +28,7 @@ import {setSound} from '../features/sound'
     this.flightBackState = this.flightBackState.bind(this);
     this.flightActual = this.flightActual.bind(this);
     this.loseFun = this.loseFun.bind(this);
+    this.soundStart = this.soundStart.bind(this);
   }
 
     plateFun (cb){ cb(this.state.plate);};
@@ -39,6 +41,11 @@ import {setSound} from '../features/sound'
 
     this.setState({flightActual:true});
 
+  }
+
+  soundStart(){
+
+    this.setState({sound:true})
   }
 
     addGold(value){
@@ -724,6 +731,7 @@ var updateGold = () => currentGold = this.state.gold;
 var flightBackState = this.flightBackState;
 
 var flightActual = this.flightActual;
+var soundStart = this.soundStart;
 var loseFun = this.loseFun;
 
 console.log('here is lvl ',lvl);
@@ -741,6 +749,9 @@ setTimeout(()=>{
     flightActual();
 
     if(inMove === 0){
+
+      soundStart();
+
     ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun,gunFun,flightBackState,loseFun);
 
   }
@@ -1178,6 +1189,8 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           <GameBar character = {this.props.character} gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint } onFire = {this.state.onfire} user = {this.props.user}/>
         </div>
 
+        {/* if we need to internal sound uncomment line bellow */}
+        {/* {this.state.sound? <Player url = 'techhouse.mp3'/> : <div></div>} */}
         </div>
 
         </div>
