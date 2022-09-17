@@ -798,12 +798,21 @@ var creatingBrick = function (arr){
 
 var creatingWall = function(pattern){
 
+  var countUnbreakableBricks = 0;
+
   for(let x of pattern){
+
+    //counting unbreakable bricks
+    if(Number.isInteger(x[3])===false){countUnbreakableBricks++;}
+    //
 
     creatingBrick(x);
 
   }
 
+  var wall = document.getElementById('wall');
+  console.log(wall);
+  wall.setAttribute('value',countUnbreakableBricks);
 }
 
 creatingWall(this.props.pattern);
@@ -827,6 +836,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
   var wasChangedDirection = false;
 
+  var unbreakable = +document.getElementById('wall').getAttribute('value')
 
 
   for( var x=0 ; x< bricksArray.length;x++){
@@ -884,7 +894,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
           }
 
 
-         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold); }
+         if(bricksArray.length === unbreakable) {flightBackState();clear();updateGold();handleOff(lvl, currentGold); }
         }
 
 
@@ -950,9 +960,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
         }
 
 
-
-
-        if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
+        if(bricksArray.length === unbreakable) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
       }
          } else
 
@@ -1008,9 +1016,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
         }
 
-
-
-         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
+         if(bricksArray.length === unbreakable) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
       }
          } else
 
@@ -1063,8 +1069,7 @@ if(switcherLeft<0){
 
         }
 
-
-         if(bricksArray.length === 0) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
+         if(bricksArray.length === unbreakable) {flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
       }
          }
 
@@ -1087,6 +1092,8 @@ if(switcherLeft<0){
 
 
 var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet,flightBackState){
+
+  var unbreakable = +document.getElementById('wall').getAttribute('value')
 
  // console.log('from brickbouncerbullet');
          //here is squized a shooting module//
@@ -1134,7 +1141,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           }
 
 
-        if(bricksArray.length === 0) {document.removeEventListener('mousemove',mousemove);console.log(currentGold);flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
+        if(bricksArray.length === unbreakable) {document.removeEventListener('mousemove',mousemove);console.log(currentGold);flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
 
         }
