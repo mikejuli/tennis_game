@@ -229,7 +229,7 @@ class AppGame extends React.Component {
     if (prevState.level !== this.state.level) {
       if (this.state.level) {
         var filtred = this.state.active.sort((a, b) => a.level - b.level);
-        console.log(filtred);
+        //console.log(filtred);
         var createPattern = filtred[this.state.level - 1].pattern
           .split("")
           .map((x) => parseInt(x));
@@ -266,7 +266,7 @@ class AppGame extends React.Component {
               attribute = "plate";
             }
             if (count % 4 == 0) {
-              attribute = "ball";
+              attribute = "tnt";
             }
             if (count % 5 == 0) {
               attribute = "onfire";

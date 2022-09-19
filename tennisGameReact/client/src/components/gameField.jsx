@@ -296,12 +296,13 @@ topI = topI + 2;
 
 startDropItem = startDropItem.bind(this);
 
+//move myAudio behing colorChanger to avoid creaction new audio multiple times
+var myAudio = new Audio('mixkit.wav');
 
 var colorChanger = function (currentBrick){
 
   console.log(this.props.sound);
   if(this.props.sound){
-  var myAudio = new Audio('mixkit.wav');
   myAudio.play();}
 
   switch (currentBrick.health){
