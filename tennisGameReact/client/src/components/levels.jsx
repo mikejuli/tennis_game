@@ -185,7 +185,8 @@ class Levels extends React.Component {
     if(this.state.arrow===2) {var page = 'second'} else
     if(this.state.arrow===3) {var page = 'third'} else
     if(this.state.arrow===4) {var page = 'fourth'} else
-    if(this.state.arrow===5) {var page = 'fifth'}
+    if(this.state.arrow===5) {var page = 'fifth'} else
+    if(this.state.arrow===5) {var page = 'final'}
 
 
     if(this.state.changeArrow===1){
