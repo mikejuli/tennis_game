@@ -186,7 +186,7 @@ class Levels extends React.Component {
     if(this.state.arrow===3) {var page = 'third'} else
     if(this.state.arrow===4) {var page = 'fourth'} else
     if(this.state.arrow===5) {var page = 'fifth'} else
-    if(this.state.arrow===5) {var page = 'final'}
+    if(this.state.arrow===6) {var page = 'final'}
 
 
     if(this.state.changeArrow===1){
@@ -231,9 +231,27 @@ class Levels extends React.Component {
         </table>
 
 
-    <BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} user = {this.props.user} />
+    {page!=='final'?<BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} user = {this.props.user} />:<div id = 'finalPage' style = {{position: 'absolute' }}>
 
-     {page!== 'fifth' ? <button class = 'next' onClick = {()=>this.changeLevels(1)}></button> : <div></div> }
+      Thank you for this little adventure!<br/>
+
+      It was a genual pleasure to have you playing this game!<br/>
+    <br/>
+      Your final score: {this.props.gold}<br/>
+      <br/>
+      Web-developer: Mikhail Zhulev <br/>
+      Web-design: Mikhail Zhulev <br/>
+      Ilustrator: Olga Zhuleva <br/>
+    <br/>
+      Fell free to check git-hub repository:<br/>
+
+      Me on linkedIn:<br/>
+    <br/>
+      Devoted to our Father🧡<br/>
+
+    </div>}
+
+     {page!== 'fifth' && page!== 'final' ? <button class = 'next' onClick = {()=>this.changeLevels(1)}></button> : <div></div> }
 
 
      {this.state.openLogOutMenu ? <MainMenu handleLogout = {this.props.handleLogout} openLogOutMenu = {this.openLogOutMenu}/> : <div></div>}

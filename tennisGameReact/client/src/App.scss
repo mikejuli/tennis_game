@@ -1587,3 +1587,23 @@ $tx: translateY(35px);
 #menuButton:hover {
   background-color: #0c4c52
 }
+
+#finalPage{
+  height: 500px;
+  width: 320px;
+  animation:  ch linear 20s ;
+  animation-fill-mode: forwards;
+
+  //background-color: rosybrown;
+  //transition:  transform 20s;
+}
+
+@keyframes ch {
+
+  from {
+    transform: translate(75%, 120%) ;
+}
+to {
+    transform: translate(75%, 30%) ;
+}}
+
