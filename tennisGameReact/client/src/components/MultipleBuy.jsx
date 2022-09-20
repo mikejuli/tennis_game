@@ -1,25 +1,74 @@
 import React, {useEffect,useState} from 'react'
-
+import {useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
+import {setItem} from '../features/boughtItems'
 
 const MultipleBuy = (props) => {
 
 const [point, setPoint] = useState(0);
 
-const r = () => {
+
+const item = useSelector((state)=> state.item.value[props.id].value);
+
+const max = useSelector((state)=> state.item.value[props.id].max);
+
+useEffect(()=>{
+
+console.log(max)
+
+  setPoint(item)
 
   var s = document.querySelectorAll('#circleInM')
-  if(point<s.length){s[point].style.backgroundColor = 'rgb(0 253 63)';}
-  setPoint(point+1)
-  document.getElementById('mainWrap').style = `transform: rotate(-${40*point}deg)`
-  document.getElementById('mainIn').style = `
-  background: linear-gradient(0deg, rgb(0 253 63) ${(point*12)}% ,  rgb(122 122 180) ${(point*12)+20}% ) ;`
 
+    for(var i = 0; i< s.length;i++){
+
+
+      s[i].style.backgroundColor = 'rgb(221 176 211)';
+    }
+
+
+  if(point<=s.length){
+
+    for(var i =0; i<point;i++){
+
+      s[i].style.backgroundColor = 'rgb(0 253 63)';
+    }
+
+  }
+
+  //dispatch(setItem({[props.id]:point+1}))
+
+  document.getElementById('mainWrap').style = `transform: rotate(-${(360/max)*point}deg)`
+  document.getElementById('mainIn').style = `
+  background: linear-gradient(0deg, rgb(0 253 63) ${(point*(100/max))-5}% ,  rgb(122 122 180) ${(point*(100/max))+20}% ) ;`
+
+
+})
+
+console.log(item);
+
+const dispatch = useDispatch();
+
+const r = () => {
+
+  if(point<max){
+
+  dispatch(setItem({[props.id]:point+1}))
 
   props.buyItem(props.price,props.id);
 
     document.getElementById(`${props.id}Menu`).style.backgroundColor = 'pink';
-
+  }
 }
+
+// var circle = [];
+
+
+// for(var i=0;i<max;i++){
+
+//   circle.push(<div id = 'circleInM'></div>)
+
+// }
 
 return (
 <div>
@@ -30,18 +79,13 @@ return (
 
 <div id = 'mainWrap'>
 <div id = 'main'>
-<div id = 'circleInM'></div>
-<div id = 'circleInM'></div>
-<div id = 'circleInM'></div>
-<div id = 'circleInM'></div>
-<div id = 'circleInM'></div>
-<div id = 'circleInM'></div>
-<div id = 'circleInM'></div>
-<div id = 'circleInM'></div>
-<div id = 'circleInM'></div>
+
+
+  {[...Array(max)].map((e, i) => <span  id = 'circleInM' style= {{ transform: `rotate(${i*(360/max)}deg) translateY(35px) `}} key={i}></span>)}
+
 </div>
 </div>
-<div id = 'mainIn'>➖</div>
+<div id = 'mainIn'>{props.item}</div>
 
 <div id = 'titleFeature'>{props.id}{point}</div>
 </div>
