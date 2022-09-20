@@ -18,7 +18,7 @@ export const itemSlice = createSlice({
 
 
       //it's not the best way how we can change our reducers, but insted of making 5 dif refucers I decided to  change this line this way.
-      console.log(Object.values(action.payload)[0]);
+
       state.value[Object.keys(action.payload)[0]].value = Object.values(action.payload)[0]
 
 
