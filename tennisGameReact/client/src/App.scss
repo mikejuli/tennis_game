@@ -1070,7 +1070,7 @@ position: absolute;
   border-radius: 50%;
   background-color: rgb(221, 176, 211);
   position: absolute;
-  transition: 1s;
+  //transition: 1s;
 
 }
 
@@ -1101,6 +1101,7 @@ position: absolute;
 }
 
 #mainWrap {
+
   position: absolute;
   left: 105px;
   top: 5px;
@@ -1109,47 +1110,47 @@ position: absolute;
   background-color: rgb(21, 143, 112);
   border-radius: 50%;
   transform: rotate(40deg);
-  transition:  transform 1s;
+  transition: 1s;
 }
 
 $tx: translateY(35px);
 
 
-#circleInM:nth-child(1) {
-  transform: $tx;
-}
+// #circleInM:nth-child(1) {
+//   transform: $tx;
+// }
 
-#circleInM:nth-child(2) {
-  transform: rotate(40deg) $tx;
-}
+// #circleInM:nth-child(2) {
+//   transform: rotate(40deg) $tx;
+// }
 
-#circleInM:nth-child(3) {
-  transform: rotate(80deg) $tx;
-}
+// #circleInM:nth-child(3) {
+//   transform: rotate(80deg) $tx;
+// }
 
-#circleInM:nth-child(4) {
-  transform: rotate(120deg) $tx;
-}
+// #circleInM:nth-child(4) {
+//   transform: rotate(120deg) $tx;
+// }
 
-#circleInM:nth-child(5) {
-  transform: rotate(160deg) $tx;
-}
+// #circleInM:nth-child(5) {
+//   transform: rotate(160deg) $tx;
+// }
 
-#circleInM:nth-child(6) {
-  transform: rotate(200deg) $tx;;
-}
+// #circleInM:nth-child(6) {
+//   transform: rotate(200deg) $tx;;
+// }
 
-#circleInM:nth-child(7) {
-  transform: rotate(240deg) $tx;
-}
+// #circleInM:nth-child(7) {
+//   transform: rotate(240deg) $tx;
+// }
 
-#circleInM:nth-child(8) {
-  transform: rotate(280deg) $tx;
-}
+// #circleInM:nth-child(8) {
+//   transform: rotate(280deg) $tx;
+// }
 
-#circleInM:nth-child(9) {
-  transform: rotate(320deg) $tx;
-}
+// #circleInM:nth-child(9) {
+//   transform: rotate(320deg) $tx;
+// }
 
 #s1 {
 
