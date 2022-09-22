@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {setSound} from '../features/sound'
+import {useDispatch} from 'react-redux'
+import {setItem} from '../features/boughtItems'
 
 const Win = (props) => {
 
@@ -22,6 +24,14 @@ useEffect(()=>{
 
 
 })
+
+const dispatch = useDispatch();
+
+dispatch(setItem({onfire:0}))
+dispatch(setItem({shooting:0}))
+dispatch(setItem({flying:0}))
+dispatch(setItem({ball:0}))
+dispatch(setItem({bigPlate:0}))
 
 console.log(props.level, props.currentGold)
 

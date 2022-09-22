@@ -111,22 +111,22 @@ return(<div>
 <ul>
 
 <li class="menu-item">
-<Description skin = {'common'} price = {1000} cancel = {this.state.cancel} cancelFun = {this.cancelF} color = 'green' changer = {this.props.changer} skillButton = 'SkillButton1.png'/>
+<Description skin = {'common'} price = {1000} cancel = {this.state.cancel} cancelFun = {this.cancelF} color = 'green' changer = {this.props.changer} skillButton = 'SkillButton1.png' buyItem = {this.props.buyItem}/>
 </li>
 
 <li class="menu-item">
 <Description skin = {'rare'} price = {5000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'blue' changer = {this.props.changer}
-skillButton = 'SkillButton3.png'/>
+skillButton = 'SkillButton3.png' buyItem = {this.props.buyItem}/>
 </li>
 
 <li class="menu-item">
-<Description skin = {'epic'} price = {10000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = '#e422e4' changer = {this.props.changer} skillButton = 'SkillButton2.png'/>
+<Description skin = {'epic'} price = {10000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = '#e422e4' changer = {this.props.changer} skillButton = 'SkillButton2.png' buyItem = {this.props.buyItem}/>
 </li>
 <li class="menu-item">
-<Description skin = {'legendary'} price = {20000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'gold' changer = {this.props.changer} skillButton = 'SkillButton4.png'/>
+<Description skin = {'legendary'} price = {20000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'gold' changer = {this.props.changer} skillButton = 'SkillButton4.png' buyItem = {this.props.buyItem}/>
 </li>
 <li class="menu-item">
-<Description skin = {'mythic'} price = {50000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'} color = '#00BCFB' changer = {this.props.changer} skillButton = 'SkillButton5.png'/>
+<Description skin = {'mythic'} price = {50000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'} color = '#00BCFB' changer = {this.props.changer} skillButton = 'SkillButton5.png' buyItem = {this.props.buyItem}/>
 </li>
 </ul>
 

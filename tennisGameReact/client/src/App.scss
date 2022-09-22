@@ -1035,8 +1035,8 @@ position: absolute;
   width: 80px;
   height: 30px;
   background-color: goldenrod;
-  left: 10px;
-  top: 60px;
+  left: 110px;
+  top: 80px;
   text-align: center;
   line-height: 30px;
 }
@@ -1045,13 +1045,18 @@ position: absolute;
 
 
 #featuresDescription {
-  left: -200px;
-  top: 120px;
-  height: 100px;
+ // left: -150px;
+  top: 115px;
+  height: 120px;
   width: 200px;
-  background-color: rgb(172, 207, 119);
+  background-color: rgb(20 136 156);
 position: absolute;
 
+-webkit-border-radius: 25px;
+border-radius: 25px 0px 0px 25px;
+
+transition: 1s;
+transform: translateX(-150px);
 }
 
 #titleFeature {
@@ -1094,8 +1099,8 @@ position: absolute;
   background: linear-gradient(0deg, rgb(0 253 63) 0%,  rgb(122 122 180) 20%) ;
   border-radius: 50%;
  float: left;
- top: 30px;
- left:130px;
+ top: -53px;
+ left:-125px;
  line-height: 50px;
 
 }
@@ -1103,8 +1108,8 @@ position: absolute;
 #mainWrap {
 
   position: absolute;
-  left: 105px;
-  top: 5px;
+  left: -150px;
+  top: -78px;
   width: 90px;
   height: 90px;
   background-color: rgb(21, 143, 112);
