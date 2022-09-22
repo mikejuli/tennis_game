@@ -12,6 +12,8 @@ const item = useSelector((state)=> state.item.value[props.id].value);
 
 const max = useSelector((state)=> state.item.value[props.id].max);
 
+const desc = useSelector((state)=>state.item.value[props.id].description)
+
 useEffect(()=>{
 
 console.log(max)
@@ -53,11 +55,13 @@ const r = () => {
 
   if(point<max){
 
-  dispatch(setItem({[props.id]:point+1}))
+    var ifHaveEnoughCredit  = props.buyItem(props.price,props.id);
 
-  props.buyItem(props.price,props.id);
+    if(ifHaveEnoughCredit){
+    dispatch(setItem({[props.id]:point+1}))
 
     document.getElementById(`${props.id}Menu`).style.backgroundColor = 'pink';
+    }
   }
 }
 
@@ -87,7 +91,8 @@ return (
 </div>
 <div id = 'mainIn'>{props.item}</div>
 
-<div id = 'titleFeature'>{props.id}{point}</div>
+<div id = 'titleFeature'>{props.id}</div>
+<div style ={{position: 'absolute', top: '30px', fontSize: '16px', color: 'aqua', textAlign: 'left', marginLeft:'10px'}}>{desc}</div>
 </div>
 )
 

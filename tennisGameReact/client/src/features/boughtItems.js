@@ -5,11 +5,11 @@ export const itemSlice = createSlice({
   name: 'item',
   initialState: {value:{
 
-    onfire: {value: 0, max: 1},
-    shooting: {value: 0, max: 3},
-    flying: {value: 0, max: 1},
-    ball: {value: 0, max: 5},
-    bigPlate: {value: 0, max: 9}}},
+    onfire: {value: 0, max: 1,description: 'your ball flies through all bricks'},
+    shooting: {value: 0, max: 3,description: 'your plate\'s got gun(every next upgrade gives you +1 attack)'},
+    flying: {value: 0, max: 1, description: 'your plate is flying now'},
+    ball: {value: 0, max: 5, description: 'your ball gets stronger and stronger (+1 damage every next upgrage)'},
+    bigPlate: {value: 0, max: 9, description: 'your plate size is increasing (+5 every next update)'}}},
 
   reducers: {
 

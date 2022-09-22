@@ -58,7 +58,7 @@ toggle = () => {
 
 
          <div>
-      <Skin style = {{float: 'left', height:'40px', width: '40px'}}/>
+      <Skin style = {{float: 'left', height:'40px', width: '40px'}} buyItem = {this.props.buyItem}/>
 
   <div id = 'currentLvl' style = {{float: 'left', left: '21.5%', height: '45px', width:'90px',position: 'absolute', textAlign: 'center', lineHeight: '45px', marginTop: '3px'}}>{this.props.currentLevel}/50</div>
 

@@ -66,7 +66,7 @@ console.log(skin, 'from Skin');
    {changer}  { menu? <h7>🔼</h7>:<h7>🔽</h7> }
         </div> */}
         {/* {menu? */}
-      <SkinInner menu = {menu} changer = {changer} />
+      <SkinInner menu = {menu} changer = {changer} buyItem = {props.buyItem}/>
 
 
     </div>

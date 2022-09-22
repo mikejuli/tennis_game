@@ -18,11 +18,13 @@ const Description = (props) => {
     //set skin once we bought it
     //uncomment lines bellow
     //**********************/
+  var g =  props.buyItem(price,selector);
 
+  if(g){
     setChanger(selector);
-    dispatch(setSkin(selector));
-    dispatch(buyItem(price));
-    openMenu();
+    dispatch(setSkin(selector));}
+   dispatch(buyItem(price));
+   openMenu();
   };
 
 

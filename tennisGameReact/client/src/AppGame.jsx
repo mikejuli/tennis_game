@@ -37,7 +37,37 @@ class AppGame extends React.Component {
   }
 
   buyItem(price, item) {
-    console.log(price, item);
+    console.log(price, this.state.gold);
+
+    if(this.state.gold<price){
+
+
+      var message = document.createElement('div');
+      message.setAttribute('id','noEnoughGoldMessage');
+
+      var f = document.getElementById('noEnoughGoldMessage')
+
+      message.setAttribute('style','width: 140px; height: 40px; left: 330px; top: 450px;position: absolute; background-color: #ff5a4f; transition: 1s ease-in-out');
+      message.textContent = 'no enough gold'
+
+
+
+
+      var g = document.getElementById('tenLevels');
+
+      g.appendChild(message);
+
+      setTimeout(()=>{ g.removeChild(message)
+      },1000)
+
+      return false;
+    }
+
+    else{
+
+
+    // this.props.setSkinFromRedux(item);
+
    // this.props.buyItemFromRedux(this.state.gold);
     this.setState({ gold: this.state.gold - price }, () => {
       //done
@@ -82,10 +112,11 @@ class AppGame extends React.Component {
 
         },
       });
-
-
-
     }
+
+    return true;
+
+  }
   }
 
 
@@ -199,6 +230,7 @@ class AppGame extends React.Component {
   componentDidUpdate(prevProps, prevState) {
    //???? should change logic here
     if(prevProps.coin !== this.props.coin){
+
 
       this.buyItem(this.props.coin, 'skin');
 
