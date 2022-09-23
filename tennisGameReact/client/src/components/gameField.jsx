@@ -515,36 +515,48 @@ if(document.getElementById('ball')){
         };
 
 
+        if(powerOfTouching!==0) {
 
-        if(powerOfTouching <= -30) {
-
-          coeff = 0.6;
-
+          coeff = powerOfTouching/70 + 1;
+          if(coeff>1.4){coeff=1.4}
+          if(coeff<0.6){coeff=0.6}
+          console.log(coeff);
           switcherLeft = Math.Sin(Math.PI * coeff )* speed;
           switcherTop = Math.Cos(Math.PI * coeff  )* speed;
-
-        }  else if(powerOfTouching <= -15) {
-
-          coeff = 0.8;
-
-          switcherLeft = Math.Sin(Math.PI * coeff )* speed;
-          switcherTop = Math.Cos(Math.PI * coeff )* speed;
-
-        } else if (powerOfTouching >= 30){
-
-          coeff = 1.40;
-
-          switcherLeft = Math.Sin(Math.PI * coeff )* speed;
-          switcherTop = Math.Cos(Math.PI * coeff )* speed;
-
-        } else if (powerOfTouching >= 15){
-
-          coeff = 1.20;
-
-          switcherLeft = Math.Sin(Math.PI * coeff )* speed;
-          switcherTop = Math.Cos(Math.PI * coeff )* speed;
-
         }
+
+
+
+
+        // if(powerOfTouching <= -30) {
+
+        //   coeff = 0.6;
+
+        //   switcherLeft = Math.Sin(Math.PI * coeff )* speed;
+        //   switcherTop = Math.Cos(Math.PI * coeff  )* speed;
+
+        // }  else if(powerOfTouching <= -15) {
+
+        //   coeff = 0.8;
+
+        //   switcherLeft = Math.Sin(Math.PI * coeff )* speed;
+        //   switcherTop = Math.Cos(Math.PI * coeff )* speed;
+
+        // } else if (powerOfTouching >= 30){
+
+        //   coeff = 1.40;
+
+        //   switcherLeft = Math.Sin(Math.PI * coeff )* speed;
+        //   switcherTop = Math.Cos(Math.PI * coeff )* speed;
+
+        // } else if (powerOfTouching >= 15){
+
+        //   coeff = 1.20;
+
+        //   switcherLeft = Math.Sin(Math.PI * coeff )* speed;
+        //   switcherTop = Math.Cos(Math.PI * coeff )* speed;
+
+        // }
 
 
         else {

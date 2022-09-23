@@ -526,7 +526,7 @@ background-color: darkgreen;
   top: 200px;
   left: 225px;
 position: absolute;
-  z-index: 1;
+  z-index: 3;
   width: 200px;
   height: 150px;
   background-color: peru;
@@ -1573,7 +1573,7 @@ $tx: translateY(35px);
 
 #menuButton:hover {
 
-  background-color: lightblue;
+  background-color: rgb(23, 53, 63);
 
 }
 
