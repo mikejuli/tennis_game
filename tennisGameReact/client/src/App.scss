@@ -951,7 +951,8 @@ background-position: 20% 30%;
 
 #circle {
 
-  background-color: white;
+  //background-color: white;
+  background: linear-gradient(0deg, rgb(39, 248, 50) 50%, rgba(128,217,134,1) 82%);
   width: 15px;
   height: 15px;
   position: relative;
@@ -1613,3 +1614,52 @@ to {
     transform: translate(75%, 30%) ;
 }}
 
+#noEnoughGoldMessage{
+  -webkit-animation-duration: 3s;animation-duration: 3s;
+  -webkit-animation-fill-mode: both;animation-fill-mode: both;
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;transform: translateY(-40px);}
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;transform: translateY(-40px);}
+}
+
+
+#enginePicture{
+
+  border-radius: 5px 100% 0px 100%;
+  transform: rotate(45deg);
+  animation: 0.2s fadeOutE infinite;
+}
+
+#enginePictureIn{
+  border-radius: 5px 100% 0px 100%;
+  transform: rotate(45deg);
+  animation: 0.1s fadeOutEI infinite;
+}
+
+#enginePictureUp{
+  border-radius: 10px 10px 0px 0px;
+}
+
+@-webkit-keyframes fadeOutE {
+  0% {opacity: 1;}
+  100% {opacity: 0.5;transform: translateY(10px);}
+}
+
+@keyframes fadeOutEI {
+  0% {opacity: 1;}
+  100% {opacity: 0.5;transform: translateY(5px) scale(2,2) rotate(45deg);;}
+}
+
+@keyframes fadeOutE {
+  0% {opacity: 1;}
+  100% {opacity: 0.5;transform: translateY(5px) scale(2,2) rotate(45deg);}
+}
