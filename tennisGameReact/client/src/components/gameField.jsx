@@ -488,7 +488,7 @@ if(document.getElementById('ball')){
     //  var funcEnter = ( (e)=> {
 
 
-      if(tops >= posY-ball-3 && tops <= posY+2-ball){
+      if(tops >= posY-ball-4 && tops <= posY+4-ball){
        //   console.log(tops);
         firstEnter = pos;}
 
@@ -501,10 +501,13 @@ if(document.getElementById('ball')){
 
         if(tops >= posY - ball +6 && tops <= posY-ball+12){
 
-          console.log(pos, firstEnter);
+
+
+          if(firstEnter === undefined) {firstEnter = pos;};
+
           var powerOfTouching = firstEnter - pos;
 
-          console.log(powerOfTouching, 'powerOfTouching');
+          console.log(powerOfTouching,'powerOfTouching');
 
 
           Math.Sin = function(w){
@@ -515,8 +518,8 @@ if(document.getElementById('ball')){
         };
 
 
-        if(powerOfTouching!==0) {
-
+        if(!(powerOfTouching<3 && powerOfTouching>-3) ) {
+console.log('asdfasdfasdfasd')
           coeff = powerOfTouching/70 + 1;
           if(coeff>1.4){coeff=1.4}
           if(coeff<0.6){coeff=0.6}
