@@ -45,9 +45,9 @@ class AppGame extends React.Component {
       var message = document.createElement('div');
       message.setAttribute('id','noEnoughGoldMessage');
 
-      var f = document.getElementById('noEnoughGoldMessage')
 
-      message.setAttribute('style','width: 140px; height: 40px; left: 330px; top: 450px;position: absolute; background-color: #ff5a4f; transition: 1s ease-in-out');
+
+      message.setAttribute('style','width: 140px; height: 40px; left: 330px; top: 450px;position: absolute; background-color: #f1d90d; line-height: 40px; padding-left:10px');
       message.textContent = 'no enough gold'
 
 
@@ -57,8 +57,10 @@ class AppGame extends React.Component {
 
       g.appendChild(message);
 
-      setTimeout(()=>{ g.removeChild(message)
-      },1000)
+
+
+      setTimeout(()=>{ g.removeChild(message);
+      },5000)
 
       return false;
     }

@@ -69,8 +69,8 @@ useEffect(()=>{
   <a class="desc" onClick = {()=>{ if(props.changer===props.skin){openMenu(true)}; if(toggleSetSkin(props.skin)===false){openMenu(true)}} } style = {skin.skinArray.value[props.skin]?{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./${props.skillButton}')`,backgroundColor:props.color}:{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./${props.skillButton}')`,backgroundColor:props.color, filter: 'grayscale(80%)' }} ></a>
 
   <div id = 'description' style = {{top: props.top}}>
-  {props.skin}
-  {skin.skinArray.description[props.skin]}
+  <div style = {{textAlign:'left', padding:'10px 0px 0px 10px'}}>{props.skin}</div>
+  <div style = {{color: 'aqua', textAlign:'left', fontSize: '16px', padding: '5px 0px 0px 10px'}}>{skin.skinArray.description[props.skin]}</div>
 
   <div id = 'descSet'  onClick = {()=>{ toggleSetSkin(props.skin)}}>Set </div>
   {skin.skinArray.value[props.skin]?<div></div> : <div id = 'descPrice' onClick = {()=>{toggle(props.skin, props.price)}}><div style = {{position: 'relative', width: '55px', float: 'left'}}>{props.price}</div> <img src = 'coin1.png' width = '20px' height = '20px' style= {{marginTop: '3px'}}></img> </div>}

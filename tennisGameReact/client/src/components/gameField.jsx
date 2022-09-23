@@ -41,6 +41,11 @@ import Player from './Player'
 
     this.setState({flightActual:true});
 
+  // var enginePicture = document.createElement('div');
+  // enginePicture.setAttribute('id','enginePicture')
+  // enginePicture.setAttribute('style',`width:10px; height:10px; top:5px;left:${this.state.plate/2-5}px;position:absolute;background-color:red`)
+  // document.getElementById('plate').appendChild(enginePicture);
+
   }
 
   soundStart(){
@@ -65,6 +70,10 @@ import Player from './Player'
     flightBackState(){
       this.setState({flight:false});
 
+      // var g = document.getElementById('plate');
+      // var r = document.getElementById('enginePicture')
+      // g.removeChild(r);
+
     }
 
 //changed from componentDidmount
@@ -86,9 +95,34 @@ import Player from './Player'
 
       }
 
+
+
+
+
     }
 
     componentDidUpdate( prevProps, prevState){
+
+      if(prevState.flight!==this.state.flight ){
+
+        var enginePictureUp = document.createElement('div');
+        enginePictureUp.setAttribute('id','enginePictureUp')
+        enginePictureUp.setAttribute('style',`width:14px; height:7px; top:9px;left:${this.state.plate/2-7}px;position:absolute;background-color:rgb(23, 53, 63);z-index:1`)
+        document.getElementById('plate').appendChild(enginePictureUp);
+
+        var enginePicture = document.createElement('div');
+  enginePicture.setAttribute('id','enginePicture')
+  enginePicture.setAttribute('style',`width:10px; height:10px; top:11px;left:${this.state.plate/2-5}px;position:absolute;background-color:red`)
+  document.getElementById('plate').appendChild(enginePicture);
+
+  var enginePictureIn = document.createElement('div');
+  enginePictureIn.setAttribute('id','enginePictureIn')
+  enginePictureIn.setAttribute('style',`width:6px; height:6px; top:11px;left:${this.state.plate/2-3}px;position:absolute;background-color:yellow`)
+  document.getElementById('plate').appendChild(enginePictureIn);
+      }
+
+
+
 
       var changePlate=0;
 
@@ -139,6 +173,12 @@ import Player from './Player'
 
         var plate = this.state.plate;
         document.getElementById('plate').style.width = plate + 'px';
+        if(this.state.flight){
+        document.getElementById('enginePicture').style.left = this.state.plate/2-5 + 'px';
+        document.getElementById('enginePictureIn').style.left = this.state.plate/2-3 + 'px';
+        document.getElementById('enginePictureUp').style.left = this.state.plate/2-7 + 'px';
+
+      }
       }
 
 
@@ -648,6 +688,8 @@ var mousemove = (e) => {
 
   if(flightActual){
   document.getElementById('plate').style.top = posY + 'px';
+
+
   }
   }
 
