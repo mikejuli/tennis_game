@@ -273,7 +273,7 @@ class Levels extends React.Component {
      <div id = 'menuButton' onClick={()=>this.openLogOutMenu()}>🚪</div>
 </div>
 
-      {this.state.openLeaderBoard ? <LeaderBoard/> : <div></div>}
+      {this.state.openLeaderBoard ? <LeaderBoard openLeaderBoard = {this.openLeaderBoard}/> : <div></div>}
       <Player url = 'backgroundmusic.mp3'/>
 
       </div>
