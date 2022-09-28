@@ -305,6 +305,22 @@ console.log(req.query);
   } )
 
 
+
+  app.get('/getLeaderList', function(req,res) {
+    console.log(req.query);
+      db.getLeaderList(
+
+        (err,result) => {
+
+            res.send(result)
+
+        }
+        )
+
+      } )
+
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

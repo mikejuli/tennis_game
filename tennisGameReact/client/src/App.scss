@@ -47,8 +47,9 @@
   width: 800px;
   height: 600px;
   margin-top: auto;
-
-
+position: absolute;
+top: calc(50% - 300px);
+left: calc(50% - 400px);
     font-family: JosefinSlab;
     font-size: 20px;
     user-select: none;
@@ -295,11 +296,17 @@ button.back:hover {
 
 #BarMenuIn{
   position: absolute;
-  margin: 5px;
+  height: 60px;
+  width: 640px;
+  background-color: #66b266;
+  border-radius: 50px 50px 0px 0px;
+  -webkit-border-radius: 50px 50px 0px 0px;
 
-  width: 150px;
-  height: 500px;
 
+}
+
+#BarMenuIn div{
+  float: left;
 }
 
 #nameAndAvatar {
@@ -372,18 +379,19 @@ button.back:hover {
 
 
 
-
 #drop {
 
   position: absolute;
 }
 
 #gamebar {
+
   float: left;
 
 }
 
 #inside {
+  top: 50px;
   width: 100%;
 }
 
@@ -526,7 +534,7 @@ background-color: darkgreen;
   top: 200px;
   left: 225px;
 position: absolute;
-  z-index: 1;
+  z-index: 3;
   width: 200px;
   height: 150px;
   background-color: peru;
@@ -1573,7 +1581,7 @@ $tx: translateY(35px);
 
 #menuButton:hover {
 
-  background-color: lightblue;
+  background-color: rgb(23, 53, 63);
 
 }
 

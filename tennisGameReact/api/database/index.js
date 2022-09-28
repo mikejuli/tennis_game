@@ -258,7 +258,12 @@ let findAndActiveUserSkin = ( user, activeSkin, cb) => {
 
       }
 
+    let getLeaderList = (cb) => {
 
+        User.find({},{user:1,level:1,gold:1,activeCharacter:1, _id:0}).sort( { 'level':-1,'gold':-1 } ).limit(10).exec((err, result)=>{ cb(err,result)})
+
+
+    }
 
 
 console.log('done');
@@ -276,3 +281,4 @@ module.exports.buySkin = findAndBuyUserSkin;
 module.exports.activeSkin = findAndActiveUserSkin;
 module.exports.setCharacter = findAndActiveUserCharacter;
 module.exports.checkCharacter = checkUserCharacter;
+module.exports.getLeaderList = getLeaderList;

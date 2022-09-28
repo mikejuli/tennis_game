@@ -22,6 +22,6 @@ var levelGrid = {
   '20' : 1111444410,
 
 }
- //insted of this table here is supposed to be a database connection
+ //instead of this table here is supposed to be a database connection
 
 export default levelGrid;

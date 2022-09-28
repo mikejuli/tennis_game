@@ -18,7 +18,7 @@ const Description = (props) => {
     //set skin once we bought it
     //uncomment lines bellow
     //**********************/
-  var g =  props.buyItem(price,selector);
+  var g =  props.buyItem(props.price,'noItem');
 
   if(g){
     setChanger(selector);
