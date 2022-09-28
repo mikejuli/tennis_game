@@ -208,27 +208,30 @@ class App extends React.Component{
         break
       case "logIn":
         return (
-          <div>
-            <h2>Welcome Back!</h2>
+          <div style = {{width: '260px', height:'200px', position: 'absolute', left: '40%',top: '30%', backgroundColor: 'rgb(20 136 156)', borderRadius: '25px', padding: '5px'}}>
+            <h2>Arcane Pong</h2>
             <div>
-              <legend>Log In</legend>
-              <ul>
-                <li>
-                  <label for="username">Username:</label>
+
+              <br/>
+
+                  <label for="username">Login </label>
                   <input type="text" id="username" required/>
-                </li>
-                <li>
-                  <label for="password">Password:</label>
+
+                  <br/>
+                  <label for="password">Password </label>
                   <input type="password" id="password" required/>
-                </li>
-                <li>
-                  <i/>
-                  <a onClick={ () => this.changeView("PWReset")} href="#">Forgot Password?</a>
-                </li>
-              </ul>
-            </div>
+
+                  <br/>
+                  <br/>
+
+
             <button onClick ={()=>{this.login(document.getElementById('username').value, document.getElementById('password').value);}}>Login</button>
             <button type="button" onClick={ () => this.changeView("signUp")}>Create an Account</button>
+
+            </div>
+
+                  <a onClick={ () => this.changeView("PWReset")} href="#">Forgot Password?</a>
+
           </div>
 
         )

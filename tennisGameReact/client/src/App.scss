@@ -47,8 +47,9 @@
   width: 800px;
   height: 600px;
   margin-top: auto;
-
-
+position: absolute;
+top: calc(50% - 300px);
+left: calc(50% - 400px);
     font-family: JosefinSlab;
     font-size: 20px;
     user-select: none;

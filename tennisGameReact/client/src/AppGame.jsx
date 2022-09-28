@@ -39,6 +39,7 @@ class AppGame extends React.Component {
   buyItem(price, item, check) {
     console.log(price, this.state.gold);
 
+
     if(this.state.gold<price){
 
 
@@ -72,6 +73,9 @@ class AppGame extends React.Component {
 
    // this.props.buyItemFromRedux(this.state.gold);
   //  if(check !== undefined)){
+
+      if(item!=='noItem'){
+
     this.setState({ gold: this.state.gold - price }, () => {
       //done
       $.ajax({
@@ -83,6 +87,8 @@ class AppGame extends React.Component {
         },
       });
     });
+
+  }
 
     if (item === "onfire") {
       this.setState({ onfire: true });

@@ -3,7 +3,7 @@ import AppGame from "./AppGame";
 import axios from "axios";
 import story from './story'
 const AppCharacter = (props) => {
-  const [character, setCharacter] = useState("wizard");
+  const [character, setCharacter] = useState("");
   const [start, setStart] = useState(false);
 
   const [text, setText] = useState('');
@@ -35,6 +35,9 @@ const AppCharacter = (props) => {
 
   //if localUser has user -> fetch and check if user has picked user.
   async function getCharacter() {
+
+    if(character!==''){
+
     var user = localStorage.getItem("user");
     console.log("here");
     axios
@@ -47,6 +50,32 @@ const AppCharacter = (props) => {
         console.log(response.data[0].activeCharacter);
       });
 
+    } else {
+
+      var message = document.createElement('div');
+      message.setAttribute('id','noEnoughGoldMessage');
+
+
+
+      message.setAttribute('style','width: 140px; height: 40px; top: 90%;position: absolute; background-color: #f1d90d; line-height: 40px');
+      message.style.left = 'calc(50% - (70px))';
+      message.textContent = 'select character'
+
+
+
+
+      var g = document.getElementById('nextWrap');
+
+      g.appendChild(message);
+
+
+
+      setTimeout(()=>{ g.removeChild(message);
+      },5000)
+
+
+
+    }
     //setCharacter(response);
     //console.log(response);
   }
@@ -110,15 +139,15 @@ const AppCharacter = (props) => {
           </div>
           </div>
           <div id = "nextWrap">
-          <div
-            id="next"
-            onClick={() => {
+
+
+          <div id="next" onClick={() => {
               getCharacter();
             }}
           >
-            {" "}
-            Start the game
+            {" "} Start the game
           </div>
+
           </div>
         </div>
       )}
