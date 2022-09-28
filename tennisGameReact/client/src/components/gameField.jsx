@@ -1231,14 +1231,14 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
       return(
 
         <div>
-          GAME!
 
-          <div> level: {this.state.level} </div>
+<div id ='gamebar' style = {{position: 'absolute',top: '10px'}}>
+          <GameBar character = {this.props.character} gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint } onFire = {this.state.onfire} user = {this.props.user} skillButton = {this.props.skin}/>
+        </div>
 
-      <div>gold: {this.state.gold}</div>
         <div id = 'inside'>
 
-<div id  = 'boxCover'>
+<div id  = 'boxCover' style = {{position: 'absolute',top: '70px'}} >
         <div>{this.state.win?<Win handleOff = {this.props.handleOff} level = {this.props.level} currentGold = {this.state.gold} />:<div></div>}</div>
       <div>{this.state.lose?<Lose handleLose = {this.props.handleLose}/>:<div></div>}</div>
         <div id = 'boxS'>
@@ -1250,9 +1250,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
             {/* <div id = 'ballS'></div> */}
         </div></div>
 </div>
-        <div id ='gamebar'>
-          <GameBar character = {this.props.character} gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint } onFire = {this.state.onfire} user = {this.props.user}/>
-        </div>
+
 
         {/* if we need to internal sound uncomment line bellow */}
         {/* {this.state.sound? <Player url = 'techhouse.mp3'/> : <div></div>} */}
