@@ -129,7 +129,7 @@ import Player from './Player'
       if(prevState.attribute!==this.state.attribute){
 
         if(this.state.attribute==='plate'){
-          this.setState({plate:this.state.plate + 20, platePoint:this.state.platePoint+1, attribute: undefined})
+          this.setState({plate:this.state.plate + 10, platePoint:this.state.platePoint+1, attribute: undefined})
           changePlate++;
 
           if(this.props.sound){
