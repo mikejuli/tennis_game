@@ -98,7 +98,7 @@ const AppCharacter = (props) => {
   }
 
   return (
-    <div>
+    <div style = {{background: 'linear-gradient(-45deg, #28bebe, #4cc8ee, #23a6d5, #23d5ab)', borderRadius: '10px'}}>
       {start ? (
         <AppGame handleLogout={props.handleLogout} character={character} />
       ) : (

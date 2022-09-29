@@ -213,16 +213,16 @@ class App extends React.Component{
             <div>
 
               <br/>
-
+                  <div style = {{float: 'right',  marginRight: '20px', marginBottom: '10px'}}>
                   <label for="username">Login </label>
                   <input type="text" id="username" required/>
+                  </div>
 
-                  <br/>
+                  <div style = {{float: 'right', marginRight: '20px',  marginBottom: '10px'}}>
                   <label for="password">Password </label>
                   <input type="password" id="password" required/>
+                  </div>
 
-                  <br/>
-                  <br/>
 
 
             <button onClick ={()=>{this.login(document.getElementById('username').value, document.getElementById('password').value);}}>Login</button>
