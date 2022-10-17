@@ -5,6 +5,18 @@ $background-color4: linear-gradient(0deg, rgb(248, 39, 248) 11%, rgb(210, 128, 2
 $background-color5: linear-gradient(0deg, rgb(248, 227, 39) 11%, rgb(217, 211, 128) 82%);
 
 
+$stylePlateRare: linear-gradient(90deg, rgb(9 138 231), rgb(139 216 235), rgb(136 223 253), rgb(35 140 213));
+$stylePlateRareBorder: solid 1px aqua;
+
+
+$stylePlateEpic: linear-gradient(-135deg, #ab0202,#ff1818, #ab0202,#ff1818);
+$stylePlateEpicBorder: solid 1px #f0ff30;
+
+$stylePlateLegendary:linear-gradient(89deg, rgb(29, 136, 36), rgb(73 255 160 / 81%), rgb(108 222 127), rgb(7, 112, 30));
+$stylePlateLegendaryBorder: 1px solid rgb(35 181 86);
+
+$stylePlateMythic: linear-gradient(-135deg, #20baf7, #ef20f7, #fb9eff, #58bfe9);
+$stylePlateMythicBorder: solid 1px aqua;
 
 
 :export {
@@ -14,5 +26,19 @@ background2: $background-color2;
 background3: $background-color3;
 background4: $background-color4;
 background5: $background-color5;
+
+plateRare: $stylePlateRare ;
+plateRareBorder: $stylePlateRareBorder;
+
+
+plateEpic: $stylePlateEpic ;
+plateEpicBorder: $stylePlateRareBorder;
+
+plateLegendary: $stylePlateLegendary;
+plateLegendaryBorder: $stylePlateLegendaryBorder;
+
+plateMythic: $stylePlateMythic;
+plateMythicBorder: $stylePlateMythicBorder;
+
 }
 

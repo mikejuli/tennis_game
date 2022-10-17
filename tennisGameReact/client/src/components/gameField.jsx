@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 import {setSound} from '../features/sound'
 import Player from './Player'
 
+
   class Field extends React.Component {
 
 
@@ -86,16 +87,66 @@ import Player from './Player'
         this.setState({gun: this.props.shooting})
         this.setState({platePoint: this.props.bigPlate, plate: this.state.plate + (this.props.bigPlate*20)})
 
-      if(this.props.skin === 'rare'){
-        // document.getElementById('plate').style.background = 'orange'
 
-        document.getElementById('plate').style.background = 'linear-gradient(-135deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)';
 
-          document.getElementById('plate').style.border = 'solid 1px aqua'
+      var stylePlate = (background, border) => {
+
+
+        document.getElementById('plate').style.background = background;
+
+        document.getElementById('plate').style.border = border
+
+    }
+
+      switch (this.props.skin) {
+
+        case 'rare': stylePlate(variables.plateRare,variables.plateRareBorder);break;
+
+        case 'epic': stylePlate(variables.plateEpic,variables.plateEpicBorder); break;
+
+        case 'legendary': stylePlate(variables.plateLegendary,variables.plateLegendaryBorder); break;
+
+        case 'mythic': stylePlate(variables.plateMythic,variables.plateMythicBorder); break;
+
+
 
       }
 
 
+      // if(this.props.skin === 'rare'){
+
+      //   stylePlate(variables.plateRare,variables.plateRareBorder);
+
+      // }
+
+      // if(this.props.skin === 'epic'){
+
+      //   // document.getElementById('plate').style.background = 'linear-gradient(-135deg, #a6fd44,#ff1818, #ab0202,#79af32)';
+
+      //   stylePlate('linear-gradient(-135deg, #ab0202,#ff1818, #ab0202,#ff1818)','solid 1px #f0ff30');
+
+      // }
+
+      // if(this.props.skin === 'legendary'){
+
+
+
+      //   stylePlate('linear-gradient(89deg, rgb(29, 136, 36), rgb(73 255 160 / 81%), rgb(108 222 127), rgb(7, 112, 30))','1px solid rgb(35 181 86)');
+
+
+
+      // }
+
+
+      // if(this.props.skin === 'mythic'){
+
+
+
+      //   stylePlate('linear-gradient(-135deg, #20baf7, #ef20f7, #fb9eff, #58bfe9)','solid 1px aqua');
+
+
+
+      // }
 
 
 
@@ -296,7 +347,6 @@ topI = topI + 2;
       //if you cought tnt run this block. should be moved to separate component
 
       if(attributeI === 'tnt'){
-        console.log('BOOOOM!',topI,leftI);
         var boom = document.createElement('div');
         boom.setAttribute('id', 'boom');
         boom.setAttribute('style', `top: ${topInew}px ; left:${leftInew}px`);
@@ -519,7 +569,7 @@ if(document.getElementById('ball')){
 
 
         if(!(powerOfTouching<3 && powerOfTouching>-3) ) {
-console.log('asdfasdfasdfasd')
+
           coeff = powerOfTouching/70 + 1;
           if(coeff>1.4){coeff=1.4}
           if(coeff<0.6){coeff=0.6}
