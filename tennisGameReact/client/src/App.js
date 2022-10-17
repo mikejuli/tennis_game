@@ -182,28 +182,28 @@ class App extends React.Component{
     switch(this.state.currentView) {
       case "signUp":
         return (
-          <form>
-            <h2>Sign Up!</h2>
+          <div style = {{width: '260px', height:'200px', position: 'absolute', left: '40%',top: '30%', backgroundColor: 'rgb(20 136 156)', borderRadius: '25px', padding: '5px'}}>
+            <h2 >Sign Up!</h2>
             <div>
-              <legend>Create Account</legend>
-              <ul>
-                <li>
+
+            <div style = {{float: 'right',  marginRight: '15px', marginBottom: '5px', marginTop: '10px'}}>
                   <label for="username">Username:</label>
                   <input type="text" id="username" required/>
-                </li>
-                <li>
+                </div>
+
+                 <div style = {{float: 'right',  marginRight: '15px', marginBottom: '5px'}}>
                   <label for="email">Email:</label>
-                  <input type="email" id="email" required/>
-                </li>
-                <li>
+                  <input  type="email" id="email" required/>
+                </div>
+                <div style = {{float: 'right',  marginRight: '15px', marginBottom: '5px'}}>
                   <label for="password">Password:</label>
                   <input type="password" id="password" required/>
-                </li>
-              </ul>
+                </div>
+
             </div>
-            <button type = "button" onClick = { ()=>this.newAcc(document.getElementById('username').value,document.getElementById('password').value)}>Submit</button>
-            <button type="button" onClick={ () => this.changeView("logIn")}>Have an Account?</button>
-          </form>
+            <div id = 'buyI' style = {{top: '160px', left: '40px'}} onClick = { ()=>this.newAcc(document.getElementById('username').value,document.getElementById('password').value)}>Submit</div>
+            <div id = 'buyI' style = {{top: '160px', left: '150px'}} onClick={ () => this.changeView("logIn")}>Go Back</div>
+          </div>
         )
         break
       case "logIn":
@@ -225,12 +225,12 @@ class App extends React.Component{
 
 
 
-            <button onClick ={()=>{this.login(document.getElementById('username').value, document.getElementById('password').value);}}>Login</button>
-            <button type="button" onClick={ () => this.changeView("signUp")}>Create an Account</button>
+            <div id = 'buyI' style = {{top: '150px', left: '40px'}} onClick ={()=>{this.login(document.getElementById('username').value, document.getElementById('password').value);}}>Login</div>
+            <div id = 'buyI' style = {{top: '150px', left: '150px'}} onClick={ () => this.changeView("signUp")}>Sign Up</div>
 
             </div>
 
-                  <a onClick={ () => this.changeView("PWReset")} href="#">Forgot Password?</a>
+                  <div style = {{fontSize: '14px', cursor: 'pointer', width: '140px', height: '20px', marginLeft: '80px', marginTop: '105px', hover: 'color:red'}} onClick={ () => this.changeView("PWReset")}>Forgot Password?</div>
 
           </div>
 
@@ -238,23 +238,21 @@ class App extends React.Component{
         break
       case "PWReset":
         return (
-          <form>
+          <div style = {{width: '260px', height:'200px', position: 'absolute', left: '40%',top: '30%', backgroundColor: 'rgb(20 136 156)', borderRadius: '25px', padding: '5px'}}>
           <h2>Reset Password</h2>
-          <fieldset>
-            <legend>Password Reset</legend>
-            <ul>
-              <li>
-                <em>A reset link will be sent to your inbox!</em>
-              </li>
-              <li>
-                <label for="email">Email:</label>
-                <input type="email" id="email" required/>
-              </li>
-            </ul>
-          </fieldset>
-          <button>Send Reset Link</button>
-          <button type="button" onClick={ () => this.changeView("logIn")}>Go Back</button>
-        </form>
+
+
+                <div style = {{float: 'right', marginRight: '20px',  marginBottom: '10px', marginTop: '20px'}}>
+                <label for="email">Email: </label>
+                <input type="email" id="email" style = {{width: '160px'}}required/>
+                </div>
+                <div style = {{fontSize: '14px', position:'absolute', top: '120px', left: '20px'}}>A reset link will be sent to your inbox</div>
+
+
+          <div id = 'buyI' style = {{top: '150px', left: '40px'}}>Send</div>
+
+          <div id = 'buyI' style = {{top: '150px', left: '150px'}} onClick={ () => this.changeView("logIn")}>Go Back</div>
+        </div>
         )
       case "game":
         console.log('asd');

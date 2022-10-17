@@ -303,7 +303,7 @@ drop.setAttribute('id', 'drop');
 drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px `);
 
 if(attributeI==='gun'){
-drop.setAttribute('style', `top: ${topI}px ; left:${leftI}px; width: 10px; height: 10px; background-color: white; `);
+drop.textContent = '🏹';
 }
 
 if(attributeI==='onfire'){
