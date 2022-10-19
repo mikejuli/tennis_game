@@ -850,9 +850,9 @@ console.log('here is lvl ',lvl);
 //to prevent immidite fire the ball by click
 setTimeout(()=>{
 
+  var s = document.getElementById('box');
 
-
-  document.addEventListener('click', function(){
+  s.addEventListener('click', function(){
 
     flightActual();
 
