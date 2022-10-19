@@ -850,9 +850,13 @@ console.log('here is lvl ',lvl);
 //to prevent immidite fire the ball by click
 setTimeout(()=>{
 
-  var s = document.getElementById('box');
 
-  s.addEventListener('click', function(){
+
+  document.addEventListener('click', function(ev){
+
+    //check if click somewhere but soundsButton
+   if(ev.target.id !== 'menuButton'){
+
 
     flightActual();
 
@@ -866,7 +870,7 @@ setTimeout(()=>{
 
 
 
-
+   }
 
 
   })
