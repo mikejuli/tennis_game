@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-
+import SoundsToggle from './SoundsToggle'
 
 const GameBar = (props) => {
 
   var color;
   var backgroundImage;
+
+
 
   switch(props.skillButton){
 
@@ -37,14 +39,12 @@ const GameBar = (props) => {
   }
 
 
-
   return (
     <div className='container'>
 
       <div id = 'BarMenuIn'>
 
-
-
+    <div style = {{position: 'absolute', left: '80px', top: '5px'}}><SoundsToggle fromGame = {true}/></div>
 
   <div id = 'skin' style = {{backgroundImage: `url(./${backgroundImage})`, backgroundColor: color, width: '50px', height: '50px', top: '5px', left: '140px', position:'absolute', backgroundSize:'100%',borderRadius:'50%', backgroundRepeat: 'no-repeat'}}></div>
 
