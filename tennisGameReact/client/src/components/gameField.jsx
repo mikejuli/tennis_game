@@ -1283,7 +1283,9 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
         <div>
 
 <div id ='gamebar' style = {{position: 'absolute',top: '10px'}}>
+
           <GameBar character = {this.props.character} gold = {this.state.gold} level = {this.state.level} flight = {this.state.flight} gun = {this.state.gun} ballPoint = {this.state.ballPoint} platePoint = {this.state.platePoint } onFire = {this.state.onfire} user = {this.props.user} skillButton = {this.props.skin}/>
+
         </div>
 
         <div id = 'inside'>
