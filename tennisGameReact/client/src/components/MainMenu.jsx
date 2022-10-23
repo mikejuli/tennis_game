@@ -9,11 +9,12 @@ return(
 
 <div id = 'mainMenu' style = {{zIndex:'5'}}>
 
+<div style = {{position: 'absolute',top: '30px', left: '40px'}}>
  Are you sure?
+</div>
+<div id = 'buyI' style = {{position: 'absolute', top: '70%', left: '20px',width: '70px', height: '30px', cursor: 'pointer'}} onClick = {()=>props.handleLogout()}> Yes</div>
 
-<div id = 'menuButtonIn' style = {{position: 'absolute', top: '50%', cursor: 'pointer'}} onClick = {()=>props.handleLogout()}> Yes</div>
-
-<div id = 'menuButtonIn' style = {{position: 'absolute', top: '50%', left: '50%', width: '40px', height: '30px',cursor: 'pointer'}} onClick = {()=>props.openLogOutMenu()}> No</div>
+<div id = 'buyI' style = {{position: 'absolute', top: '70%', left: '110px', width: '70px', height: '30px',cursor: 'pointer'}} onClick = {()=>props.openLogOutMenu()}> No</div>
 </div>
 </div>
 )

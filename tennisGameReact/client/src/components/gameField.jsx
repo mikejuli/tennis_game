@@ -852,7 +852,11 @@ setTimeout(()=>{
 
 
 
-  document.addEventListener('click', function(){
+  document.addEventListener('click', function(ev){
+
+    //check if click somewhere but soundsButton
+   if(ev.target.id !== 'menuButton'){
+
 
     flightActual();
 
@@ -866,7 +870,7 @@ setTimeout(()=>{
 
 
 
-
+   }
 
 
   })

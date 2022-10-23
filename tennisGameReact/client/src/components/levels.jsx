@@ -18,7 +18,7 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 2900, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 2700, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
 
     this.changeLevels = this.changeLevels.bind(this)
     this.openLogOutMenu = this.openLogOutMenu.bind(this)
@@ -148,6 +148,9 @@ class Levels extends React.Component {
         }
         console.log(style.backgroundImage)
 
+
+
+
       }
 
 
@@ -158,6 +161,8 @@ class Levels extends React.Component {
        backgroundPosition: '0% 51.14%'
        }
        console.log(style.backgroundImage)
+
+
 
      }
 
@@ -189,12 +194,44 @@ class Levels extends React.Component {
 
 
     }
-    if(this.state.arrow===1){var page = 'first'} else
-    if(this.state.arrow===2) {var page = 'second'} else
-    if(this.state.arrow===3) {var page = 'third'} else
-    if(this.state.arrow===4) {var page = 'fourth'} else
-    if(this.state.arrow===5) {var page = 'fifth'} else
-    if(this.state.arrow===6) {var page = 'final'}
+    if(this.state.arrow===1){var page = 'first'
+
+    document.body.style.background = `url('./forest.jpg') no-repeat center center fixed`
+    document.body.style.backgroundSize = `cover`
+
+  } else
+    if(this.state.arrow===2) {var page = 'second';
+
+    document.body.style.background = `url('./snow.jpeg') no-repeat center center fixed`
+    document.body.style.backgroundSize = `cover`
+
+
+
+}
+
+    else if(this.state.arrow===3) {var page = 'third';
+
+    document.body.style.background = `url('./river.jpeg') no-repeat center center fixed`
+    document.body.style.backgroundSize = `cover`
+
+  } else
+    if(this.state.arrow===4) {var page = 'fourth';
+
+    document.body.style.background = `url('./sand.jpg') no-repeat center center fixed`
+    document.body.style.backgroundSize = `cover`
+
+  } else
+    if(this.state.arrow===5) {var page = 'fifth';
+
+    document.body.style.background = `url('./hell.jpeg') no-repeat center center fixed`
+    document.body.style.backgroundSize = `cover`
+
+  } else
+    if(this.state.arrow===6) {var page = 'final';
+    document.body.style.background = `url('./river.jpeg') no-repeat center center fixed`
+    document.body.style.backgroundSize = `cover`
+
+  }
 
 
     if(this.state.changeArrow===1){
@@ -232,11 +269,11 @@ class Levels extends React.Component {
 {page!== 'first' ? <button class = 'back' onClick = {()=>{this.changeLevels(-1); }}></button> : <div></div>}
 
 
-      <table id = 'level' >
+      <div id = 'level' >
 
       {rend}
 
-        </table>
+        </div>
 
 
     {page!=='final'?<BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} user = {this.props.user} />:<div id = 'finalPage' style = {{position: 'absolute' }}>
@@ -274,6 +311,7 @@ class Levels extends React.Component {
 </div>
 
       {this.state.openLeaderBoard ? <LeaderBoard openLeaderBoard = {this.openLeaderBoard}/> : <div></div>}
+
       <Player url = 'backgroundmusic.mp3'/>
 
       </div>
