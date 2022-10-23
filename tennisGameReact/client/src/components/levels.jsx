@@ -202,7 +202,7 @@ class Levels extends React.Component {
   } else
     if(this.state.arrow===2) {var page = 'second';
 
-    document.body.style.background = `url('./sand.jpg') no-repeat center center fixed`
+    document.body.style.background = `url('./snow.jpeg') no-repeat center center fixed`
     document.body.style.backgroundSize = `cover`
 
 
