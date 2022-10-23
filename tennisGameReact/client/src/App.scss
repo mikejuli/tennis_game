@@ -164,6 +164,12 @@ button.button {
   transition:2s
 }
 
+button.button:hover {
+
+  background-color: rgb(38, 255, 30);
+  border: rgb(49, 82, 155) 2px solid;
+}
+
 button.disButton {
   font-family: JosefinSlab ;
   font-size: 22px;
