@@ -63,6 +63,7 @@ left: calc(50% - 400px);
   height: 480px;
   width: 640px;
   position: relative;
+  left: 80px;
   cursor: none;
 }
 
@@ -162,6 +163,12 @@ button.button {
   height: 70px;
   cursor: pointer;
   transition:2s
+}
+
+button.button:hover {
+
+  background-color: rgb(38, 255, 30);
+  border: rgb(49, 82, 155) 2px solid;
 }
 
 button.disButton {
@@ -299,6 +306,7 @@ button.back:hover {
   position: absolute;
   height: 60px;
   width: 640px;
+  left: 80px;
   background-color: #66b266;
   border-radius: 50px 50px 0px 0px;
   -webkit-border-radius: 50px 50px 0px 0px;
@@ -532,28 +540,30 @@ background-color: darkgreen;
 
 #win {
   text-align: center;
-  top: 200px;
-  left: 225px;
+  top: 150px;
+  left: 300px;
 position: absolute;
   z-index: 3;
   width: 200px;
   height: 150px;
-  background-color: peru;
-  border-radius: 5%;
+  background-color:#66b266;
+
   justify-content: center;
+  border:rgb(195 164 103) 1px solid;
 }
 
 #lose {
   text-align: center;
-  top: 200px;
-  left: 250px;
+  top: 150px;
+  left: 300px;
 position: absolute;
   z-index: 2;
   width: 200px;
   height: 150px;
-  background-color: plum;
-  border-radius: 5%;
+  background-color:#94b266;
+
   justify-content: center;
+  border:rgb(195 164 103) 1px solid;
 }
 
 #empty {
@@ -1639,6 +1649,7 @@ to {
   0% {opacity: 1;}
   100% {opacity: 0;transform: translateY(-40px);}
 }
+
 
 
 #enginePicture{

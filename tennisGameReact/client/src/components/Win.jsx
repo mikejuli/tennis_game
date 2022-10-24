@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {setSound} from '../features/sound'
 import {useDispatch} from 'react-redux'
 import {setItem} from '../features/boughtItems'
+import WinCoinCounter from './WinCoinCounter'
 
 const Win = (props) => {
 
@@ -38,10 +39,23 @@ console.log(props.level, props.currentGold)
 
   return (
 <div>
-    <div id = 'win' >WIN with gold {props.currentGold}
+    <div id = 'win'>
 
-    <button id = 'winButton' onClick = {()=>{props.handleOff(props.level, props.currentGold)
-    }}>Ok</button>
+      <div style ={{position: 'absolute', top: '20px', justifyContent: 'center', width: '100%'}}>
+      You win!
+      </div>
+
+<div style ={{position: 'absolute', top: '50px', justifyContent: 'center', width: '100%'}}>
+
+    <WinCoinCounter coin = {props.currentGold}/>
+
+
+
+
+</div>
+
+    <div id = 'buyI' style = {{left: '60px', top: '105px'}}  onClick = {()=>{props.handleOff(props.level, props.currentGold)
+    }}>Ok</div>
      </div>
 
 </div>

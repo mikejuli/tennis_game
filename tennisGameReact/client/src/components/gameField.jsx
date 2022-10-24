@@ -720,6 +720,10 @@ r();
 
 var mousemove = (e) => {
 
+if(!document.getElementById('plate')){
+  document.removeEventListener('mousemove',mousemove)}else{
+
+
   //if e.curenttatget is not box do calculate
 
   //if(e.clientY>50){var y = e.clientY} else {var y = 50}
@@ -771,55 +775,12 @@ var mousemove = (e) => {
     lefts = pos + (plate/2)-(ball/2);
 
   }
-
-  // }else{
-
-  //   var y = e.clientY
-  //   var x = e.clientX
-
-  //   var flightActual = this.state.flight;
-  //   var flightActualD = this.state.flightActual;
-
-  //   if(x<width-plate){
-  //     pos = x;
-  //   }else { pos = width-plate}
-
-  //   if(flightActual && flightActualD){
-  //   if(y<height-10){
-  //     posY = y;
-  //   }else {
-  //    posY = height-10;
-  //   }
-  //   }
-
-  //   if(document.getElementById('plate')){
-  //   document.getElementById('plate').style.left = pos + 'px';
-
-  //   if(flightActual){
-  //   document.getElementById('plate').style.top = posY + 'px';
-  //   }
-  //   }
-
-  //   if(!inMove){
-  //     document.getElementById('ball').style.left = pos +(plate/2)-(ball/2) + 'px';
-  //     document.getElementById('ball').style.top = height-10-ball + 'px';
-
-  //     document.getElementById('ball').style.height = ball + 'px';
-  //     document.getElementById('ball').style.width = ball + 'px';
-
-
-
-  //     tops = height-10-ball;
-  //     lefts = pos + (plate/2)-(ball/2);
-
-  // }
-  // //console.log(pos);
-
-  // }
+}
 }
 
 document.addEventListener ('mousemove', mousemove)
 
+console.log(document.onmousemove);
 
 
 var plateFun = this.plateFun;
@@ -1275,6 +1236,9 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
 
         }
+
+
+
 
     render(){
 

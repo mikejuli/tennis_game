@@ -5,6 +5,7 @@ import AppGame from './AppGame.jsx';
 import $ from 'jquery';
 import AppCharacter from './AppCharacter';
 import axios from 'axios';
+import AppLogout from './AppLogout'
 
 class App extends React.Component{
   constructor(props){
@@ -44,7 +45,7 @@ class App extends React.Component{
               params: { user: loggedUser },
             })
             .then((response) => {
-              console.log(response,'HEREEEEEEEEEEEEEEE')
+              console.log(response,'response')
               if(response.data[0].activeCharacter !== 'none'){
 
                 this.setState({choosen: 'selected'});
@@ -98,6 +99,61 @@ class App extends React.Component{
 
   newAcc = (login,password) => {
 
+    //rules for login and pass
+    if(!login) { var message = document.createElement('div');
+    message.setAttribute('id','noEnoughGoldMessage');
+
+
+
+    message.setAttribute('style','width: 200px; height: 40px; top: 75%;position: absolute; background-color: #f1d90d; line-height: 40px; text-align: center;  animation-duration: 5s; ');
+    message.style.left = 'calc(50% - (100px))';
+    message.textContent = 'Input login'
+
+
+
+
+    var g = document.querySelector('.App');
+
+    g.appendChild(message);
+
+
+
+    setTimeout(()=>{ g.removeChild(message);
+    },5000) }
+
+    else
+    if(password.length<6){
+
+      var message = document.createElement('div');
+      message.setAttribute('id','noEnoughGoldMessage');
+
+
+
+      message.setAttribute('style','width: 300px; height: 40px; top: 75%;position: absolute; background-color: #f1d90d; line-height: 40px; text-align: center;  animation-duration: 5s; ');
+      message.style.left = 'calc(50% - (150px))';
+      message.textContent = 'Password (6 characters minimum)'
+
+
+
+
+      var g = document.querySelector('.App');
+
+      g.appendChild(message);
+
+
+
+      setTimeout(()=>{ g.removeChild(message);
+      },5000)
+
+
+    } else
+
+
+
+    //
+
+
+
     $.ajax({method: 'POST',
       url: `http://localhost:9000/newPlayer`,
       data: {login,password},
@@ -107,11 +163,55 @@ class App extends React.Component{
         if(result === 'exist'){
 
 
-          alert('Player already exists')
+          var message = document.createElement('div');
+          message.setAttribute('id','noEnoughGoldMessage');
+
+
+
+          message.setAttribute('style','width: 220px; height: 40px; top: 75%;position: absolute; background-color: #f1d90d; line-height: 40px; text-align: center;  animation-duration: 5s; ');
+          message.style.left = 'calc(50% - (110px))';
+          message.textContent = 'Player already exists'
+
+
+
+
+          var g = document.querySelector('.App');
+
+          g.appendChild(message);
+
+
+
+          setTimeout(()=>{ g.removeChild(message);
+          },5000)
+
 
       } else if (result === 'created'){
 
-        alert ('You just created a new player')
+
+        var message = document.createElement('div');
+          message.setAttribute('id','noEnoughGoldMessage');
+
+
+
+          message.setAttribute('style','width: 260px; height: 40px; top: 75%;position: absolute; background-color: #f1d90d; line-height: 40px; text-align: center; animation-duration: 10s; ');
+          message.style.left = 'calc(50% - (130px))';
+          message.textContent = 'New player\'s been created'
+
+
+
+
+          var g = document.querySelector('.App');
+
+          g.appendChild(message);
+
+
+
+          setTimeout(()=>{ g.removeChild(message);
+          },10000)
+
+
+          this.setState({currentView:'logIn'})
+
 
       }
 
@@ -156,12 +256,42 @@ class App extends React.Component{
           }
         }).then( ()=>{
 
+          var g = document.querySelector('.App');
+
+          if(document.getElementById('noEnoughGoldMessage')){
+          g.removeChild(document.getElementById('noEnoughGoldMessage'));
+          }
 
           this.setState({currentView:'game', user: result.user})
+
 
         }
 
           );
+
+      } else {
+
+        var message = document.createElement('div');
+        message.setAttribute('id','noEnoughGoldMessage');
+
+
+
+        message.setAttribute('style','width: 220px; height: 40px; top: 75%;position: absolute; background-color: #f1d90d; line-height: 40px; text-align: center; animation-duration: 5s;');
+        message.style.left = 'calc(50% - (110px))';
+        message.textContent = 'wrong login or password'
+
+
+
+
+        var g = document.querySelector('.App');
+
+        g.appendChild(message);
+
+
+
+        setTimeout(()=>{ g.removeChild(message);
+        },5000)
+
 
       }
 
@@ -197,7 +327,7 @@ class App extends React.Component{
                 </div>
                 <div style = {{float: 'right',  marginRight: '15px', marginBottom: '5px'}}>
                   <label for="password">Password:</label>
-                  <input type="password" id="password" required/>
+                  <input type="password" id="password" minlength="8" required/>
                 </div>
 
             </div>
@@ -255,11 +385,17 @@ class App extends React.Component{
         </div>
         )
       case "game":
-        console.log('asd');
+        console.log('in the game');
         return(
 
           <div>
-          {this.state.choosen === 'selected'?<AppGame handleLogout = {this.handleLogout} character = {this.state.character}/>:
+          {this.state.choosen === 'selected'?
+
+          <AppLogout handleLogout = {this.handleLogout}>
+          <AppGame handleLogout = {this.handleLogout} character = {this.state.character}/>
+          </AppLogout>
+
+          :
           <AppCharacter handleLogout = {this.handleLogout}/>}
         </div>
           )
