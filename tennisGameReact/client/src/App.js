@@ -5,6 +5,7 @@ import AppGame from './AppGame.jsx';
 import $ from 'jquery';
 import AppCharacter from './AppCharacter';
 import axios from 'axios';
+import AppLogout from './AppLogout'
 
 class App extends React.Component{
   constructor(props){
@@ -260,6 +261,7 @@ class App extends React.Component{
           if(document.getElementById('noEnoughGoldMessage')){
           g.removeChild(document.getElementById('noEnoughGoldMessage'));
           }
+
           this.setState({currentView:'game', user: result.user})
 
 
@@ -387,7 +389,13 @@ class App extends React.Component{
         return(
 
           <div>
-          {this.state.choosen === 'selected'?<AppGame handleLogout = {this.handleLogout} character = {this.state.character}/>:
+          {this.state.choosen === 'selected'?
+
+          <AppLogout handleLogout = {this.handleLogout}>
+          <AppGame handleLogout = {this.handleLogout} character = {this.state.character}/>
+          </AppLogout>
+
+          :
           <AppCharacter handleLogout = {this.handleLogout}/>}
         </div>
           )
