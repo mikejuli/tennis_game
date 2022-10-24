@@ -45,7 +45,7 @@ class App extends React.Component{
               params: { user: loggedUser },
             })
             .then((response) => {
-              console.log(response,'HEREEEEEEEEEEEEEEE')
+              console.log(response,'response')
               if(response.data[0].activeCharacter !== 'none'){
 
                 this.setState({choosen: 'selected'});
