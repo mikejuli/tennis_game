@@ -1,0 +1,21 @@
+import {createSlice} from '@reduxjs/toolkit';
+
+export const loaderMessageSlice = createSlice({
+  name: 'loaderMessage',
+  initialState: { value: 0, },
+  reducers: {
+
+
+    setLoaderMessage: (state,action)=>{
+
+state.value = action.payload;
+
+    }
+
+  }
+})
+
+
+export const {setLoaderMessage} = loaderMessageSlice.actions;
+
+export default loaderMessageSlice.reducer;

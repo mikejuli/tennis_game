@@ -10,6 +10,8 @@ import skinReducerCoin from './features/skinCoin'
 import skinReducedUpdate from './features/availiableSkin'
 import soundReducer from './features/sound'
 import itemReducer from './features/boughtItems'
+import loaderReducer from './features/loader'
+import loaderMessageReducer from './features/loaderMessage'
 
 const store = configureStore({
 
@@ -19,7 +21,9 @@ const store = configureStore({
     gold: skinReducerCoin,
     skinArray: skinReducedUpdate,
     sound: soundReducer,
-    item: itemReducer
+    item: itemReducer,
+    loader: loaderReducer,
+    loaderMessage: loaderMessageReducer,
   }
 
 })

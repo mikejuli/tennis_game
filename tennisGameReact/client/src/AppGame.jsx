@@ -7,7 +7,10 @@ import $ from "jquery";
 import { connect } from 'react-redux';
 import { buyItem } from "./features/skinCoin";
 import {updateItem} from './features/availiableSkin';
-import {setSkin} from './features/skin'
+import {setSkin} from './features/skin';
+import {setLoader} from './features/loader'
+import {setLoaderMessage} from './features/loaderMessage'
+
 
 class AppGame extends React.Component {
   constructor(props) {
@@ -24,12 +27,25 @@ class AppGame extends React.Component {
       flying: false,
       shooting: false,
       bigPlate: 0,
+      loaded: false
     };
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
     this.fitLevel = this.fitLevel.bind(this);
     this.buyItem = this.buyItem.bind(this);
     this.handleLose = this.handleLose.bind(this);
+    this.loaderChanger = this.loaderChanger.bind(this);
+  }
+
+
+  loaderChanger(message){
+
+    if(!this.state.loaded){
+    console.log(message, 'from loader')
+
+    this.props.setLoaderFromRedux(this.props.loader + 1);
+    this.props.setLoaderMessageFromRedux(message)
+    }
   }
 
   handle() {
@@ -203,6 +219,7 @@ class AppGame extends React.Component {
   componentDidMount() {
 
 
+
     if (!this.state.user) {
       this.setState({ user: localStorage.getItem("user") }, () => {
         console.log(this.state.user, "WAS MOUNT");
@@ -211,7 +228,7 @@ class AppGame extends React.Component {
           method: "POST",
           url: `http://localhost:9000/activeGET`,
           data: { user: this.state.user },
-          success: (result) => this.setState({ active: result }),
+          success: (result) => {this.loaderChanger('getting data');this.setState({ active: result })},
         });
         //done
         $.ajax({
@@ -219,7 +236,7 @@ class AppGame extends React.Component {
           url: `http://localhost:9000/userGET`,
           data: { user: this.state.user },
           success: (result) => {
-
+            this.loaderChanger('getting user');
 
             this.props.setSkinFromRedux(result[0].activeSkin);
 
@@ -232,11 +249,22 @@ class AppGame extends React.Component {
             })},
         });
 
+        console.log('was mount')
+
+
       });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
+
+
+    if(this.props.loader === 7){
+    this.setState({loaded: true})
+        this.props.setLoaderFromRedux(0)
+    }
+
+
    //???? should change logic here
     if(prevProps.coin !== this.props.coin){
 
@@ -254,7 +282,7 @@ class AppGame extends React.Component {
         data: { user: this.state.user, activeSkin: this.props.skin},
         success: (result) => {
           console.log(result, "from skin");
-
+          this.loaderChanger('getting active skin');
 
 
         },
@@ -331,7 +359,14 @@ class AppGame extends React.Component {
         // console.log('update');
       }
     }
+
+      $( document ).ready(function() {
+        console.log( "ready!" );
+     });
+
   }
+
+
 
   render() {
 
@@ -363,6 +398,7 @@ class AppGame extends React.Component {
     } else if (this.state.currentLevel) {
       popUp = (
         <Levels
+          loaderChanger = {this.loaderChanger}
           character = {this.props.character}
           handle={this.handle}
           fitLevel={this.fitLevel}
@@ -380,8 +416,11 @@ class AppGame extends React.Component {
 
     return (
       <div className="App">
-        <div>{popUp}</div>
+<div id = 'buyI' style = {{width: '300px', left: '250px', top: '300px'}}> {this.props.loaderMessage} {this.props.loader}</div>
+     <div style = {{visibility: this.state.loaded ? 'visible' : 'hidden'}}>{popUp}</div>
+     {/* :<div><div> {this.props.loaderMessage} {this.props.loader}</div> <div style = {{display: 'none'}}>{popUp}</div></div> } */}
       </div>
+
     );
   }
 }
@@ -389,13 +428,15 @@ class AppGame extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {buyItemFromRedux: (x)=>buyItem(x),
           updateItemFromRedux: (x)=>updateItem(x),
-          setSkinFromRedux: (x)=>setSkin(x)
+          setSkinFromRedux: (x)=>setSkin(x),
+          setLoaderFromRedux: (x)=>setLoader(x),
+          setLoaderMessageFromRedux: (x)=>setLoaderMessage(x)
   }
 };
 
 
 
-const mapStateToProps = state => ({ skin: state.skin.value, coin: state.gold.value })
+const mapStateToProps = state => ({ skin: state.skin.value, coin: state.gold.value, loader: state.loader.value  , loaderMessage: state.loaderMessage.value})
 
 
 

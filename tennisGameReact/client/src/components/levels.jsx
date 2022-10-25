@@ -26,16 +26,6 @@ class Levels extends React.Component {
   }
 
 
-  // componentDidMount(){
-  //   console.log('WAS MOUNT');
-  //   $.ajax({method: 'GET',
-  //   url: `http://localhost:9000/active`,
-  //   success: result => this.setState({active: result})
-
-  // })
-
-  //   }
-
   openLeaderBoard(){
 
     this.setState({
@@ -90,8 +80,71 @@ class Levels extends React.Component {
 
 
     componentDidMount(){
-      this.setState({active:this.props.active, arrow:this.props.arrow})
+      this.setState({active:this.props.active, arrow:this.props.arrow});
 
+      var loadingIn = this.props.loaderChanger;
+
+      var backgroundImageLoading = new Image();
+      backgroundImageLoading.src = '/grass.png';
+      backgroundImageLoading.onload = function() {
+
+        loadingIn('loading backgroundImage...');
+
+      console.log('loaded backgroundImageLoading');
+      }
+
+      // var forestImage = new Image();
+      // forestImage.src = '/forest.jpg';
+      // forestImage.onload = function() {
+      //   this.props.loaderChanger();
+
+      //   loadingIn('loaded forest');
+
+      // console.log('loaded forest');
+      // }
+
+      var snowImage = new Image();
+      snowImage.src = '/snow.jpeg';
+      snowImage.onload = function() {
+
+        loadingIn('loaded snow');
+
+      console.log('loaded snow');
+      }
+
+      var riverImage = new Image();
+      riverImage.src = '/river.jpeg';
+      riverImage.onload = function() {
+
+        loadingIn('loaded river');
+
+      console.log('loaded river');
+      }
+
+      var sandImage = new Image();
+      sandImage.src = '/sand.jpg';
+      sandImage.onload = function() {
+
+        loadingIn('loaded sand');
+
+      console.log('loaded sand');
+      }
+
+      var hellImage = new Image();
+      hellImage.src = '/hell.jpeg';
+      hellImage.onload = function() {
+
+        loadingIn('loaded hell');
+
+      console.log('loaded hell');
+      }
+    //   $( document ).ready(function() {
+    //     console.log( "ready!" );
+    //  });
+
+  //    $( document ).load(function() {
+  //     console.log( "ready load!" );
+  //  });
 
 
     }
@@ -134,15 +187,19 @@ class Levels extends React.Component {
 
       }
 
+
+
+      // <img src= '/grass.png'/>
+
       var style = {
-        backgroundImage: `url(${grass})`,
+        backgroundImage: `url('/grass.png')`,
         backgroundSize: '100%',
         backgroundPosition: '0% 4%'
       }
 
       if(i==1){
          style = {
-          backgroundImage: `url(${grass})`,
+          backgroundImage: `url('/grass.png')`,
         backgroundSize: '100%',
         backgroundPosition: '0% 27.6%'
         }
@@ -156,7 +213,7 @@ class Levels extends React.Component {
 
       if(i==2){
         style = {
-         backgroundImage: `url(${grass})`,
+         backgroundImage: `url('/grass.png')`,
        backgroundSize: '100%',
        backgroundPosition: '0% 51.14%'
        }
@@ -169,7 +226,8 @@ class Levels extends React.Component {
 
      if(i==3){
       style = {
-       backgroundImage: `url(${grass})`,
+        backgroundImage: `url('/grass.png')`,
+      //  backgroundImage: `image(${backgroundImageLoading})`,
      backgroundSize: '100%',
      backgroundPosition: '0% 74.75%'
      }
@@ -180,7 +238,7 @@ class Levels extends React.Component {
 
    if(i==4){
     style = {
-     backgroundImage: `url(${grass})`,
+      backgroundImage: `url('/grass.png')`,
    backgroundSize: '100%',
    backgroundPosition: '0% 98.3%'
    }
@@ -272,7 +330,7 @@ class Levels extends React.Component {
       <div id = 'level' >
 
       {rend}
-
+      {/* {backgroundImageLoading} */}
         </div>
 
 
