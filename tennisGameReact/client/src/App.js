@@ -5,7 +5,8 @@ import AppGame from './AppGame.jsx';
 import $ from 'jquery';
 import AppCharacter from './AppCharacter';
 import axios from 'axios';
-import AppLogout from './AppLogout'
+import AppLogout from './AppLogout';
+
 
 class App extends React.Component{
   constructor(props){
@@ -23,6 +24,8 @@ class App extends React.Component{
 
 
   componentDidMount(){
+
+
 
     console.log('mount' ,this.state.currentView);
     var loggedUser = localStorage.getItem('user');
@@ -390,11 +393,11 @@ class App extends React.Component{
 
           <div>
           {this.state.choosen === 'selected'?
-
           <AppLogout handleLogout = {this.handleLogout}>
-          <AppGame handleLogout = {this.handleLogout} character = {this.state.character}/>
-          </AppLogout>
 
+          <AppGame handleLogout = {this.handleLogout} character = {this.state.character}/>
+
+          </AppLogout>
           :
           <AppCharacter handleLogout = {this.handleLogout}/>}
         </div>
