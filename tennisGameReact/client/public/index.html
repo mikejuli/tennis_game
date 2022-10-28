@@ -34,19 +34,20 @@
         navigator.serviceWorker.register('./sw.js')
         .then((reg) => {
             console.log('Registration succeeded');
+
+            console.log(reg.active);
+            if(reg.active === null){
+
+              window.location.reload();
+
+            }
+
         }).catch((error) => {
             console.log('Registration failed with ' + error);
-        });
+
+          });
 
 
-        var refreshing;
-navigator.serviceWorker.addEventListener('controllerchange',
-    function () {
-        if (refreshing) return;
-        refreshing = true;
-        window.location.reload();
-    }
-);
       }
   </script>
 

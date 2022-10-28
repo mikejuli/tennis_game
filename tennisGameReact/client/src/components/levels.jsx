@@ -84,17 +84,27 @@ class Levels extends React.Component {
 
       var loadingIn = this.props.loaderChanger;
 
+      var imageList = [
+
+        ['loading backgroundImage...', '/grass.png'],
+        ['loaded snow background...', '/snow.jpeg'],
+        ['loaded river background...', '/river.jpeg'],
+        ['loaded sand background...', '/sand.jpg'],
+        ['loaded hell background...', '/hell.jpeg']
+      ]
 
 
+      loadingIn('loading image list...', imageList);
 
-      var backgroundImageLoading = new Image();
-      backgroundImageLoading.src = '/grass.png';
-      backgroundImageLoading.onload = function() {
 
-        loadingIn('loading backgroundImage...');
+      // var backgroundImageLoading = new Image();
+      // backgroundImageLoading.src = '/grass.png';
+      // backgroundImageLoading.onload = function() {
 
-      console.log('loaded backgroundImageLoading');
-      }
+      //   // loadingIn('loading backgroundImage...');
+
+      // console.log('loaded backgroundImageLoading');
+      // }
 
       // var forestImage = new Image();
       // forestImage.src = '/forest.jpg';
@@ -119,17 +129,17 @@ class Levels extends React.Component {
 
 
 
-        const cacheName = 'pic'
-        var url = '/snow.jpeg'
+        // const cacheName = 'pic'
+        // var url = '/snow.jpeg'
 
-        caches.open(cacheName).then( cache => {
-          cache.add(url).then( () => {
-              console.log("Data cached ")
+        // caches.open(cacheName).then( cache => {
+        //   cache.add(url).then( () => {
+        //       console.log("Data cached ")
 
-               loadingIn('loaded snow background...');
-              console.log('loaded snow');
-            });
-        });
+        //        loadingIn('loaded snow background...');
+        //       console.log('loaded snow');
+        //     });
+        // });
 
 
 
@@ -149,7 +159,7 @@ class Levels extends React.Component {
       //   cache.add('/river.jpeg').then( () => {
       //       console.log("Data cached ")
 
-             loadingIn('loaded river background...');
+
       //       console.log('loaded river');
       //     });
       // });
@@ -158,23 +168,36 @@ class Levels extends React.Component {
 
 
 
-      var sandImage = new Image();
-      sandImage.src = '/sand.jpg';
-      sandImage.onload = function() {
+      // var sandImage = new Image();
+      // sandImage.src = '/sand.jpg';
+      // sandImage.onload = function() {
 
-        loadingIn('loaded sand background...');
+      //   loadingIn('loaded sand background...');
 
-      console.log('loaded sand');
-      }
+      // console.log('loaded sand');
+      // }
 
-      var hellImage = new Image();
-      hellImage.src = '/hell.jpeg';
-      hellImage.onload = function() {
+      // caches.open(cacheName).then( cache => {
+      //   cache.add('/sand.jpg').then( () => {
+      //       console.log("Data cached ")
 
-        loadingIn('loaded hell background...');
+      //        loadingIn('loaded sand background...');
+      //       console.log('loaded sand');
+      //     });
+      // });
 
-      console.log('loaded hell');
-      }
+
+
+
+
+      // var hellImage = new Image();
+      // hellImage.src = '/hell.jpeg';
+      // hellImage.onload = function() {
+
+      //   loadingIn('loaded hell background...');
+
+      // console.log('loaded hell');
+      // }
     //   $( document ).ready(function() {
     //     console.log( "ready!" );
     //  });
@@ -306,12 +329,6 @@ class Levels extends React.Component {
 }
 
     else if(this.state.arrow===3) {var page = 'third';
-
-
- caches.match('/river.jpeg').then(res => {
-    console.log(res);
-  })
-
 
 
 

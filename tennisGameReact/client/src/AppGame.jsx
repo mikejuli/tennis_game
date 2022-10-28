@@ -38,13 +38,36 @@ class AppGame extends React.Component {
   }
 
 
-  loaderChanger(message){
+  loaderChanger(message, imageList){
 
     if(!this.state.loaded){
     console.log(message, 'from loader')
 
-    this.props.setLoaderFromRedux(this.props.loader + 1);
-    this.props.setLoaderMessageFromRedux(message)
+      if(imageList){
+
+        imageList.forEach((image)=>{
+
+          caches.open('pic').then( cache => {
+            cache.add(image[1]).then( () => {
+                console.log("Data cached ")
+
+
+
+                this.props.setLoaderFromRedux(this.props.loader + 1);
+                this.props.setLoaderMessageFromRedux(image[0])
+              });
+          });
+
+        })
+
+
+      }else {
+        this.props.setLoaderFromRedux(this.props.loader + 1);
+        this.props.setLoaderMessageFromRedux(message)
+
+      }
+      console.log(this.props.loader);
+
     }
   }
 
