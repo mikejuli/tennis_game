@@ -38,13 +38,13 @@ class App extends React.Component{
 
 
       $.ajax({method: 'POST',
-      url: `http://localhost:9000/authRefresh`,
+      url: `http://192.168.1.223:9000/authRefresh`,
       data: {loggedUser,token},
       success: (result) => {
 
           //should get this gata from global redux
           axios
-            .get(`http://localhost:9000/checkUserCharacter`, {
+            .get(`http://192.168.1.223:9000/checkUserCharacter`, {
               params: { user: loggedUser },
             })
             .then((response) => {
@@ -158,7 +158,7 @@ class App extends React.Component{
 
 
     $.ajax({method: 'POST',
-      url: `http://localhost:9000/newPlayer`,
+      url: `http://192.168.1.223:9000/newPlayer`,
       data: {login,password},
       success: (result) => {
 
@@ -235,7 +235,7 @@ class App extends React.Component{
 
 
     $.ajax({method: 'POST',
-      url: `http://localhost:9000/auth`,
+      url: `http://192.168.1.223:9000/auth`,
       data: {login,password},
       success: (result) => {
 
@@ -248,7 +248,7 @@ class App extends React.Component{
 
           //should get this gata from global redux
         axios
-        .get(`http://localhost:9000/checkUserCharacter`, {
+        .get(`http://192.168.1.223:9000/checkUserCharacter`, {
           params: { user: login },
         })
         .then((response) => {
@@ -341,7 +341,7 @@ class App extends React.Component{
         break
       case "logIn":
         return (
-          <div style = {{width: '260px', height:'200px', position: 'absolute', left: '265px',top: '30%', backgroundColor: 'rgb(20 136 156)', borderRadius: '25px', padding: '5px'}}>
+          <div id = 'loginInMenu' >
             <h2>Arcane Pong</h2>
             <div>
 
@@ -359,6 +359,7 @@ class App extends React.Component{
 
 
             <div id = 'buyI' style = {{top: '150px', left: '40px'}} onClick ={()=>{this.login(document.getElementById('username').value, document.getElementById('password').value);}}>Login</div>
+
             <div id = 'buyI' style = {{top: '150px', left: '150px'}} onClick={ () => this.changeView("signUp")}>Sign Up</div>
 
             </div>
