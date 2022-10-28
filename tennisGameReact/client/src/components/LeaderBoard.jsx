@@ -6,7 +6,7 @@ const LeaderBoard = (props) => {
 
 useEffect(()=>{
 
-  axios.get('http://localhost:9000/getLeaderList').then((response)=>{
+  axios.get('http://192.168.1.223:9000/getLeaderList').then((response)=>{
 
     console.log(response.data);
     setData(response.data);

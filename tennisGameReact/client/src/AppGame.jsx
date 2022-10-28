@@ -45,11 +45,15 @@ class AppGame extends React.Component {
 
       if(imageList){
 
+
+        if(window.caches) {
+
         imageList.forEach((image)=>{
+
 
           caches.open('pic').then( cache => {
             cache.add(image[1]).then( () => {
-                console.log("Data cached ")
+                console.log("Data cached ", caches)
 
 
 
@@ -59,6 +63,14 @@ class AppGame extends React.Component {
           });
 
         })
+
+      } else {
+
+        this.props.setLoaderFromRedux(this.props.loader + imageList.length);
+        this.props.setLoaderMessageFromRedux(message)
+
+      }
+
 
 
       }else {
@@ -119,7 +131,7 @@ class AppGame extends React.Component {
       //done
       $.ajax({
         method: "POST",
-        url: `http://localhost:9000/gold`,
+        url: `http://192.168.1.223:9000/gold`,
         data: { user: this.state.user, gold: this.state.gold },
         success: (result) => {
           console.log(result, "from gold");
@@ -150,7 +162,7 @@ class AppGame extends React.Component {
 
       $.ajax({
         method: "POST",
-        url: `http://localhost:9000/buySkin`,
+        url: `http://192.168.1.223:9000/buySkin`,
         data: { user: this.state.user, skin: this.props.skin},
         success: (result) => {
           console.log(result, "from skin");
@@ -197,7 +209,7 @@ class AppGame extends React.Component {
       //done
       $.ajax({
         method: "POST",
-        url: `http://localhost:9000/gold`,
+        url: `http://192.168.1.223:9000/gold`,
         data: { user: this.state.user, gold: this.state.gold },
         success: (result) => {
           console.log(result, "from gold");
@@ -209,7 +221,7 @@ class AppGame extends React.Component {
     if (this.state.currentLevel === this.state.level) {
       $.ajax({
         method: "POST",
-        url: `http://localhost:9000/user`,
+        url: `http://192.168.1.223:9000/user`,
         data: { user: this.state.user },
         success: (result) => {
           console.log(result, "from success");
@@ -225,7 +237,7 @@ class AppGame extends React.Component {
 
     $.ajax({
       method: "POST",
-      url: `http://localhost:9000/active`,
+      url: `http://192.168.1.223:9000/active`,
       data: { user: this.state.user, level: level + 1 },
       success: (result) => {
         console.log(result, "from success");
@@ -246,17 +258,17 @@ class AppGame extends React.Component {
     if (!this.state.user) {
       this.setState({ user: localStorage.getItem("user") }, () => {
         console.log(this.state.user, "WAS MOUNT");
-        //done
+        //done  //192.168.1.223:9000
         $.ajax({
           method: "POST",
-          url: `http://localhost:9000/activeGET`,
+          url: `http://192.168.1.223:9000/activeGET`,
           data: { user: this.state.user },
           success: (result) => {this.loaderChanger('getting data...');this.setState({ active: result })},
         });
         //done
         $.ajax({
           method: "POST",
-          url: `http://localhost:9000/userGET`,
+          url: `http://192.168.1.223:9000/userGET`,
           data: { user: this.state.user },
           success: (result) => {
             this.loaderChanger('getting user...');
@@ -301,7 +313,7 @@ class AppGame extends React.Component {
 
       $.ajax({
         method: "POST",
-        url: `http://localhost:9000/activeSkin`,
+        url: `http://192.168.1.223:9000/activeSkin`,
         data: { user: this.state.user, activeSkin: this.props.skin},
         success: (result) => {
           console.log(result, "from skin");
@@ -439,7 +451,7 @@ class AppGame extends React.Component {
 
     return (
       <div className="App">
-<div id = 'buyI' style = {{width: '300px', left: '250px', top: '300px'}}> {this.props.loaderMessage} </div>
+<div id = 'buyI' style = {{width: '300px', left: '50px', top: '200px'}}> {this.props.loaderMessage} </div>
      <div style = {{visibility: this.state.loaded ? 'visible' : 'hidden'}}>{popUp}</div>
      {/* :<div><div> {this.props.loaderMessage} {this.props.loader}</div> <div style = {{display: 'none'}}>{popUp}</div></div> } */}
       </div>

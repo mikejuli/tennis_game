@@ -41,7 +41,7 @@ const AppCharacter = (props) => {
     var user = localStorage.getItem("user");
     console.log("here");
     axios
-      .post(`http://localhost:9000/getUserCharacter`, {
+      .post(`http://192.168.1.223:9000/getUserCharacter`, {
         user: user,
         character: character,
       })
@@ -84,7 +84,7 @@ const AppCharacter = (props) => {
     var user = localStorage.getItem("user");
     console.log("here");
     axios
-      .get(`http://localhost:9000/checkUserCharacter`, {
+      .get(`http://192.168.1.223:9000/checkUserCharacter`, {
         params: { user: user },
       })
       .then((response) => {

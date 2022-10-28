@@ -1258,7 +1258,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
         <div id = 'inside'>
 
-<div id  = 'boxCover' style = {{position: 'absolute',top: '70px'}} >
+<div id  = 'boxCover' >
         <div>{this.state.win?<Win handleOff = {this.props.handleOff} level = {this.props.level} currentGold = {this.state.gold} />:<div></div>}</div>
       <div>{this.state.lose?<Lose handleLose = {this.props.handleLose}/>:<div></div>}</div>
         <div id = 'boxS'>
