@@ -84,14 +84,27 @@ class Levels extends React.Component {
 
       var loadingIn = this.props.loaderChanger;
 
-      var backgroundImageLoading = new Image();
-      backgroundImageLoading.src = '/grass.png';
-      backgroundImageLoading.onload = function() {
+      var imageList = [
 
-        loadingIn('loading backgroundImage...');
+        ['loading backgroundImage...', '/grass.png'],
+        ['loaded snow background...', '/snow.jpeg'],
+        ['loaded river background...', '/river.jpeg'],
+        ['loaded sand background...', '/sand.jpg'],
+        ['loaded hell background...', '/hell.jpeg']
+      ]
 
-      console.log('loaded backgroundImageLoading');
-      }
+
+      loadingIn('loading image list...', imageList);
+
+
+      // var backgroundImageLoading = new Image();
+      // backgroundImageLoading.src = '/grass.png';
+      // backgroundImageLoading.onload = function() {
+
+      //   // loadingIn('loading backgroundImage...');
+
+      // console.log('loaded backgroundImageLoading');
+      // }
 
       // var forestImage = new Image();
       // forestImage.src = '/forest.jpg';
@@ -103,41 +116,88 @@ class Levels extends React.Component {
       // console.log('loaded forest');
       // }
 
-      var snowImage = new Image();
-      snowImage.src = '/snow.jpeg';
-      snowImage.onload = function() {
 
-        loadingIn('loaded snow');
 
-      console.log('loaded snow');
-      }
+      // var snowImage = new Image();
+      // snowImage.src = '/snow.jpeg';
+      // snowImage.onload = function() {
 
-      var riverImage = new Image();
-      riverImage.src = '/river.jpeg';
-      riverImage.onload = function() {
+      //   loadingIn('loaded snow background...');
 
-        loadingIn('loaded river');
+      //   console.log('loaded snow');
+      // }
 
-      console.log('loaded river');
-      }
 
-      var sandImage = new Image();
-      sandImage.src = '/sand.jpg';
-      sandImage.onload = function() {
 
-        loadingIn('loaded sand');
+        // const cacheName = 'pic'
+        // var url = '/snow.jpeg'
 
-      console.log('loaded sand');
-      }
+        // caches.open(cacheName).then( cache => {
+        //   cache.add(url).then( () => {
+        //       console.log("Data cached ")
 
-      var hellImage = new Image();
-      hellImage.src = '/hell.jpeg';
-      hellImage.onload = function() {
+        //        loadingIn('loaded snow background...');
+        //       console.log('loaded snow');
+        //     });
+        // });
 
-        loadingIn('loaded hell');
 
-      console.log('loaded hell');
-      }
+
+      // var riverImage = new Image();
+      // riverImage.src = '/river.jpeg';
+      // riverImage.onload = function() {
+
+      //   loadingIn('loaded river background...');
+
+      // console.log('loaded river');
+      // }
+
+
+      // var url = '/river.jpeg'
+
+      // caches.open('pic').then( cache => {
+      //   cache.add('/river.jpeg').then( () => {
+      //       console.log("Data cached ")
+
+
+      //       console.log('loaded river');
+      //     });
+      // });
+
+
+
+
+
+      // var sandImage = new Image();
+      // sandImage.src = '/sand.jpg';
+      // sandImage.onload = function() {
+
+      //   loadingIn('loaded sand background...');
+
+      // console.log('loaded sand');
+      // }
+
+      // caches.open(cacheName).then( cache => {
+      //   cache.add('/sand.jpg').then( () => {
+      //       console.log("Data cached ")
+
+      //        loadingIn('loaded sand background...');
+      //       console.log('loaded sand');
+      //     });
+      // });
+
+
+
+
+
+      // var hellImage = new Image();
+      // hellImage.src = '/hell.jpeg';
+      // hellImage.onload = function() {
+
+      //   loadingIn('loaded hell background...');
+
+      // console.log('loaded hell');
+      // }
     //   $( document ).ready(function() {
     //     console.log( "ready!" );
     //  });
@@ -162,6 +222,7 @@ class Levels extends React.Component {
 
 
   render() {
+
 
 
 
@@ -268,6 +329,8 @@ class Levels extends React.Component {
 }
 
     else if(this.state.arrow===3) {var page = 'third';
+
+
 
     document.body.style.background = `url('./river.jpeg') no-repeat center center fixed`
     document.body.style.backgroundSize = `cover`

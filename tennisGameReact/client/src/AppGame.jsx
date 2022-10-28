@@ -38,13 +38,36 @@ class AppGame extends React.Component {
   }
 
 
-  loaderChanger(message){
+  loaderChanger(message, imageList){
 
     if(!this.state.loaded){
     console.log(message, 'from loader')
 
-    this.props.setLoaderFromRedux(this.props.loader + 1);
-    this.props.setLoaderMessageFromRedux(message)
+      if(imageList){
+
+        imageList.forEach((image)=>{
+
+          caches.open('pic').then( cache => {
+            cache.add(image[1]).then( () => {
+                console.log("Data cached ")
+
+
+
+                this.props.setLoaderFromRedux(this.props.loader + 1);
+                this.props.setLoaderMessageFromRedux(image[0])
+              });
+          });
+
+        })
+
+
+      }else {
+        this.props.setLoaderFromRedux(this.props.loader + 1);
+        this.props.setLoaderMessageFromRedux(message)
+
+      }
+      console.log(this.props.loader);
+
     }
   }
 
@@ -228,7 +251,7 @@ class AppGame extends React.Component {
           method: "POST",
           url: `http://localhost:9000/activeGET`,
           data: { user: this.state.user },
-          success: (result) => {this.loaderChanger('getting data');this.setState({ active: result })},
+          success: (result) => {this.loaderChanger('getting data...');this.setState({ active: result })},
         });
         //done
         $.ajax({
@@ -236,7 +259,7 @@ class AppGame extends React.Component {
           url: `http://localhost:9000/userGET`,
           data: { user: this.state.user },
           success: (result) => {
-            this.loaderChanger('getting user');
+            this.loaderChanger('getting user...');
 
             this.props.setSkinFromRedux(result[0].activeSkin);
 
@@ -259,9 +282,9 @@ class AppGame extends React.Component {
   componentDidUpdate(prevProps, prevState) {
 
 
-    if(this.props.loader === 7){
+    if(this.props.loader === 8){
     this.setState({loaded: true})
-        this.props.setLoaderFromRedux(0)
+        this.props.setLoaderFromRedux(1)
     }
 
 
@@ -282,7 +305,7 @@ class AppGame extends React.Component {
         data: { user: this.state.user, activeSkin: this.props.skin},
         success: (result) => {
           console.log(result, "from skin");
-          this.loaderChanger('getting active skin');
+          this.loaderChanger('retrieving active skin...');
 
 
         },
@@ -416,7 +439,7 @@ class AppGame extends React.Component {
 
     return (
       <div className="App">
-<div id = 'buyI' style = {{width: '300px', left: '250px', top: '300px'}}> {this.props.loaderMessage} {this.props.loader}</div>
+<div id = 'buyI' style = {{width: '300px', left: '250px', top: '300px'}}> {this.props.loaderMessage} </div>
      <div style = {{visibility: this.state.loaded ? 'visible' : 'hidden'}}>{popUp}</div>
      {/* :<div><div> {this.props.loaderMessage} {this.props.loader}</div> <div style = {{display: 'none'}}>{popUp}</div></div> } */}
       </div>

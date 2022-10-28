@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 export const loaderMessageSlice = createSlice({
   name: 'loaderMessage',
-  initialState: { value: 0, },
+  initialState: { value: 'loading...', },
   reducers: {
 
 
