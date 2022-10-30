@@ -25,7 +25,7 @@ class AppGame extends React.Component {
       gold: 0,
       onfire: false,
       flying: false,
-      shooting: false,
+      shooting: 0,
       bigPlate: 0,
       ball: 1,
       loaded: false
@@ -151,7 +151,7 @@ class AppGame extends React.Component {
     }
 
     if (item === "shooting") {
-      this.setState({ shooting: true });
+      this.setState({ shooting: this.state.shooting + 1 });
     }
 
     if (item == "bigPlate") {

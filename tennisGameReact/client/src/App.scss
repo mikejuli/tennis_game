@@ -239,9 +239,21 @@ left: calc(50% - 400px);
 
 }
 
-#bullet{
+#bullet1{
   position: absolute;
   background-color: rgb(224, 50, 240);
+  border-radius: 50%;
+}
+
+#bullet2{
+  position: absolute;
+  background-color: rgb(50, 63, 240);
+  border-radius: 50%;
+}
+
+#bullet3{
+  position: absolute;
+  background-color: rgb(255, 231, 13);
   border-radius: 50%;
 }
 
@@ -281,15 +293,7 @@ box-sizing: border-box;
 -moz-box-sizing: border-box;
 -webkit-box-sizing: border-box;
 
-&:before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  z-index: -1;
-  //margin: -$border; /* !importanté */
-  border-radius: inherit; /* !importanté */
-  background: linear-gradient(to right, red, orange);
-}
+
 
 }
 

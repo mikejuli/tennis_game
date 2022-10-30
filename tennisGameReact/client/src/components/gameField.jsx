@@ -206,8 +206,10 @@ import Player from './Player'
         }
 
         if(this.state.attribute==='gun'){
-          this.setState({gun:true})
+          if(this.state.gun<3){
+          this.setState({gun: this.state.gun + 1,attribute: undefined})
         }
+      }
 
         if(this.state.attribute==='tnt'){
           if(!this.state.win){
@@ -414,9 +416,12 @@ var colorChanger = function (currentBrick){
 colorChanger = colorChanger.bind(this)
 
 
-var bulletRunning = function(clear,flightBackState){
 
 
+var bulletRunning = function(clear,flightBackState, powerOfBullet){
+
+
+  var gun = this.state.gun;
 
   var clearBullet = ()=>{
     clearInterval(bul);
@@ -439,7 +444,9 @@ var bulletRunning = function(clear,flightBackState){
 
   var bul = setInterval(()=>{
     //console.log(pos,posY)
-  bullet.setAttribute('id', 'bullet');
+    //console.log(`bullet${gun}`);
+
+  bullet.setAttribute('id', `bullet${gun}`);
   bullet.setAttribute('style', `top: ${bulletY}px ; left:${bulletX}px; width: 5px; height: 5px `);
 
 
@@ -448,7 +455,7 @@ var bulletRunning = function(clear,flightBackState){
 
 
 
-  brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet,flightBackState);
+  brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet,flightBackState, this.state.gun);
 
   if(bulletY<0){
     clearBullet();
@@ -457,6 +464,8 @@ var bulletRunning = function(clear,flightBackState){
   },16.6666667)
 
 };
+
+bulletRunning = bulletRunning.bind(this)
 
 var runAnimationFrame = true;
 
@@ -490,13 +499,17 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,ballFunPoint,onf
     ballFun((x)=> {ball =x;})
     ballFunPoint((x)=> {ballPoint =x;})
     onfireFun((x)=>{onfire=x;})
-    gunFun((x)=>{if(x & (shooting===false)){shooting = true; shootingInt = setInterval( ()=>
+    gunFun((x)=>{if(x && (shooting===false)){
+
+        console.log(x, 'from gunFun');
+      shooting = true; shootingInt = setInterval( ()=>
 
       {
+
          bulletRunning(
 
           ()=>{ clearInterval(shootingInt);
-            runAnimationFrame = false }, flightBackState
+            runAnimationFrame = false }, flightBackState, x
 
           )},200)
   }})
@@ -987,7 +1000,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
           var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-          currentBrick.health-=ballPoint; console.log(ballPoint, currentBrick.health)
+          currentBrick.health-=ballPoint;
 
 
 
@@ -1054,7 +1067,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
         var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-        currentBrick.health-=ballPoint; console.log(ballPoint, currentBrick.health)
+        currentBrick.health-=ballPoint;
 
 
 
@@ -1112,8 +1125,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
         var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-        currentBrick.health-=ballPoint; console.log(ballPoint, currentBrick.health)
-
+        currentBrick.health-=ballPoint;
 
 
       colorChanger(currentBrick);
@@ -1166,7 +1178,7 @@ if(switcherLeft<0){
 
         var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-        currentBrick.health-=ballPoint; console.log(ballPoint, currentBrick.health)
+        currentBrick.health-=ballPoint;
 
 
 
@@ -1221,7 +1233,7 @@ if(switcherLeft<0){
 }
 
 
-var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet,flightBackState){
+var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet,flightBackState, powerOfBullet){
 
   var unbreakable = +document.getElementById('wall').getAttribute('value')
 
@@ -1242,8 +1254,8 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
           var currentBrick = document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-          currentBrick.health--;
-          console.log(ballPoint, currentBrick.health)
+          currentBrick.health-=powerOfBullet;
+        //  console.log(powerOfBullet, currentBrick.health)
 
           colorChanger(currentBrick);
 
