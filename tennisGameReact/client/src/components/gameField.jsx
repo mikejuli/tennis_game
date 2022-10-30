@@ -106,9 +106,13 @@ import Player from './Player'
 
         case 'epic': stylePlate(variables.plateEpic,variables.plateEpicBorder); break;
 
-        case 'legendary': stylePlate(variables.plateLegendary,variables.plateLegendaryBorder); break;
+        case 'legendary': stylePlate(variables.plateLegendary,variables.plateLegendaryBorder);
+        this.setState({ballPoint: this.props.ball+1})
+        break;
 
-        case 'mythic': stylePlate(variables.plateMythic,variables.plateMythicBorder); break;
+        case 'mythic': stylePlate(variables.plateMythic,variables.plateMythicBorder);
+        this.setState({ballPoint: this.props.ball+2})
+        break;
 
 
 
