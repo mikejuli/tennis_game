@@ -59,7 +59,7 @@ const handleLogoutTimer = () => {
 
     if(f){clearInterval(f)};
   children.props.handleLogout();
-  }, 120000);
+  }, 600000);
 
 
   message = setTimeout (()=>{
@@ -68,7 +68,7 @@ const handleLogoutTimer = () => {
 
     g.appendChild(messages);
 
-    }, 60000)
+    }, 540000)
 
 
 

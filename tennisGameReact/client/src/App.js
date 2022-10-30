@@ -315,7 +315,7 @@ class App extends React.Component{
     switch(this.state.currentView) {
       case "signUp":
         return (
-          <div style = {{width: '260px', height:'200px', position: 'absolute', left: '265px',top: '30%', backgroundColor: 'rgb(20 136 156)', borderRadius: '25px', padding: '5px'}}>
+          <div id = 'loginInMenu'>
             <h2 >Sign Up!</h2>
             <div>
 
@@ -372,7 +372,7 @@ class App extends React.Component{
         break
       case "PWReset":
         return (
-          <div style = {{width: '260px', height:'200px', position: 'absolute', left: '265px',top: '30%', backgroundColor: 'rgb(20 136 156)', borderRadius: '25px', padding: '5px'}}>
+          <div id = 'loginInMenu'>
           <h2>Reset Password</h2>
 
 

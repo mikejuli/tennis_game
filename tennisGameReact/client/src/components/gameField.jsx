@@ -24,6 +24,7 @@ import Player from './Player'
     this.addAttribute = this.addAttribute.bind(this);
     this.plateFun = this.plateFun.bind(this);
     this.ballFun = this.ballFun.bind(this);
+    this.ballFunPoint = this.ballFunPoint.bind(this);
     this.onfireFun = this.onfireFun.bind(this);
     this.gunFun = this.gunFun.bind(this);
     this.flightBackState = this.flightBackState.bind(this);
@@ -34,6 +35,7 @@ import Player from './Player'
 
     plateFun (cb){ cb(this.state.plate);};
     ballFun(cb) {cb(this.state.ball)}
+    ballFunPoint(cb) {cb(this.state.ballPoint)}
     onfireFun(cb){cb(this.state.onfire)}
     gunFun(cb){cb(this.state.gun)}
     loseFun(cb){cb(this.state.lose)}
@@ -86,7 +88,7 @@ import Player from './Player'
         this.setState({flight: this.props.flying})
         this.setState({gun: this.props.shooting})
         this.setState({platePoint: this.props.bigPlate, plate: this.state.plate + (this.props.bigPlate*20)})
-
+        this.setState({ballPoint: this.props.ball})
 
 
       var stylePlate = (background, border) => {
@@ -191,7 +193,7 @@ import Player from './Player'
         }
 
         if(this.state.attribute==='ball'){
-          this.setState({ball: this.state.ball + 10, ballPoint:this.state.ballPoint+1});
+          this.setState({ballPoint:this.state.ballPoint+1, attribute: undefined});
         }
 
         if(this.state.attribute==='onfire'){
@@ -458,7 +460,7 @@ var bulletRunning = function(clear,flightBackState){
 
 var runAnimationFrame = true;
 
-var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun, gunFun,flightBackState, loseFun){
+var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun, gunFun,flightBackState, loseFun,ballPoint){
 
 
 
@@ -486,6 +488,7 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,onfire,onfireFun
     loseFun((x)=>{lose =x})
     plateFun( (x) => {plate = x;});
     ballFun((x)=> {ball =x;})
+    ballFunPoint((x)=> {ballPoint =x;})
     onfireFun((x)=>{onfire=x;})
     gunFun((x)=>{if(x & (shooting===false)){shooting = true; shootingInt = setInterval( ()=>
 
@@ -679,7 +682,7 @@ if(document.getElementById('ball')){
   }
 
 
-  brickBouncer(tops,lefts,pat,clear,onfire,1,flightBackState);
+  brickBouncer(tops,lefts,pat,clear,onfire,1,flightBackState, ballPoint);
 
 
   if(runAnimationFrame){requestAnimationFrame(r)};
@@ -778,7 +781,52 @@ if(!document.getElementById('plate')){
 }
 }
 
-document.addEventListener ('mousemove', mousemove)
+document.addEventListener ('mousemove', mousemove);
+
+
+  ///   have to finish up with touch movement for cellphone version
+  ///
+  ///
+  //     var box = document.getElementById('boxCover')
+  //     var statusdiv = document.getElementById('BarMenuIn')
+  //     var startx = 0
+  //     var dist = 0
+  //     console.log(box,statusdiv)
+  // box.addEventListener('touchstart', function(e){
+  //        
+  //   var touchobj = e.changedTouches[0] // reference first touch point (ie: first finger)
+  //         startx = parseInt(touchobj.clientX) // get x position of touch point relative to left edge of browser
+  //         statusdiv.innerHTML = 'Status: touchstart<br> ClientX: ' + startx + 'px'
+  //         e.preventDefault()
+  //     }, false)
+  //  
+  // box.addEventListener('touchmove', function(e){
+  //         var touchobj = e.changedTouches[0] // reference first touch point for this event
+  //         var dist = parseInt(touchobj.clientX) - startx
+
+  // if(dist<=0){pos = 0} else
+  // if(dist<width-plate){
+  //   pos = dist;
+  // }else { pos = width-plate}
+
+  //   document.getElementById('plate').style.left = dist + 'px';
+
+  //         statusdiv.innerHTML = 'Status: touchmove<br> Horizontal distance traveled: ' + dist + 'px'
+  //         e.preventDefault()
+  //     }, false)
+  //  
+  // box.addEventListener('touchend', function(e){
+  //         var touchobj = e.changedTouches[0] // reference first touch point for this event
+  //         statusdiv.innerHTML = 'Status: touchend<br> Resting x coordinate: ' + touchobj.clientX + 'px'
+  //         e.preventDefault()
+  //     }, false)
+  //  
+
+
+
+
+
+
 
 console.log(document.onmousemove);
 
@@ -793,6 +841,8 @@ var addGold = this.addGold;
 var currentGold = this.state.gold;
 var addAttribute = this.addAttribute;
 var ball = this.state.ball;
+var ballPoint = this.state.ballPoint;
+var ballFunPoint = this.ballFunPoint;
 var onfire = this.state.onfire;
 var onfireFun = this.onfireFun;
 var gunFun = this.gunFun;
@@ -825,7 +875,7 @@ setTimeout(()=>{
 
       soundStart();
 
-    ballRunning(pat,undefined,plateFun,ball,ballFun,onfire,onfireFun,gunFun,flightBackState,loseFun);
+    ballRunning(pat,undefined,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun,gunFun,flightBackState,loseFun,ballPoint);
 
   }
 
@@ -861,8 +911,12 @@ var creatingBrick = function (arr){
   }
 
 
-  newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px; background: ${background}`);
-  // newBrick.textContent = newBrick.health;
+
+  newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px; background: ${background};`);
+
+  // newBrick.setAttribute('style', `top: ${arr[0]}px ; left:${arr[1]}px; background: ${background}; ${newBrick.attribute === 'tnt' && !isNaN(newBrick.health) ? 'box-shadow: inset 0 0 5px 1px black;' : 'box-shadow: none'}; ${newBrick.attribute  === 'flight' && !isNaN(newBrick.health)? 'box-shadow: 0 0 4px 2px #13ff06;' : ''} `);
+
+  // newBrick.textContent = typeof newBrick.health
   var wall = document.getElementById('wall');
   wall.appendChild(newBrick);
 
@@ -896,7 +950,7 @@ creatingWall(this.props.pattern);
 
 
 
-var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flightBackState){
+var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flightBackState, ballPoint){
 
   //console.log(bulletX,bulletY,'bullet');
   //to prevent the ball go through 2 bricks the same time.
@@ -933,7 +987,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
           var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-          currentBrick.health--;
+          currentBrick.health-=ballPoint; console.log(ballPoint, currentBrick.health)
 
 
 
@@ -942,14 +996,14 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
           //wrong way to change colors
           // currentBrick.textContent = currentBrick.health;
 
-          if(currentBrick.health === 0){
+          if(currentBrick.health <= 0){
             // currentBrick.textContent = '';
             // console.log('addgold top');
 
             addGold(currentBrick.gold);
 
             currentBrick.setAttribute('id', 'empty');
-
+            currentBrick.setAttribute('style','');
 
             var topI = bricksArray[x][0];
             var leftI = bricksArray[x][1];;
@@ -1000,7 +1054,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
         var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-        currentBrick.health--;
+        currentBrick.health-=ballPoint; console.log(ballPoint, currentBrick.health)
 
 
 
@@ -1009,13 +1063,14 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
         //wrong way to change colors
         // currentBrick.textContent = currentBrick.health;
 
-        if(currentBrick.health === 0){
+        if(currentBrick.health <= 0){
           // currentBrick.textContent = '';
           // console.log('addgold top');
 
           addGold(currentBrick.gold);
 
           currentBrick.setAttribute('id', 'empty');
+          currentBrick.setAttribute('style','');
 
           var topI = bricksArray[x][0];
           var leftI = bricksArray[x][1];;
@@ -1057,7 +1112,7 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
         var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-        currentBrick.health--;
+        currentBrick.health-=ballPoint; console.log(ballPoint, currentBrick.health)
 
 
 
@@ -1066,13 +1121,14 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
         //wrong way to change colors
         // currentBrick.textContent = currentBrick.health;
 
-        if(currentBrick.health === 0){
+        if(currentBrick.health <= 0){
           // currentBrick.textContent = '';
           // console.log('addgold top');
 
           addGold(currentBrick.gold);
 
           currentBrick.setAttribute('id', 'empty');
+          currentBrick.setAttribute('style','border: none');
 
           var topI = bricksArray[x][0];
           var leftI = bricksArray[x][1];;
@@ -1110,7 +1166,7 @@ if(switcherLeft<0){
 
         var currentBrick =  document.getElementById('wall').childNodes[bricksArray[x][2]];
 
-        currentBrick.health--;
+        currentBrick.health-=ballPoint; console.log(ballPoint, currentBrick.health)
 
 
 
@@ -1119,13 +1175,14 @@ if(switcherLeft<0){
         //wrong way to change colors
         // currentBrick.textContent = currentBrick.health;
 
-        if(currentBrick.health === 0){
+        if(currentBrick.health <= 0){
           // currentBrick.textContent = '';
           // console.log('addgold top');
 
           addGold(currentBrick.gold);
 
           currentBrick.setAttribute('id', 'empty');
+          currentBrick.setAttribute('style','border: none');
 
           var topI = bricksArray[x][0];
           var leftI = bricksArray[x][1];;
@@ -1186,6 +1243,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           var currentBrick = document.getElementById('wall').childNodes[bricksArray[x][2]];
 
           currentBrick.health--;
+          console.log(ballPoint, currentBrick.health)
 
           colorChanger(currentBrick);
 
@@ -1193,12 +1251,13 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
           //  document.getElementById('wall').childNodes[bricksArray[x][2]].textContent = document.getElementById('wall').childNodes[bricksArray[x][2]].health;
 
-          if(currentBrick.health === 0){
+          if(currentBrick.health <= 0){
 
            // currentBrick.textContent = '';
            addGold(currentBrick.gold);
 
            currentBrick.setAttribute('id', 'empty');
+           currentBrick.setAttribute('style','border: none');
 
            var topI = bricksArray[x][0];
            var leftI = bricksArray[x][1];;

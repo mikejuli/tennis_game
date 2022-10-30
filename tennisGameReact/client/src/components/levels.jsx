@@ -80,6 +80,9 @@ class Levels extends React.Component {
 
 
     componentDidMount(){
+
+
+
       this.setState({active:this.props.active, arrow:this.props.arrow});
 
       var loadingIn = this.props.loaderChanger;

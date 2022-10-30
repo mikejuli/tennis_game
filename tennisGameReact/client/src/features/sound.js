@@ -3,7 +3,7 @@ import {createSlice} from '@reduxjs/toolkit'
 const soundsSlice = createSlice({
 
 name: 'sound',
-initialState: {value: true},
+initialState: {value: false},
 reducers: {
 
 
