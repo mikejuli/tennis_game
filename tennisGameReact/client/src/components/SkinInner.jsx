@@ -126,7 +126,7 @@ skillButton = 'SkillButton3.png' buyItem = {this.props.buyItem}/>
 <Description skin = {'legendary'} price = {20000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-50px'} color = 'gold' changer = {this.props.changer} skillButton = 'SkillButton4.png' buyItem = {this.props.buyItem}/>
 </li>
 <li class="menu-item">
-<Description skin = {'mythic'} price = {50000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'} color = '#00BCFB' changer = {this.props.changer} skillButton = 'SkillButton5.png' buyItem = {this.props.buyItem}/>
+<Description skin = {'mythic'} price = {80000} cancel = {this.state.cancel} cancelFun = {this.cancelF} top = {'-96px'} color = '#00BCFB' changer = {this.props.changer} skillButton = 'SkillButton5.png' buyItem = {this.props.buyItem}/>
 </li>
 </ul>
 

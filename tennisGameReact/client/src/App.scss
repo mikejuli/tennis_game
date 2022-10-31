@@ -432,14 +432,10 @@ button.back:hover {
 }
 .background-leave {
   transform: translateY(0%);
-
 }
 .background-leave.background-leave-active {
-
   transform: translateY(-100%);
   transition: transform 3000ms ease-in-out;
-
-
 }
 
 
@@ -454,7 +450,7 @@ button.back:hover {
 
 }
 .backgroundBack-leave {
-  transform: translateY(0%);
+ transform: translateY(0%);
 
 }
 .backgroundBack-leave.backgroundBack-leave-active {
