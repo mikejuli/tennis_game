@@ -90,13 +90,13 @@ return (
 <a id="bigPlateMenu" onClick = {()=>{this.setItems('bigPlate','➖',1000)}}>➖</a>
 </li>
 <li class="menu-itemS">
-<a id="ballMenu" onClick = {()=>{this.setItems('ball','⚪',2000)}} >⚪</a>
+<a id="ballMenu" onClick = {()=>{this.setItems('ball','⚪',1000)}} >⚪</a>
 </li>
 <li class="menu-itemS">
-<a id="flyingMenu" onClick = {()=>{this.setItems('flying','🚀',3000)}}>🚀</a>
+<a id="flyingMenu" onClick = {()=>{this.setItems('flying','🚀',2000)}}>🚀</a>
 </li>
 <li class="menu-itemS">
-<a id="shootingMenu" onClick = {()=>{this.setItems('shooting','🏹',4000)}}>🏹</a>
+<a id="shootingMenu" onClick = {()=>{this.setItems('shooting','🏹',3000)}}>🏹</a>
 </li>
 <li class="menu-itemS">
 <a id ="onfireMenu" onClick = {()=>{this.setItems('onfire','☄',5000)}}>☄</a>
