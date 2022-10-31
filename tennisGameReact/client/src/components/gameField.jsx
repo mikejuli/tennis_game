@@ -104,7 +104,9 @@ import Player from './Player'
 
         case 'rare': stylePlate(variables.plateRare,variables.plateRareBorder);break;
 
-        case 'epic': stylePlate(variables.plateEpic,variables.plateEpicBorder); break;
+        case 'epic': stylePlate(variables.plateEpic,variables.plateEpicBorder);
+        this.setState({ballPoint: this.props.ball+1})
+        break;
 
         case 'legendary': stylePlate(variables.plateLegendary,variables.plateLegendaryBorder);
         this.setState({ballPoint: this.props.ball+1})
@@ -685,17 +687,65 @@ if(document.getElementById('ball')){
 
   if (tops <= 0 ) {
     tops =0;
+
+      var g = document.createElement('div');
+      var f = document.getElementById('box');
+
+      g.setAttribute('id', 'lineT');
+
+      g.setAttribute('style',`position: absolute; top: 0px; left: ${lefts}px; width: 0px; height: 1px; `)
+
+      f.appendChild(g);
+
+      setTimeout(()=>{f.removeChild(g)},500)
+
+//       var styleLine = document.createElement('style');
+//     styleLine.type = 'text/css';
+//     styleLine.innerHTML = `\
+// @keyframes spreadLine {\
+//     100% {\
+//       width: 100px;left: ${lefts-50}px;visibility: hidden;\
+//     }\
+// }\
+// }`;
+
+// document.getElementsByTagName('head')[0].appendChild(styleLine);
+
+
+
+
       switcherTop = -switcherTop;
   }
 
   if (lefts >= width-ball){
     lefts = width-ball;
     switcherLeft = -switcherLeft;
+
+    var g = document.createElement('div');
+    var f = document.getElementById('box');
+
+    g.setAttribute('id', 'lineS');
+
+    g.setAttribute('style',`position: absolute; top: ${tops}px; left: 639px; width: 1px; height: 0px; `)
+    f.appendChild(g);
+    setTimeout(()=>{f.removeChild(g)},500)
+
   }
 
   if (lefts <= 0) {
     lefts =  0;
     switcherLeft = -switcherLeft;
+
+    var g = document.createElement('div');
+    var f = document.getElementById('box');
+
+    g.setAttribute('id', 'lineS');
+
+    g.setAttribute('style',`position: absolute; top: ${tops}px; left: 0px; width: 1px; height: 0px; `)
+    f.appendChild(g);
+    setTimeout(()=>{f.removeChild(g)},500)
+
+
   }
 
 

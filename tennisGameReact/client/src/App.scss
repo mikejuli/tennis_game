@@ -90,6 +90,7 @@ left: calc(50% - 400px);
   position: relative;
   left: 80px;
   cursor: none;
+  overflow: hidden;
 }
 
 
@@ -422,33 +423,43 @@ button.back:hover {
 
 .background-enter {
   transform: translateY(100%);
+
 }
 .background-enter.background-enter-active {
   transform: translateY(0%);
   transition: transform 3000ms ease-in-out;
+
 }
 .background-leave {
   transform: translateY(0%);
+
 }
 .background-leave.background-leave-active {
+
   transform: translateY(-100%);
   transition: transform 3000ms ease-in-out;
+
+
 }
 
 
 .backgroundBack-enter {
   transform: translateY(-100%);
+
 }
 .backgroundBack-enter.backgroundBack-enter-active {
   transform: translateY(0%);
   transition: transform 3000ms ease-in-out;
+
 }
 .backgroundBack-leave {
   transform: translateY(0%);
+
 }
 .backgroundBack-leave.backgroundBack-leave-active {
   transform: translateY(100%);
   transition: transform 3000ms ease-in-out;
+
 }
 
 
@@ -1786,6 +1797,28 @@ to {
   100% {opacity: 0;transform: translateY(-40px);}
 }
 
+
+#lineT {
+  background: linear-gradient(90deg, rgb(155, 14, 160), rgb(231, 175, 248), rgb(251, 181, 253), rgb(175, 10, 167));
+  animation: 0.5s spreadLineT linear ;
+}
+
+#lineS {
+  background: linear-gradient(180deg, rgb(155, 14, 160), rgb(231, 175, 248), rgb(251, 181, 253), rgb(175, 10, 167));
+  animation: 0.5s spreadLineS linear ;
+}
+
+@keyframes spreadLineT {
+
+  0% {width: 0px;}
+  100% {width: 100px;transform: translateX(-50px);visibility: hidden;}
+}
+
+@keyframes spreadLineS {
+
+  0% {height: 0px;}
+  100% {height: 100px;transform: translateY(-50px);visibility: hidden;}
+}
 
 
 #enginePicture{

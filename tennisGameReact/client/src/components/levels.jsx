@@ -18,7 +18,7 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 2700, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 3200, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
 
     this.changeLevels = this.changeLevels.bind(this)
     this.openLogOutMenu = this.openLogOutMenu.bind(this)
@@ -57,7 +57,7 @@ class Levels extends React.Component {
       this.setState({arrow:g, changeArrow: -1})
     }
 
-    setTimeout(()=>{this.setState({inProcess: false})},this.state.transitionTime)
+    setTimeout(()=>{this.setState({inProcess: false})},this.state.transitionTime+200)
   }
 
   }
