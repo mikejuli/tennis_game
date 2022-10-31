@@ -18,7 +18,7 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 3200, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 3000, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
 
     this.changeLevels = this.changeLevels.bind(this)
     this.openLogOutMenu = this.openLogOutMenu.bind(this)
@@ -57,11 +57,14 @@ class Levels extends React.Component {
       this.setState({arrow:g, changeArrow: -1})
     }
 
-    setTimeout(()=>{this.setState({inProcess: false})},this.state.transitionTime+200)
+    setTimeout(()=>{this.setState({inProcess: false})},this.state.transitionTime)
   }
 
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.arrow != nextState.arrow;
+    }
 
 
   componentDidUpdate( prevProps, prevState){
@@ -356,11 +359,11 @@ class Levels extends React.Component {
     document.body.style.backgroundSize = `cover`
 
   }
-
+  var rend;
 
     if(this.state.changeArrow===1){
 
-       var rend = <CSSTransition
+        rend = <CSSTransition
         transitionName="background"
         transitionEnterTimeout={this.state.transitionTime}
         transitionLeaveTimeout={this.state.transitionTime}
@@ -372,7 +375,7 @@ class Levels extends React.Component {
 
     } else {
 
-      var rend =  <CSSTransition
+       rend =  <CSSTransition
       transitionName="backgroundBack"
       transitionEnterTimeout={this.state.transitionTime}
       transitionLeaveTimeout={this.state.transitionTime}
