@@ -25,8 +25,9 @@ class AppGame extends React.Component {
       gold: 0,
       onfire: false,
       flying: false,
-      shooting: false,
+      shooting: 0,
       bigPlate: 0,
+      ball: 1,
       loaded: false
     };
     this.handle = this.handle.bind(this);
@@ -150,11 +151,15 @@ class AppGame extends React.Component {
     }
 
     if (item === "shooting") {
-      this.setState({ shooting: true });
+      this.setState({ shooting: this.state.shooting + 1 });
     }
 
     if (item == "bigPlate") {
       this.setState({ bigPlate: this.state.bigPlate + 1 });
+    }
+
+    if (item == "ball") {
+      this.setState({ ball: this.state.ball + 1 });
     }
 
     if(item === 'skin'){
@@ -187,6 +192,7 @@ class AppGame extends React.Component {
       flying: false,
       shooting: false,
       bigPlate: 0,
+      ball: 1
     });
 
     this.setState({ levelChosen: false, level: 0 });
@@ -201,6 +207,7 @@ class AppGame extends React.Component {
       flying: false,
       shooting: false,
       bigPlate: 0,
+      ball: 1
     });
 
     console.log(currentGold);
@@ -378,6 +385,10 @@ class AppGame extends React.Component {
             if (count % 6 == 0) {
               attribute = 'tnt';
             }
+            if(count% 2 == 0) {
+
+              attribute = 'ball';
+            }
             //
             return [top, left, num, health, gold, attribute];
           }
@@ -425,6 +436,7 @@ class AppGame extends React.Component {
             flying={this.state.flying}
             shooting={this.state.shooting}
             bigPlate={this.state.bigPlate}
+            ball = {this.state.ball}
             user={this.state.user}
             skin = {this.props.skin}
           />{" "}
@@ -451,7 +463,7 @@ class AppGame extends React.Component {
 
     return (
       <div className="App">
-<div id = 'buyI' style = {{width: '300px', left: '50px', top: '200px'}}> {this.props.loaderMessage} </div>
+<div id = 'buyI' style = {{width: '300px', left: 'calc(50% - 150px)', top: '45%'}}> {this.props.loaderMessage} </div>
      <div style = {{visibility: this.state.loaded ? 'visible' : 'hidden'}}>{popUp}</div>
      {/* :<div><div> {this.props.loaderMessage} {this.props.loader}</div> <div style = {{display: 'none'}}>{popUp}</div></div> } */}
       </div>

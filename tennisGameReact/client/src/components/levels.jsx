@@ -7,6 +7,8 @@ import grass from './grass.png';
 import MainMenu from './MainMenu'
 import SoundsToggle from './SoundsToggle'
 import CSSTransition from 'react-transition-group/CSSTransitionGroup'
+//import { CSSTransition } from 'react-transition-group';
+
 import BackgroundImage from './BackgroundImage';
 import SoundPlayer from './SoundPlayer'
 import Player from './Player'
@@ -18,7 +20,7 @@ class Levels extends React.Component {
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 2700, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 4000, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
 
     this.changeLevels = this.changeLevels.bind(this)
     this.openLogOutMenu = this.openLogOutMenu.bind(this)
@@ -57,10 +59,13 @@ class Levels extends React.Component {
       this.setState({arrow:g, changeArrow: -1})
     }
 
-    setTimeout(()=>{this.setState({inProcess: false})},this.state.transitionTime)
+    setTimeout(()=>{this.setState({inProcess: false})},this.state.transitionTime + 300)
   }
 
   }
+
+
+
 
 
 
@@ -80,6 +85,9 @@ class Levels extends React.Component {
 
 
     componentDidMount(){
+
+
+
       this.setState({active:this.props.active, arrow:this.props.arrow});
 
       var loadingIn = this.props.loaderChanger;
@@ -224,7 +232,7 @@ class Levels extends React.Component {
   render() {
 
 
-
+    console.log('lLEVEEVEVEVevels was rendered')
 
    // console.log(this.state.active);
     var arr = [];
@@ -264,7 +272,6 @@ class Levels extends React.Component {
         backgroundSize: '100%',
         backgroundPosition: '0% 27.6%'
         }
-        console.log(style.backgroundImage)
 
 
 
@@ -278,7 +285,7 @@ class Levels extends React.Component {
        backgroundSize: '100%',
        backgroundPosition: '0% 51.14%'
        }
-       console.log(style.backgroundImage)
+
 
 
 
@@ -292,7 +299,7 @@ class Levels extends React.Component {
      backgroundSize: '100%',
      backgroundPosition: '0% 74.75%'
      }
-     console.log(style.backgroundImage)
+
 
    }
 
@@ -303,7 +310,7 @@ class Levels extends React.Component {
    backgroundSize: '100%',
    backgroundPosition: '0% 98.3%'
    }
-   console.log(style.backgroundImage)
+
 
  }
 
@@ -353,15 +360,14 @@ class Levels extends React.Component {
     document.body.style.backgroundSize = `cover`
 
   }
-
+  var rend;
 
     if(this.state.changeArrow===1){
 
-       var rend = <CSSTransition
+        rend = <CSSTransition unmountOnExit
         transitionName="background"
         transitionEnterTimeout={this.state.transitionTime}
-        transitionLeaveTimeout={this.state.transitionTime}
-
+      transitionLeaveTimeout={this.state.transitionTime}
 
       >
       <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
@@ -369,7 +375,7 @@ class Levels extends React.Component {
 
     } else {
 
-      var rend =  <CSSTransition
+       rend =  <CSSTransition unmountOnExit
       transitionName="backgroundBack"
       transitionEnterTimeout={this.state.transitionTime}
       transitionLeaveTimeout={this.state.transitionTime}

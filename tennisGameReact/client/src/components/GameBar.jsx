@@ -75,10 +75,10 @@ const GameBar = (props) => {
   <div id = 'flying'  style = {{backgroundColor:'rgb(177 175 19)'}}> <div>🚀</div> {props.flight?<div>1</div>:<div>0</div>}
   </div>
 
-  <div id = 'shooting'  style = {{backgroundColor:'rgb(139 137 7)'}}><div>☄</div> {props.gun?<div>1</div>:<div>0</div>}
+  <div id = 'shooting'  style = {{backgroundColor:'rgb(139 137 7)'}}><div>🏹</div> {props.gun?<div>{props.gun}</div>:<div>0</div>}
   </div>
 
-  <div id = 'onFire'  style = {{backgroundColor:'rgb(98 96 2)'}}><div>🏹</div> {props.onFire?<div>1</div>:<div>0</div>}
+  <div id = 'onFire'  style = {{backgroundColor:'rgb(98 96 2)'}}><div>☄</div> {props.onFire?<div>1</div>:<div>0</div>}
   </div>
 </div>
 
