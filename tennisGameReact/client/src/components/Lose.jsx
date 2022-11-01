@@ -16,7 +16,7 @@ const Lose = (props) => {
   return (
 <div>
     <div id = 'lose' ><div style ={{position: 'absolute', top: '50px', justifyContent: 'center', width: '100%'}}>You lose</div>
-    <SoundPlayer path = 'mixkit-lose.wav'/>
+    <SoundPlayer path = 'sounds/mixkit-lose.wav'/>
     <div id = 'buyI' style = {{left: '60px', top: '105px'}} onClick = {()=>{props.handleLose()
     }}>Ok</div>
      </div>

@@ -32,7 +32,7 @@ const AppLogout = ({children}) => {
   var f;
 
 const timerBack = () => {
-  time = 120;
+  time = 60;
   if(f){clearInterval(f)};
 
    f = setInterval(()=>{

@@ -37,7 +37,7 @@ const WinCoinCounter = (props) => {
     {coin}
 
 
-    <img src="coin1.png" style={{width: '20px', height: '20px', top: '3px', position: 'relative'}}></img>
+    <img src="images/coin1.png" style={{width: '20px', height: '20px', top: '3px', position: 'relative'}}></img>
     </div>
 
 

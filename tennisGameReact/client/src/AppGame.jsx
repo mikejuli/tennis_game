@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.scss";
 import Levels from "./components/levels";
 import Field from "./components/gameField";
@@ -392,7 +391,7 @@ class AppGame extends React.Component {
             if (odds<0.85) {
               attribute = "ball";
             }
-            if (odds<0.78) {
+            if (odds<0.80) {
               attribute = 'tnt';
             }
             if(odds<0.65) {

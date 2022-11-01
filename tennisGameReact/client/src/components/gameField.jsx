@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import LevelGrid from './levelGrid';
-import pattern from './brickPattern';
 import GameBar from './GameBar';
 import $ from 'jquery';
 import Win from './Win';
@@ -162,6 +160,9 @@ import Player from './Player'
 
     componentDidUpdate( prevProps, prevState){
 
+
+
+
       if(prevState.flight!==this.state.flight ){
 
         var enginePictureUp = document.createElement('div');
@@ -181,18 +182,19 @@ import Player from './Player'
       }
 
 
-
-
       var changePlate=0;
 
       if(prevState.attribute!==this.state.attribute){
+
+
+
 
         if(this.state.attribute==='plate'){
           this.setState({plate:this.state.plate + 10, platePoint:this.state.platePoint+1, attribute: undefined})
           changePlate++;
 
           if(this.props.sound){
-          var myAudio = new Audio('mixkit-fast-small-sweep.wav');
+          var myAudio = new Audio('sounds/mixkit-fast-small-sweep.wav');
           myAudio.play();
           }
 
@@ -200,20 +202,37 @@ import Player from './Player'
 
         if(this.state.attribute==='ball'){
           this.setState({ballPoint:this.state.ballPoint+1, attribute: undefined});
+
+          if(this.props.sound){
+            var myAudioDropItems = new Audio('sounds/mixkit-drop-items.wav');
+            myAudioDropItems.play();
+            }
         }
 
         if(this.state.attribute==='onfire'){
           this.setState({onfire: true})
 
+          if(this.props.sound){
+            var myAudioDropItems = new Audio('sounds/mixkit-drop-items.wav');
+            myAudioDropItems.play();
+            }
+
         }
 
         if(this.state.attribute==='flight'){
           this.setState({flight: true , flightActual: true})
+          var myAudioDropItems = new Audio('sounds/mixkit-drop-items.wav');
+            myAudioDropItems.play();
         }
 
         if(this.state.attribute==='gun'){
           if(this.state.gun<3){
+
           this.setState({gun: this.state.gun + 1,attribute: undefined})
+
+            var myAudioShoot = new Audio('sounds/mixkit-laser-gun.wav');
+            myAudioShoot.play();
+
         }
       }
 
@@ -262,7 +281,6 @@ import Player from './Player'
 
 
 
-console.log(pattern);
 
 var height = 480;
 var width = 640;
@@ -364,7 +382,7 @@ topI = topI + 2;
         wall.appendChild(boom);
 
         if(this.props.sound){
-        var myAudio = new Audio('mixkit-explosion.wav');
+        var myAudio = new Audio('sounds/mixkit-explosion.wav');
         myAudio.play();
         }
 
@@ -397,13 +415,17 @@ topI = topI + 2;
 startDropItem = startDropItem.bind(this);
 
 //move myAudio behing colorChanger to avoid creaction new audio multiple times
-var myAudio = new Audio('mixkit.wav');
+var myAudio = new Audio('sounds/mixkit.wav');
 
-var colorChanger = function (currentBrick){
 
+
+var colorChanger = function (currentBrick, fromBullet){
+
+  if(!fromBullet){
   console.log(this.props.sound);
   if(this.props.sound){
   myAudio.play();}
+  }
 
   switch (currentBrick.health){
 
@@ -420,8 +442,6 @@ var colorChanger = function (currentBrick){
 }
 
 colorChanger = colorChanger.bind(this)
-
-
 
 
 var bulletRunning = function(clear,flightBackState, powerOfBullet){
@@ -448,6 +468,9 @@ var bulletRunning = function(clear,flightBackState, powerOfBullet){
   var bulletX = pos + (plate/2);
   var bulletY = posY;
 
+
+
+
   var bul = setInterval(()=>{
     //console.log(pos,posY)
     //console.log(`bullet${gun}`);
@@ -464,6 +487,20 @@ var bulletRunning = function(clear,flightBackState, powerOfBullet){
   brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet,flightBackState, this.state.gun);
 
   if(bulletY<0){
+
+    var g = document.createElement('div');
+      var f = document.getElementById('box');
+
+      g.setAttribute('id', 'lineT');
+
+      g.setAttribute('style',`position: absolute; top: 0px; left: ${bulletX}px; width: 0px; height: 1px; `)
+
+      f.appendChild(g);
+
+      setTimeout(()=>{f.removeChild(g)},500)
+
+
+
     clearBullet();
   }
 
@@ -493,6 +530,10 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,ballFunPoint,onf
 
 
 
+
+
+
+
   //var r;
   var r = ()=>{
 
@@ -500,6 +541,7 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,ballFunPoint,onf
 
     //have to find the way to change it
     var lose;
+
     loseFun((x)=>{lose =x})
     plateFun( (x) => {plate = x;});
     ballFun((x)=> {ball =x;})
@@ -507,12 +549,16 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,ballFunPoint,onf
     onfireFun((x)=>{onfire=x;})
     gunFun((x)=>{if(x && (shooting===false)){
 
+
+
+
         console.log(x, 'from gunFun');
       shooting = true; shootingInt = setInterval( ()=>
 
       {
 
          bulletRunning(
+
 
           ()=>{ clearInterval(shootingInt);
             runAnimationFrame = false }, flightBackState, x
@@ -698,21 +744,11 @@ if(document.getElementById('ball')){
       f.appendChild(g);
 
       setTimeout(()=>{f.removeChild(g)},500)
-
-//       var styleLine = document.createElement('style');
-//     styleLine.type = 'text/css';
-//     styleLine.innerHTML = `\
-// @keyframes spreadLine {\
-//     100% {\
-//       width: 100px;left: ${lefts-50}px;visibility: hidden;\
-//     }\
-// }\
-// }`;
-
-// document.getElementsByTagName('head')[0].appendChild(styleLine);
-
-
-
+      console.log(soundFun());
+      if(soundFun()){
+        var myAudioBorderBouncer = new Audio('sounds/mixkit-bounce.wav')
+        myAudioBorderBouncer.play();
+      }
 
       switcherTop = -switcherTop;
   }
@@ -730,6 +766,11 @@ if(document.getElementById('ball')){
     f.appendChild(g);
     setTimeout(()=>{f.removeChild(g)},500)
 
+
+    if(soundFun()){
+      var myAudioBorderBouncer = new Audio('sounds/mixkit-bounce.wav')
+      myAudioBorderBouncer.play();
+    }
   }
 
   if (lefts <= 0) {
@@ -745,6 +786,10 @@ if(document.getElementById('ball')){
     f.appendChild(g);
     setTimeout(()=>{f.removeChild(g)},500)
 
+    if(soundFun()){
+      var myAudioBorderBouncer = new Audio('sounds/mixkit-bounce.wav')
+      myAudioBorderBouncer.play();
+    }
 
   }
 
@@ -920,6 +965,14 @@ var flightActual = this.flightActual;
 var soundStart = this.soundStart;
 var loseFun = this.loseFun;
 
+
+
+var soundFun = () => this.props.sound;
+
+
+
+
+
 console.log('here is lvl ',lvl);
 //console.log(this.props.pattern , 'hereee')
 
@@ -941,8 +994,19 @@ setTimeout(()=>{
     if(inMove === 0){
 
       soundStart();
+      // var gunSound;
+      // gunFun((x)=> gunSound = x)
 
-    ballRunning(pat,undefined,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun,gunFun,flightBackState,loseFun,ballPoint);
+      // console.log('here',gunSound)
+      // if(gunSound){
+      //   console.log('here')
+      // // var myAudioShoot = new Audio('sounds/mixkit-shortt.wav');
+      // //     myAudioShoot.play();
+      // //     myAudioShoot.loop = true;
+
+      // }
+
+    ballRunning(pat,undefined,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun,gunFun,flightBackState,loseFun,ballPoint,soundFun);
 
   }
 
@@ -1311,7 +1375,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           currentBrick.health-=powerOfBullet;
         //  console.log(powerOfBullet, currentBrick.health)
 
-          colorChanger(currentBrick);
+          colorChanger(currentBrick, true);
 
           //console.log(currentBrick.health);
 

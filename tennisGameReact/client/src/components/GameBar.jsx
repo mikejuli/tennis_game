@@ -46,7 +46,7 @@ const GameBar = (props) => {
 
     <div style = {{position: 'absolute', left: '80px', top: '5px'}}><SoundsToggle fromGame = {true}/></div>
 
-  <div id = 'skin' style = {{backgroundImage: `url(./${backgroundImage})`, backgroundColor: color, width: '50px', height: '50px', top: '5px', left: '140px', position:'absolute', backgroundSize:'100%',borderRadius:'50%', backgroundRepeat: 'no-repeat'}}></div>
+  <div id = 'skin' style = {{backgroundImage: `url(./images/${backgroundImage})`, backgroundColor: color, width: '50px', height: '50px', top: '5px', left: '140px', position:'absolute', backgroundSize:'100%',borderRadius:'50%', backgroundRepeat: 'no-repeat'}}></div>
 
 
 <div style = {{position:'absolute',left:'200px', borderRadius:'50%', webkitBorderRadius: '15px', backgroundColor:'yellow', width: '220px', overflow: 'hidden', top: '15px'}}>
@@ -57,11 +57,11 @@ const GameBar = (props) => {
   <div id = 'gold' style = {{width: '110px', textAlign: 'right', lineHeight:'30px'}}> {props.gold}
 
 
-  <img src="coin1.png"  style = {{width: '20px', height: '20px', top: '5px',position: 'relative'}}></img>
+  <img src="/images/coin1.png"  style = {{width: '20px', height: '20px', top: '5px',position: 'relative'}}></img>
   </div>
 </div>
 
-      <div style = {{position: 'absolute',backgroundImage: `url('./${props.character}.png')`, width:'50px', height: '50px',backgroundSize:'100%',borderRadius:'50%', left: '285px', top: '5px'}}></div>
+      <div style = {{position: 'absolute',backgroundImage: `url('./images/${props.character}.png')`, width:'50px', height: '50px',backgroundSize:'100%',borderRadius:'50%', left: '285px', top: '5px'}}></div>
 
 
 
