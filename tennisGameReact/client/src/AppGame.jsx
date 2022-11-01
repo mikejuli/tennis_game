@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
-import Levels from "./components/levels";
-import Field from "./components/gameField";
+import Levels from "./components/Levels";
+import Field from "./components/GameField";
 import $ from "jquery";
 import { connect } from 'react-redux';
 import { buyItem } from "./features/skinCoin";

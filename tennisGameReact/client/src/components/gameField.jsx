@@ -221,17 +221,20 @@ import Player from './Player'
 
         if(this.state.attribute==='flight'){
           this.setState({flight: true , flightActual: true})
+          if(this.props.sound){
           var myAudioDropItems = new Audio('sounds/mixkit-drop-items.wav');
             myAudioDropItems.play();
+          }
         }
 
         if(this.state.attribute==='gun'){
           if(this.state.gun<3){
 
           this.setState({gun: this.state.gun + 1,attribute: undefined})
-
+          if(this.props.sound){
             var myAudioShoot = new Audio('sounds/mixkit-laser-gun.wav');
             myAudioShoot.play();
+          }
 
         }
       }

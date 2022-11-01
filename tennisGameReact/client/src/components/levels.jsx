@@ -1,9 +1,8 @@
 import React from 'react';
-import Level from './level';
+import Level from './Level';
 import TenLevels from './tenlevels';
 import BarMenu from './BarMenu';
 import $ from 'jquery';
-import grass from './grass.png';
 import MainMenu from './MainMenu'
 import SoundsToggle from './SoundsToggle'
 import CSSTransition from 'react-transition-group/CSSTransitionGroup'
@@ -96,7 +95,7 @@ class Levels extends React.Component {
 
       var imageList = [
 
-        ['loading backgroundImage...', '/images/grass.png'],
+        ['loading backgroundImage...', '/images/forest.png'],
         ['loaded snow background...', '/images/snow.jpeg'],
         ['loaded river background...', '/images/river.jpeg'],
         ['loaded sand background...', '/images/sand.jpg'],
