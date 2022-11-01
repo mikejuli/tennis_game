@@ -78,7 +78,7 @@ return (
 <div>
 <div id = 'buyI' onClick = {()=>{r()}}>
 
-<div style = {{position: 'relative', width: '55px', float: 'left'}}>{props.price}</div> <img src = 'coin1.png' width = '20px' height = '20px' style= {{marginTop: '3px'}}></img> </div>
+<div style = {{position: 'relative', width: '55px', float: 'left'}}>{props.price}</div> <img src = 'images/coin1.png' width = '20px' height = '20px' style= {{marginTop: '3px'}}></img> </div>
 
 
 <div id = 'mainWrap'>

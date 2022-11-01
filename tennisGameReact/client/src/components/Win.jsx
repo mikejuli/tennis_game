@@ -17,7 +17,7 @@ useEffect(()=>{
     if(sound){
 
       soundPlayed(false);
-      var myAudio = new Audio('mixkit-win.wav');
+      var myAudio = new Audio('sounds/mixkit-win.wav');
       myAudio.play();
 
     }

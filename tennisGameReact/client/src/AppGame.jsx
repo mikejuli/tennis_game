@@ -1,8 +1,7 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.scss";
-import Levels from "./components/levels";
-import Field from "./components/gameField";
+import Levels from "./components/Levels";
+import Field from "./components/GameField";
 import $ from "jquery";
 import { connect } from 'react-redux';
 import { buyItem } from "./features/skinCoin";
@@ -352,7 +351,7 @@ class AppGame extends React.Component {
         createPattern = createPattern.map((x) => {
          // console.log(x);
           var health = x;
-          var gold = 45 * x;
+          var gold = 17 * health;
           var attribute = "gun";
 
           if (count === 13) {
@@ -370,24 +369,33 @@ class AppGame extends React.Component {
             num++;
             left += 42;
             //testing
-            if (count % 2 == 0) {
-              attribute = "flight";
-            }
-            if (count % 3 == 0) {
-              attribute = "plate";
-            }
-            if (count % 4 == 0) {
-              attribute = "tnt";
-            }
-            if (count % 5 == 0) {
+
+            console.log(Math.random());
+
+            var odds = Math.random();
+
+            //the more value health that every singe brick has the more odds get some valuable attribute
+
+            if (odds < 1) {
               attribute = "onfire";
             }
-            if (count % 6 == 0) {
+            if(odds < 0.98 - (health * 0.004)){
+              attribute = 'shooting'
+            }
+            if (odds < 0.95 - (health * 0.004)) {
+              attribute = "flight";
+            }
+            if (odds< 0.92 - (health * 0.007) ) {
+              attribute = "plate";
+            }
+            if (odds<0.85) {
+              attribute = "ball";
+            }
+            if (odds<0.80) {
               attribute = 'tnt';
             }
-            if(count% 2 == 0) {
-
-              attribute = 'ball';
+            if(odds<0.65) {
+              attribute = 'none';
             }
             //
             return [top, left, num, health, gold, attribute];

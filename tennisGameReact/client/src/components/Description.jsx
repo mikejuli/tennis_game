@@ -66,14 +66,14 @@ useEffect(()=>{
 <div>
 {menu?
   <div id = 'bounce' >
-  <a class="desc" onClick = {()=>{ if(props.changer===props.skin){openMenu(true)}; if(toggleSetSkin(props.skin)===false){openMenu(true)}} } style = {skin.skinArray.value[props.skin]?{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./${props.skillButton}')`,backgroundColor:props.color}:{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./${props.skillButton}')`,backgroundColor:props.color, filter: 'grayscale(80%)' }} ></a>
+  <a class="desc" onClick = {()=>{ if(props.changer===props.skin){openMenu(true)}; if(toggleSetSkin(props.skin)===false){openMenu(true)}} } style = {skin.skinArray.value[props.skin]?{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./images/${props.skillButton}')`,backgroundColor:props.color}:{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./images/${props.skillButton}')`,backgroundColor:props.color, filter: 'grayscale(80%)' }} ></a>
 
   <div id = 'description' style = {{top: props.top}}>
   <div style = {{textAlign:'left', padding:'10px 0px 0px 10px'}}>{props.skin}</div>
   <div style = {{color: '#ffde1c', textAlign:'left', fontSize: '16px', padding: '5px 0px 0px 10px'}}>{skin.skinArray.description[props.skin]}</div>
 
   <div id = 'descSet'  onClick = {()=>{ toggleSetSkin(props.skin)}}>Set </div>
-  {skin.skinArray.value[props.skin]?<div></div> : <div id = 'descPrice' onClick = {()=>{toggle(props.skin, props.price)}}><div style = {{position: 'relative', width: '55px', float: 'left'}}>{props.price}</div> <img src = 'coin1.png' width = '20px' height = '20px' style= {{marginTop: '3px'}}></img> </div>}
+  {skin.skinArray.value[props.skin]?<div></div> : <div id = 'descPrice' onClick = {()=>{toggle(props.skin, props.price)}}><div style = {{position: 'relative', width: '55px', float: 'left'}}>{props.price}</div> <img src = 'images/coin1.png' width = '20px' height = '20px' style= {{marginTop: '3px'}}></img> </div>}
 
 
   </div>
@@ -81,7 +81,7 @@ useEffect(()=>{
 
 :
 <div>
-<a class="desc" style = {skin.skinArray.value[props.skin]?{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./${props.skillButton}')`,backgroundColor:props.color, border: 'greenyellow 2px solid'}:{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./${props.skillButton}')`,backgroundColor:props.color, filter: 'grayscale(100%)'}} onClick = {()=>{ openMenu(true)}}  onMouseEnter = {()=>{openMenu()}}></a>
+<a class="desc" style = {skin.skinArray.value[props.skin]?{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./images/${props.skillButton}')`,backgroundColor:props.color, border: 'greenyellow 2px solid'}:{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundImage:`url('./images/${props.skillButton}')`,backgroundColor:props.color, filter: 'grayscale(100%)'}} onClick = {()=>{ openMenu(true)}}  onMouseEnter = {()=>{openMenu()}}></a>
 
 
 </div>

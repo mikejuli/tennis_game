@@ -31,7 +31,7 @@ toggle = () => {
 
 
       <div id = 'nameAndAvatar'>
-        <div id = 'avatar' style = {{backgroundImage: `url('./${this.props.character}.png')`}}></div>
+        <div id = 'avatar' style = {{backgroundImage: `url('./images/${this.props.character}.png')`}}></div>
 
         <div id = 'circlePanel'>
         <div id = 'circle'></div>
@@ -51,7 +51,7 @@ toggle = () => {
 
         <div id = 'gold' style = {{padding:"5px"}}>
         <div>
-        <img src = 'coin.png' style = {{marginLeft:'10px',height:'30px', width:'45px', float: 'left'}}></img></div>
+        <img src = 'images/coin.png' style = {{marginLeft:'10px',height:'30px', width:'45px', float: 'left'}}></img></div>
 
            <div id = 'coinIn' style = {{height:'30px', backgroundColor:'gray', borderRadius:'50%',webkitBorderRadius: '15px', fontColor:'gold', color: 'gold', textAlign:'center', lineHeight: '30px'}}>{this.props.gold}</div>
          </div>

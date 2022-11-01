@@ -1,9 +1,8 @@
 import React from 'react';
-import Level from './level';
+import Level from './Level';
 import TenLevels from './tenlevels';
 import BarMenu from './BarMenu';
 import $ from 'jquery';
-import grass from './grass.png';
 import MainMenu from './MainMenu'
 import SoundsToggle from './SoundsToggle'
 import CSSTransition from 'react-transition-group/CSSTransitionGroup'
@@ -14,13 +13,15 @@ import SoundPlayer from './SoundPlayer'
 import Player from './Player'
 import axios from 'axios'
 import LeaderBoard from './LeaderBoard'
+import {useSelector} from 'react-redux'
+
 
 class Levels extends React.Component {
 
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 4000, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 2900, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
 
     this.changeLevels = this.changeLevels.bind(this)
     this.openLogOutMenu = this.openLogOutMenu.bind(this)
@@ -94,11 +95,11 @@ class Levels extends React.Component {
 
       var imageList = [
 
-        ['loading backgroundImage...', '/grass.png'],
-        ['loaded snow background...', '/snow.jpeg'],
-        ['loaded river background...', '/river.jpeg'],
-        ['loaded sand background...', '/sand.jpg'],
-        ['loaded hell background...', '/hell.jpeg']
+        ['loading backgroundImage...', '/images/forest.png'],
+        ['loaded snow background...', '/images/snow.jpeg'],
+        ['loaded river background...', '/images/river.jpeg'],
+        ['loaded sand background...', '/images/sand.jpg'],
+        ['loaded hell background...', '/images/hell.jpeg']
       ]
 
 
@@ -261,14 +262,14 @@ class Levels extends React.Component {
       // <img src= '/grass.png'/>
 
       var style = {
-        backgroundImage: `url('/grass.png')`,
+        backgroundImage: `url('./images/grass.png')`,
         backgroundSize: '100%',
         backgroundPosition: '0% 4%'
       }
 
       if(i==1){
          style = {
-          backgroundImage: `url('/grass.png')`,
+          backgroundImage: `url('./images/grass.png')`,
         backgroundSize: '100%',
         backgroundPosition: '0% 27.6%'
         }
@@ -281,7 +282,7 @@ class Levels extends React.Component {
 
       if(i==2){
         style = {
-         backgroundImage: `url('/grass.png')`,
+         backgroundImage: `url('./images/grass.png')`,
        backgroundSize: '100%',
        backgroundPosition: '0% 51.14%'
        }
@@ -294,7 +295,7 @@ class Levels extends React.Component {
 
      if(i==3){
       style = {
-        backgroundImage: `url('/grass.png')`,
+        backgroundImage: `url('./images/grass.png')`,
       //  backgroundImage: `image(${backgroundImageLoading})`,
      backgroundSize: '100%',
      backgroundPosition: '0% 74.75%'
@@ -306,7 +307,7 @@ class Levels extends React.Component {
 
    if(i==4){
     style = {
-      backgroundImage: `url('/grass.png')`,
+      backgroundImage: `url('./images/grass.png')`,
    backgroundSize: '100%',
    backgroundPosition: '0% 98.3%'
    }
@@ -322,13 +323,13 @@ class Levels extends React.Component {
     }
     if(this.state.arrow===1){var page = 'first'
 
-    document.body.style.background = `url('./forest.jpg') no-repeat center center fixed`
+    document.body.style.background = `url('./images/forest.jpg') no-repeat center center fixed`
     document.body.style.backgroundSize = `cover`
 
   } else
     if(this.state.arrow===2) {var page = 'second';
 
-    document.body.style.background = `url('./snow.jpeg') no-repeat center center fixed`
+    document.body.style.background = `url('./images/snow.jpeg') no-repeat center center fixed`
     document.body.style.backgroundSize = `cover`
 
 
@@ -339,24 +340,24 @@ class Levels extends React.Component {
 
 
 
-    document.body.style.background = `url('./river.jpeg') no-repeat center center fixed`
+    document.body.style.background = `url('./images/river.jpeg') no-repeat center center fixed`
     document.body.style.backgroundSize = `cover`
 
   } else
     if(this.state.arrow===4) {var page = 'fourth';
 
-    document.body.style.background = `url('./sand.jpg') no-repeat center center fixed`
+    document.body.style.background = `url('./images/sand.jpg') no-repeat center center fixed`
     document.body.style.backgroundSize = `cover`
 
   } else
     if(this.state.arrow===5) {var page = 'fifth';
 
-    document.body.style.background = `url('./hell.jpeg') no-repeat center center fixed`
+    document.body.style.background = `url('./images/hell.jpeg') no-repeat center center fixed`
     document.body.style.backgroundSize = `cover`
 
   } else
     if(this.state.arrow===6) {var page = 'final';
-    document.body.style.background = `url('./river.jpeg') no-repeat center center fixed`
+    document.body.style.background = `url('./images/river.jpeg') no-repeat center center fixed`
     document.body.style.backgroundSize = `cover`
 
   }
@@ -439,7 +440,7 @@ class Levels extends React.Component {
 
       {this.state.openLeaderBoard ? <LeaderBoard openLeaderBoard = {this.openLeaderBoard}/> : <div></div>}
 
-      <Player url = 'backgroundmusic.mp3'/>
+      <Player url = 'sounds/backgroundmusic.mp3'/>
 
       </div>
 

@@ -52,7 +52,7 @@ Gold
 <div style = {{width:'20px'}}>
 {index+1}
 </div>
-{<div style = {{backgroundImage : `url('./${item.activeCharacter}.png')`, width: '40px', height: '40px', backgroundPosition: '50%', backgroundSize:'100%', borderRadius: '50%' }}></div>}
+{<div style = {{backgroundImage : `url('./images/${item.activeCharacter}.png')`, width: '40px', height: '40px', backgroundPosition: '50%', backgroundSize:'100%', borderRadius: '50%' }}></div>}
 
 <div style = {{width:'100px'}}>
 {item.user}
