@@ -12,17 +12,30 @@ COPY . /src/app
 
 # Does your app have any dependencies that should be installed?
 
+RUN npm install
+RUN npm install jquery
+RUN npm install react-transition-group
+RUN npm install react-addons-css-transition-group
+RUN npm i sass
+
+
+
 WORKDIR /src/app/client
 
 RUN npm install
 RUN npm install jquery
-RUN npm install @types/react-transition-group
+RUN npm install react-transition-group
 RUN npm install react-addons-css-transition-group
+RUN npm i sass
+
+
 
 
 RUN npm run build
-RUN npm install -g
+RUN npm install -g serve
 # What port will the container talk to the outside world with once created?
-EXPOSE 3006
+EXPOSE 3001
 
-# How do you start your app?
+
+
+# CMD [ "npm","run","buildRun" ]
