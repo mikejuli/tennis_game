@@ -25,9 +25,7 @@ class BackgroundImage extends React.Component {
     };
 
     const style = {
-      animationIterationCount: 'infinite',
-      animationFillMode: 'forwards',
-      position: 'absolute',
+      position: 'absolute'
     };
 
   //  if(this.props.arrow===1){

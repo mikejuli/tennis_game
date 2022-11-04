@@ -380,7 +380,7 @@ class AppGame extends React.Component {
               attribute = "onfire";
             }
             if(odds < 0.98 - (health * 0.004)){
-              attribute = 'shooting'
+              attribute = 'gun'
             }
             if (odds < 0.95 - (health * 0.004)) {
               attribute = "flight";

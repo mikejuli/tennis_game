@@ -393,43 +393,73 @@ button.back:hover {
 }
 
 
-.background-enter {
+.backgroundF-enter {
   transform: translateY(100%);
+}
+.backgroundF-enter.backgroundF-enter-active {
 
-}
-.background-enter.background-enter-active {
   transform: translateY(0%);
-  transition: transform 3000ms ease-in-out;
+  transition: transform 2900ms ease-in-out;
+}
 
-}
-.background-leave {
+
+
+.backgroundF-exit {
   transform: translateY(0%);
 }
-.background-leave.background-leave-active {
+.backgroundF-exit.backgroundF-exit-active {
   transform: translateY(-100%);
-  transition: transform 3000ms ease-in-out;
+  transition: transform 2900ms ease-in-out;
 }
 
 
-.backgroundBack-enter {
+
+
+.backgroundB-enter {
   transform: translateY(-100%);
-
-
 }
-.backgroundBack-enter.backgroundBack-enter-active {
+.backgroundB-enter.backgroundB-enter-active {
   transform: translateY(0%);
-  transition: transform 3000ms ease-in-out;
-
+  transition: transform 2900ms ease-in-out;
 }
-.backgroundBack-leave {
- transform: translateY(0%);
 
+
+
+
+
+.backgroundB-exit {
+  transform: translateY(0%);
 }
-.backgroundBack-leave.backgroundBack-leave-active {
+.backgroundB-exit.backgroundB-exit-active {
   transform: translateY(100%);
-  transition: transform 3000ms ease-in-out;
-
+  transition: transform 2900ms ease-in-out;
 }
+
+
+
+// .backgroundC-exit-done {
+//   transform: translateY(-100%);
+
+// }
+
+
+// .backgroundBack-enter {
+//   transform: translateY(-100%);
+// }
+// .backgroundBack-enter.backgroundBack-enter-active {
+//   transform: translateY(0%);
+//   transition: transform 3000ms ease-in-out;
+
+// }
+// .backgroundBack-exit {
+//  transform: translateY(0%);
+
+// }
+// .backgroundBack-exit.backgroundBack-exit-active {
+//   transform: translateY(100%);
+//   transition: transform 3000ms ease-in-out;
+
+// }
 
 
 

@@ -5,7 +5,7 @@ import BarMenu from './BarMenu';
 import $ from 'jquery';
 import MainMenu from './MainMenu'
 import SoundsToggle from './SoundsToggle'
-import CSSTransition from 'react-transition-group/CSSTransitionGroup'
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
 //import { CSSTransition } from 'react-transition-group';
 
 import BackgroundImage from './BackgroundImage';
@@ -14,14 +14,14 @@ import Player from './Player'
 import axios from 'axios'
 import LeaderBoard from './LeaderBoard'
 import {useSelector} from 'react-redux'
-
+import Transit from './Transit'
 
 class Levels extends React.Component {
 
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 2900, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 2900, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true, arrowDirect: 0}
 
     this.changeLevels = this.changeLevels.bind(this)
     this.openLogOutMenu = this.openLogOutMenu.bind(this)
@@ -46,8 +46,9 @@ class Levels extends React.Component {
 
 
   changeLevels(arrow){
-  if(this.state.inProcess === false){
-    this.setState({inProcess: true})
+
+
+
 
     console.log(this.state.arrow);
     if(arrow === 1){
@@ -60,10 +61,10 @@ class Levels extends React.Component {
       this.setState({arrow:g, changeArrow: -1})
     }
 
-    setTimeout(()=>{this.setState({inProcess: false})},this.state.transitionTime + 300)
-  }
 
   }
+
+
 
 
 
@@ -364,26 +365,39 @@ class Levels extends React.Component {
   var rend;
 
     if(this.state.changeArrow===1){
-
-        rend = <CSSTransition unmountOnExit
-        transitionName="background"
-        transitionEnterTimeout={this.state.transitionTime}
-      transitionLeaveTimeout={this.state.transitionTime}
-
-      >
-      <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
-      </CSSTransition>
+      console.log(this.state.changeArrow, 'thisARROW')
+        rend =    <TransitionGroup childFactory={child => React.cloneElement(
+          child,
+          {classNames: "backgroundF", timeout: this.state.transitionTime}
+        )}>
+        <CSSTransition
+          in = {true}
+          classNames="backgroundF"
+          timeout={this.state.transitionTime}
+          key = {page}
+          unmountOnExit
+        >
+        <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
+        </CSSTransition>
+        </TransitionGroup>
 
     } else {
+        console.log(this.state.changeArrow, 'thisARROW')
+       rend =  <TransitionGroup childFactory={child => React.cloneElement(
+        child,
+        {classNames: "backgroundB", timeout: this.state.transitionTime}
+      )}>
+       <CSSTransition
+         in = {true}
+         classNames="backgroundB"
+         timeout={this.state.transitionTime}
+         key = {page}
+         unmountOnExit
 
-       rend =  <CSSTransition unmountOnExit
-      transitionName="backgroundBack"
-      transitionEnterTimeout={this.state.transitionTime}
-      transitionLeaveTimeout={this.state.transitionTime}
-
-    >
-    <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
-    </CSSTransition>
+       >
+       <BackgroundImage page={page} key={page} arrow = {this.state.arrow} arrS = {arrS} />
+       </CSSTransition>
+       </TransitionGroup>
 
     }
 
@@ -394,12 +408,13 @@ class Levels extends React.Component {
 
 
 
-{page!== 'first' ? <button class = 'back' onClick = {()=>{this.changeLevels(-1); }}></button> : <div></div>}
+{page!== 'first' ? <button class = 'back' onClick = {()=>{this.changeLevels(-1) }}></button> : <div></div>}
 
 
       <div id = 'level' >
 
-      {rend}
+    {rend}
+       {/* <Transit timeout = {this.state.transitionTime} changeArrow = {this.state.changeArrow} page={page} key={page} arrow = {this.state.arrow} arrS = {arrS}/> */}
       {/* {backgroundImageLoading} */}
         </div>
 

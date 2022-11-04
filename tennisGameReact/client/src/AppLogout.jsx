@@ -32,7 +32,7 @@ const AppLogout = ({children}) => {
   var f;
 
 const timerBack = () => {
-  time = 60;
+  time = 600;
   if(f){clearInterval(f)};
 
    f = setInterval(()=>{
@@ -68,7 +68,7 @@ const handleLogoutTimer = () => {
 
     g.appendChild(messages);
 
-    }, 540000)
+    }, 60000)
 
 
 
