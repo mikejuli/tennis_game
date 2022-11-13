@@ -896,54 +896,161 @@ if(!document.getElementById('plate')){
 }
 }
 
-document.addEventListener ('mousemove', mousemove);
+
+
+
+if(this.props.isMobile){
 
 
   ///   have to finish up with touch movement for cellphone version
   ///
   ///
-  //     var box = document.getElementById('boxCover')
-  //     var statusdiv = document.getElementById('BarMenuIn')
-  //     var startx = 0
-  //     var dist = 0
-  //     console.log(box,statusdiv)
-  // box.addEventListener('touchstart', function(e){
-  //        
-  //   var touchobj = e.changedTouches[0] // reference first touch point (ie: first finger)
-  //         startx = parseInt(touchobj.clientX) // get x position of touch point relative to left edge of browser
-  //         statusdiv.innerHTML = 'Status: touchstart<br> ClientX: ' + startx + 'px'
-  //         e.preventDefault()
-  //     }, false)
-  //  
-  // box.addEventListener('touchmove', function(e){
-  //         var touchobj = e.changedTouches[0] // reference first touch point for this event
-  //         var dist = parseInt(touchobj.clientX) - startx
+      var controllerBar = document.getElementById('controllerBar');
+      var box = document.getElementById('boxCover')
+      var statusdiv = document.getElementById('BarMenuIn')
+      var startx = 0
+      var dist = 0
+    var diff = 0;
+    var first =0;
 
-  // if(dist<=0){pos = 0} else
-  // if(dist<width-plate){
-  //   pos = dist;
-  // }else { pos = width-plate}
+    var starty = 0;
+      var distY = 0;
+    var diffY = 0;
+    var firstY =0;
 
-  //   document.getElementById('plate').style.left = dist + 'px';
 
-  //         statusdiv.innerHTML = 'Status: touchmove<br> Horizontal distance traveled: ' + dist + 'px'
-  //         e.preventDefault()
-  //     }, false)
-  //  
-  // box.addEventListener('touchend', function(e){
-  //         var touchobj = e.changedTouches[0] // reference first touch point for this event
-  //         statusdiv.innerHTML = 'Status: touchend<br> Resting x coordinate: ' + touchobj.clientX + 'px'
-  //         e.preventDefault()
-  //     }, false)
-  //  
+      console.log(box,statusdiv)
+
+
+  var touchstart = (e) => {
+         
+      var touchobj = e.changedTouches[0] // reference first touch point (ie: first finger)
+            startx = parseInt(touchobj.clientX) // get x position of touch point relative to left edge of browser
+
+    if(this.state.flight){
+    starty = parseInt(touchobj.clientY)}
+            statusdiv.innerHTML = 'Status: touchstart<br> ClientX: ' + startx + 'px'
+
+            e.preventDefault()
+      
+
+
+  }
 
 
 
+  controllerBar.addEventListener('touchstart', touchstart, false)
+   
+
+  var touchmove = (e) =>{
+          
+    // if(!document.getElementById('plate')){
+
+
+    //     //remove listener
+
+    // } else {
+
+    var flightActual = this.state.flight;
+    var flightActualD = this.state.flightActual;
+
+
+    var touchobj = e.changedTouches[0] // reference first touch point for this event
+          var dist = parseInt(touchobj.clientX) - startx
+
+
+
+      dist = dist * 3.7;
+      diff = dist - first;
+      first = dist;
+      pos = pos + diff;
+
+      if(flightActual){
+      var distY = parseInt(touchobj.clientY) - starty;
+      distY = distY * 2.8;
+      diffY = distY - firstY;
+      firstY = distY;
+      posY = posY + diffY;
+      }
+
+
+    if(pos<=0){pos = 0} else
+  if(pos<width-plate){
+    pos = pos;
+  }else { pos = width-plate}
+
+
+  if(flightActual && flightActualD){
+    if(posY<height-10){
+      posY = posY;
+    }else {
+     posY = height-10;
+    }
+    }
+
+
+    if(document.getElementById('plate')){
+    document.getElementById('plate').style.left = pos + 'px';
+
+    if(flightActual){
+      document.getElementById('plate').style.top = posY + 'px';
+    }
+
+       }
+
+
+       if(!inMove){
+        document.getElementById('ball').style.left = pos +(plate/2)-(ball/2) + 'px';
+        document.getElementById('ball').style.top = height-10-ball + 'px';
+
+        document.getElementById('ball').style.height = ball + 'px';
+        document.getElementById('ball').style.width = ball + 'px';
+
+
+
+        tops = height-10-ball;
+        lefts = pos + (plate/2)-(ball/2);
+
+      }
+
+
+
+  //         statusdiv.innerHTML = 'Status: touchmove<br> Horizontal distance traveled: ' + dist + '  px   ' + posY + ' this pos'
+          e.preventDefault()
+      }
+
+
+  controllerBar.addEventListener('touchmove', touchmove, false)
+   
+  controllerBar.addEventListener('touchend', function(e){
+          var touchobj = e.changedTouches[0] // reference first touch point for this event
+  first = 0;
+  firstY = 0;
+          statusdiv.innerHTML = 'Status: touchend<br> Resting x coordinate: ' + touchobj.clientX + 'px'
+          e.preventDefault()
+      }, false)
+   
 
 
 
 
-console.log(document.onmousemove);
+
+  // }
+
+
+}else {
+
+  document.addEventListener ('mousemove', mousemove);
+
+}
+
+
+
+
+
+
+
+//console.log(document.onmousemove);
 
 
 var plateFun = this.plateFun;
@@ -1441,6 +1548,9 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
       return(
 
         <div>
+
+{this.props.isMobile?<div id = 'controllerBar'></div>:<div></div>}
+{/* <div id = 'controllerBar'></div> */}
 
 <div id ='gamebar' style = {{position: 'absolute',top: '10px'}}>
 
