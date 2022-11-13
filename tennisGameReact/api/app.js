@@ -12,6 +12,7 @@ var testAPIRouter = require('./routes/testAPI')
 var levelsTable = require('./levelsTable')
 
 
+
 const db = require('./database/index.js');
 
 
@@ -116,7 +117,7 @@ app.post('/user', function(req, res){
       data.password = req.body.password,
       data.token = '13244532',
       data.level = 1,
-      data.gold = 0
+      data.gold = 25000
 
 
         db.saveUser(data);
@@ -150,6 +151,7 @@ app.post('/user', function(req, res){
 
   app.post('/authRefresh', function(req,res){
 
+    console.log(req);
     //
     //here we'll implement the way how to generate token every 24 hour a day.
     console.log(req.body.loggedUser,req.body.token)

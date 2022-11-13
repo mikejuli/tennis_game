@@ -46,7 +46,8 @@ class Levels extends React.Component {
 
 
   changeLevels(arrow){
-
+    if(this.state.inProcess === false){
+      this.setState({inProcess: true})
 
 
 
@@ -61,6 +62,9 @@ class Levels extends React.Component {
       this.setState({arrow:g, changeArrow: -1})
     }
 
+
+    setTimeout(()=>{this.setState({inProcess: false})},this.state.transitionTime + 300)
+  }
 
   }
 
@@ -221,7 +225,7 @@ class Levels extends React.Component {
 
 
 //       $.ajax({method: 'GET',
-//       url: `http://localhost:9000/active`,
+//       url: `https://3.213.179.128:9000/active`,
 //       success: result => this.setState({active: result})
 
 //     })
@@ -432,8 +436,9 @@ class Levels extends React.Component {
       Ilustrator: Olga Zhuleva <br/>
     <br/>
       Fell free to check git-hub repository:<br/>
-
+      https://github.com/mikejuli/tennis_game
       Me on linkedIn:<br/>
+      https://www.linkedin.com/in/mikhail-zhulev
     <br/>
       Devoted to our Father🧡<br/>
 

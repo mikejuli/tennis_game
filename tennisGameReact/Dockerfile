@@ -14,28 +14,21 @@ COPY . /src/app
 
 RUN npm install
 RUN npm install jquery
-RUN npm install react-transition-group
-RUN npm install react-addons-css-transition-group
 RUN npm i sass
-
+RUN npm install react-transition-group
 
 
 WORKDIR /src/app/client
 
-RUN npm install
-RUN npm install jquery
+
 RUN npm install react-transition-group
-RUN npm install react-addons-css-transition-group
-RUN npm i sass
-
-
 
 
 RUN npm run build
 RUN npm install -g serve
 # What port will the container talk to the outside world with once created?
-EXPOSE 3001
+EXPOSE 80
 
 
 
-# CMD [ "npm","run","buildRun" ]
+ CMD [ "serve", "-s", "-n", "build"]

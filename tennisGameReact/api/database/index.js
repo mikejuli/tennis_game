@@ -1,9 +1,9 @@
 const mongoose = require ('mongoose');
 
 
-mongoose.connect('mongodb://localhost/Level') //the name has to be changed!
+// mongoose.connect('mongodb://localhost/Level') //the name has to be changed!
 
-//  mongoose.connect('mongodb://172.17.0.4:27017/Level') //the name has to be changed!
+ mongoose.connect('mongodb://172.17.0.4:27017/Level') //the name has to be changed!
 
 
 
@@ -253,7 +253,8 @@ let findAndActiveUserSkin = ( user, activeSkin, cb) => {
 
     let checkUserCharacter = ( user, cb) => {
       console.log('!!!character->>>>', user);
-      User.find({user:user}).exec((err, result) => { console.log(result[0].activeCharacter,'result');cb(err,result) });
+      User.find({user:user}).exec((err, result) => { //console.log(result[0].activeCharacter,'result');
+      cb(err,result) });
 
 
       }

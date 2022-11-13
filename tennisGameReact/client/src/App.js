@@ -24,7 +24,9 @@ class App extends React.Component{
 
   componentDidMount(){
 
+    var isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
+    console.log(isMobile(), 'isMobile');
 
     console.log('mount' ,this.state.currentView);
     var loggedUser = localStorage.getItem('user');
@@ -35,31 +37,39 @@ class App extends React.Component{
 
       var token = localStorage.getItem('token');
 
-
+//`authRefresh`
+//`https://cs8mzuv9y5.execute-api.us-east-1.amazonaws.com/1/`
       $.ajax({method: 'POST',
-      url: `http://192.168.1.223:9000/authRefresh`,
+      url: `https://arcanepong.com:9000/authRefresh`,
       data: {loggedUser,token},
       success: (result) => {
 
           //should get this gata from global redux
           axios
-            .get(`http://192.168.1.223:9000/checkUserCharacter`, {
+            .get(`https://arcanepong.com:9000/checkUserCharacter`, {
               params: { user: loggedUser },
             })
             .then((response) => {
               console.log(response,'response')
               if(response.data[0].activeCharacter !== 'none'){
 
+                if(response.data[0].activeCharacter===undefined){
+                  localStorage.clear();
+                }else{
                 this.setState({choosen: 'selected'});
                 this.setState({character : response.data[0].activeCharacter})
-                console.log('hee', response.data)
+                console.log('hee', response.data)}
               }
             }).then( ()=>{
 
-              if(result){ this.setState({currentView:'game'}) }
+              if(result){ this.setState({currentView:'game'}) } else { localStorage.clear();}
 
             }  );
+
+
             console.log(result,'from success')
+
+
 
         }
 
@@ -157,7 +167,7 @@ class App extends React.Component{
 
 
     $.ajax({method: 'POST',
-      url: `http://192.168.1.223:9000/newPlayer`,
+      url: `https://arcanepong.com:9000/newPlayer`,
       data: {login,password},
       success: (result) => {
 
@@ -228,13 +238,14 @@ class App extends React.Component{
 
   login = (login,password) => {
 
-    console.log('here!!',login,password)
+  //  console.log('here!!',login,password)
 
 
 
-
+//`https://3.213.179.128:9000/auth`
+//https://cs8mzuv9y5.execute-api.us-east-1.amazonaws.com/1/
     $.ajax({method: 'POST',
-      url: `http://192.168.1.223:9000/auth`,
+      url: `https://arcanepong.com:9000/auth`,
       data: {login,password},
       success: (result) => {
 
@@ -247,7 +258,7 @@ class App extends React.Component{
 
           //should get this gata from global redux
         axios
-        .get(`http://192.168.1.223:9000/checkUserCharacter`, {
+        .get(`https://arcanepong.com:9000/checkUserCharacter`, {
           params: { user: login },
         })
         .then((response) => {
@@ -333,8 +344,8 @@ class App extends React.Component{
                 </div>
 
             </div>
-            <div id = 'buyI' style = {{top: '160px', left: '40px'}} onClick = { ()=>this.newAcc(document.getElementById('username').value,document.getElementById('password').value)}>Submit</div>
-            <div id = 'buyI' style = {{top: '160px', left: '150px'}} onClick={ () => this.changeView("logIn")}>Go Back</div>
+            <div id = 'buyI' style = {{top: '160px', left: '45px'}} onClick = { ()=>this.newAcc(document.getElementById('username').value,document.getElementById('password').value)}>Submit</div>
+            <div id = 'buyI' style = {{top: '160px', left: '160px'}} onClick={ () => this.changeView("logIn")}>Go Back</div>
           </div>
         )
         break
@@ -357,9 +368,9 @@ class App extends React.Component{
 
 
 
-            <div id = 'buyI' style = {{top: '150px', left: '40px'}} onClick ={()=>{this.login(document.getElementById('username').value, document.getElementById('password').value);}}>Login</div>
+            <div id = 'buyI' style = {{top: '150px', left: '45px'}} onClick ={()=>{this.login(document.getElementById('username').value, document.getElementById('password').value);}}>Login</div>
 
-            <div id = 'buyI' style = {{top: '150px', left: '150px'}} onClick={ () => this.changeView("signUp")}>Sign Up</div>
+            <div id = 'buyI' style = {{top: '150px', left: '160px'}} onClick={ () => this.changeView("signUp")}>Sign Up</div>
 
             </div>
 

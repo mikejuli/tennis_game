@@ -37,7 +37,7 @@
 }
 
 #loginInMenu{
-  width: 260px;
+  width: 282px;
   height:200px;
   position: absolute;
   left: calc(50% - 130px);
@@ -99,6 +99,11 @@
 
 @media screen and (max-height: 600px){
 
+  .sel{
+    width: 130px;
+    height: 130px
+  }
+
   .App {
 
     height: 330px;
@@ -127,13 +132,17 @@
   #BarMenuIn{
 
     zoom: 0.68;
-    left: -48px;
+    left: -148px;
+    top: 40px;
+    height: 150px;
+    width: 250px;
     z-index: 2;
   }
 
 
   #boxCover {
     top: 45px;
+    left: 140px;
   }
 
 }
@@ -141,6 +150,12 @@
 
 
 @media screen and (max-width: 400px){
+
+  #wizardButton{
+    width: 130px;
+    height: 130px
+  }
+
 
   .App {
 
@@ -701,7 +716,7 @@ position: absolute;
 #lose {
   text-align: center;
   top: 150px;
-  left: 300px;
+  left: calc(50% - 25px);
 position: absolute;
   z-index: 2;
   width: 200px;
@@ -1782,4 +1797,55 @@ to {
 @keyframes fadeOutE {
   0% {opacity: 1;}
   100% {opacity: 0.5;transform: translateY(5px) scale(2,2) rotate(45deg);}
+}
+
+@media screen and (max-width: 400px){
+
+  #wizardButton{
+    width: 130px;
+    height: 130px
+  }
+
+  #golemButton{
+    width: 130px;
+    height: 130px
+  }
+
+  #gunnersButton{
+    width: 130px;
+    height: 130px
+  }
+
+}
+
+@media screen and (max-height: 600px){
+
+  #wizardButton{
+    width: 130px;
+    height: 130px
+  }
+
+  #golemButton{
+    width: 130px;
+    height: 130px
+  }
+
+  #gunnersButton{
+    width: 130px;
+    height: 130px
+  }
+
+}
+
+
+#controllerBar{
+
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background-color: grey;
+  z-index: 5;
+  opacity: 0.7;
+  top:150px;
+  left: -100px;
 }
