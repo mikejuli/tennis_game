@@ -269,7 +269,9 @@ class AppGame extends React.Component {
     this.setState({isMobile: isMobileCheck})
     console.log(isMobile(), 'isMobile');
 
-
+    if(isMobile){
+    window.scrollTo(0, 1);
+    }
 
     if (!this.state.user) {
       this.setState({ user: localStorage.getItem("user") }, () => {

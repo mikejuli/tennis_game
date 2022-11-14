@@ -24,9 +24,7 @@ class App extends React.Component{
 
   componentDidMount(){
 
-    var isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-    console.log(isMobile(), 'isMobile');
 
     console.log('mount' ,this.state.currentView);
     var loggedUser = localStorage.getItem('user');

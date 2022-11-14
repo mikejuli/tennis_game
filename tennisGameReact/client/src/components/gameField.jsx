@@ -315,6 +315,8 @@ var inMove = 0;
 
 var posY = height-12;
 
+var lastTop = posY;
+var switcherLastTop = true;
 
 var bulletX, bulletY;
 
@@ -598,6 +600,8 @@ if(document.getElementById('ball')){
   //some changes
   // if((tops >= height-12-ball) && (pos < lefts + (ball/2)) && (pos + plate > lefts + (ball/2)) ) {
 
+
+
     if((tops >= posY - ball) && (pos < lefts + (ball/2)) && (pos + plate > lefts + (ball/2)) ) {
 
 
@@ -609,7 +613,7 @@ if(document.getElementById('ball')){
     //  var funcEnter = ( (e)=> {
 
 
-      if(tops >= posY-ball-4 && tops <= posY+4-ball){
+      if(tops >= posY-ball-4 && tops <= lastTop+4-ball){
        //   console.log(tops);
         firstEnter = pos;}
 
@@ -620,7 +624,7 @@ if(document.getElementById('ball')){
 
 
 
-        if(tops >= posY - ball +6 && tops <= posY-ball+12){
+        if(tops >= posY - ball +6 && tops <= lastTop-ball+12){
 
 
 
@@ -684,8 +688,13 @@ if(document.getElementById('ball')){
 
 
         else {
-          console.log('here-1');
-          switcherTop = - switcherTop;
+          console.log('here-1',switcherTop);
+
+          if(switcherTop>=0){
+
+            switcherTop = - switcherTop;
+
+          }///? have to remove it
 
 
         }
@@ -706,6 +715,8 @@ if(document.getElementById('ball')){
 
 
  }
+
+ switcherLastTop = true;
 
   //  if(tops > 380 && (pos < lefts && pos +50 > lefts) ) { switcherTop = -3;}
 
@@ -800,7 +811,7 @@ if(document.getElementById('ball')){
   brickBouncer(tops,lefts,pat,clear,onfire,1,flightBackState, ballPoint);
 
 
-  if(runAnimationFrame){requestAnimationFrame(r)};
+  if(runAnimationFrame){ requestAnimationFrame(r)};
 
 
 
@@ -841,7 +852,11 @@ var mousemove = (e) => {
 if(!document.getElementById('plate')){
   document.removeEventListener('mousemove',mousemove)}else{
 
+    if(switcherLastTop){
+      lastTop = posY;
+    }
 
+    switcherLastTop = false;
   //if e.curenttatget is not box do calculate
 
   //if(e.clientY>50){var y = e.clientY} else {var y = 50}
@@ -879,6 +894,7 @@ if(!document.getElementById('plate')){
 
   }
   }
+
 
   if(!inMove){
     document.getElementById('ball').style.left = pos +(plate/2)-(ball/2) + 'px';
@@ -965,7 +981,13 @@ if(this.props.isMobile){
       first = dist;
       pos = pos + diff;
 
-      if(flightActual){
+      if(flightActual && flightActualD){
+
+        if(switcherLastTop){
+          lastTop = posY;
+        }
+        switcherLastTop = false;
+
       var distY = parseInt(touchobj.clientY) - starty;
       distY = distY * 2.8;
       diffY = distY - firstY;
@@ -1207,6 +1229,8 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
   var unbreakable = +document.getElementById('wall').getAttribute('value')
 
 
+    if(bricksArray[0][0]-20 < top && bricksArray[bricksArray.length-1][0]+20>top) {
+
   for( var x=0 ; x< bricksArray.length;x++){
 
     //if(wasChangedDirection){console.log('break');break;}
@@ -1446,6 +1470,7 @@ if(switcherLeft<0){
 
 
   }
+}
 
   //console.log(bricksArray);
 
