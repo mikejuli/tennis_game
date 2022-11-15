@@ -80,7 +80,12 @@ import Player from './Player'
 //changed from componentDidmount
     componentDidMount(){
 
-
+      window.addEventListener("load",function() {
+        setTimeout(function(){
+            // This hides the address bar:
+            window.scrollTo(0, 1);
+        }, 0);
+    });
 
         this.setState({onfire: this.props.onfire})
         this.setState({flight: this.props.flying})
@@ -921,6 +926,48 @@ if(this.props.isMobile){
   ///   have to finish up with touch movement for cellphone version
   ///
   ///
+  // setTimeout(()=>{
+
+  //   var funToList = (ev) => {    //check if click somewhere but soundsButton
+  //     if(ev.target.id !== 'menuButton'){
+
+
+  //      flightActual();
+
+  //      if(inMove === 0){
+
+  //        soundStart();
+  //        // var gunSound;
+  //        // gunFun((x)=> gunSound = x)
+
+  //        // console.log('here',gunSound)
+  //        // if(gunSound){
+  //        //   console.log('here')
+  //        // // var myAudioShoot = new Audio('sounds/mixkit-shortt.wav');
+  //        // //     myAudioShoot.play();
+  //        // //     myAudioShoot.loop = true;
+
+  //        // }
+
+  //      ballRunning(pat,undefined,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun,gunFun,flightBackState,loseFun,ballPoint,soundFun);
+
+  //    }
+
+  //     controllerBarCover.removeEventListener('click', funToList)
+
+  //     }}
+
+  //   controllerBarCover.addEventListener('click', funToList)
+
+  // },1000)
+
+
+
+
+
+
+
+
       var controllerBar = document.getElementById('controllerBar');
       var box = document.getElementById('boxCover')
       var statusdiv = document.getElementById('BarMenuIn')
@@ -945,7 +992,7 @@ if(this.props.isMobile){
 
     if(this.state.flight){
     starty = parseInt(touchobj.clientY)}
-            statusdiv.innerHTML = 'Status: touchstart<br> ClientX: ' + startx + 'px'
+           
 
             e.preventDefault()
       
@@ -976,7 +1023,7 @@ if(this.props.isMobile){
 
 
 
-      dist = dist * 3.7;
+      dist = dist * 4;
       diff = dist - first;
       first = dist;
       pos = pos + diff;
@@ -1045,10 +1092,34 @@ if(this.props.isMobile){
   controllerBar.addEventListener('touchmove', touchmove, false)
    
   controllerBar.addEventListener('touchend', function(e){
+
+
+    if(e.target.id !== 'menuButton'){
+
+
+       flightActual();
+
+       if(inMove === 0){
+
+         soundStart();
+
+
+       ballRunning(pat,undefined,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun,gunFun,flightBackState,loseFun,ballPoint,soundFun);
+
+     }
+
+
+
+      }
+
+
           var touchobj = e.changedTouches[0] // reference first touch point for this event
   first = 0;
   firstY = 0;
-          statusdiv.innerHTML = 'Status: touchend<br> Resting x coordinate: ' + touchobj.clientX + 'px'
+
+
+
+         
           e.preventDefault()
       }, false)
    
@@ -1110,10 +1181,9 @@ console.log('here is lvl ',lvl);
 
 
 
+if(!this.props.isMobile) {
 //to prevent immidite fire the ball by click
 setTimeout(()=>{
-
-
 
   document.addEventListener('click', function(ev){
 
@@ -1151,7 +1221,7 @@ setTimeout(()=>{
 
 
 },1000)
-
+}
 
 var creatingBrick = function (arr){
 

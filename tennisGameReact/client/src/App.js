@@ -26,6 +26,9 @@ class App extends React.Component{
 
 
 
+
+
+
     console.log('mount' ,this.state.currentView);
     var loggedUser = localStorage.getItem('user');
 
@@ -418,6 +421,7 @@ class App extends React.Component{
 
 
 render(){
+
 
 
   return (

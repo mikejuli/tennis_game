@@ -44,14 +44,14 @@ const GameBar = (props) => {
 
       <div id = 'BarMenuIn'>
 
-    <div style = {{position: 'absolute', left: '80px', top: '5px'}}><SoundsToggle fromGame = {true}/></div>
+    <div id = 'soundToggleInGame' ><SoundsToggle fromGame = {true}/></div>
 
-  <div id = 'skin' style = {{backgroundImage: `url(./images/${backgroundImage})`, backgroundColor: color, width: '50px', height: '50px', top: '5px', left: '140px', position:'absolute', backgroundSize:'100%',borderRadius:'50%', backgroundRepeat: 'no-repeat'}}></div>
+  <div id = 'skin' style = {{backgroundImage: `url(./images/${backgroundImage})`, backgroundColor: color}}></div>
 
 
-<div style = {{position:'absolute',left:'200px', borderRadius:'50%', webkitBorderRadius: '15px', backgroundColor:'yellow', width: '220px', overflow: 'hidden', top: '15px'}}>
+<div id = 'avatarInGame' >
 
-<div id = 'currentLvl' style = {{width: '100px', textAlign: 'left',paddingLeft: '10px', height: '30px', lineHeight:'30px'}}> {props.level}/50</div>
+<div id = 'currentLvl' > {props.level}/50</div>
 
 
   <div id = 'gold' style = {{width: '110px', textAlign: 'right', lineHeight:'30px'}}> {props.gold}
@@ -61,11 +61,11 @@ const GameBar = (props) => {
   </div>
 </div>
 
-      <div style = {{position: 'absolute',backgroundImage: `url('./images/${props.character}.png')`, width:'50px', height: '50px',backgroundSize:'100%',borderRadius:'50%', left: '285px', top: '5px'}}></div>
+      <div id = 'avatarPicture' style = {{backgroundImage: `url('./images/${props.character}.png')` }}></div>
 
 
 
-<div id = 'skillsInS' style = {{display:'flex', position: 'absolute', left:'430px', backgroundColor: 'yellow', borderRadius:'50%', webkitBorderRadius: '15px',top: '15px', overflow: 'hidden'}}>
+<div id = 'skillsInS'>
 
   <div id = 'bigPlate' style = {{backgroundColor:'rgb(255 252 55 / 1)'}}><div>➖</div>{props.platePoint?<div>{props.platePoint}</div>:<div>0</div>}</div>
 
