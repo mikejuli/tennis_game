@@ -320,10 +320,12 @@ var inMove = 0;
 
 var posY = height-12;
 
+
 var lastTop = posY;
 var switcherLastTop = true;
 
 var bulletX, bulletY;
+
 
 
 
@@ -375,16 +377,17 @@ topI = topI + 2;
       drop.parentNode.removeChild(drop);
 }
 
-    if(leftI>=pos && leftI<=pos+plate  && topI>=posY-5 && topI<=posY){
+    if(leftI>=pos && leftI<=pos+plate  && ((topI>=posY-5 && topI<=lastTop)||(topI>=lastTop-5 && topI<=posY)) ){
       clearInterval(df);
 
-      var topInew = topI+10;
-      var leftInew = leftI+10;
+
 
 
       //if you cought tnt run this block. should be moved to separate component
 
       if(attributeI === 'tnt'){
+        var topInew = topI+10;
+        var leftInew = leftI+10;
         var boom = document.createElement('div');
         boom.setAttribute('id', 'boom');
         boom.setAttribute('style', `top: ${topInew}px ; left:${leftInew}px`);
@@ -852,6 +855,10 @@ r();
 // }
 // animate();
 
+var x=0;
+var y=0;
+var movingX =0;
+var movingY =0;
 var mousemove = (e) => {
 
 if(!document.getElementById('plate')){
@@ -866,8 +873,21 @@ if(!document.getElementById('plate')){
 
   //if(e.clientY>50){var y = e.clientY} else {var y = 50}
   //if(e.clientX>50){var x = e.clientX} else {var x = 50}
-   var y = e.clientY ;
-   var x = e.clientX -100 ;
+
+
+
+    if(e.clientX-x>0) {movingX = e.clientX-x} else if (e.clientX-x<0) {movingX = e.clientX-x} else if (x===e.clientX){movingX = 0};
+
+    if(e.clientY-y>0) {movingY = e.clientY-y} else if (e.clientY-y<0) {movingY = e.clientY-y} else if (y===e.clientY){movingY = 0};
+
+    y = e.clientY ;
+    x=e.clientX;
+
+    pos = pos+movingX;
+
+    //posY = posY+movingY;
+
+  //console.log(movingY, posY);
   //  mouseX = x;
   //  mouseY = y;
 
@@ -877,16 +897,15 @@ if(!document.getElementById('plate')){
   var flightActualD = this.state.flightActual;
 
 
-  if(x<=0){pos = 0} else
-  if(x<width-plate){
-    pos = x;
-  }else { pos = width-plate}
+  if(pos<=0){pos = 0} else if(pos> width - plate) { pos = width-plate}
 
   if(flightActual && flightActualD){
-  if(y<height-10){
-    posY = y;
-  }else {
-   posY = height-10;
+    posY = posY+movingY;
+
+    if(posY>height-10){
+    posY = height-10;
+  }else if (posY<=0) {
+   posY = 0;
   }
   }
 
@@ -921,49 +940,6 @@ if(!document.getElementById('plate')){
 
 
 if(this.props.isMobile){
-
-
-  ///   have to finish up with touch movement for cellphone version
-  ///
-  ///
-  // setTimeout(()=>{
-
-  //   var funToList = (ev) => {    //check if click somewhere but soundsButton
-  //     if(ev.target.id !== 'menuButton'){
-
-
-  //      flightActual();
-
-  //      if(inMove === 0){
-
-  //        soundStart();
-  //        // var gunSound;
-  //        // gunFun((x)=> gunSound = x)
-
-  //        // console.log('here',gunSound)
-  //        // if(gunSound){
-  //        //   console.log('here')
-  //        // // var myAudioShoot = new Audio('sounds/mixkit-shortt.wav');
-  //        // //     myAudioShoot.play();
-  //        // //     myAudioShoot.loop = true;
-
-  //        // }
-
-  //      ballRunning(pat,undefined,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun,gunFun,flightBackState,loseFun,ballPoint,soundFun);
-
-  //    }
-
-  //     controllerBarCover.removeEventListener('click', funToList)
-
-  //     }}
-
-  //   controllerBarCover.addEventListener('click', funToList)
-
-  // },1000)
-
-
-
-
 
 
 

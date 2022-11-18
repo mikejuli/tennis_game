@@ -223,7 +223,7 @@
   position: absolute;
 
 
-  background-color: rgb(138, 66, 18);
+  background-color: rgb(255 41 41);
 
   border-radius: 50%;
   /* animation: blink 1s infinite; */
@@ -247,7 +247,7 @@
 
 #bullet2{
   position: absolute;
-  background-color: rgb(50, 63, 240);
+  background-color: rgb(219, 219, 219);
   border-radius: 50%;
 }
 
@@ -264,7 +264,7 @@ pointer-events: none;
 
 position: absolute;
 top: calc(100% - 10px);
-left: 50%;
+left: 30%;
 
 
 background-color: darkslateblue;
@@ -273,6 +273,8 @@ transition: width 0.7s ease-in-out;
 
 -webkit-border-radius: 15px;
 border-radius: 15px;
+
+
 }
 
 

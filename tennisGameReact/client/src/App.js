@@ -45,6 +45,7 @@ class App extends React.Component{
       data: {loggedUser,token},
       success: (result) => {
 
+        if(result){
           //should get this gata from global redux
           axios
             .get(`https://arcanepong.com:9000/checkUserCharacter`, {
@@ -52,14 +53,15 @@ class App extends React.Component{
             })
             .then((response) => {
               console.log(response,'response')
+
+
+
               if(response.data[0].activeCharacter !== 'none'){
 
-                if(response.data[0].activeCharacter===undefined){
-                  localStorage.clear();
-                }else{
+
                 this.setState({choosen: 'selected'});
                 this.setState({character : response.data[0].activeCharacter})
-                console.log('hee', response.data)}
+                console.log('hee', response.data)
               }
             }).then( ()=>{
 
@@ -68,16 +70,20 @@ class App extends React.Component{
             }  );
 
 
-            console.log(result,'from success')
+            console.log(result,'from success1')
 
 
+
+        } else {
+
+          this.setState({currentView:'logIn'});
 
         }
 
 
 
 
-
+      }
 
 
       })
@@ -332,7 +338,7 @@ class App extends React.Component{
 
             <div style = {{float: 'right',  marginRight: '15px', marginBottom: '5px', marginTop: '10px'}}>
                   <label for="username">Username:</label>
-                  <input type="text" id="username" required/>
+                  <input type="text" name = 'username' id="username" required/>
                 </div>
 
                  <div style = {{float: 'right',  marginRight: '15px', marginBottom: '5px'}}>
@@ -359,7 +365,7 @@ class App extends React.Component{
               <br/>
                   <div style = {{float: 'right',  marginRight: '20px', marginBottom: '10px'}}>
                   <label for="username">Login </label>
-                  <input type="text" id="username" required/>
+                  <input type="text" name = 'username' id="username" required/>
                   </div>
 
                   <div style = {{float: 'right', marginRight: '20px',  marginBottom: '10px'}}>
