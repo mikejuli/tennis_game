@@ -94,6 +94,19 @@ import Player from './Player'
         this.setState({ballPoint: this.props.ball})
 
 
+        console.log('this.props.tenLevels',this.props.tenLevels)
+      switch(this.props.tenLevels+1){
+        case 1:  document.getElementById('box').style.background = variables.backgroundLevel1; break;
+        case 2:  document.getElementById('box').style.background = variables.backgroundLevel2; break;
+        case 3:  document.getElementById('box').style.background = variables.backgroundLevel3; break;
+        case 4:  document.getElementById('box').style.background = variables.backgroundLevel4; break;
+        case 5:  document.getElementById('box').style.background = variables.backgroundLevel5; break;
+
+
+      }
+
+
+
       var stylePlate = (background, border) => {
 
 

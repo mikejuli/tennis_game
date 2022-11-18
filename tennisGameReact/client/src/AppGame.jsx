@@ -242,7 +242,7 @@ class AppGame extends React.Component {
         url: `https://arcanepong.com:9000/user`,
         data: { user: this.state.user },
         success: (result) => {
-          console.log(result, "from success");
+          console.log(result, "from success1");
 
           this.setState({ currentLevel: result[0].level });
         },
@@ -258,7 +258,7 @@ class AppGame extends React.Component {
       url: `https://arcanepong.com:9000/active`,
       data: { user: this.state.user, level: level + 1 },
       success: (result) => {
-        console.log(result, "from success");
+        console.log(result, "from success2");
 
         this.setState({ active: result });
       },
@@ -466,6 +466,7 @@ class AppGame extends React.Component {
             user={this.state.user}
             skin = {this.props.skin}
             isMobile = {this.state.isMobile}
+            tenLevels ={Math.floor((this.state.level-1)/10)}
           />{" "}
         </div>
       );

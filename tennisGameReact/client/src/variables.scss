@@ -4,6 +4,11 @@ $background-color3: linear-gradient(0deg, rgb(39, 248, 50) 11%, rgba(128,217,134
 $background-color4: linear-gradient(0deg, rgb(248, 39, 248) 11%, rgb(210, 128, 217) 82%);
 $background-color5: linear-gradient(0deg, rgb(248, 227, 39) 11%, rgb(217, 211, 128) 82%);
 
+$background-color-level1: rgb(27 100 75);
+$background-color-level2: rgb(156 193 227);
+$background-color-level3: rgb(23 67 140);
+$background-color-level4: rgb(176 171 110);
+$background-color-level5: rgb(88 24 24);
 
 $stylePlateRare: linear-gradient(90deg, rgb(9 138 231), rgb(139 216 235), rgb(136 223 253), rgb(35 140 213));
 $stylePlateRareBorder: solid 1px aqua;
@@ -19,6 +24,8 @@ $stylePlateMythic: linear-gradient(-135deg, #20baf7, #ef20f7, #fb9eff, #58bfe9);
 $stylePlateMythicBorder: solid 1px aqua;
 
 
+
+
 :export {
 
 background1: $background-color1;
@@ -26,6 +33,12 @@ background2: $background-color2;
 background3: $background-color3;
 background4: $background-color4;
 background5: $background-color5;
+
+backgroundLevel1: $background-color-level1;
+backgroundLevel2: $background-color-level2;
+backgroundLevel3: $background-color-level3;
+backgroundLevel4: $background-color-level4;
+backgroundLevel5: $background-color-level5;
 
 plateRare: $stylePlateRare ;
 plateRareBorder: $stylePlateRareBorder;
