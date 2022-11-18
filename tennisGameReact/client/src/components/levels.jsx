@@ -15,6 +15,7 @@ import axios from 'axios'
 import LeaderBoard from './LeaderBoard'
 import {useSelector} from 'react-redux'
 import Transit from './Transit'
+import FullScreenMode from './FullScreenMode'
 
 class Levels extends React.Component {
 
@@ -448,7 +449,13 @@ class Levels extends React.Component {
 
 
      {this.state.openLogOutMenu ? <MainMenu handleLogout = {this.props.handleLogout} openLogOutMenu = {this.openLogOutMenu}/> : <div></div>}
+
+      <FullScreenMode/>
+
+
 <div style = {{position: 'absolute', float: 'left', top: '90%', left: '82%', width:'140px', fontSize:'30px',display: 'flex', justifyContent: 'space-around'}}>
+
+
 
       <SoundsToggle/>
 

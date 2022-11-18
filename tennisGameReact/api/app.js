@@ -40,7 +40,7 @@ app.use('/testAPI', testAPIRouter);
 
 app.post('/active', function(req, res){
 
-console.log('---------',req.body.level);
+console.log('req.body.level from active',req.body.level);
 
   db.replace(req.body.user,req.body.level,(err,result)=>{res.send(result)});
 
@@ -50,7 +50,7 @@ console.log('---------',req.body.level);
 
 app.post('/user', function(req, res){
 
-  console.log('---!---',req.body.level);
+  console.log('req.body.level from user  ',req.body.level);
 
     db.replaceLevel(req.body.user,(err,result)=>{res.send(result)});
 
@@ -60,9 +60,9 @@ app.post('/user', function(req, res){
 
   app.post('/newPlayer', function(req,res){
 
-    console.log('leveltable=>>',levelsTable, levelsTable.levelsTable['1']);
 
-    console.log(req.body.login,req.body.password)
+
+    console.log(req.body.login)
 
     db.getUser(req.body.login,(err,result)=>{
 
@@ -143,7 +143,7 @@ app.post('/user', function(req, res){
 
     db.loginUser(req.body.login,req.body.password, (err,result)=>{console.log(result);if(result === []){result = null};res.send(result)});
 
-    console.log('here',req.body.login, req.body.password)
+    console.log('login from auth:  ',req.body.login, req._startTime, req.headers)
 
 
   })
@@ -151,13 +151,12 @@ app.post('/user', function(req, res){
 
   app.post('/authRefresh', function(req,res){
 
-    console.log(req);
+   // console.log(req);
     //
     //here we'll implement the way how to generate token every 24 hour a day.
     console.log(req.body.loggedUser,req.body.token)
     db.loginUserToken(req.body.loggedUser,req.body.token, (err,result)=>{console.log(result);if(result === []){result = null};res.send(result)});
 
-    console.log('here',req.body.login, req.body.password)
 
 
   })
@@ -275,7 +274,7 @@ app.post('/activeGET', function (req, res) {
 
 app.post('/userGET', function (req, res) {
 
-  console.log('here123',req.body.user);
+  console.log('req.body.user',req.body.user);
   //db.save();
   db.getUser(req.body.user,(err,result)=>(res.send(result)));
 

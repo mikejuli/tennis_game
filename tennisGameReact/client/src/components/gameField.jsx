@@ -80,13 +80,31 @@ import Player from './Player'
 //changed from componentDidmount
     componentDidMount(){
 
-
+      window.addEventListener("load",function() {
+        setTimeout(function(){
+            // This hides the address bar:
+            window.scrollTo(0, 1);
+        }, 0);
+    });
 
         this.setState({onfire: this.props.onfire})
         this.setState({flight: this.props.flying})
         this.setState({gun: this.props.shooting})
         this.setState({platePoint: this.props.bigPlate, plate: this.state.plate + (this.props.bigPlate*20)})
         this.setState({ballPoint: this.props.ball})
+
+
+        console.log('this.props.tenLevels',this.props.tenLevels)
+      switch(this.props.tenLevels+1){
+        case 1:  document.getElementById('box').style.background = variables.backgroundLevel1; break;
+        case 2:  document.getElementById('box').style.background = variables.backgroundLevel2; break;
+        case 3:  document.getElementById('box').style.background = variables.backgroundLevel3; break;
+        case 4:  document.getElementById('box').style.background = variables.backgroundLevel4; break;
+        case 5:  document.getElementById('box').style.background = variables.backgroundLevel5; break;
+
+
+      }
+
 
 
       var stylePlate = (background, border) => {
@@ -316,7 +334,11 @@ var inMove = 0;
 var posY = height-12;
 
 
+var lastTop = posY;
+var switcherLastTop = true;
+
 var bulletX, bulletY;
+
 
 
 
@@ -368,16 +390,17 @@ topI = topI + 2;
       drop.parentNode.removeChild(drop);
 }
 
-    if(leftI>=pos && leftI<=pos+plate  && topI>=posY-5 && topI<=posY){
+    if(leftI>=pos && leftI<=pos+plate  && ((topI>=posY-5 && topI<=lastTop)||(topI>=lastTop-5 && topI<=posY)) ){
       clearInterval(df);
 
-      var topInew = topI+10;
-      var leftInew = leftI+10;
+
 
 
       //if you cought tnt run this block. should be moved to separate component
 
       if(attributeI === 'tnt'){
+        var topInew = topI+10;
+        var leftInew = leftI+10;
         var boom = document.createElement('div');
         boom.setAttribute('id', 'boom');
         boom.setAttribute('style', `top: ${topInew}px ; left:${leftInew}px`);
@@ -598,6 +621,8 @@ if(document.getElementById('ball')){
   //some changes
   // if((tops >= height-12-ball) && (pos < lefts + (ball/2)) && (pos + plate > lefts + (ball/2)) ) {
 
+
+
     if((tops >= posY - ball) && (pos < lefts + (ball/2)) && (pos + plate > lefts + (ball/2)) ) {
 
 
@@ -609,7 +634,7 @@ if(document.getElementById('ball')){
     //  var funcEnter = ( (e)=> {
 
 
-      if(tops >= posY-ball-4 && tops <= posY+4-ball){
+      if(tops >= posY-ball-4 && tops <= lastTop+4-ball){
        //   console.log(tops);
         firstEnter = pos;}
 
@@ -620,7 +645,7 @@ if(document.getElementById('ball')){
 
 
 
-        if(tops >= posY - ball +6 && tops <= posY-ball+12){
+        if(tops >= posY - ball +6 && tops <= lastTop-ball+12){
 
 
 
@@ -684,8 +709,13 @@ if(document.getElementById('ball')){
 
 
         else {
-          console.log('here-1');
-          switcherTop = - switcherTop;
+          console.log('here-1',switcherTop);
+
+          if(switcherTop>=0){
+
+            switcherTop = - switcherTop;
+
+          }///? have to remove it
 
 
         }
@@ -706,6 +736,8 @@ if(document.getElementById('ball')){
 
 
  }
+
+ switcherLastTop = true;
 
   //  if(tops > 380 && (pos < lefts && pos +50 > lefts) ) { switcherTop = -3;}
 
@@ -800,7 +832,7 @@ if(document.getElementById('ball')){
   brickBouncer(tops,lefts,pat,clear,onfire,1,flightBackState, ballPoint);
 
 
-  if(runAnimationFrame){requestAnimationFrame(r)};
+  if(runAnimationFrame){ requestAnimationFrame(r)};
 
 
 
@@ -836,18 +868,39 @@ r();
 // }
 // animate();
 
+var x=0;
+var y=0;
+var movingX =0;
+var movingY =0;
 var mousemove = (e) => {
 
 if(!document.getElementById('plate')){
   document.removeEventListener('mousemove',mousemove)}else{
 
+    if(switcherLastTop){
+      lastTop = posY;
+    }
 
+    switcherLastTop = false;
   //if e.curenttatget is not box do calculate
 
   //if(e.clientY>50){var y = e.clientY} else {var y = 50}
   //if(e.clientX>50){var x = e.clientX} else {var x = 50}
-   var y = e.clientY ;
-   var x = e.clientX -100 ;
+
+
+
+    if(e.clientX-x>0) {movingX = e.clientX-x} else if (e.clientX-x<0) {movingX = e.clientX-x} else if (x===e.clientX){movingX = 0};
+
+    if(e.clientY-y>0) {movingY = e.clientY-y} else if (e.clientY-y<0) {movingY = e.clientY-y} else if (y===e.clientY){movingY = 0};
+
+    y = e.clientY ;
+    x=e.clientX;
+
+    pos = pos+movingX;
+
+    //posY = posY+movingY;
+
+  //console.log(movingY, posY);
   //  mouseX = x;
   //  mouseY = y;
 
@@ -857,16 +910,15 @@ if(!document.getElementById('plate')){
   var flightActualD = this.state.flightActual;
 
 
-  if(x<=0){pos = 0} else
-  if(x<width-plate){
-    pos = x;
-  }else { pos = width-plate}
+  if(pos<=0){pos = 0} else if(pos> width - plate) { pos = width-plate}
 
   if(flightActual && flightActualD){
-  if(y<height-10){
-    posY = y;
-  }else {
-   posY = height-10;
+    posY = posY+movingY;
+
+    if(posY>height-10){
+    posY = height-10;
+  }else if (posY<=0) {
+   posY = 0;
   }
   }
 
@@ -879,6 +931,7 @@ if(!document.getElementById('plate')){
 
   }
   }
+
 
   if(!inMove){
     document.getElementById('ball').style.left = pos +(plate/2)-(ball/2) + 'px';
@@ -902,9 +955,8 @@ if(!document.getElementById('plate')){
 if(this.props.isMobile){
 
 
-  ///   have to finish up with touch movement for cellphone version
-  ///
-  ///
+
+
       var controllerBar = document.getElementById('controllerBar');
       var box = document.getElementById('boxCover')
       var statusdiv = document.getElementById('BarMenuIn')
@@ -929,7 +981,7 @@ if(this.props.isMobile){
 
     if(this.state.flight){
     starty = parseInt(touchobj.clientY)}
-            statusdiv.innerHTML = 'Status: touchstart<br> ClientX: ' + startx + 'px'
+           
 
             e.preventDefault()
       
@@ -960,12 +1012,18 @@ if(this.props.isMobile){
 
 
 
-      dist = dist * 3.7;
+      dist = dist * 4;
       diff = dist - first;
       first = dist;
       pos = pos + diff;
 
-      if(flightActual){
+      if(flightActual && flightActualD){
+
+        if(switcherLastTop){
+          lastTop = posY;
+        }
+        switcherLastTop = false;
+
       var distY = parseInt(touchobj.clientY) - starty;
       distY = distY * 2.8;
       diffY = distY - firstY;
@@ -1023,10 +1081,34 @@ if(this.props.isMobile){
   controllerBar.addEventListener('touchmove', touchmove, false)
    
   controllerBar.addEventListener('touchend', function(e){
+
+
+    if(e.target.id !== 'menuButton'){
+
+
+       flightActual();
+
+       if(inMove === 0){
+
+         soundStart();
+
+
+       ballRunning(pat,undefined,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun,gunFun,flightBackState,loseFun,ballPoint,soundFun);
+
+     }
+
+
+
+      }
+
+
           var touchobj = e.changedTouches[0] // reference first touch point for this event
   first = 0;
   firstY = 0;
-          statusdiv.innerHTML = 'Status: touchend<br> Resting x coordinate: ' + touchobj.clientX + 'px'
+
+
+
+         
           e.preventDefault()
       }, false)
    
@@ -1088,10 +1170,9 @@ console.log('here is lvl ',lvl);
 
 
 
+if(!this.props.isMobile) {
 //to prevent immidite fire the ball by click
 setTimeout(()=>{
-
-
 
   document.addEventListener('click', function(ev){
 
@@ -1129,7 +1210,7 @@ setTimeout(()=>{
 
 
 },1000)
-
+}
 
 var creatingBrick = function (arr){
 
@@ -1206,6 +1287,8 @@ var brickBouncer = function (top,left,bricksArray,clear,onfire, clearBullet,flig
 
   var unbreakable = +document.getElementById('wall').getAttribute('value')
 
+
+    if(bricksArray[0][0]-20 < top && bricksArray[bricksArray.length-1][0]+20>top) {
 
   for( var x=0 ; x< bricksArray.length;x++){
 
@@ -1446,6 +1529,7 @@ if(switcherLeft<0){
 
 
   }
+}
 
   //console.log(bricksArray);
 

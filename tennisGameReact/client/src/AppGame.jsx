@@ -28,7 +28,8 @@ class AppGame extends React.Component {
       bigPlate: 0,
       ball: 1,
       loaded: false,
-      isMobile: undefined
+      isMobile: undefined,
+      loaderV:0
     };
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
@@ -37,6 +38,9 @@ class AppGame extends React.Component {
     this.handleLose = this.handleLose.bind(this);
     this.loaderChanger = this.loaderChanger.bind(this);
   }
+
+
+
 
 
   loaderChanger(message, imageList){
@@ -54,12 +58,15 @@ class AppGame extends React.Component {
 
           caches.open('pic').then( cache => {
             cache.add(image[1]).then( () => {
-                console.log("Data cached ", caches)
 
 
 
+                this.setState({loaderV: this.state.loaderV+1})
+                console.log(this.state.loaderV, message)
                 this.props.setLoaderFromRedux(this.props.loader + 1);
                 this.props.setLoaderMessageFromRedux(image[0])
+
+                console.log("Data cached ", this.props.loader)
               });
           });
 
@@ -75,6 +82,8 @@ class AppGame extends React.Component {
 
 
       }else {
+        this.setState({loaderV: this.state.loaderV+1})
+        console.log(this.state.loaderV,message)
         this.props.setLoaderFromRedux(this.props.loader + 1);
         this.props.setLoaderMessageFromRedux(message)
 
@@ -233,7 +242,7 @@ class AppGame extends React.Component {
         url: `https://arcanepong.com:9000/user`,
         data: { user: this.state.user },
         success: (result) => {
-          console.log(result, "from success");
+          console.log(result, "from success1");
 
           this.setState({ currentLevel: result[0].level });
         },
@@ -249,7 +258,7 @@ class AppGame extends React.Component {
       url: `https://arcanepong.com:9000/active`,
       data: { user: this.state.user, level: level + 1 },
       success: (result) => {
-        console.log(result, "from success");
+        console.log(result, "from success2");
 
         this.setState({ active: result });
       },
@@ -267,7 +276,6 @@ class AppGame extends React.Component {
     var isMobileCheck = isMobile();
 
     this.setState({isMobile: isMobileCheck})
-    console.log(isMobile(), 'isMobile');
 
 
 
@@ -312,7 +320,7 @@ class AppGame extends React.Component {
 
     if(this.props.loader === 7){
     this.setState({loaded: true})
-        this.props.setLoaderFromRedux(1)
+        this.props.setLoaderFromRedux(0)
     }
 
 
@@ -458,6 +466,7 @@ class AppGame extends React.Component {
             user={this.state.user}
             skin = {this.props.skin}
             isMobile = {this.state.isMobile}
+            tenLevels ={Math.floor((this.state.level-1)/10)}
           />{" "}
         </div>
       );
@@ -481,6 +490,7 @@ class AppGame extends React.Component {
     }
 
     return (
+
       <div className="App">
 <div id = 'buyI' style = {{width: '300px', left: 'calc(50% - 150px)', top: '45%', visibility: this.state.loaded ? 'hidden' : 'visible' }}> {this.props.loaderMessage} </div>
      <div style = {{visibility: this.state.loaded ? 'visible' : 'hidden'}}>{popUp}</div>

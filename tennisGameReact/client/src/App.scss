@@ -7,6 +7,9 @@
 }
 
 
+@media (display-mode: fullscreen) {
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -99,6 +102,10 @@
 
 @media screen and (max-height: 600px){
 
+  #box {
+      left: 140px;
+  }
+
   .sel{
     width: 130px;
     height: 130px
@@ -108,8 +115,9 @@
 
     height: 330px;
     width: 400px;
-    top: calc(50% - 165px);
+    top: calc(50% - 180px);
     left: calc(50% - 200px);
+
   }
 
   #loginInMenu{
@@ -132,17 +140,21 @@
   #BarMenuIn{
 
     zoom: 0.68;
-    left: -148px;
-    top: 40px;
+    left: -200px;
+    top: 30px;
     height: 150px;
-    width: 250px;
+    width: 350px;
     z-index: 2;
+
+    border-radius: 20px 0px 0px 0px;
+    -webkit-border-radius: 20px 0px 0px 0px;
+
   }
 
 
   #boxCover {
-    top: 45px;
-    left: 140px;
+ top: 30px;
+    left: 100px;
   }
 
 }
@@ -211,7 +223,7 @@
   position: absolute;
 
 
-  background-color: rgb(138, 66, 18);
+  background-color: rgb(255 41 41);
 
   border-radius: 50%;
   /* animation: blink 1s infinite; */
@@ -235,7 +247,7 @@
 
 #bullet2{
   position: absolute;
-  background-color: rgb(50, 63, 240);
+  background-color: rgb(41, 252, 252);
   border-radius: 50%;
 }
 
@@ -252,7 +264,7 @@ pointer-events: none;
 
 position: absolute;
 top: calc(100% - 10px);
-left: 50%;
+left: 30%;
 
 
 background-color: darkslateblue;
@@ -261,6 +273,8 @@ transition: width 0.7s ease-in-out;
 
 -webkit-border-radius: 15px;
 border-radius: 15px;
+
+
 }
 
 
@@ -974,7 +988,14 @@ overflow: hidden;
 
 #currentLvl {
 
-  background: linear-gradient(92deg, rgb(169, 252, 74) 11%, rgb(255 106 176) 82%)
+  background: linear-gradient(92deg, rgb(169, 252, 74) 11%, rgb(255 106 176) 82%);
+
+
+  width: 100px;
+  text-align: center;
+
+  height: 30px;
+  line-height: 30px;
 }
 
 
@@ -1841,11 +1862,110 @@ to {
 #controllerBar{
 
   position: absolute;
-  width: 180px;
-  height: 180px;
+  width: 238px;
+  height: 225px;
   background-color: grey;
-  z-index: 5;
+  z-index: 3;
   opacity: 0.7;
-  top:150px;
-  left: -100px;
+  top:132px;
+  left: -136px;
+  border-radius: 0px 0px 0px 30px;
+  -webkit-border-radius: 0px 0px 0px 30px;
+}
+
+#skin {
+
+
+  font-family: JosefinSlab;
+  font-size: 20px;
+  user-select: none;
+  visibility: visible;
+  float: left;
+  background-color: rgb(169, 252, 74);
+  width: 50px;
+  height: 50px;
+  top: 5px;
+  left: 140px;
+  position: absolute;
+  background-size: 100%;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+
+}
+
+#soundToggleInGame{
+
+  position: absolute;
+  left: 80px;
+  top: 5px
+
+}
+
+#avatarInGame {
+
+
+    font-size: 20px;
+
+    position: absolute;
+    left: 200px;
+    border-radius: 50%;
+    -webkit-border-radius: 15px;
+    background-color: yellow;
+    width: 220px;
+    overflow: hidden;
+    top: 15px;
+
+}
+
+#avatarPicture {
+  width:50px; height: 50px;background-size:100%;border-radius:50%; left: 285px; top: 5px;
+  position: absolute
+}
+
+#skillsInS {
+  display:flex;
+   position: absolute;
+    left:430px; background-color: yellow; border-radius:50%; -webkit-border-radius: 15px;top: 15px; overflow: hidden
+
+
+}
+
+@media screen and (max-height: 600px){
+
+  #skin {
+    top: 50px;
+    left: 190px
+  }
+
+  #soundToggleInGame{
+
+    position: absolute;
+    left: 20px;
+    top: 50px
+
+  }
+
+  #avatarInGame {
+    left: 20px
+  }
+
+  #avatarPicture {
+    left:100px;
+  }
+
+
+  #skillsInS {
+    display:flex;
+     position: absolute;
+      left:30px; background-color: yellow; border-radius:50%; -webkit-border-radius: 15px;top: 110px; overflow: hidden
+
+
+  }
+
+  #currentLvl {
+
+    height: 32px;
+  }
+
+
 }
