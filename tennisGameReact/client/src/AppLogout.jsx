@@ -8,6 +8,10 @@ const events = [
   "click",
   "scroll",
   "keypress",
+  "touchstart",
+  "touchmove",
+  "touchend"
+
 ];
 
 const AppLogout = ({children}) => {
@@ -20,7 +24,7 @@ const AppLogout = ({children}) => {
 
 
 
-  messages.setAttribute('style','width: 500px; height: 40px; top: 75%;position: absolute; background-color: #f1d90d; line-height: 40px; text-align: center;  animation-duration: 5s; ');
+  messages.setAttribute('style','width: 500px; height: 40px; top: 75%;position: absolute; background-color: #f1d90d; line-height: 40px; text-align: center;  animation-duration: 5s; z-index: 3 ');
   messages.style.left = 'calc(50% - (250px))';
   messages.textContent = `You are going to be automatically logout in ${time} minutes`
 
@@ -68,7 +72,7 @@ const handleLogoutTimer = () => {
 
     g.appendChild(messages);
 
-    }, 60000)
+    }, 540000)
 
 
 

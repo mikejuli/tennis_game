@@ -103,6 +103,7 @@ import Player from './Player'
         case 5:  document.getElementById('box').style.background = variables.backgroundLevel5; break;
 
 
+
       }
 
 
@@ -413,6 +414,11 @@ topI = topI + 2;
         }
 
         document.removeEventListener('mousemove',mousemove);
+
+        if(document.getElementById('controllerBar')){
+        document.getElementById('controllerBar').removeEventListener('touchmove',touchmove);
+        }
+
         setTimeout(()=>{addAttribute(attributeI);
         },1000);
       }else {
@@ -595,7 +601,18 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,ballFunPoint,onf
 
 
 
-    function clear() {document.removeEventListener ('mousemove', mousemove);runAnimationFrame = false;clearInterval(shootingInt)}
+    function clear() {
+
+
+      document.removeEventListener ('mousemove', mousemove);
+
+
+    if(document.getElementById('controllerBar')){
+    document.getElementById('controllerBar').removeEventListener('touchmove',touchmove);}
+
+    runAnimationFrame = false;clearInterval(shootingInt)
+
+  }
 
 
   tops = tops+switcherTop;
@@ -875,7 +892,11 @@ var movingY =0;
 var mousemove = (e) => {
 
 if(!document.getElementById('plate')){
-  document.removeEventListener('mousemove',mousemove)}else{
+  document.removeEventListener('mousemove',mousemove);
+
+
+
+}else{
 
     if(switcherLastTop){
       lastTop = posY;
@@ -1145,6 +1166,7 @@ var addGold = this.addGold;
 var currentGold = this.state.gold;
 var addAttribute = this.addAttribute;
 var ball = this.state.ball;
+var character = this.props.character;
 var ballPoint = this.state.ballPoint;
 var ballFunPoint = this.ballFunPoint;
 var onfire = this.state.onfire;
@@ -1198,6 +1220,59 @@ setTimeout(()=>{
       // }
 
     ballRunning(pat,undefined,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun,gunFun,flightBackState,loseFun,ballPoint,soundFun);
+
+
+      if(character = 'wizard'){
+
+    var gs = document.createElement('div');
+    var gs1 = document.createElement('div');
+    var gs2 = document.createElement('div');
+    var fs = document.getElementById('box');
+
+    gs.setAttribute('id', 'lineCrystal');
+
+    gs1.setAttribute('id', 'lineCrystal');
+    gs2.setAttribute('id', 'lineCrystal');
+
+    gs.setAttribute('style',`position: absolute; top: -10px; left: 320px; width: 1px; height: 1px;  animation: changeSizeBlizzard 4s linear; border-radius: 50%`)
+
+    gs1.setAttribute('style',`position: absolute; top: -10px; left: 320px; width: 1px; height: 1px;  animation: changeSizeBlizzard 4s linear; border-radius: 50%`)
+
+    gs2.setAttribute('style',`position: absolute; top: -10px; left: 320px; width: 1px; height: 1px;  animation: changeSizeBlizzard 4s linear; border-radius: 50%`)
+
+    fs.appendChild(gs);
+
+    var x =0;
+    setTimeout(()=>{
+      fs.appendChild(gs1);
+    },500)
+    setTimeout(()=>{
+      fs.appendChild(gs2);
+    },1000)
+
+
+    setTimeout(()=>{
+
+///////
+
+
+
+for( var x=0 ; x< pat.length;x++){
+
+
+        var currentBrick =  document.getElementById('wall').childNodes[pat[x][2]];
+        currentBrick.health=1;
+
+      colorChanger(currentBrick);
+}
+
+document.getElementById('wall').setAttribute('value', 0)
+
+
+    },4000)
+
+
+  }
 
   }
 
@@ -1597,7 +1672,11 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           }
 
 
-        if(bricksArray.length === unbreakable) {document.removeEventListener('mousemove',mousemove);console.log(currentGold);flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
+        if(bricksArray.length === unbreakable) {document.removeEventListener('mousemove',mousemove);
+        if(document.getElementById('controllerBar')){
+        document.getElementById('controllerBar').removeEventListener('touchmove',touchmove);
+        }
+        console.log(currentGold);flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
 
         }

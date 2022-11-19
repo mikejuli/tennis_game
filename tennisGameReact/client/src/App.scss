@@ -1969,3 +1969,26 @@ to {
 
 
 }
+
+@keyframes changeSizeBlizzard {
+
+  from {
+    transform: translate(-50%, -50%) scale(0,0);
+}
+to {
+    transform: translate(-50%, -50%) scale(1200,1200) rotate(160deg);
+}
+
+}
+
+#lineCrystal {
+  background: linear-gradient(90deg, rgb(14, 72, 160), rgb(175, 207, 248), rgb(181, 239, 253), rgb(10, 128, 175));
+  opacity: 0.5;
+  position: absolute;
+  animation: changeSizeBlizzard 4s linear;
+
+  animation-fill-mode: forwards;
+  background-position: 50% 50%;
+  background-size: contain;
+  transform-origin: center;
+}

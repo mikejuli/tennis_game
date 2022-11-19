@@ -46,53 +46,48 @@ class AppGame extends React.Component {
   loaderChanger(message, imageList){
 
     if(!this.state.loaded){
-    console.log(message, 'from loader')
+      console.log(message, 'from loader')
 
-      if(imageList){
-
-
-        if(window.caches) {
-
-        imageList.forEach((image)=>{
+        if(imageList){
 
 
-          caches.open('pic').then( cache => {
-            cache.add(image[1]).then( () => {
+          if(window.caches) {
+
+          imageList.forEach((image)=>{
+
+
+            caches.open('pic').then( cache => {
+              cache.add(image[1]).then( () => {
+                  console.log("Data cached ", caches)
 
 
 
-                this.setState({loaderV: this.state.loaderV+1})
-                console.log(this.state.loaderV, message)
-                this.props.setLoaderFromRedux(this.props.loader + 1);
-                this.props.setLoaderMessageFromRedux(image[0])
+                  this.props.setLoaderFromRedux(this.props.loader + 1);
+                  this.props.setLoaderMessageFromRedux(image[0])
+                });
+            });
 
-                console.log("Data cached ", this.props.loader)
-              });
-          });
+          })
 
-        })
+        } else {
+
+          this.props.setLoaderFromRedux(this.props.loader + imageList.length);
+          this.props.setLoaderMessageFromRedux(message)
+
+        }
+
+
+
+        }else {
+          this.props.setLoaderFromRedux(this.props.loader + 1);
+          this.props.setLoaderMessageFromRedux(message)
+
+        }
+        console.log(this.props.loader);
 
       } else {
-
-        this.props.setLoaderFromRedux(this.props.loader + imageList.length);
-        this.props.setLoaderMessageFromRedux(message)
-
+        this.props.setLoaderMessageFromRedux('')
       }
-
-
-
-      }else {
-        this.setState({loaderV: this.state.loaderV+1})
-        console.log(this.state.loaderV,message)
-        this.props.setLoaderFromRedux(this.props.loader + 1);
-        this.props.setLoaderMessageFromRedux(message)
-
-      }
-      console.log(this.props.loader);
-
-    } else {
-      this.props.setLoaderMessageFromRedux('')
-    }
   }
 
   handle() {
@@ -320,7 +315,7 @@ class AppGame extends React.Component {
 
     if(this.props.loader === 7){
     this.setState({loaded: true})
-        this.props.setLoaderFromRedux(0)
+        this.props.setLoaderFromRedux(1)
     }
 
 
@@ -367,9 +362,12 @@ class AppGame extends React.Component {
         var count = 0;
         var num = -1;
         createPattern = createPattern.map((x) => {
-         // console.log(x);
           var health = x;
-          var gold = 17 * health;
+          var gold;
+          //
+          //
+
+          if(!isNaN(x)){ gold = 17 * health;}else {gold = 30}
           var attribute = "gun";
 
           if (count === 13) {
