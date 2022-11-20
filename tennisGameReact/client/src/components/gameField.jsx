@@ -103,6 +103,7 @@ import Player from './Player'
         case 5:  document.getElementById('box').style.background = variables.backgroundLevel5; break;
 
 
+
       }
 
 
@@ -339,6 +340,12 @@ var switcherLastTop = true;
 
 var bulletX, bulletY;
 
+var shootingInt;
+
+var crystalSetTimeout;
+var gunnersSetTimeout;
+var shootingIntUltimete;
+
 
 
 
@@ -413,6 +420,11 @@ topI = topI + 2;
         }
 
         document.removeEventListener('mousemove',mousemove);
+
+        if(document.getElementById('controllerBar')){
+        document.getElementById('controllerBar').removeEventListener('touchmove',touchmove);
+        }
+
         setTimeout(()=>{addAttribute(attributeI);
         },1000);
       }else {
@@ -470,10 +482,12 @@ var colorChanger = function (currentBrick, fromBullet){
 colorChanger = colorChanger.bind(this)
 
 
-var bulletRunning = function(clear,flightBackState, powerOfBullet){
+var bulletRunning = function(clear,flightBackState, powerOfBullet,ultimate,startBulPos){
 
 
   var gun = this.state.gun;
+
+  if(ultimate){gun = ultimate};
 
   var clearBullet = ()=>{
     clearInterval(bul);
@@ -495,6 +509,7 @@ var bulletRunning = function(clear,flightBackState, powerOfBullet){
   var bulletY = posY;
 
 
+if(ultimate){bulletX = startBulPos; bulletY = 445;}
 
 
   var bul = setInterval(()=>{
@@ -510,7 +525,7 @@ var bulletRunning = function(clear,flightBackState, powerOfBullet){
 
 
 
-  brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet,flightBackState, this.state.gun);
+  brickBouncerBullet(bulletX,bulletY,pat,clear,clearBullet,flightBackState, gun);
 
   if(bulletY<0){
 
@@ -521,7 +536,7 @@ var bulletRunning = function(clear,flightBackState, powerOfBullet){
 
       g.setAttribute('style',`position: absolute; top: 0px; left: ${bulletX}px; width: 0px; height: 1px; `)
 
-      f.appendChild(g);
+      if(f) {f.appendChild(g)};
 
       setTimeout(()=>{f.removeChild(g)},500)
 
@@ -552,7 +567,7 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,ballFunPoint,onf
 
 
 
-  var shootingInt;
+
 
 
 
@@ -587,6 +602,7 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,ballFunPoint,onf
 
 
           ()=>{ clearInterval(shootingInt);
+            clearInterval(shootingIntUltimete);
             runAnimationFrame = false }, flightBackState, x
 
           )},200)
@@ -595,7 +611,32 @@ var ballRunning = function(pat, handleOff,plateFun,ball,ballFun,ballFunPoint,onf
 
 
 
-    function clear() {document.removeEventListener ('mousemove', mousemove);runAnimationFrame = false;clearInterval(shootingInt)}
+    function clear() {
+
+
+      document.removeEventListener ('mousemove', mousemove);
+
+
+    if(document.getElementById('controllerBar')){
+    document.getElementById('controllerBar').removeEventListener('touchmove',touchmove);}
+
+    runAnimationFrame = false;
+
+    clearInterval(shootingInt);
+    clearInterval(shootingIntUltimete);
+
+
+
+    console.log(shootingInt)
+
+    clearTimeout(crystalSetTimeout);
+    clearTimeout(gunnersSetTimeout);
+
+    if(document.getElementById('cannons')){
+      document.getElementById('box').removeChild(document.getElementById('cannons'));}
+
+
+  }
 
 
   tops = tops+switcherTop;
@@ -875,7 +916,11 @@ var movingY =0;
 var mousemove = (e) => {
 
 if(!document.getElementById('plate')){
-  document.removeEventListener('mousemove',mousemove)}else{
+  document.removeEventListener('mousemove',mousemove);
+
+
+
+}else{
 
     if(switcherLastTop){
       lastTop = posY;
@@ -987,6 +1032,8 @@ if(this.props.isMobile){
       
 
 
+
+
   }
 
 
@@ -1080,6 +1127,14 @@ if(this.props.isMobile){
 
   controllerBar.addEventListener('touchmove', touchmove, false)
    
+
+
+//change to activate mobile version of ultimate skills
+  var ultimate = true;
+
+
+
+
   controllerBar.addEventListener('touchend', function(e){
 
 
@@ -1106,6 +1161,120 @@ if(this.props.isMobile){
   first = 0;
   firstY = 0;
 
+
+      if(ultimate){
+
+        ultimate = false;
+
+  if(character === 'wizard'){
+
+    var gs = document.createElement('div');
+    var gs1 = document.createElement('div');
+    var gs2 = document.createElement('div');
+
+
+    var fs = document.getElementById('box');
+
+    gs.setAttribute('id', 'lineCrystal');
+    gs1.setAttribute('id', 'lineCrystal');
+    gs2.setAttribute('id', 'lineCrystal');
+
+    gs.setAttribute('style',`position: absolute; top: -10px; left: 320px; width: 1px; height: 1px;  animation: changeSizeBlizzard 4s linear; border-radius: 50%`)
+
+    gs1.setAttribute('style',`position: absolute; top: -10px; left: 320px; width: 1px; height: 1px;  animation: changeSizeBlizzard 4s linear; border-radius: 50%`)
+
+    gs2.setAttribute('style',`position: absolute; top: -10px; left: 320px; width: 1px; height: 1px;  animation: changeSizeBlizzard 4s linear; border-radius: 50%`)
+
+    fs.appendChild(gs);
+
+    var x =0;
+    setTimeout(()=>{
+      fs.appendChild(gs1);
+    },500)
+    setTimeout(()=>{
+      fs.appendChild(gs2);
+    },1000)
+
+
+    setTimeout(()=>{
+
+///////
+
+
+
+for( var x=0 ; x< pat.length;x++){
+
+
+        var currentBrick =  document.getElementById('wall').childNodes[pat[x][2]];
+        currentBrick.health=1;
+
+      colorChanger(currentBrick);
+}
+
+document.getElementById('wall').setAttribute('value', 0)
+
+
+    },4000)
+
+
+  }
+
+  if(character === 'gunners'){
+    console.log('gunners<----------------------')
+
+    var fs = document.getElementById('box');
+    var gs = document.createElement('div');
+
+    gs.setAttribute('id', 'cannons');
+
+
+
+    fs.appendChild(gs);
+
+
+
+    var countShoot = Math.floor(4 + Math.random() * 5);
+
+
+    gunnersSetTimeout = setTimeout(()=>{
+    shootingIntUltimete =  setInterval(()=>{
+
+      // document.getElementById('cannons').style.top = '450px';
+
+      var powerOfBulletIn = Math.floor(Math.random() * 3)+1;
+
+      for(var i=0; i< 13; i++){
+
+
+      Math.random()
+
+      bulletRunning(
+
+      ()=>{
+        clearInterval(shootingInt);
+        clearInterval(shootingIntUltimete);
+        runAnimationFrame = false }, flightBackState, powerOfBulletIn , powerOfBulletIn, 60+(i*42)
+      )
+    }
+
+    countShoot--;
+
+    if(countShoot === 0) {
+
+      document.getElementById('cannons').style.top = '490px';
+
+      setTimeout(()=>{fs.removeChild(gs);
+      },3000)
+
+      clearInterval(shootingIntUltimete)}
+
+   }, 600)
+  }, 2000)
+
+
+  }
+
+      }
 
 
          
@@ -1138,13 +1307,14 @@ if(this.props.isMobile){
 var plateFun = this.plateFun;
 var ballFun = this.ballFun;
 var pat = this.props.pattern;
-var handleOff = () => {  this.setState({win: true});  };
-var handleLose = () => { this.setState({lose: true});};
+var handleOff = () => { if(!this.state.lose) { this.setState({win: true}); }  };
+var handleLose = () => { if(!this.state.win) { this.setState({lose: true});}};
 var lvl = this.props.level;
 var addGold = this.addGold;
 var currentGold = this.state.gold;
 var addAttribute = this.addAttribute;
 var ball = this.state.ball;
+var character = this.props.character;
 var ballPoint = this.state.ballPoint;
 var ballFunPoint = this.ballFunPoint;
 var onfire = this.state.onfire;
@@ -1198,6 +1368,110 @@ setTimeout(()=>{
       // }
 
     ballRunning(pat,undefined,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun,gunFun,flightBackState,loseFun,ballPoint,soundFun);
+
+
+      if(character === 'wizard'){
+
+    var gs = document.createElement('div');
+    var gs1 = document.createElement('div');
+    var gs2 = document.createElement('div');
+
+
+    var fs = document.getElementById('box');
+
+    gs.setAttribute('id', 'lineCrystal');
+    gs1.setAttribute('id', 'lineCrystal');
+    gs2.setAttribute('id', 'lineCrystal');
+
+    gs.setAttribute('style',`position: absolute; top: -10px; left: 320px; width: 1px; height: 1px;  animation: changeSizeBlizzard 4s linear; border-radius: 50%`)
+
+    gs1.setAttribute('style',`position: absolute; top: -10px; left: 320px; width: 1px; height: 1px;  animation: changeSizeBlizzard 4s linear; border-radius: 50%`)
+
+    gs2.setAttribute('style',`position: absolute; top: -10px; left: 320px; width: 1px; height: 1px;  animation: changeSizeBlizzard 4s linear; border-radius: 50%`)
+
+    fs.appendChild(gs);
+
+
+    setTimeout(()=>{
+      fs.appendChild(gs1);
+    },500)
+    setTimeout(()=>{
+      fs.appendChild(gs2);
+    },1000)
+
+   crystalSetTimeout =  setTimeout(()=>{
+
+
+for( var x=0 ; x< pat.length;x++){
+        var currentBrick =  document.getElementById('wall').childNodes[pat[x][2]];
+        currentBrick.health=1;
+      colorChanger(currentBrick);
+}
+
+document.getElementById('wall').setAttribute('value', 0)
+
+    },4000)
+  }
+
+
+  if(character === 'gunners'){
+    console.log('gunners<----------------------')
+
+    var fs = document.getElementById('box');
+    var gs = document.createElement('div');
+
+    gs.setAttribute('id', 'cannons');
+
+
+
+    fs.appendChild(gs);
+
+
+
+    var countShoot = Math.floor(4 + Math.random() * 5);
+
+
+    gunnersSetTimeout = setTimeout(()=>{
+    shootingIntUltimete =  setInterval(()=>{
+
+      // document.getElementById('cannons').style.top = '450px';
+
+      var powerOfBulletIn = Math.floor(Math.random() * 3)+1;
+
+      for(var i=0; i< 13; i++){
+
+
+      Math.random()
+
+      bulletRunning(
+
+      ()=>{
+        clearInterval(shootingInt);
+        clearInterval(shootingIntUltimete);
+        runAnimationFrame = false }, flightBackState, powerOfBulletIn , powerOfBulletIn, 60+(i*42)
+      )
+    }
+
+    countShoot--;
+
+    if(countShoot === 0) {
+
+      document.getElementById('cannons').style.top = '490px';
+
+      setTimeout(()=>{fs.removeChild(gs);
+      },3000)
+
+      clearInterval(shootingIntUltimete)}
+
+   }, 600)
+  }, 2000)
+
+
+  }
+
+
+
+
 
   }
 
@@ -1547,8 +1821,10 @@ if(switcherLeft<0){
 
 var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet,flightBackState, powerOfBullet){
 
-  var unbreakable = +document.getElementById('wall').getAttribute('value')
-
+  var unbreakable;
+  if(document.getElementById('wall')){
+   unbreakable = +document.getElementById('wall').getAttribute('value')
+}
  // console.log('from brickbouncerbullet');
          //here is squized a shooting module//
         /////////////////////////////////////
@@ -1597,7 +1873,11 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
           }
 
 
-        if(bricksArray.length === unbreakable) {document.removeEventListener('mousemove',mousemove);console.log(currentGold);flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
+        if(bricksArray.length === unbreakable) {document.removeEventListener('mousemove',mousemove);
+        if(document.getElementById('controllerBar')){
+        document.getElementById('controllerBar').removeEventListener('touchmove',touchmove);
+        }
+        console.log(currentGold);flightBackState();clear();updateGold();handleOff(lvl, currentGold);}
 
 
         }
