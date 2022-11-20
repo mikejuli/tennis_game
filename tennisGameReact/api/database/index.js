@@ -71,9 +71,9 @@ let saveUser = (data) => {
       level: data.level,
       gold: data.gold,
 
-      activeSkin:'default',
+      activeSkin:'common',
 
-  common: false,
+  common: true,
   rare: false,
   epic: false,
   legendary : false,
