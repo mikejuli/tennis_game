@@ -68,6 +68,7 @@
   left: 80px;
   cursor: none;
   overflow: hidden;
+  transition: background-color 2s;
 }
 
 
@@ -1127,6 +1128,31 @@ background-position: 20% 30%;
   position: relative;
   border-radius:50%;
   margin-top: 5px;
+  transition: 1s;
+}
+
+
+#circleGolden {
+
+  //background-color: white;
+  background: linear-gradient(0deg, rgb(229, 255, 0) 50%, rgb(253, 87, 75) 82%);
+  width: 15px;
+  height: 15px;
+  position: relative;
+  border-radius:50%;
+  margin-top: 5px;
+  transition: 1s;
+}
+
+
+#circleEmpty {
+
+  background: linear-gradient(0deg, rgb(201 201 201) 50%, rgb(182 174 174) 82%);
+  width: 15px;
+  height: 15px;
+  position: relative;
+  border-radius:50%;
+  margin-top: 5px;
 }
 
 
@@ -1769,6 +1795,63 @@ to {
   background: linear-gradient(90deg, rgb(155, 14, 160), rgb(231, 175, 248), rgb(251, 181, 253), rgb(175, 10, 167));
   animation: 0.5s spreadLineT linear ;
 }
+
+#shield {
+  width: 100px;
+  height: 100px;
+  top: -40px;
+ border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+ visibility:hidden;
+
+
+}
+
+#segment {
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vw;
+  transform-origin: 0 0;
+  overflow: hidden;
+  visibility: visible;
+  background: inherit;
+  background-attachment: fixed;
+  background:linear-gradient(89deg, rgb(240 253 255 / 0%), rgb(21 70 255), rgb(21 70 255), rgb(21 70 255));
+  transform: rotate(270deg) skew(86deg);
+
+  animation: 0.5s spreadLineShield linear;
+  animation-fill-mode: forwards;
+
+}
+
+// #shieldIn {
+//   width: 100px;
+//   height: 100px;
+
+//  border-radius: 50%;
+//   overflow: hidden;
+//   position: relative;
+//   background: radial-gradient(circle at 50% 50%, rgba(38, 35, 255, 0.425), rgba(16, 30, 216, 0.651) 40%, rgb(39, 164, 236) 65%, rgb(255, 255, 255) 95%);
+
+// }
+
+
+
+@keyframes spreadLineShield {
+
+  0% {transform: rotate(270deg) skew(86deg)
+
+   }
+  100% {
+
+    transform: rotate(183deg) skew(-84deg);
+}
+}
+
 
 #lineS {
   background: linear-gradient(180deg, rgb(155, 14, 160), rgb(231, 175, 248), rgb(251, 181, 253), rgb(175, 10, 167));

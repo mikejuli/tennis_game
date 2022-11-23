@@ -12,6 +12,7 @@ import soundReducer from './features/sound'
 import itemReducer from './features/boughtItems'
 import loaderReducer from './features/loader'
 import loaderMessageReducer from './features/loaderMessage'
+import ultimateReducer from './features/ultimateCounter'
 
 const store = configureStore({
 
@@ -24,6 +25,7 @@ const store = configureStore({
     item: itemReducer,
     loader: loaderReducer,
     loaderMessage: loaderMessageReducer,
+    ultimate: ultimateReducer
   }
 
 })

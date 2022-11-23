@@ -4,6 +4,7 @@ import {setSound} from '../features/sound'
 import {useDispatch} from 'react-redux'
 import {setItem} from '../features/boughtItems'
 import WinCoinCounter from './WinCoinCounter'
+import Ultimate from './Ultimate'
 
 const Win = (props) => {
 
@@ -39,6 +40,7 @@ console.log(props.level, props.currentGold)
 
   return (
 <div>
+<div style = {{visibility: 'hidden'}} > <Ultimate value = {props.currentGold}/></div>
     <div id = 'win'>
 
       <div style ={{position: 'absolute', top: '20px', justifyContent: 'center', width: '100%'}}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Skin from './Skin'
 import Features from './Features'
-
+import Ultimate from './Ultimate'
 class BarMenu extends React.Component {
 
   constructor(props){
@@ -33,13 +33,8 @@ toggle = () => {
       <div id = 'nameAndAvatar'>
         <div id = 'avatar' style = {{backgroundImage: `url('./images/${this.props.character}.png')`}}></div>
 
-        <div id = 'circlePanel'>
-        <div id = 'circle'></div>
-        <div id = 'circle'></div>
-        <div id = 'circle'></div>
-        <div id = 'circle'></div>
-        <div id = 'circle'></div>
-        </div>
+        <Ultimate/>
+
 
   <div id = 'name' style = {{paddingRight:'30px'}}>{this.props.user}</div>
 

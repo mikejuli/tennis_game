@@ -9,7 +9,7 @@ import {updateItem} from './features/availiableSkin';
 import {setSkin} from './features/skin';
 import {setLoader} from './features/loader'
 import {setLoaderMessage} from './features/loaderMessage'
-
+import {setUltimate} from './features/ultimateCounter'
 
 class AppGame extends React.Component {
   constructor(props) {
@@ -29,7 +29,8 @@ class AppGame extends React.Component {
       ball: 1,
       loaded: false,
       isMobile: undefined,
-      loaderV:0
+      loaderV:0,
+      ultimate:false
     };
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
@@ -312,6 +313,19 @@ class AppGame extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
 
+    if(this.props.ultimate!== prevProps.ultimate){
+
+      if(this.props.ultimate>=5000){
+        this.setState((prevState, props)=>{ return {ultimate: true} })
+        //this.props.setUltimateFromRedux(0);
+      } else {
+
+        this.setState((prevState,props)=>{return {ultimate:false}})
+
+      }
+
+    }
+
 
     if(this.props.loader === 7){
     this.setState({loaded: true})
@@ -451,6 +465,7 @@ class AppGame extends React.Component {
       popUp = (
         <div>
           <Field
+          ultimateF = {this.state.ultimate}
           character = {this.props.character}
             level={this.state.level}
             pattern={this.state.pattern}
@@ -504,13 +519,14 @@ const mapDispatchToProps = dispatch => {
           updateItemFromRedux: (x)=>updateItem(x),
           setSkinFromRedux: (x)=>setSkin(x),
           setLoaderFromRedux: (x)=>setLoader(x),
-          setLoaderMessageFromRedux: (x)=>setLoaderMessage(x)
+          setLoaderMessageFromRedux: (x)=>setLoaderMessage(x),
+          setUltimateFromRedux: (x)=>setUltimate(x)
   }
 };
 
 
 
-const mapStateToProps = state => ({ skin: state.skin.value, coin: state.gold.value, loader: state.loader.value  , loaderMessage: state.loaderMessage.value})
+const mapStateToProps = state => ({ skin: state.skin.value, coin: state.gold.value, loader: state.loader.value  , loaderMessage: state.loaderMessage.value, ultimate: state.ultimate.value})
 
 
 

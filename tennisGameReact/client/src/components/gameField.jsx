@@ -8,6 +8,7 @@ import SoundPlayer from './SoundPlayer'
 import {connect} from 'react-redux';
 import {setSound} from '../features/sound'
 import Player from './Player'
+import {setUltimate} from '../features/ultimateCounter'
 
 
   class Field extends React.Component {
@@ -16,7 +17,7 @@ import Player from './Player'
     constructor(props){
       super(props);
 
-    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false, flightActual:false, win: false, lose: false, sound: false})
+    this.state = ({field:true, level: undefined, pattern: this.props.pattern, gold: 0, attribute: undefined, plate: 100, platePoint:0, ball: 10, ballPoint:0, onfire: false, flight: false, gun: false, flightActual:false, win: false, lose: false, sound: false,golemStateUltimate: true})
 
     this.addGold = this.addGold.bind(this);
     this.addAttribute = this.addAttribute.bind(this);
@@ -281,6 +282,9 @@ import Player from './Player'
         document.getElementById('enginePictureUp').style.left = this.state.plate/2-7 + 'px';
 
       }
+
+
+
       }
 
 
@@ -397,7 +401,42 @@ topI = topI + 2;
       drop.parentNode.removeChild(drop);
 }
 
-    if(leftI>=pos && leftI<=pos+plate  && ((topI>=posY-5 && topI<=lastTop)||(topI>=lastTop-5 && topI<=posY)) ){
+
+  if(ultimateProps === true && character === 'golem' && attributeI === 'tnt' && leftI>=pos && leftI<=pos+plate  && ((topI>=posY-55 && topI<=lastTop)||(topI>=lastTop-5 && topI<=posY)) ){
+    console.log('clearIterval')
+    clearInterval(df);
+
+    var shield = document.createElement('div');
+    shield.setAttribute('id', 'shield');
+    shield.setAttribute('style', `width: ${plate}px; height: ${plate}px; top: ${-40 - ((plate-100)/2)}px`);
+
+
+    var segment = document.createElement('div');
+    segment.setAttribute('id', 'segment');
+
+
+    // var shieldIn = document.createElement('div');
+    // shieldIn.setAttribute('id', 'shieldIn');
+
+
+    // segment.appendChild(shieldIn);
+    console.log(plate)
+
+    shield.appendChild(segment);
+
+
+    var plateIn = document.getElementById('plate');
+    plateIn.appendChild(shield);
+
+
+     setTimeout(()=>{  plateIn.removeChild(shield)},3000)
+
+
+     drop.parentNode.removeChild(drop);
+
+  }
+
+ else if(leftI>=pos && leftI<=pos+plate  && ((topI>=posY-5 && topI<=lastTop)||(topI>=lastTop-5 && topI<=posY)) ){
       clearInterval(df);
 
 
@@ -406,6 +445,7 @@ topI = topI + 2;
       //if you cought tnt run this block. should be moved to separate component
 
       if(attributeI === 'tnt'){
+
         var topInew = topI+10;
         var leftInew = leftI+10;
         var boom = document.createElement('div');
@@ -426,8 +466,9 @@ topI = topI + 2;
         }
 
         setTimeout(()=>{addAttribute(attributeI);
-        },1000);
-      }else {
+        },1000); }
+
+      else {
 
 
         addAttribute(attributeI);
@@ -1322,7 +1363,8 @@ var onfireFun = this.onfireFun;
 var gunFun = this.gunFun;
 var updateGold = () => currentGold = this.state.gold;
 var flightBackState = this.flightBackState;
-
+var ultimateProps = this.props.ultimateF;
+var setUltimate = this.props.setUltimateFromRedux;
 var flightActual = this.flightActual;
 var soundStart = this.soundStart;
 var loseFun = this.loseFun;
@@ -1369,6 +1411,8 @@ setTimeout(()=>{
 
     ballRunning(pat,undefined,plateFun,ball,ballFun,ballFunPoint,onfire,onfireFun,gunFun,flightBackState,loseFun,ballPoint,soundFun);
 
+
+      if(ultimateProps){
 
       if(character === 'wizard'){
 
@@ -1470,7 +1514,20 @@ document.getElementById('wall').setAttribute('value', 0)
   }
 
 
+  if(character === 'golem'){
 
+    document.getElementById('box').style.background = '#1b1717';
+
+
+
+  }
+
+
+  setUltimate(0);
+
+
+
+      }
 
 
   }
@@ -1926,7 +1983,7 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
 <div id  = 'boxCover' >
         <div>{this.state.win?<Win handleOff = {this.props.handleOff} level = {this.props.level} currentGold = {this.state.gold} />:<div></div>}</div>
-      <div>{this.state.lose?<Lose handleLose = {this.props.handleLose}/>:<div></div>}</div>
+      <div>{this.state.lose?<Lose handleLose = {this.props.handleLose}  currentGold = {this.state.gold} />:<div></div>}</div>
         <div id = 'boxS'>
         <div id = 'box'>
             <div id = 'wall'></div>
@@ -1954,7 +2011,9 @@ var brickBouncerBullet = function (bulletX,bulletY,bricksArray,clear,clearBullet
 
   const mapDispatchToProps = dispatch => {
 
-    return {setSoundFromRedux: (x)=>setSound(x)}
+    return {setSoundFromRedux: (x)=>setSound(x),
+      setUltimateFromRedux: (x)=> setUltimate(x)
+    }
 
   }
 

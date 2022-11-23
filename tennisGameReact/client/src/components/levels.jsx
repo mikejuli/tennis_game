@@ -16,13 +16,14 @@ import LeaderBoard from './LeaderBoard'
 import {useSelector} from 'react-redux'
 import Transit from './Transit'
 import FullScreenMode from './FullScreenMode'
+import Ultimate from './Ultimate'
 
 class Levels extends React.Component {
 
   constructor(props){
     super(props)
 
-    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 2900, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true, arrowDirect: 0}
+    this.state = {selected: false , active: [],arrow:this.props.arrow, turn:0, changeArrow: 0 , openedMenu: false, inProcess: false, transitionTime: 2900, openLogOutMenu: false,openLeaderBoard: false, soundToggle: true, arrowDirect: 0, ultimate: false}
 
     this.changeLevels = this.changeLevels.bind(this)
     this.openLogOutMenu = this.openLogOutMenu.bind(this)
@@ -77,6 +78,10 @@ class Levels extends React.Component {
 
 
   componentDidUpdate( prevProps, prevState){
+
+
+
+
     if(prevProps.active!== this.props.active){
       this.setState({active:this.props.active})
     }
@@ -422,6 +427,7 @@ class Levels extends React.Component {
        {/* <Transit timeout = {this.state.transitionTime} changeArrow = {this.state.changeArrow} page={page} key={page} arrow = {this.state.arrow} arrS = {arrS}/> */}
       {/* {backgroundImageLoading} */}
         </div>
+
 
 
     {page!=='final'?<BarMenu character = {this.props.character} currentLevel = {this.props.currentLevel} gold = {this.props.gold} buyItem = {this.props.buyItem} bigPlate = {this.props.bigPlate} user = {this.props.user} />:<div id = 'finalPage' style = {{position: 'absolute' }}>
