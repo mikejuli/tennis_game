@@ -1142,6 +1142,32 @@ background-position: 20% 30%;
   border-radius:50%;
   margin-top: 5px;
   transition: 1s;
+
+  animation: glowingCircle 3s infinite;
+
+}
+
+
+@keyframes glowingCircle {
+
+  0% {
+
+    box-shadow: 0px 0px 0px 0px rgb(255, 81, 0);
+
+  }
+
+  50% {
+
+    box-shadow: 0px 0px 5px 5px red;
+
+  }
+
+  100% {
+
+    box-shadow: 0px 0px 0px 0px rgb(255, 81, 0);
+
+  }
+
 }
 
 
@@ -2001,9 +2027,29 @@ to {
 }
 
 #avatarPicture {
+  z-index: 3;
   width:50px; height: 50px;background-size:100%;border-radius:50%; left: 285px; top: 5px;
-  position: absolute
+  position: absolute;
+
 }
+
+@keyframes glowing {
+
+  from {
+
+    box-shadow: 0px 0px 20px 20px red;
+
+  }
+
+  to {
+
+    box-shadow: 0px 0px 20px 10px red;
+
+  }
+
+
+}
+
 
 #skillsInS {
   display:flex;
