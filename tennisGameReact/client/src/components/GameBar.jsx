@@ -57,12 +57,11 @@ const GameBar = (props) => {
   <div id = 'gold' style = {{width: '110px', textAlign: 'right', lineHeight:'30px'}}> {props.gold}
 
 
-  <img src="/images/coin1.png"  style = {{width: '20px', height: '20px', top: '5px',position: 'relative'}}></img>
+  <img src="/images/coin1.png"  style = {{ width: '20px', height: '20px', top: '5px',position: 'relative' }}></img>
   </div>
 </div>
 
-      <div id = 'avatarPicture' style = {{backgroundImage: `url('./images/${props.character}.png')` }}></div>
-
+      <div id = 'avatarPicture' style = {{backgroundImage: `url('./images/${props.character}.png')`, animation: props.ultimate? 'glowing 2s infinite': 'none'}}></div>
 
 
 <div id = 'skillsInS'>
