@@ -21,7 +21,7 @@ const Ultimate = (props) => {
 
   var arrCount = (arr) => {
 
-   var s = Math.floor(ultimate.ultimate.value/1000);
+   var s = Math.floor(ultimate.ultimate.value/1500);
     console.log(s);
     setArr(arr.map(x=>{ if(s>0) {s--; return 1} else return 0 }).reverse())
 

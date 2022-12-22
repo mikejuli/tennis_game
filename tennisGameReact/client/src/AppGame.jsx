@@ -315,7 +315,7 @@ class AppGame extends React.Component {
 
     if(this.props.ultimate!== prevProps.ultimate){
 
-      if(this.props.ultimate>=7000){
+      if(this.props.ultimate>=7500){
         this.setState((prevState, props)=>{ return {ultimate: true} })
         //this.props.setUltimateFromRedux(0);
       } else {
