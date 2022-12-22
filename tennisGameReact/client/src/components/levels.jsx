@@ -108,7 +108,7 @@ class Levels extends React.Component {
 
         ['loading backgroundImage...', '/images/forest.png'],
         ['loaded snow background...', '/images/snow.jpeg'],
-        ['loaded river background...', '/images/river.jpeg'],
+        ['loaded water background...', '/images/water.jpeg'],
         ['loaded sand background...', '/images/sand.jpg'],
         ['loaded hell background...', '/images/hell.jpeg']
       ]
@@ -351,7 +351,7 @@ class Levels extends React.Component {
 
 
 
-    document.body.style.background = `url('./images/river.jpeg') no-repeat center center fixed`
+    document.body.style.background = `url('./images/water.jpeg') no-repeat center center fixed`
     document.body.style.backgroundSize = `cover`
 
   } else

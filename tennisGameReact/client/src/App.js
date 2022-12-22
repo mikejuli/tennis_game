@@ -13,13 +13,20 @@ class App extends React.Component{
     this.state = {
       currentView: "",
       choosen: '',
-      character: ''
+      character: '',
+      login: '',
+      loaded: true
   }
-  this.handleLogout = this.handleLogout.bind(this)
+  this.handleLogout = this.handleLogout.bind(this);
+  this.onInputchange = this.onInputchange.bind(this);
 
 }
 
-
+onInputchange(event) {
+  this.setState({
+    login: event.target.value
+  });
+}
 
 
   componentDidMount(){
@@ -111,6 +118,19 @@ class App extends React.Component{
 
 
   changeView = (view) => {
+
+    //clearing form
+
+    var allFiledForms = document.querySelectorAll('.filledForm');
+
+    for(var i of allFiledForms){
+      i.value = '';
+    }
+
+    //
+
+
+
     this.setState({
       currentView: view
     })
@@ -172,12 +192,12 @@ class App extends React.Component{
     //
 
 
-
+    this.setState({loaded:false})
     $.ajax({method: 'POST',
       url: `https://arcanepong.com:9000/newPlayer`,
       data: {login,password},
       success: (result) => {
-
+        this.setState({loaded:true});
         console.log('from success registration')
         if(result === 'exist'){
 
@@ -207,6 +227,7 @@ class App extends React.Component{
       } else if (result === 'created'){
 
 
+
         var message = document.createElement('div');
           message.setAttribute('id','noEnoughGoldMessage');
 
@@ -228,8 +249,24 @@ class App extends React.Component{
           setTimeout(()=>{ g.removeChild(message);
           },10000)
 
+           //clearing form
 
-          this.setState({currentView:'logIn'})
+          var getUserName = document.getElementById('username').value;
+
+          var allFiledForms = document.querySelectorAll('.filledForm');
+
+          for(var i of allFiledForms){
+            i.value = '';
+          }
+
+
+          this.setState({login: getUserName, currentView:'logIn'});
+          //
+
+
+
+
+
 
 
       }
@@ -329,25 +366,30 @@ class App extends React.Component{
   }
 
   currentView = () => {
+
     switch(this.state.currentView) {
       case "signUp":
         return (
+
           <div id = 'loginInMenu'>
+
+          {!this.state.loaded?<div style = {{width: '100%', height: '100%', backgroundColor: 'grey', opacity: '0.9', borderRadius: '25px', position: 'absolute', zIndex: '4'}}><div id ='buyI'>Loading...</div></div>:<div></div>}
+
             <h2 >Sign Up!</h2>
             <div>
 
             <div style = {{float: 'right',  marginRight: '15px', marginBottom: '5px', marginTop: '10px'}}>
                   <label for="username">Username:</label>
-                  <input type="text" name = 'username' id="username" required/>
+                  <input type="text" name = 'username' class="filledForm" id = 'username' required/>
                 </div>
 
                  <div style = {{float: 'right',  marginRight: '15px', marginBottom: '5px'}}>
                   <label for="email">Email:</label>
-                  <input  type="email" id="email" required/>
+                  <input  type="email" class="filledForm" id = 'email' required/>
                 </div>
                 <div style = {{float: 'right',  marginRight: '15px', marginBottom: '5px'}}>
                   <label for="password">Password:</label>
-                  <input type="password" id="password" minlength="8" required/>
+                  <input type="password" class="filledForm" id = 'password' minlength="8" required/>
                 </div>
 
             </div>
@@ -365,12 +407,12 @@ class App extends React.Component{
               <br/>
                   <div style = {{float: 'right',  marginRight: '20px', marginBottom: '10px'}}>
                   <label for="username">Login </label>
-                  <input type="text" name = 'username' id="username" required/>
+                  <input type="text" name = 'username' id = 'username' class="filledForm" value = {this.state.login} onChange ={this.onInputchange} required />
                   </div>
 
                   <div style = {{float: 'right', marginRight: '20px',  marginBottom: '10px'}}>
                   <label for="password">Password </label>
-                  <input type="password" id="password" required/>
+                  <input type="password" id = 'password' class="filledForm" required/>
                   </div>
 
 
@@ -386,6 +428,9 @@ class App extends React.Component{
           </div>
 
         )
+
+
+
         break
       case "PWReset":
         return (
@@ -423,6 +468,10 @@ class App extends React.Component{
       default:
         break
     }
+
+
+
+
   }
 
 
