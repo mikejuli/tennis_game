@@ -60,7 +60,7 @@ const Skin = (props) => {
 console.log(skin, 'from Skin');
 
   return (
-    <div style = {{width:'30px', height:'30px', position:'absolute'}}>
+    <div id = 'skinInBox' style = {{width:'30px', height:'30px', position:'absolute'}}>
 
       {/* <div id = 'dropDownMenu' style = {{cursor:'pointer'}}onClick = {openMenu}>
    {changer}  { menu? <h7>🔼</h7>:<h7>🔽</h7> }

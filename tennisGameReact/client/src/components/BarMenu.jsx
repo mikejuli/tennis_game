@@ -44,11 +44,11 @@ toggle = () => {
       <div id = 'baseInfo' style = {{webKitBorderRadius:'15px', borderRadius: '15px 0px 0px 30px'}}>
 
 
-        <div id = 'gold' style = {{padding:"5px"}}>
+        <div id = 'gold' style = {{padding:"5px", position :'relative'}}>
         <div>
         <img src = 'images/coin.png' style = {{marginLeft:'10px',height:'30px', width:'45px', float: 'left'}}></img></div>
 
-           <div id = 'coinIn' style = {{height:'30px', backgroundColor:'gray', borderRadius:'50%',webkitBorderRadius: '15px', fontColor:'gold', color: 'gold', textAlign:'center', lineHeight: '30px'}}>{this.props.gold}</div>
+           <div id = 'coinIn'>{this.props.gold}</div>
          </div>
 
 
