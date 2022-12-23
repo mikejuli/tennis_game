@@ -103,7 +103,7 @@ return(<div>
 
 <div >
 
-<nav class="menu">
+<nav class="menu" >
 
 <input class="menu-toggler" type="checkbox" style = {{backgroundSize: 'contain',backgroundPosition: '50% 50%',backgroundColor: color, backgroundImage: `url('./images/${backgroundImage}')`}} onClick = {()=>{this.cancelF(false)}}/>
 

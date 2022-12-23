@@ -17,6 +17,7 @@ import {useSelector} from 'react-redux'
 import Transit from './Transit'
 import FullScreenMode from './FullScreenMode'
 import Ultimate from './Ultimate'
+import InitialHelper from './InitialHelper'
 
 class Levels extends React.Component {
 
@@ -415,6 +416,10 @@ class Levels extends React.Component {
 
 
     return(<div id = 'levels'>
+
+
+<InitialHelper/>
+
 
 
 
