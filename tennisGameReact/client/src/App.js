@@ -185,7 +185,7 @@ onInputchange(event) {
       },5000)
 
 
-    } else
+    } else {
 
 
 
@@ -276,15 +276,15 @@ onInputchange(event) {
 
       })
 
-
+    }
 
   }
 
   login = (login,password) => {
-
+if(login && password){
   //  console.log('here!!',login,password)
 
-
+  this.setState({loaded:false})
 
 //`https://3.213.179.128:9000/auth`
 //https://cs8mzuv9y5.execute-api.us-east-1.amazonaws.com/1/
@@ -320,7 +320,7 @@ onInputchange(event) {
           }
 
           this.setState({currentView:'game', user: result.user})
-
+          this.setState({loaded:true})
 
         }
 
@@ -349,9 +349,9 @@ onInputchange(event) {
         setTimeout(()=>{ g.removeChild(message);
         },5000)
 
+        this.setState({loaded:true})
 
       }
-
 
 
 
@@ -362,7 +362,31 @@ onInputchange(event) {
 
       })
 
+    } else {
 
+       var message = document.createElement('div');
+      message.setAttribute('id','noEnoughGoldMessage');
+
+
+
+      message.setAttribute('style','width: 240px; height: 40px; top: 75%;position: absolute; background-color: #f1d90d; line-height: 40px; text-align: center;  animation-duration: 5s; ');
+      message.style.left = 'calc(50% - (110px))';
+      message.textContent = 'Input login and password'
+
+
+
+
+      var g = document.querySelector('.App');
+
+      g.appendChild(message);
+
+
+
+      setTimeout(()=>{ g.removeChild(message);
+      },5000)
+
+
+    }
   }
 
   currentView = () => {
@@ -393,18 +417,23 @@ onInputchange(event) {
                 </div>
 
             </div>
-            <div id = 'buyI' style = {{top: '160px', left: '45px'}} onClick = { ()=>this.newAcc(document.getElementById('username').value,document.getElementById('password').value)}>Submit</div>
-            <div id = 'buyI' style = {{top: '160px', left: '160px'}} onClick={ () => this.changeView("logIn")}>Go Back</div>
+            <button type = 'button' id = 'buyI' style = {{top: '160px', left: '45px', border: 'none', fontFamily: 'JosefinSlab', fontSize: '20px'}} onClick = { ()=>this.newAcc(document.getElementById('username').value,document.getElementById('password').value)}>Submit</button>
+            <button type = 'button' id = 'buyI' style = {{top: '160px', left: '160px', border: 'none', fontFamily: 'JosefinSlab', fontSize: '20px'}} onClick={ () => this.changeView("logIn")}>Go Back</button>
           </div>
         )
         break
       case "logIn":
         return (
           <div id = 'loginInMenu' >
+
+{!this.state.loaded?<div style = {{width: '100%', height: '100%', backgroundColor: 'grey', opacity: '0.9', borderRadius: '25px', position: 'absolute', zIndex: '4'}}><div id ='buyI'>Loading...</div></div>:<div></div>}
+
             <h2>Arcane Pong</h2>
             <div>
 
               <br/>
+
+
                   <div style = {{float: 'right',  marginRight: '20px', marginBottom: '10px'}}>
                   <label for="username">Login </label>
                   <input type="text" name = 'username' id = 'username' class="filledForm" value = {this.state.login} onChange ={this.onInputchange} required />
@@ -417,9 +446,11 @@ onInputchange(event) {
 
 
 
-            <div id = 'buyI' style = {{top: '150px', left: '45px'}} onClick ={()=>{this.login(document.getElementById('username').value, document.getElementById('password').value);}}>Login</div>
+            <button type = "button" id = 'buyI' style = {{top: '150px', left: '45px', border: 'none', fontFamily: 'JosefinSlab', fontSize: '20px'}} onClick ={()=>{this.login(document.getElementById('username').value, document.getElementById('password').value);}}>Login</button>
 
-            <div id = 'buyI' style = {{top: '150px', left: '160px'}} onClick={ () => this.changeView("signUp")}>Sign Up</div>
+            <button type = "button" id = 'buyI' style = {{top: '150px', left: '160px', border: 'none', fontFamily: 'JosefinSlab', fontSize: '20px', width:'81px'}} onClick={ () => this.changeView("signUp")}>Sign Up</button>
+
+
 
             </div>
 

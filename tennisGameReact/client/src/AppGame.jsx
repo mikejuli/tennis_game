@@ -18,6 +18,7 @@ class AppGame extends React.Component {
       user: undefined,
       levelChosen: false,
       level: 0,
+      levelPlayed: undefined,
       pattern: [],
       active: [],
       currentLevel: undefined,
@@ -39,10 +40,15 @@ class AppGame extends React.Component {
     this.buyItem = this.buyItem.bind(this);
     this.handleLose = this.handleLose.bind(this);
     this.loaderChanger = this.loaderChanger.bind(this);
+    this.initialHelperPassed = this.initialHelperPassed.bind(this);
   }
 
 
+initialHelperPassed(){
 
+  this.setState({initialHelperPassed: true});
+
+}
 
 
   loaderChanger(message, imageList){
@@ -203,6 +209,7 @@ class AppGame extends React.Component {
       ball: 1
     });
 
+    this.setState({levelPlayed:this.state.level})
     this.setState({ levelChosen: false, level: 0 });
 
 
@@ -248,6 +255,7 @@ class AppGame extends React.Component {
 
     //done
     console.log("invoked handleOff +", level);
+    this.setState({levelPlayed:this.state.level})
     this.setState({ levelChosen: false, level: 0 });
 
     $.ajax({
@@ -492,6 +500,7 @@ class AppGame extends React.Component {
     } else if (this.state.currentLevel) {
       popUp = (
         <Levels
+        initialHelperPassedF = {this.initialHelperPassed}
           initialHelperPassed = {this.state.initialHelperPassed}
           loaderChanger = {this.loaderChanger}
           character = {this.props.character}
@@ -499,7 +508,7 @@ class AppGame extends React.Component {
           fitLevel={this.fitLevel}
           active={this.state.active}
           currentLevel={this.state.currentLevel}
-          arrow={parseInt((this.state.currentLevel - 1) / 10) + 1}
+          arrow={this.state.levelPlayed && this.state.levelPlayed + 1 < this.state.currentLevel  ? parseInt((this.state.levelPlayed - 1 ) / 10 ) + 1  : parseInt((this.state.currentLevel - 1) / 10) + 1}
           gold={this.state.gold}
           buyItem={this.buyItem}
           bigPlate={this.state.bigPlate}

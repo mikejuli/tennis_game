@@ -95,7 +95,7 @@ setDesc('All set! Now let\'s play!')
 
 
   });
-
+      props.initialHelperPassedF();
       setClicked(true);
 
       break;
