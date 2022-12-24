@@ -30,7 +30,8 @@ class AppGame extends React.Component {
       loaded: false,
       isMobile: undefined,
       loaderV:0,
-      ultimate:false
+      ultimate:false,
+      initialHelperPassed: false
     };
     this.handle = this.handle.bind(this);
     this.handleOff = this.handleOff.bind(this);
@@ -301,7 +302,12 @@ class AppGame extends React.Component {
             this.setState({
               currentLevel: result[0].level,
               gold: result[0].gold,
-            })},
+              initialHelperPassed: result[0].initialHelper
+            })
+
+
+
+          },
         });
 
         console.log('was mount')
@@ -486,6 +492,7 @@ class AppGame extends React.Component {
     } else if (this.state.currentLevel) {
       popUp = (
         <Levels
+          initialHelperPassed = {this.state.initialHelperPassed}
           loaderChanger = {this.loaderChanger}
           character = {this.props.character}
           handle={this.handle}

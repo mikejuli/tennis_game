@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose');
 
 
-// mongoose.connect('mongodb://localhost/Level') //the name has to be changed!
+ //mongoose.connect('mongodb://localhost/Level') //the name has to be changed!
 
  mongoose.connect('mongodb://172.17.0.4:27017/Level') //the name has to be changed!
 
@@ -33,7 +33,9 @@ const userSchema = mongoose.Schema ({
   legendary : Boolean,
   mythic: Boolean,
 
-  activeCharacter: String
+  activeCharacter: String,
+
+  initialHelper: Boolean
 
 })
 
@@ -79,7 +81,10 @@ let saveUser = (data) => {
   legendary : false,
   mythic: false,
 
-  activeCharacter: 'none'
+  activeCharacter: 'none',
+
+
+  initialHelper: false
 
   });
 
@@ -251,6 +256,24 @@ let findAndActiveUserSkin = ( user, activeSkin, cb) => {
 
     }
 
+
+  let setInitialHelper = (user, cb) => {
+    console.log(user,'from setInitial Helper')
+    User.findOneAndUpdate( {user: user} , {$set:{initialHelper:true}}, {new: true}, (err, doc) => {
+      if (err) {
+          console.log("Something wrong when updating data!");
+      }
+
+      cb(err,doc);
+
+    })
+
+
+  }
+
+
+
+
     let checkUserCharacter = ( user, cb) => {
       console.log('!!!character->>>>', user);
       User.find({user:user}).exec((err, result) => { //console.log(result[0].activeCharacter,'result');
@@ -283,3 +306,4 @@ module.exports.activeSkin = findAndActiveUserSkin;
 module.exports.setCharacter = findAndActiveUserCharacter;
 module.exports.checkCharacter = checkUserCharacter;
 module.exports.getLeaderList = getLeaderList;
+module.exports.setInitialHelper = setInitialHelper;

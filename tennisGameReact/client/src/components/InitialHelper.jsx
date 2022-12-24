@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 
-
-const InitialHelper = () => {
+const InitialHelper = (props) => {
 
   const [clicked, setClicked] = useState(false);
   const [step, setStep] = useState(0);
@@ -49,7 +49,7 @@ const InitialHelper = () => {
       document.getElementById('skinInBox').style.zIndex = 'auto'
       document.getElementById('skillsInBox').style.zIndex = '6'
 
-      setDesc('Before every singe match you start don\'t forget to stock up on some useful stuff. Buying these features you significantly increase your odds to win.')
+      setDesc('Before every singe match you start don\'t forget to stock up on some useful stuff. Buying these features you significantly increase your odds to win. Click on any button to try.')
       break;
 
       case 3 :
@@ -57,9 +57,9 @@ const InitialHelper = () => {
 
       document.getElementById('skillsInBox').style.zIndex = 'auto'
       document.getElementById('circlePanel').style.zIndex = '6';
-      document.getElementById('circlePanel').style.backgroundColor = 'rgb(247 255 47)';
+      document.getElementById('circlePanel').style.backgroundColor = 'rgb(252 255 0)';
 
-setDesc('There\'s important one. Every singe brick you get rid of brings score to your ultimate scale. Once you filled it up you get the ultimate that your character owns.')
+setDesc('There\'s important one. Every singe brick you get rid of brings score to your ultimate scale. Once you filled it up you get the ultimate for your next match that your character owns.')
       break;
 
       case 4 :
@@ -86,6 +86,15 @@ setDesc('All set! Now let\'s play!')
       break;
 
       case 6 :
+
+      console.log(props.user)
+      //learning was passed ->
+      axios.post('https://arcanepong.com:9000/setInitialHelper', {user: props.user} ).then((response)=>{
+
+    console.log('response data->>',response.data);
+
+
+  });
 
       setClicked(true);
 

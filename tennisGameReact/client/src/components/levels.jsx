@@ -417,8 +417,9 @@ class Levels extends React.Component {
 
     return(<div id = 'levels'>
 
+{/* if initialHelperPassed */}
+    {!this.props.initialHelperPassed ? <InitialHelper user = {this.props.user}/> : <div></div>}
 
-<InitialHelper/>
 
 
 

@@ -117,7 +117,8 @@ app.post('/user', function(req, res){
       data.password = req.body.password,
       data.token = '13244532',
       data.level = 1,
-      data.gold = 25000
+      data.gold = 25000,
+
 
 
         db.saveUser(data);
@@ -158,7 +159,6 @@ app.post('/user', function(req, res){
     db.loginUserToken(req.body.loggedUser,req.body.token, (err,result)=>{console.log(result);if(result === []){result = null};res.send(result)});
 
 
-
   })
 
 
@@ -178,7 +178,16 @@ app.post('/user', function(req, res){
 
       })
 
-      app.post('/activeSkin', function(req, res){
+
+    app.post('/setInitialHelper', function(req,res) {
+
+      console.log('......from setInitialHelper', req.body.user)
+
+      db.setInitialHelper(req.body.user, (err,result)=> {res.send(true)})
+
+    })
+
+    app.post('/activeSkin', function(req, res){
 
         console.log('---------from activeSkin',req.body.activeSkin);
            db.activeSkin(req.body.user,req.body.activeSkin,(err,result)=>{res.send(result)});
